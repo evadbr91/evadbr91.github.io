@@ -4,34 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eva De Abreu — Communication & Marketing (Freelance)</title>
-  <meta name="description" content="Freelance Communication & Marketing : visuels, réseaux sociaux, site web, SEO, événementiel. Intervention partout en France." />
+  <meta name="description" content="Freelance communication & marketing : visuels, réseaux sociaux, site web, SEO, événementiel. France entière." />
 
   <style>
     :root{
       --bg0:#070812;
       --bg1:#0b1024;
-      --card: rgba(255,255,255,.06);
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.045);
       --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.90);
-      --muted: rgba(255,255,255,.62);
-      --muted2: rgba(255,255,255,.45);
-      --accent1:#7c3aed;
-      --accent2:#22d3ee;
-      --accent3:#f472b6;
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.66);
+      --muted2: rgba(255,255,255,.46);
+
+      --a1:#7c3aed; /* violet */
+      --a2:#22d3ee; /* cyan */
+      --a3:#f472b6; /* rose */
+
       --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --shadow2: 0 14px 55px rgba(0,0,0,.28);
       --r: 22px;
-      --max: 1120px;
+      --max: 1140px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family:var(--font); color:var(--text);
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
       background:
-        radial-gradient(1200px 800px at 14% 10%, rgba(124,58,237,.35), transparent 55%),
-        radial-gradient(900px 700px at 80% 20%, rgba(34,211,238,.25), transparent 55%),
-        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.18), transparent 60%),
+        radial-gradient(1200px 800px at 14% 10%, rgba(124,58,237,.32), transparent 55%),
+        radial-gradient(900px 700px at 82% 18%, rgba(34,211,238,.22), transparent 55%),
+        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.16), transparent 60%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
@@ -40,7 +46,7 @@
       position:fixed; inset:0;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
       mix-blend-mode:overlay;
-      opacity:.18;
+      opacity:.14;
       pointer-events:none;
     }
 
@@ -58,129 +64,135 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900}
     .logo{
       width:36px; height:36px; border-radius:12px;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      box-shadow: 0 14px 30px rgba(124,58,237,.25);
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      box-shadow: 0 14px 30px rgba(124,58,237,.22);
       border: 1px solid rgba(255,255,255,.18);
+      flex:0 0 auto;
     }
-    .brand small{display:block; color:var(--muted); font-weight:600; margin-top:2px}
-    .navlinks{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .brand small{display:block; color:var(--muted); font-weight:650; margin-top:2px}
+    .navlinks{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .navlinks a{
       font-size:14px; color:var(--muted);
       padding:10px 12px; border-radius:12px;
-      border: 1px solid transparent;
+      border:1px solid transparent;
     }
     .navlinks a:hover{color:var(--text); border-color:rgba(255,255,255,.10); background:rgba(255,255,255,.04)}
     .cta{
       display:inline-flex; align-items:center; gap:10px;
       padding:11px 14px; border-radius:14px;
       background: linear-gradient(135deg, rgba(124,58,237,.9), rgba(34,211,238,.75));
-      color: #080a14; font-weight:900;
-      box-shadow: 0 18px 50px rgba(124,58,237,.22);
-      border: 1px solid rgba(255,255,255,.18);
+      color:#080a14;
+      font-weight:950;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 50px rgba(124,58,237,.18);
       transition: transform .12s ease;
+      white-space:nowrap;
     }
     .cta:hover{transform: translateY(-1px)}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius:999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size:13px;
-    }
+    @media (max-width: 980px){ .navlinks{display:none} }
 
-    /* LAYOUT CARDS */
+    /* CARDS */
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
       border: 1px solid rgba(255,255,255,.12);
       border-radius: var(--r);
       box-shadow: var(--shadow);
     }
+    .box{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+    }
 
     /* HERO */
-    header{padding:64px 0 30px}
-    .hero{
-      display:grid; grid-template-columns: 1.1fr .9fr; gap:26px;
-      align-items:stretch;
-    }
+    header{padding:62px 0 26px}
+    .hero{display:grid; grid-template-columns: 1.05fr .95fr; gap:18px}
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr} header{padding:44px 0 18px} }
+
     .hero-left{padding:30px}
-    .kicker{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px}
+    .pills{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size:13px;
+    }
     h1{
       margin:0 0 12px;
       font-size: clamp(34px, 4.4vw, 56px);
-      line-height: 1.04;
-      letter-spacing: -.6px;
+      line-height:1.04;
+      letter-spacing:-.6px;
     }
     .grad{
-      background:linear-gradient(135deg,var(--accent2),var(--accent1),var(--accent3));
+      background:linear-gradient(135deg,var(--a2),var(--a1),var(--a3));
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
     .lead{
-      margin:0 0 22px;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 68ch;
+      margin:0 0 20px;
+      font-size:16px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width: 72ch;
     }
+
     .btns{display:flex; gap:12px; flex-wrap:wrap}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
+      padding:12px 14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.05);
-      color: var(--text);
-      font-weight:800;
-      transition: transform .12s ease, background .12s ease;
+      font-weight:950;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
     }
-    .btn:hover{background:rgba(255,255,255,.08); transform: translateY(-1px)}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.75));
-      color:#0a0b14;
-      border-color: rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.72));
+      color:#0a0b14; border-color: rgba(255,255,255,.18);
     }
-    .btn.ghost{background:rgba(255,255,255,.04)}
-    .btn small{font-weight:800; opacity:.85}
+    .btn.linkedin{
+      background: linear-gradient(135deg, rgba(34,211,238,.78), rgba(124,58,237,.78));
+      color:#0a0b14; border-color: rgba(255,255,255,.18);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.04);
+    }
 
-    .hero-right{padding:24px; display:flex; flex-direction:column; gap:12px}
+    .hero-right{padding:22px; display:flex; flex-direction:column; gap:12px}
     .profile{
       display:flex; align-items:center; gap:14px;
-      padding:16px;
-      border-radius:18px;
+      padding:16px; border-radius:18px;
       background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
     }
     .avatar{
-      width:72px; height:72px; border-radius:22px;
+      width:80px; height:80px; border-radius:26px;
       border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      overflow:hidden;
+      overflow:hidden; background: rgba(255,255,255,.06);
       box-shadow: 0 16px 55px rgba(0,0,0,.35);
       flex:0 0 auto;
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .profile .name{font-weight:950}
-    .profile .sub{color:var(--muted); font-size:13px; margin-top:4px; line-height:1.4}
+    .name{font-weight:950}
+    .sub{color:var(--muted); font-size:13px; margin-top:4px; line-height:1.4}
 
-    .statgrid{
-      display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:auto;
-    }
     .mini{
-      padding:16px;
-      border-radius:18px;
+      padding:16px; border-radius:18px;
       background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
-      position:relative;
-      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      position:relative; overflow:hidden;
     }
     .mini:before{
-      content:"";
-      position:absolute; inset:-50px -50px auto auto;
+      content:""; position:absolute; inset:-50px -50px auto auto;
       width:180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.26), transparent 55%);
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 55%);
       transform: rotate(18deg);
       pointer-events:none;
     }
@@ -189,31 +201,26 @@
 
     /* SECTIONS */
     section{padding:22px 0}
-    .section-title{
-      display:flex; align-items:end; justify-content:space-between; gap:14px;
-      margin: 14px 0 14px;
-    }
+    .section-title{display:flex; align-items:end; justify-content:space-between; gap:14px; margin: 14px 0 14px}
     .section-title h2{margin:0; font-size:18px; letter-spacing:.2px}
     .section-title p{margin:0; color:var(--muted2); font-size:13px}
 
-    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
-    .grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px}
-
     /* SERVICES */
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
+
     .service{
-      padding:18px;
-      border-radius:18px;
+      padding:18px; border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       transition: transform .15s ease, background .15s ease;
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden;
+      box-shadow: var(--shadow2);
     }
     .service:before{
-      content:"";
-      position:absolute; inset:-60px -60px auto auto;
+      content:""; position:absolute; inset:-60px -60px auto auto;
       width:180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(244,114,182,.20), transparent 55%);
+      background: radial-gradient(circle at 30% 30%, rgba(244,114,182,.14), transparent 55%);
       transform: rotate(18deg);
       pointer-events:none;
     }
@@ -223,30 +230,50 @@
     .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
     .tag{
       font-size:12px; color:var(--muted);
-      border: 1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       padding:6px 9px; border-radius:999px;
     }
 
-    /* PROJECT/INFO CARDS */
-    .box{
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-    }
-
     /* PACKS */
-    .packs{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
+
     details.pack{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
       overflow:hidden;
+      box-shadow: var(--shadow2);
       transition: transform .16s ease, background .16s ease;
     }
     details.pack:hover{transform: translateY(-2px); background: rgba(255,255,255,.05)}
     details.pack[open]{background: rgba(255,255,255,.06)}
+
+    details.pack.featured{
+      border-color: rgba(34,211,238,.35);
+      box-shadow: 0 30px 110px rgba(34,211,238,.10);
+      transform: scale(1.055);
+      background:
+        radial-gradient(420px 280px at 80% 20%, rgba(34,211,238,.14), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      position:relative;
+    }
+    details.pack.featured:before{
+      content:"LE PLUS CHOISI";
+      position:absolute;
+      top:14px; right:14px;
+      font-size:11px;
+      font-weight:950;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(34,211,238,.16);
+      border:1px solid rgba(34,211,238,.35);
+      color: rgba(255,255,255,.88);
+      letter-spacing:.3px;
+    }
+    @media (max-width: 980px){ details.pack.featured{transform:none} }
+
     details.pack summary{
       cursor:pointer;
       list-style:none;
@@ -257,27 +284,22 @@
       gap:12px;
     }
     details.pack summary::-webkit-details-marker{display:none}
-    .pack-title{margin:0; font-size:15px; font-weight:900}
-    .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
+    .pack h3{margin:0; font-size:15px; font-weight:950}
+    .pack .desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
     .price{
       text-align:right;
-      min-width: 120px;
+      min-width: 128px;
       font-weight:950;
       color:#0a0b14;
       padding:10px 12px;
       border-radius:999px;
       background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(124,58,237,.90));
-      border: 1px solid rgba(255,255,255,.16);
-      box-shadow: 0 18px 55px rgba(34,211,238,.10);
+      border:1px solid rgba(255,255,255,.16);
+      white-space:nowrap;
     }
     .price small{display:block; font-weight:900; opacity:.8; font-size:11px}
     .pack-body{padding:0 18px 18px}
-    .list{
-      margin:12px 0 0; padding:0; list-style:none;
-      display:grid; gap:8px;
-      color: var(--muted);
-      font-size:13px;
-    }
+    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px; color:var(--muted); font-size:13px}
     .list li{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
@@ -286,103 +308,91 @@
       background: rgba(255,255,255,.03);
     }
     .dot{
-      width:10px; height:10px; border-radius:999px;
-      margin-top:4px;
-      background: linear-gradient(135deg, var(--accent3), var(--accent2));
+      width:10px; height:10px; border-radius:999px; margin-top:4px;
+      background: linear-gradient(135deg, var(--a3), var(--a2));
       flex:0 0 auto;
     }
-    .pack-cta{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    /* GALLERY FILTER */
+    .gallery-actions{display:flex; gap:10px; flex-wrap:wrap}
+    .seg{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+      font-weight:950;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .seg:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .seg.active{
+      color:#0a0b14;
+      background: linear-gradient(135deg, rgba(124,58,237,.88), rgba(34,211,238,.72));
+      border-color: rgba(255,255,255,.16);
     }
 
-    /* GALLERY */
     .gallery{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
       gap:12px;
+      margin-top:12px;
     }
+    @media (max-width: 980px){ .gallery{grid-template-columns:1fr 1fr} }
+    @media (max-width: 520px){ .gallery{grid-template-columns:1fr} }
+
     .shot{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       overflow:hidden;
       position:relative;
-      transition: transform .16s ease, filter .16s ease;
-      box-shadow: 0 14px 55px rgba(0,0,0,.32);
+      transition: transform .16s ease;
+      box-shadow: var(--shadow2);
     }
     .shot:hover{transform: translateY(-3px)}
     .shot img{
       width:100%;
-      height: 220px;
-      object-fit: cover;
+      height:230px;
+      object-fit:cover;
       display:block;
-      filter: saturate(1.06) contrast(1.03);
+      filter:saturate(1.06) contrast(1.03);
     }
-    .shot .cap{
+    .cap{
       position:absolute;
       left:10px; right:10px; bottom:10px;
       padding:10px 12px;
       border-radius:14px;
       background: rgba(7,8,18,.58);
-      border: 1px solid rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.14);
       backdrop-filter: blur(10px);
       display:flex; justify-content:space-between; gap:10px; align-items:center;
     }
     .cap b{font-size:12px; letter-spacing:.2px}
     .cap span{font-size:11px; color:var(--muted)}
-    .cap em{font-style:normal; font-size:11px; color: rgba(255,255,255,.85)}
-    .cap .tagmini{
+    .tagmini{
       padding:6px 9px; border-radius:999px;
       background: rgba(124,58,237,.20);
-      border: 1px solid rgba(124,58,237,.35);
-      font-weight:900;
+      border:1px solid rgba(124,58,237,.35);
+      font-weight:950; font-size:11px;
+      white-space:nowrap;
     }
 
-    /* REVIEWS */
-    .split{
-      display:grid; grid-template-columns: 1fr 1fr; gap:12px;
-      align-items:stretch;
-    }
+    /* REVIEWS / CONTACT */
+    .split{display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:stretch}
+    @media (max-width: 980px){ .split{grid-template-columns:1fr} }
     .reviews{
-      padding:18px;
-      border-radius:18px;
+      padding:18px; border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       overflow:hidden;
+      box-shadow: var(--shadow2);
     }
-    .reviews iframe{
-      width:100%; height:360px;
-      border:0; border-radius:14px;
-      background:#fff;
-    }
+    .reviews iframe{width:100%; height:360px; border:0; border-radius:14px; background:#fff}
 
-    /* FOOTER */
-    footer{
-      padding:28px 0 60px;
-      color: var(--muted2);
-      font-size: 13px;
-    }
-    .foot{
-      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
-      border-top: 1px solid rgba(255,255,255,.10);
-      padding-top:18px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 980px){
-      .hero{grid-template-columns: 1fr}
-      .grid3{grid-template-columns: 1fr}
-      .grid2{grid-template-columns: 1fr}
-      .split{grid-template-columns: 1fr}
-      .packs{grid-template-columns: 1fr}
-      .gallery{grid-template-columns: 1fr 1fr}
-      header{padding:46px 0 18px}
-      .navlinks{display:none}
-      .shot img{height: 240px}
-    }
-    @media (max-width: 520px){
-      .gallery{grid-template-columns: 1fr}
-    }
+    footer{padding:28px 0 60px; color:var(--muted2); font-size:13px}
+    .foot{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; border-top: 1px solid rgba(255,255,255,.10); padding-top:18px}
   </style>
 </head>
 
@@ -393,7 +403,7 @@
         <div class="logo" aria-hidden="true"></div>
         <div>
           <div style="font-size:14px; line-height:1.1; font-weight:950;">Eva De Abreu</div>
-          <small>Communication • Marketing • Visuels • Web</small>
+          <small>Freelance — Communication • Marketing • Visuels • Web</small>
         </div>
       </div>
 
@@ -405,79 +415,67 @@
         <a href="#contact">Contact</a>
       </div>
 
-      <a class="cta" href="#contact" title="Me contacter">Me contacter →</a>
+      <a class="cta" href="#contact">Devis rapide →</a>
     </div>
   </div>
 
   <header class="wrap">
     <div class="hero">
       <div class="card hero-left">
-        <div class="kicker">
+        <div class="pills">
           <span class="pill">✨ Freelance — à distance</span>
           <span class="pill">📍 France entière (national)</span>
-          <span class="pill">✅ Devis rapide & accompagnement</span>
+          <span class="pill">✅ Design + stratégie contenu</span>
         </div>
 
         <h1>
-          Communication & marketing <span class="grad">ultra visuels</span> —
-          je rends ta marque <span class="grad">plus crédible</span> et <span class="grad">plus visible</span>.
+          Je gère ta com’ comme une <span class="grad">vraie marque</span> :
+          <span class="grad">visuels</span>, <span class="grad">réseaux</span>, <span class="grad">web</span>.
         </h1>
 
         <p class="lead">
-          Je travaille depuis chez moi en freelance et j’accompagne les TPE/PME partout en France :
-          <strong>création de visuels</strong> (print & digital), <strong>gestion de réseaux sociaux</strong>,
-          <strong>gestion de site</strong>, <strong>référencement SEO</strong>, <strong>événementiel</strong>,
-          et création de pages type <strong>Linktree / portfolio</strong> sur-mesure.
+          Je travaille depuis chez moi et j’accompagne les TPE/PME partout en France :
+          <b>visuels</b> (flyers, menus, affiches, promos), <b>réseaux sociaux</b> (posts/stories),
+          <b>web / site</b>, <b>SEO</b>, <b>événementiel</b> et pages type <b>Linktree / portfolio</b>.
+          On échange → je fais un devis → je produis → tu valides.
         </p>
 
         <div class="btns">
-          <a class="btn primary" href="mailto:deabreue9@gmail.com">📩 Demander un devis</a>
-          <a class="btn ghost" href="tel:+33767208655">📞 07 67 20 86 55</a>
-          <a class="btn" href="#galerie">🖼️ Voir mes visuels</a>
+          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">📩 Demander un devis</a>
+          <a class="btn" href="tel:+33767208655">📞 07 67 20 86 55</a>
+          <a class="btn" href="#galerie" id="goGalleryBtn">🖼️ Visiter la galerie</a>
+          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">in LinkedIn</a>
         </div>
 
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <div class="pills" style="margin-top:14px">
           <span class="pill">Restaurants</span>
           <span class="pill">Instituts / salons</span>
           <span class="pill">BTP</span>
           <span class="pill">Taxis</span>
           <span class="pill">Artisans</span>
-          <span class="pill">PME locales</span>
+          <span class="pill">PME</span>
         </div>
       </div>
 
       <div class="card hero-right">
         <div class="profile">
           <div class="avatar">
-            <img src="assets/profil.jpg" alt="Photo de profil — Eva De Abreu">
+            <img src="profil.jpg" alt="Photo profil — Eva De Abreu">
           </div>
           <div>
             <div class="name">Eva De Abreu</div>
-            <div class="sub">
-              Freelance — Communication & Marketing<br>
-              Visuels • Réseaux sociaux • Site web • SEO
-            </div>
+            <div class="sub">Visuels • Réseaux sociaux • Site • SEO<br>Freelance — France entière</div>
           </div>
         </div>
 
         <div class="mini">
-          <strong>Livrables premium</strong>
-          <span>Visuels pro, cohérence de marque, templates réutilisables, supports print & digital.</span>
-        </div>
-        <div class="mini">
-          <strong>Clair & efficace</strong>
-          <span>Prise de brief → proposition → devis → production → livraison (et ajustements si besoin).</span>
+          <strong>Image premium</strong>
+          <span>Une identité cohérente et “carrée” : rendu propre, pro, qui donne confiance.</span>
         </div>
 
-        <div class="statgrid">
-          <div class="mini">
-            <strong>À distance</strong>
-            <span>Intervention France entière. Échanges simples & rapides.</span>
-          </div>
-          <div class="mini">
-            <strong>Prix lancement</strong>
-            <span>Packs accessibles pour démarrer (et évoluer ensuite).</span>
-          </div>
+        <div class="mini">
+          <strong>Gestion complète</strong>
+          <span>Je peux gérer la com’ + le site + le contenu, et te simplifier la vie.</span>
         </div>
       </div>
     </div>
@@ -486,32 +484,32 @@
   <main class="wrap">
     <section id="services">
       <div class="section-title">
-        <h2>Services</h2>
-        <p>Tout ce qu’il faut pour une com’ cohérente et efficace.</p>
+        <h2>Ce que je fais</h2>
+        <p>Design + contenu + web : tu as une présence propre partout.</p>
       </div>
 
       <div class="grid3">
         <div class="service">
-          <h3>Visuels & identité</h3>
-          <p>Création de visuels premium : posts, stories, bannières, flyers, affiches, menus, cartes, templates.</p>
+          <h3>Visuels & supports</h3>
+          <p>Flyers, brochures, menus, affiches, bannières, cartes, templates… (print & digital).</p>
           <div class="tags">
-            <span class="tag">Canva / design</span><span class="tag">Print</span><span class="tag">Social</span><span class="tag">Templates</span>
+            <span class="tag">Design</span><span class="tag">Print</span><span class="tag">Templates</span>
           </div>
         </div>
 
         <div class="service">
           <h3>Réseaux sociaux</h3>
-          <p>Planning, création, cohérence de marque, publications, déclinaisons, optimisation et suivi.</p>
+          <p>Planning, créations, cohérence, déclinaisons, optimisation et suivi.</p>
           <div class="tags">
-            <span class="tag">Calendrier</span><span class="tag">Brand voice</span><span class="tag">Content</span><span class="tag">Engagement</span>
+            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Planning</span>
           </div>
         </div>
 
         <div class="service">
-          <h3>Web • site • SEO</h3>
-          <p>Mise à jour site, pages, optimisation SEO, contenu, structure, bases analytics & conversion.</p>
+          <h3>Web • Site • SEO</h3>
+          <p>Pages pro, mini-portfolio, SEO basique, optimisation, mises à jour.</p>
           <div class="tags">
-            <span class="tag">SEO</span><span class="tag">Sites</span><span class="tag">Conversion</span><span class="tag">Maintenance</span>
+            <span class="tag">Web</span><span class="tag">SEO</span><span class="tag">Conversion</span>
           </div>
         </div>
       </div>
@@ -520,233 +518,195 @@
     <section id="packs">
       <div class="section-title">
         <h2>Packs (prix de lancement)</h2>
-        <p>Cartes cliquables → tu ouvres et tu vois tout ce qui est inclus.</p>
+        <p>Tu cliques → tu vois toutes les missions incluses.</p>
       </div>
 
       <div class="packs">
+        <!-- PACK 1 -->
         <details class="pack">
           <summary>
-            <div>
-              <div class="pack-title">Pack Starter — “Je démarre”</div>
-              <div class="pack-desc">Parfait pour être présent, propre, pro. Idéal TPE.</div>
+            <div class="pack">
+              <h3>Pack Starter — “Je démarre”</h3>
+              <div class="desc">Pour une présence propre et pro rapidement.</div>
             </div>
-            <div class="price">
-              79€
-              <small>prix lancement</small>
-            </div>
+            <div class="price">69€<small>lancement</small></div>
           </summary>
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>3 visuels (post ou story) au choix</span></li>
-              <li><span class="dot"></span><span>1 template réutilisable (pour rester cohérent)</span></li>
-              <li><span class="dot"></span><span>1 mini-cadre de charte (couleurs + typos)</span></li>
-              <li><span class="dot"></span><span>Livraison + 1 série d’ajustements</span></li>
+              <li><span class="dot"></span><span>Brief + définition du style (couleurs/typos)</span></li>
+              <li><span class="dot"></span><span>3 visuels au choix (post ou story)</span></li>
+              <li><span class="dot"></span><span>1 template réutilisable (gain de temps)</span></li>
+              <li><span class="dot"></span><span>Export HD + formats réseaux</span></li>
+              <li><span class="dot"></span><span>1 série d’ajustements incluse</span></li>
             </ul>
             <div class="pack-cta">
               <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%20Starter">📩 Demander ce pack</a>
-              <a class="btn ghost" href="tel:+33767208655">📞 Appeler</a>
+              <a class="btn ghost" href="#galerie">Voir des exemples</a>
             </div>
           </div>
         </details>
 
-        <details class="pack">
+        <!-- PACK 2 (featured) -->
+        <details class="pack featured" open>
           <summary>
-            <div>
-              <div class="pack-title">Pack Réseaux — “Je poste”</div>
-              <div class="pack-desc">Pour publier régulièrement avec un rendu premium.</div>
+            <div class="pack">
+              <h3>Pack Réseaux — “Je poste”</h3>
+              <div class="desc">Le plus demandé : régularité + rendu premium.</div>
             </div>
-            <div class="price">
-              149€
-              <small>prix lancement</small>
-            </div>
+            <div class="price">129€<small>lancement</small></div>
           </summary>
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>10 visuels (posts/stories) cohérents</span></li>
-              <li><span class="dot"></span><span>2 templates réutilisables (gain de temps)</span></li>
-              <li><span class="dot"></span><span>1 proposition de planning (idées de contenu)</span></li>
-              <li><span class="dot"></span><span>Livraison + 2 séries d’ajustements</span></li>
+              <li><span class="dot"></span><span>Brief + ligne graphique & ton éditorial</span></li>
+              <li><span class="dot"></span><span>10 visuels (posts + stories) cohérents</span></li>
+              <li><span class="dot"></span><span>2 templates réutilisables</span></li>
+              <li><span class="dot"></span><span>Mini planning (idées de contenus)</span></li>
+              <li><span class="dot"></span><span>Optimisation : lisibilité + hiérarchie + CTA</span></li>
+              <li><span class="dot"></span><span>2 séries d’ajustements incluses</span></li>
             </ul>
             <div class="pack-cta">
               <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%20R%C3%A9seaux">📩 Demander ce pack</a>
-              <a class="btn" href="#galerie">🖼️ Voir des exemples</a>
+              <a class="btn" href="tel:+33767208655">📞 Appeler</a>
             </div>
           </div>
         </details>
 
+        <!-- PACK 3 -->
         <details class="pack">
           <summary>
-            <div>
-              <div class="pack-title">Pack Web — “Je convertis”</div>
-              <div class="pack-desc">Pour un profil type Linktree / mini-portfolio + SEO simple.</div>
+            <div class="pack">
+              <h3>Pack Web — “Je convertis”</h3>
+              <div class="desc">Page pro type Linktree/portfolio + optimisation SEO.</div>
             </div>
-            <div class="price">
-              199€
-              <small>prix lancement</small>
-            </div>
+            <div class="price">179€<small>lancement</small></div>
           </summary>
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>1 page pro type Linktree / portfolio (sur-mesure)</span></li>
-              <li><span class="dot"></span><span>Optimisation texte + structure (SEO basique)</span></li>
-              <li><span class="dot"></span><span>Intégration contact (mail/tel/liens)</span></li>
-              <li><span class="dot"></span><span>Livraison + 2 séries d’ajustements</span></li>
+              <li><span class="dot"></span><span>1 page pro (sections + CTA + contact)</span></li>
+              <li><span class="dot"></span><span>Textes optimisés (SEO basique + clarté)</span></li>
+              <li><span class="dot"></span><span>Ajout de tes liens (LinkedIn, Insta pro quand prêt)</span></li>
+              <li><span class="dot"></span><span>Bloc avis Google prêt (lien à mettre ensuite)</span></li>
+              <li><span class="dot"></span><span>2 séries d’ajustements incluses</span></li>
             </ul>
             <div class="pack-cta">
               <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%20Web">📩 Demander ce pack</a>
-              <a class="btn ghost" href="tel:+33767208655">📞 07 67 20 86 55</a>
+              <a class="btn ghost" href="#contact">Contact</a>
             </div>
           </div>
         </details>
       </div>
 
-      <div class="box" style="margin-top:12px;">
-        <b>Process (simple & pro)</b>
+      <div class="box" style="margin-top:12px">
+        <b>France entière • Devis sur-mesure</b>
         <div class="muted" style="margin-top:8px; line-height:1.6; font-size:13px;">
-          1) Prise de contact → 2) Brief (besoin + style) → 3) Devis → 4) Production → 5) Livraison (et ajustements).
-          <br>Je travaille à distance : <strong>France entière</strong>.
+          Tu m’expliques ton besoin (secteur + objectif + style) → je te fais un devis → je produis → tu valides.
         </div>
       </div>
     </section>
 
     <section id="galerie">
       <div class="section-title">
-        <h2>Galerie — mes visuels</h2>
-        <p>Clique sur une création pour l’ouvrir en grand. Tu pourras en ajouter d’autres ensuite.</p>
+        <h2>Galerie</h2>
+        <p>Choisis : Visuels / Sites internet / Réseaux sociaux.</p>
       </div>
 
-      <div class="gallery">
-        <a class="shot" href="assets/produit-the.jpg" target="_blank" rel="noopener">
-          <img src="assets/produit-the.jpg" alt="Visuel produit — thé" />
-          <div class="cap">
-            <div>
-              <b>Produit / Branding</b><br><span>Création premium</span>
-            </div>
-            <em class="tagmini">Design</em>
-          </div>
+      <div class="gallery-actions">
+        <button class="seg active" data-cat="visuels">Visuels</button>
+        <button class="seg" data-cat="sites">Sites internet</button>
+        <button class="seg" data-cat="reseaux">Réseaux sociaux</button>
+      </div>
+
+      <div class="gallery" id="galleryGrid">
+        <!-- VISUELS -->
+        <a class="shot" data-cat="visuels" href="produit-the.jpg" target="_blank" rel="noopener">
+          <img src="produit-the.jpg" alt="Visuel produit / branding">
+          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="tagmini">Visuel</div></div>
         </a>
 
-        <a class="shot" href="assets/menu-resto.jpg" target="_blank" rel="noopener">
-          <img src="assets/menu-resto.jpg" alt="Menu restauration" />
-          <div class="cap">
-            <div>
-              <b>Restauration</b><br><span>Menu / print</span>
-            </div>
-            <em class="tagmini">Print</em>
-          </div>
+        <a class="shot" data-cat="visuels" href="menu-resto.jpg" target="_blank" rel="noopener">
+          <img src="menu-resto.jpg" alt="Menu restauration">
+          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="tagmini">Visuel</div></div>
         </a>
 
-        <a class="shot" href="assets/matchday.jpg" target="_blank" rel="noopener">
-          <img src="assets/matchday.jpg" alt="Matchday sportif" />
-          <div class="cap">
-            <div>
-              <b>Sport / Event</b><br><span>Instagram story</span>
-            </div>
-            <em class="tagmini">Social</em>
-          </div>
+        <a class="shot" data-cat="visuels" href="valentine.jpg" target="_blank" rel="noopener">
+          <img src="valentine.jpg" alt="Promo Saint-Valentin">
+          <div class="cap"><div><b>Promo</b><br><span>Opération spéciale</span></div><div class="tagmini">Visuel</div></div>
         </a>
 
-        <a class="shot" href="assets/classico.jpg" target="_blank" rel="noopener">
-          <img src="assets/classico.jpg" alt="Classico sportif" />
-          <div class="cap">
-            <div>
-              <b>Sport / Event</b><br><span>Annonce / visuel</span>
-            </div>
-            <em class="tagmini">Event</em>
-          </div>
+        <a class="shot" data-cat="visuels" href="maraude.jpg" target="_blank" rel="noopener">
+          <img src="maraude.jpg" alt="Affiche maraude">
+          <div class="cap"><div><b>Affiche</b><br><span>Associatif</span></div><div class="tagmini">Visuel</div></div>
         </a>
 
-        <a class="shot" href="assets/valentine.jpg" target="_blank" rel="noopener">
-          <img src="assets/valentine.jpg" alt="Visuel Saint-Valentin" />
-          <div class="cap">
-            <div>
-              <b>Restauration</b><br><span>Opération spéciale</span>
-            </div>
-            <em class="tagmini">Promo</em>
-          </div>
+        <a class="shot" data-cat="visuels" href="logo-taxi.png" target="_blank" rel="noopener">
+          <img src="logo-taxi.png" alt="Logo taxi">
+          <div class="cap"><div><b>Logo</b><br><span>Identité</span></div><div class="tagmini">Visuel</div></div>
         </a>
 
-        <a class="shot" href="assets/maraude.jpg" target="_blank" rel="noopener">
-          <img src="assets/maraude.jpg" alt="Affiche maraude solidaire" />
-          <div class="cap">
-            <div>
-              <b>Associatif</b><br><span>Affiche / flyer</span>
-            </div>
-            <em class="tagmini">Flyer</em>
-          </div>
+        <!-- RESEAUX -->
+        <a class="shot" data-cat="reseaux" href="matchday.jpg" target="_blank" rel="noopener">
+          <img src="matchday.jpg" alt="Matchday story">
+          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="tagmini">Réseaux</div></div>
         </a>
 
-        <a class="shot" href="assets/logo-taxi.png" target="_blank" rel="noopener">
-          <img src="assets/logo-taxi.png" alt="Logo taxi" />
-          <div class="cap">
-            <div>
-              <b>Logo / Identité</b><br><span>Branding</span>
-            </div>
-            <em class="tagmini">Logo</em>
-          </div>
+        <a class="shot" data-cat="reseaux" href="classico.jpg" target="_blank" rel="noopener">
+          <img src="classico.jpg" alt="Classico story">
+          <div class="cap"><div><b>Annonce</b><br><span>Event sportif</span></div><div class="tagmini">Réseaux</div></div>
         </a>
 
-        <a class="shot" href="assets/profil.jpg" target="_blank" rel="noopener">
-          <img src="assets/profil.jpg" alt="Illustration / profil" />
-          <div class="cap">
-            <div>
-              <b>Créatif</b><br><span>Illustration</span>
-            </div>
-            <em class="tagmini">Art</em>
-          </div>
+        <!-- SITES (placeholder prêt) -->
+        <a class="shot" data-cat="sites" href="#contact" onclick="return false;">
+          <img src="profil.jpg" alt="Sites (à ajouter)">
+          <div class="cap"><div><b>Sites internet</b><br><span>Ajout bientôt (projets web)</span></div><div class="tagmini">Sites</div></div>
         </a>
       </div>
 
-      <div class="box" style="margin-top:12px;">
-        <b>Ajouter de nouveaux visuels (super simple)</b>
+      <div class="box" style="margin-top:12px">
+        <b>Ajouter des créations (facile)</b>
         <div class="muted" style="margin-top:8px; line-height:1.6; font-size:13px;">
-          1) Upload une image dans <strong>assets/</strong><br>
-          2) Duplique une carte dans la galerie et remplace le nom du fichier (ex: <span class="tiny">assets/ton-nouveau-visuel.jpg</span>)
+          Upload une nouvelle image dans le repo → duplique une carte → change
+          <span class="tiny">src="ton-fichier.jpg"</span> et la catégorie
+          <span class="tiny">data-cat="visuels"</span> / <span class="tiny">data-cat="sites"</span> / <span class="tiny">data-cat="reseaux"</span>.
         </div>
       </div>
     </section>
 
     <section class="split" id="avis">
-      <div class="card box">
+      <div class="box">
         <div class="section-title" style="margin-top:0">
-          <h2>Pourquoi travailler avec moi</h2>
-          <p>Simple, clair, efficace.</p>
+          <h2>LinkedIn & Avis</h2>
+          <p>LinkedIn actif • Zone avis Google prête.</p>
         </div>
 
         <div class="muted" style="line-height:1.7; font-size:13px;">
-          <b>• Design & cohérence :</b> une image premium alignée à ta marque.<br>
-          <b>• Réactivité :</b> échanges fluides, livrables rapides.<br>
-          <b>• Polyvalence :</b> print, digital, web, événementiel.<br>
-          <b>• Objectif :</b> visibilité + crédibilité + conversion.<br><br>
-          <span class="muted2">Je travaille à distance : <b>France entière</b>. On fait un devis selon ton besoin.</span>
+          <b>Objectif :</b> une image premium qui convertit.<br>
+          <b>Je travaille à distance</b> : France entière.<br><br>
+          Quand tu crées ta fiche Google, je mets :
+          <b>la note</b>, un bouton <b>“Voir les avis”</b> et la carte exacte.
         </div>
 
-        <div class="tags" style="margin-top:14px">
-          <span class="tag">Réseaux</span><span class="tag">Visuels</span><span class="tag">Site</span><span class="tag">SEO</span><span class="tag">Événementiel</span>
+        <div class="btns" style="margin-top:14px">
+          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir mon LinkedIn</a>
+          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Demander un devis</a>
         </div>
       </div>
 
       <div class="reviews">
         <div class="section-title" style="margin-top:0">
-          <h2>Avis Google</h2>
-          <p>Zone prête — on mettra ton lien dès que ta fiche est créée.</p>
+          <h2>Emplacement Google</h2>
+          <p>Placeholder (France)</p>
         </div>
-
-        <iframe
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=France&output=embed"
-          title="Carte Google (placeholder)"
-        ></iframe>
-
+          title="Carte Google (placeholder)"></iframe>
         <div class="muted2 tiny" style="margin-top:10px;">
-          Dès que tu as ta fiche Google, je remplace le lien ici + j’ajoute un bouton “Voir les avis”.
+          Dès que tu as ton lien Google, je remplace ici.
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <div class="card box">
+      <div class="card" style="padding:18px">
         <div class="section-title" style="margin-top:0">
           <h2>Contact</h2>
           <p>Tu me dis ton besoin → je te fais un devis.</p>
@@ -760,8 +720,8 @@
 
         <div class="btns" style="margin-top:14px">
           <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">📩 Me contacter</a>
-          <a class="btn ghost" href="tel:+33767208655">📞 Appeler</a>
-          <a class="btn" href="#packs">Voir les packs</a>
+          <a class="btn" href="tel:+33767208655">📞 Appeler</a>
+          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -769,13 +729,34 @@
     <footer>
       <div class="foot">
         <div>© <span id="y"></span> Eva De Abreu — Freelance Communication & Marketing</div>
-        <div class="muted2">Portfolio en ligne • Devis • France entière</div>
+        <div class="muted2">Visuels • Réseaux • Web • SEO • Événementiel — France entière</div>
       </div>
     </footer>
   </main>
 
   <script>
+    // year
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // gallery filter
+    const segs = document.querySelectorAll(".seg");
+    const items = document.querySelectorAll(".shot");
+
+    function setCat(cat){
+      segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
+      items.forEach(it => {
+        it.style.display = (it.dataset.cat === cat) ? "" : "none";
+      });
+    }
+
+    segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
+    setCat("visuels");
+
+    // "Visiter la galerie" => ouvre direct Visuels
+    const goGalleryBtn = document.getElementById("goGalleryBtn");
+    if (goGalleryBtn) {
+      goGalleryBtn.addEventListener("click", () => setCat("visuels"));
+    }
   </script>
 </body>
 </html>
