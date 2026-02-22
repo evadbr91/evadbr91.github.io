@@ -1,82 +1,476 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr">
 <head>
-  <title>Portfolio - Evad</title>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Communication & Marketing</title>
+  <meta name="description" content="Portfolio — Communication & Marketing : identité visuelle, création de contenus, gestion de site, SEO, événementiel." />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-      color: white;
-      text-align: center;
+    :root{
+      --bg0:#070812;
+      --bg1:#0b1024;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.88);
+      --muted: rgba(255,255,255,.62);
+      --muted2: rgba(255,255,255,.45);
+      --accent1:#7c3aed;
+      --accent2:#22d3ee;
+      --accent3:#f472b6;
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --r: 22px;
+      --max: 1120px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--font); color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 14% 10%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(900px 700px at 80% 20%, rgba(34,211,238,.25), transparent 55%),
+        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
     }
 
-    .container {
-      padding: 100px 20px;
+    /* subtle grain */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      opacity:.18;
+      pointer-events:none;
     }
 
-    h1 {
-      font-size: 50px;
-      margin-bottom: 10px;
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,8,18,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      box-shadow: 0 14px 30px rgba(124,58,237,.25);
+    }
+    .navlinks{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+    .navlinks a{
+      font-size:14px; color:var(--muted);
+      padding:10px 12px; border-radius:12px;
+      border: 1px solid transparent;
+    }
+    .navlinks a:hover{color:var(--text); border-color:rgba(255,255,255,.10); background:rgba(255,255,255,.04)}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:11px 14px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,58,237,.9), rgba(34,211,238,.75));
+      color: #080a14; font-weight:800;
+      box-shadow: 0 18px 50px rgba(124,58,237,.22);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .cta:hover{transform: translateY(-1px)}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size:13px;
     }
 
-    h2 {
-      color: #888;
-      font-weight: normal;
+    header{padding:64px 0 30px}
+    .hero{
+      display:grid; grid-template-columns: 1.15fr .85fr; gap:26px;
+      align-items:stretch;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+    .hero-left{padding:30px}
+    .kicker{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px}
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(34px, 4.4vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -.6px;
+    }
+    .lead{
+      margin:0 0 22px;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+    .btns{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight:700;
+    }
+    .btn:hover{background:rgba(255,255,255,.08)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.75));
+      color:#0a0b14;
+      border-color: rgba(255,255,255,.18);
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 30px;
-      background: #6c5ce7;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: 0.3s;
+    .hero-right{padding:24px; display:flex; flex-direction:column; gap:12px}
+    .statgrid{
+      display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:auto;
+    }
+    .mini{
+      padding:16px;
+      border-radius:18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .mini strong{display:block; font-size:20px}
+    .mini span{display:block; color:var(--muted); margin-top:6px; font-size:13px; line-height:1.45}
+
+    section{padding:22px 0}
+    .section-title{
+      display:flex; align-items:end; justify-content:space-between; gap:14px;
+      margin: 14px 0 14px;
+    }
+    .section-title h2{margin:0; font-size:18px; letter-spacing:.2px}
+    .section-title p{margin:0; color:var(--muted2); font-size:13px}
+
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px}
+
+    .service{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      transition: transform .15s ease, background .15s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .service:before{
+      content:"";
+      position:absolute; inset:-60px -60px auto auto;
+      width:180px; height:180px;
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.30), transparent 55%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+    .service:hover{transform: translateY(-2px); background: rgba(255,255,255,.055)}
+    .service h3{margin:0 0 8px; font-size:15px}
+    .service p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .tag{
+      font-size:12px; color:var(--muted);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:6px 9px; border-radius:999px;
     }
 
-    .btn:hover {
-      background: #4834d4;
+    .project{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+    }
+    .project .top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
+    .project h3{margin:0; font-size:15px}
+    .project p{margin:10px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
+    .project .meta{margin-top:12px; color:var(--muted2); font-size:12px}
+    .badge{
+      font-size:12px; font-weight:700;
+      padding:6px 10px; border-radius:999px;
+      background: rgba(124,58,237,.22);
+      border: 1px solid rgba(124,58,237,.35);
+      color: rgba(255,255,255,.86);
+      white-space:nowrap;
     }
 
-    .projects {
-      margin-top: 80px;
+    .split{
+      display:grid; grid-template-columns: 1fr 1fr; gap:12px;
+      align-items:stretch;
+    }
+    .box{padding:18px}
+    .box p{margin:10px 0 0; color:var(--muted); font-size:13px; line-height:1.65}
+
+    .reviews{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .reviews iframe{
+      width:100%; height:360px;
+      border:0; border-radius:14px;
+      background:#fff;
     }
 
-    .card {
-      background: #222;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 400px;
-      border-radius: 10px;
+    footer{
+      padding:28px 0 60px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top:18px;
+    }
+
+    /* responsive */
+    @media (max-width: 920px){
+      .hero{grid-template-columns: 1fr}
+      .grid3{grid-template-columns: 1fr}
+      .grid2{grid-template-columns: 1fr}
+      .split{grid-template-columns: 1fr}
+      header{padding:46px 0 18px}
+      .navlinks{display:none}
     }
   </style>
 </head>
 
 <body>
-
-  <div class="container">
-    <h1>Evad</h1>
-    <h2>Développeur Web Freelance</h2>
-    <a class="btn" href="mailto:tonemail@gmail.com">Me contacter</a>
-
-    <div class="projects">
-      <h2>Mes Projets</h2>
-
-      <div class="card">
-        <h3>Site Vitrine</h3>
-        <p>Création d'un site moderne pour entreprise locale.</p>
+  <div class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:14px; line-height:1.1; font-weight:800;">A MODIFIER : Ton Nom</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:3px;">Communication • Marketing • Digital</div>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Landing Page</h3>
-        <p>Page optimisée pour convertir des clients.</p>
+      <div class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#projets">Projets</a>
+        <a href="#avis">Avis</a>
+        <a href="#contact">Contact</a>
       </div>
 
+      <a class="cta" href="#contact" title="Me contacter">
+        Me contacter →
+      </a>
     </div>
   </div>
 
+  <header class="wrap">
+    <div class="hero">
+      <div class="card hero-left">
+        <div class="kicker">
+          <span class="pill">✨ Chargée de communication & marketing</span>
+          <span class="pill">📍 A MODIFIER : Ville / Région</span>
+          <span class="pill">✅ Disponibilités : A MODIFIER (ex: Freelance / Missions)</span>
+        </div>
+
+        <h1>
+          Je crée des <span style="background:linear-gradient(135deg,var(--accent2),var(--accent1),var(--accent3)); -webkit-background-clip:text; background-clip:text; color:transparent;">visuels</span>,
+          des <span style="background:linear-gradient(135deg,var(--accent1),var(--accent3)); -webkit-background-clip:text; background-clip:text; color:transparent;">contenus</span>
+          et des <span style="background:linear-gradient(135deg,var(--accent2),var(--accent3)); -webkit-background-clip:text; background-clip:text; color:transparent;">sites</span>
+          qui donnent envie.
+        </h1>
+
+        <p class="lead">
+          A MODIFIER : 2–3 phrases sur toi. Exemple : J’accompagne les TPE/PME à renforcer leur image de marque,
+          créer des supports impactants (print & digital), gérer et optimiser leur site, et piloter une communication cohérente.
+        </p>
+
+        <div class="btns">
+          <a class="btn primary" href="mailto:A_MODIFIER_EMAIL">📩 Demander un devis</a>
+          <a class="btn" href="A_MODIFIER_LINKEDIN" target="_blank" rel="noopener">in LinkedIn</a>
+          <a class="btn" href="A_MODIFIER_INSTAGRAM" target="_blank" rel="noopener">📷 Instagram (bientôt)</a>
+        </div>
+      </div>
+
+      <div class="card hero-right">
+        <div class="mini">
+          <strong>Branding & visuels</strong>
+          <span>Identité, supports, templates, contenu social media.</span>
+        </div>
+        <div class="mini">
+          <strong>Web & SEO</strong>
+          <span>Mise à jour site, pages, optimisation, contenus, tracking.</span>
+        </div>
+
+        <div class="statgrid">
+          <div class="mini">
+            <strong>A MODIFIER</strong>
+            <span>ex: +X contenus / mois</span>
+          </div>
+          <div class="mini">
+            <strong>A MODIFIER</strong>
+            <span>ex: Projets multi-supports</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="services">
+      <div class="section-title">
+        <h2>Services</h2>
+        <p>Tout ce qu’il faut pour une com’ cohérente et efficace.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="service">
+          <h3>Direction artistique & visuels</h3>
+          <p>Conception de visuels premium : réseaux sociaux, flyers, affiches, cartes, signatures, bannières, templates.</p>
+          <div class="tags">
+            <span class="tag">Identité</span><span class="tag">Print</span><span class="tag">Social</span><span class="tag">Templates</span>
+          </div>
+        </div>
+
+        <div class="service">
+          <h3>Communication & contenu</h3>
+          <p>Calendrier éditorial, textes, storytelling, cohérence de marque, optimisation des messages & appels à l’action.</p>
+          <div class="tags">
+            <span class="tag">Stratégie</span><span class="tag">Copywriting</span><span class="tag">Planning</span><span class="tag">Brand voice</span>
+          </div>
+        </div>
+
+        <div class="service">
+          <h3>Web • gestion de site • SEO</h3>
+          <p>Mises à jour, pages, optimisation SEO, performance, analytics (suivi), amélioration de la conversion.</p>
+          <div class="tags">
+            <span class="tag">SEO</span><span class="tag">Sites</span><span class="tag">Analytics</span><span class="tag">Conversion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projets">
+      <div class="section-title">
+        <h2>Projets & réalisations</h2>
+        <p>Ajoute ici 3–6 exemples concrets (même si ce sont des projets perso).</p>
+      </div>
+
+      <div class="grid2">
+        <div class="project">
+          <div class="top">
+            <h3>A MODIFIER : Projet 1</h3>
+            <span class="badge">Branding</span>
+          </div>
+          <p>A MODIFIER : Résultat + ce que tu as fait (ex: refonte charte + pack templates + supports print).</p>
+          <div class="meta">Outils : A MODIFIER (ex: Canva / Suite Adobe / WordPress)</div>
+        </div>
+
+        <div class="project">
+          <div class="top">
+            <h3>A MODIFIER : Projet 2</h3>
+            <span class="badge">Web / SEO</span>
+          </div>
+          <p>A MODIFIER : Ex: création / optimisation de pages, amélioration SEO, mise en place tracking.</p>
+          <div class="meta">Outils : A MODIFIER</div>
+        </div>
+
+        <div class="project">
+          <div class="top">
+            <h3>A MODIFIER : Projet 3</h3>
+            <span class="badge">Événementiel</span>
+          </div>
+          <p>A MODIFIER : Ex: supports de com, visuels, coordination, signalétique, posts.</p>
+          <div class="meta">Rôle : A MODIFIER</div>
+        </div>
+
+        <div class="project">
+          <div class="top">
+            <h3>A MODIFIER : Projet 4</h3>
+            <span class="badge">Social Media</span>
+          </div>
+          <p>A MODIFIER : Ex: ligne éditoriale, créations, planning, reporting.</p>
+          <div class="meta">Résultat : A MODIFIER (ex: + engagement)</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="split" id="avis">
+      <div class="card box">
+        <div class="section-title" style="margin-top:0">
+          <h2>Pourquoi travailler avec moi</h2>
+          <p>Simple, clair, efficace.</p>
+        </div>
+        <p>
+          <strong>• Design & cohérence :</strong> une image premium, alignée avec ta marque.<br>
+          <strong>• Réactivité :</strong> livrables rapides, communication fluide.<br>
+          <strong>• Polyvalence :</strong> print, digital, web, événementiel.<br>
+          <strong>• Objectif :</strong> visibilité + crédibilité + conversion.
+        </p>
+        <div class="tags" style="margin-top:14px">
+          <span class="tag">Identité</span><span class="tag">Visuels</span><span class="tag">Site & SEO</span><span class="tag">Événementiel</span>
+        </div>
+      </div>
+
+      <div class="reviews">
+        <div class="section-title" style="margin-top:0">
+          <h2>Avis Google</h2>
+          <p>On intègre ta page / un avis / ton établissement.</p>
+        </div>
+
+        <!-- IMPORTANT :
+          Remplace l'iframe ci-dessous par TON lien d'intégration Google (je t'explique juste après).
+          Pour l'instant, ça affiche une carte générique.
+        -->
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Paris&output=embed"
+          title="Carte Google"
+        ></iframe>
+
+        <div style="margin-top:10px; color:var(--muted2); font-size:12px;">
+          Astuce : on peut afficher une carte + un bouton "Voir les avis" vers ta fiche Google.
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="card box">
+        <div class="section-title" style="margin-top:0">
+          <h2>Contact</h2>
+          <p>On discute de ton besoin en 5 minutes.</p>
+        </div>
+        <p>
+          <strong>Email :</strong> <a href="mailto:A_MODIFIER_EMAIL">A_MODIFIER_EMAIL</a><br>
+          <strong>LinkedIn :</strong> <a href="A_MODIFIER_LINKEDIN" target="_blank" rel="noopener">Voir mon profil</a><br>
+          <strong>Instagram :</strong> <a href="A_MODIFIER_INSTAGRAM" target="_blank" rel="noopener">à venir</a>
+        </p>
+        <div class="btns" style="margin-top:14px">
+          <a class="btn primary" href="mailto:A_MODIFIER_EMAIL">📩 Me contacter</a>
+          <a class="btn" href="#services">Voir mes services</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> A MODIFIER : Ton Nom — Portfolio</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="pill" href="A_MODIFIER_LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="pill" href="A_MODIFIER_INSTAGRAM" target="_blank" rel="noopener">Instagram</a>
+          <a class="pill" href="mailto:A_MODIFIER_EMAIL">Email</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
