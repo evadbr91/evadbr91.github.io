@@ -3,17 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eva De Abreu — Communication & Marketing Freelance</title>
-  <meta name="description" content="Freelance communication & marketing : identité visuelle, création de contenus, réseaux sociaux, web & SEO. France entière (à distance)." />
+  <title>Eva De Abreu — Communication & Marketing</title>
+  <meta name="description" content="Freelance communication & marketing : identité visuelle, réseaux sociaux, web & SEO. France entière (à distance)." />
 
   <style>
     :root{
-      --bg0:#070812;
-      --bg1:#0b1024;
-
-      --surface: rgba(12, 14, 30, .90);
-      --surface2: rgba(12, 14, 30, .82);
-
+      --bg:#07070c;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
       --stroke: rgba(255,255,255,.14);
       --stroke2: rgba(255,255,255,.10);
 
@@ -21,17 +18,16 @@
       --muted: rgba(255,255,255,.68);
       --muted2: rgba(255,255,255,.48);
 
-      --a1:#7c3aed;
+      --a1:#8b5cf6;
       --a2:#22d3ee;
       --a3:#f472b6;
 
-      --shadow: 0 20px 80px rgba(0,0,0,.55);
-      --shadow2: 0 14px 55px rgba(0,0,0,.30);
+      --shadow: 0 18px 70px rgba(0,0,0,.45);
+      --shadow2: 0 10px 40px rgba(0,0,0,.25);
 
-      --r: 22px;
-      --max: 1160px;
-
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      --r: 18px;
+      --max: 1120px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
     }
 
     *{box-sizing:border-box}
@@ -41,21 +37,21 @@
       font-family:var(--font);
       color:var(--text);
       background:
-        radial-gradient(1100px 780px at 14% 10%, rgba(124,58,237,.28), transparent 58%),
-        radial-gradient(900px 700px at 82% 18%, rgba(34,211,238,.18), transparent 58%),
-        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.12), transparent 62%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+        radial-gradient(900px 600px at 18% 18%, rgba(34,211,238,.20), transparent 60%),
+        radial-gradient(900px 600px at 78% 22%, rgba(139,92,246,.22), transparent 60%),
+        radial-gradient(900px 600px at 60% 85%, rgba(244,114,182,.14), transparent 62%),
+        linear-gradient(180deg, #05050a, #090a12 40%, #060610);
       overflow-x:hidden;
     }
 
-    /* Grain léger */
+    /* grain */
     body:before{
       content:"";
       position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
-      mix-blend-mode:overlay;
-      opacity:.06;
       pointer-events:none;
+      opacity:.06;
+      mix-blend-mode: overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
     }
 
     a{color:inherit; text-decoration:none}
@@ -68,491 +64,396 @@
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(7,8,18,.62);
+      background: rgba(6,6,12,.65);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
 
-    .brand{display:flex; align-items:center; gap:10px; font-weight:950}
-
-    /* Photo/logo à gauche */
-    .brand-photo{
-      width:40px; height:40px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
-      object-fit:cover;
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px}
+    .brand img{
+      width:42px; height:42px; border-radius:16px;
+      object-fit:cover; border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.06);
-      box-shadow: 0 14px 30px rgba(0,0,0,.30);
-      flex:0 0 auto;
-      display:block;
+      box-shadow: var(--shadow2);
     }
-    /* fallback logo gradient si jamais l'image ne charge pas */
-    .logo{
-      width:40px; height:40px; border-radius:14px;
-      background: linear-gradient(135deg, var(--a1), var(--a2));
-      box-shadow: 0 14px 30px rgba(124,58,237,.20);
-      border: 1px solid rgba(255,255,255,.18);
-      flex:0 0 auto;
-      display:none;
-    }
+    .brand .name{font-weight:950; letter-spacing:.2px}
+    .brand .sub{font-size:12px; color:var(--muted); margin-top:3px}
 
-    .brand small{display:block; color:var(--muted); font-weight:650; margin-top:2px}
-    .navlinks{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .navlinks a{
-      font-size:14px; color:var(--muted);
-      padding:10px 12px; border-radius:12px;
+    .links{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+    .links a{
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:999px;
       border:1px solid transparent;
     }
-    .navlinks a:hover{color:var(--text); border-color:rgba(255,255,255,.10); background:rgba(255,255,255,.04)}
-    .cta{
+    .links a:hover{
+      color:var(--text);
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    @media(max-width:980px){ .links{display:none} }
+
+    .nav-right{display:flex; align-items:center; gap:10px}
+    .pill{
       display:inline-flex; align-items:center; gap:10px;
-      padding:11px 14px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(34,211,238,.76));
-      color:#070812;
-      font-weight:950;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 18px 50px rgba(124,58,237,.16);
-      transition: transform .12s ease;
+      padding:11px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:900;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
     }
-    .cta:hover{transform: translateY(-1px)}
-    @media (max-width: 980px){ .navlinks{display:none} }
-
-    /* ✅ Photo en haut à droite */
-    .nav-right{display:flex; align-items:center; gap:10px}
-    .nav-right-photo{
-      width:40px; height:40px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
-      object-fit:cover;
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 14px 30px rgba(0,0,0,.30);
-      flex:0 0 auto;
-      display:block;
+    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
+    .pill.primary{
+      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
+      color:#07070c;
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 55px rgba(34,211,238,.10);
     }
 
-    /* SURFACES */
+    /* Layout blocks */
     .card{
-      background: var(--surface);
-      border: 1px solid var(--stroke);
       border-radius: var(--r);
+      border:1px solid var(--stroke);
+      background: var(--panel);
       box-shadow: var(--shadow);
     }
-    .panel{
-      background: var(--surface2);
-      border: 1px solid var(--stroke);
-      border-radius: 18px;
+    .soft{
+      border-radius: var(--r);
+      border:1px solid var(--stroke2);
+      background: rgba(255,255,255,.04);
       box-shadow: var(--shadow2);
     }
 
     /* HERO */
-    header{padding:58px 0 22px}
-    .hero{display:grid; grid-template-columns: 1.08fr .92fr; gap:18px}
-    @media (max-width: 980px){ .hero{grid-template-columns:1fr} header{padding:42px 0 16px} }
+    header{padding:40px 0 10px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media(max-width:980px){ .hero{grid-template-columns:1fr} header{padding:26px 0 8px} }
 
-    .hero-left{padding:30px}
-    .badge-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px}
-    .badge{
+    .hero-left{padding:26px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+    .chip{
       display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: linear-gradient(135deg, var(--a2), var(--a1));
+      display:inline-block;
     }
 
     h1{
       margin:0 0 12px;
       font-size: clamp(34px, 4.3vw, 56px);
-      line-height:1.05;
-      letter-spacing:-.6px;
+      line-height:1.03;
+      letter-spacing:-.7px;
     }
     .grad{
-      background:linear-gradient(135deg,var(--a2),var(--a1),var(--a3));
+      background: linear-gradient(135deg, var(--a2), var(--a1), var(--a3));
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
     .lead{
-      margin:0 0 20px;
-      font-size:16px;
+      margin:0 0 18px;
+      line-height:1.75;
       color:var(--muted);
-      line-height:1.7;
-      max-width: 78ch;
+      font-size:15px;
+      max-width:78ch;
     }
 
-    .btns{display:flex; gap:12px; flex-wrap:wrap}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.05);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
       font-weight:950;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
-      white-space:nowrap;
       cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.72));
-      color:#070812; border-color: rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(139,92,246,.90), rgba(244,114,182,.72));
+      color:#07070c;
+      border-color: rgba(255,255,255,.18);
     }
     .btn.linkedin{
-      background: linear-gradient(135deg, rgba(34,211,238,.78), rgba(124,58,237,.78));
-      color:#070812; border-color: rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(34,211,238,.82), rgba(139,92,246,.82));
+      color:#07070c;
+      border-color: rgba(255,255,255,.18);
     }
-    .btn.ghost{background: rgba(255,255,255,.04)}
-    .btn.sm{padding:10px 12px; border-radius:12px; font-size:13px}
 
-    .hero-right{padding:22px; display:flex; flex-direction:column; gap:12px}
+    .hero-right{padding:14px; display:flex; flex-direction:column; gap:10px}
     .profile{
-      display:flex; align-items:center; gap:14px;
-      padding:16px; border-radius:18px;
-      background: rgba(255,255,255,.04);
+      padding:16px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
     }
     .avatar{
-      width:82px; height:82px; border-radius:26px;
-      border:1px solid rgba(255,255,255,.18);
-      overflow:hidden; background: rgba(255,255,255,.06);
-      box-shadow: 0 16px 55px rgba(0,0,0,.35);
+      width:72px; height:72px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow2);
       flex:0 0 auto;
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .name{font-weight:950}
-    .sub{color:var(--muted); font-size:13px; margin-top:4px; line-height:1.4}
+    .profile b{display:block; font-size:14px}
+    .profile span{display:block; margin-top:5px; color:var(--muted); font-size:12px; line-height:1.4}
 
-    .kpi{
-      padding:16px; border-radius:18px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .kpi strong{display:block; font-size:16px}
-    .kpi span{display:block; color:var(--muted); margin-top:6px; font-size:13px; line-height:1.45}
-
-    /* SECTION HEADER */
-    section{padding:22px 0}
-    .section-head{
-      display:flex; align-items:end; justify-content:space-between; gap:14px;
-      margin: 14px 0 14px;
-    }
-    .section-head h2{margin:0; font-size:18px; letter-spacing:.2px}
-    .section-head p{margin:0; color:var(--muted2); font-size:13px}
-
-    /* TRUST STRIP */
-    .trust{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){ .trust{grid-template-columns:1fr 1fr} }
-    @media (max-width: 520px){ .trust{grid-template-columns:1fr} }
-    .trust .item{
-      padding:14px 14px;
-      border-radius:18px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: var(--shadow2);
-    }
-    .trust .item b{display:block; font-size:13px}
-    .trust .item span{display:block; margin-top:6px; font-size:12px; color:var(--muted); line-height:1.5}
-
-    /* SERVICES */
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
-    .service{
-      padding:18px; border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      transition: transform .15s ease, background .15s ease;
-    }
-    .service:hover{transform: translateY(-2px); background: rgba(255,255,255,.055)}
-    .service h3{margin:0 0 8px; font-size:15px}
-    .service p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .tag{
-      font-size:12px; color:var(--muted);
+    .stat{
+      padding:14px;
+      border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
-      padding:6px 9px; border-radius:999px;
+    }
+    .stat strong{display:block; font-size:14px}
+    .stat p{margin:6px 0 0; color:var(--muted); font-size:12.5px; line-height:1.55}
+
+    /* Sections */
+    section{padding:20px 0}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin:12px 0 12px;
+    }
+    .section-head h2{margin:0; font-size:16px; letter-spacing:.2px}
+    .section-head p{margin:0; color:var(--muted2); font-size:13px}
+
+    /* Expertise grid */
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    @media(max-width:980px){ .grid3{grid-template-columns:1fr} }
+
+    .tile{
+      padding:16px;
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow2);
+      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+    }
+    .tile:hover{transform: translateY(-2px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
+    .tile h3{margin:0 0 8px; font-size:14px}
+    .tile p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
+    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .tag{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:6px 9px;
+      border-radius:999px;
     }
 
-    /* METHOD */
-    .method{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 980px){ .method{grid-template-columns:1fr} }
+    /* Method */
+    .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    @media(max-width:980px){ .steps{grid-template-columns:1fr} }
     .step{
-      padding:18px;
-      border-radius:18px;
+      padding:16px;
+      border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
     }
-    .step .n{
-      width:34px; height:34px; border-radius:12px;
+    .badgeN{
+      width:30px;height:30px;border-radius:12px;
       display:inline-flex; align-items:center; justify-content:center;
-      font-weight:950; color:#070812;
-      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(124,58,237,.90));
+      font-weight:950; color:#07070c;
+      background: linear-gradient(135deg, rgba(34,211,238,.92), rgba(139,92,246,.92));
       border:1px solid rgba(255,255,255,.16);
-      margin-bottom:10px;
+      margin-bottom:8px;
     }
-    .step h3{margin:0 0 8px; font-size:15px}
+    .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* =========================
-       ✅ PACKS (TRAITS FIX DEFINITIF)
-       ========================= */
+    /* Packs (no glow, no pseudo elements) */
     .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-    @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
+    @media(max-width:980px){ .packs{grid-template-columns:1fr} }
 
     details.pack{
-      border-radius:18px;
+      border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
+      background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
-      position:relative;
-      transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
-
-      /* ✅ anti-artefacts (traits) */
-      isolation:isolate;
+      overflow:hidden;
       transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden;
       background-clip: padding-box;
     }
-
-    /* ✅ on supprime le glow source de traits (même si présent ailleurs) */
-    details.pack::before,
-    details.pack::after{
-      content:none !important;
-      display:none !important;
-    }
-
-    details.pack:hover{
-      transform: translateY(-3px);
-      background: rgba(255,255,255,.05);
-      border-color: rgba(255,255,255,.20);
-      box-shadow: 0 24px 80px rgba(0,0,0,.40);
-    }
-    details.pack[open]{background: rgba(255,255,255,.055)}
-
     details.pack summary{
-      cursor:pointer; list-style:none;
-      padding:18px;
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-      position:relative;
-      z-index:1;
+      list-style:none;
+      cursor:pointer;
+      padding:16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
     }
     details.pack summary::-webkit-details-marker{display:none}
-
-    .pack-title{margin:0; font-size:15px; font-weight:950}
-    .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
-
+    .pack-title{font-weight:950; font-size:14px}
+    .pack-desc{margin-top:6px; color:var(--muted); font-size:12.8px; line-height:1.55}
     .price{
-      text-align:right;
-      min-width: 170px;
-      font-weight:950;
-      color:#070812;
+      flex:0 0 auto;
       padding:10px 12px;
       border-radius:999px;
-      background: linear-gradient(135deg, rgba(34,211,238,.86), rgba(124,58,237,.92));
+      color:#07070c;
+      font-weight:950;
+      background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.92));
       border:1px solid rgba(255,255,255,.16);
       white-space:nowrap;
+      text-align:right;
       line-height:1.2;
-      position:relative;
-      z-index:1;
+      min-width: 160px;
     }
-    .price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
+    .price small{display:block; opacity:.82; font-size:11px; margin-top:4px}
+    .pack-body{padding:0 16px 16px}
 
-    .pack-peek{
-      padding:0 18px 16px;
-      display:grid;
-      gap:8px;
-      position:relative;
-      z-index:1;
+    .peek{
+      margin-top:0;
+      padding:0 16px 12px;
+      display:grid; gap:8px;
     }
-
-    .peek-row{
+    .peek .row{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      color: var(--muted);
+      color:var(--muted);
       font-size:13px;
     }
-
-    .pack-body{padding:0 18px 18px; position:relative; z-index:1}
-
-    .list{
-      margin:12px 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:8px;
-      color:var(--muted);
-      font-size:13px
+    .row i{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--a3), var(--a2));
+      margin-top:4px; flex:0 0 auto; display:inline-block;
     }
+    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
     .list li{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px; margin-top:4px;
-      background: linear-gradient(135deg, var(--a3), var(--a2));
-      flex:0 0 auto;
+      color:var(--muted);
+      font-size:13px;
     }
     .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
 
-    details.pack.featured{
-      border-color: rgba(34,211,238,.35);
-      box-shadow: 0 30px 110px rgba(34,211,238,.10);
-      position:relative;
-    }
-    details.pack.featured:before{
-      content:"PACK RECOMMANDÉ";
-      position:absolute; top:14px; left:16px;
-      font-size:11px; font-weight:950;
-      padding:7px 10px; border-radius:999px;
-      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(124,58,237,.18));
-      border:1px solid rgba(34,211,238,.35);
-      color: rgba(255,255,255,.92);
-      letter-spacing:.2px;
-      z-index:2;
-      backdrop-filter: blur(10px);
-    }
-    details.pack.featured summary{ padding-top:46px; }
-
-    /* OPTIONS */
-    .options{
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    @media (max-width: 1100px){ .options{grid-template-columns: repeat(3,1fr)} }
-    @media (max-width: 700px){ .options{grid-template-columns: 1fr 1fr} }
-    @media (max-width: 420px){ .options{grid-template-columns: 1fr} }
-
-    .opt{
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-      transition: transform .12s ease;
-    }
-    .opt:hover{transform: translateY(-2px)}
-    .opt b{font-size:13px}
-    .opt span{color:var(--muted); font-size:12px; display:block; margin-top:4px; line-height:1.4}
-    .opt .p{
-      font-weight:950;
-      color:#070812;
+    .recommended{
+      position:absolute;
+      top:12px; left:12px;
+      font-size:11px;
       padding:7px 10px;
       border-radius:999px;
-      background: rgba(255,255,255,.86);
-      border:1px solid rgba(255,255,255,.18);
-      white-space:nowrap;
-      font-size:12px;
+      border:1px solid rgba(34,211,238,.35);
+      background: rgba(34,211,238,.12);
+      backdrop-filter: blur(10px);
+      font-weight:950;
+      color: rgba(255,255,255,.92);
     }
+    details.pack.featured{ position:relative; border-color: rgba(34,211,238,.32) }
+    details.pack.featured summary{ padding-top:48px }
+    details.pack[open]{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18) }
 
-    /* GALLERY FILTER */
+    /* Portfolio */
     .gallery-actions{display:flex; gap:10px; flex-wrap:wrap}
     .seg{
       padding:10px 12px;
-      border-radius:14px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.03);
       color:var(--muted);
       font-weight:950;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .seg:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .seg:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
     .seg.active{
-      color:#070812;
-      background: linear-gradient(135deg, rgba(124,58,237,.88), rgba(34,211,238,.72));
+      color:#07070c;
+      background: linear-gradient(135deg, rgba(139,92,246,.88), rgba(34,211,238,.72));
       border-color: rgba(255,255,255,.16);
     }
 
     .gallery{
       display:grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns:repeat(4,1fr);
       gap:12px;
       margin-top:12px;
     }
-    @media (max-width: 980px){ .gallery{grid-template-columns:1fr 1fr} }
-    @media (max-width: 520px){ .gallery{grid-template-columns:1fr} }
+    @media(max-width:980px){ .gallery{grid-template-columns:1fr 1fr} }
+    @media(max-width:520px){ .gallery{grid-template-columns:1fr} }
 
     .shot{
-      border-radius:18px;
+      border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.03);
       overflow:hidden;
-      position:relative;
-      transition: transform .16s ease;
       box-shadow: var(--shadow2);
       cursor:pointer;
+      transition: transform .14s ease, border-color .14s ease;
+      position:relative;
     }
-    .shot:hover{transform: translateY(-3px)}
-    .shot img{
-      width:100%;
-      height:230px;
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.05) contrast(1.03);
-    }
+    .shot:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18)}
+    .shot img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.03) contrast(1.02)}
     .cap{
       position:absolute;
       left:10px; right:10px; bottom:10px;
-      padding:10px 12px;
       border-radius:14px;
-      background: rgba(7,8,18,.66);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(10px);
-      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(6,6,12,.70);
+      backdrop-filter: blur(12px);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
-    .cap b{font-size:12px; letter-spacing:.2px}
+    .cap b{font-size:12px}
     .cap span{font-size:11px; color:var(--muted)}
-    .tagmini{
-      padding:6px 9px; border-radius:999px;
-      background: rgba(124,58,237,.20);
-      border:1px solid rgba(124,58,237,.35);
-      font-weight:950; font-size:11px;
+    .miniTag{
+      font-size:11px;
+      font-weight:950;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(139,92,246,.35);
+      background: rgba(139,92,246,.16);
       white-space:nowrap;
     }
 
-    /* SPLIT */
-    .split{display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:stretch}
-    @media (max-width: 980px){ .split{grid-template-columns:1fr} }
-
-    .reviews{
-      padding:18px; border-radius:18px;
+    /* LinkedIn */
+    .linkedin{
+      padding:18px;
+      border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
+      background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
-    }
-
-    /* CONTACT FORM */
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       gap:12px;
+      flex-wrap:wrap;
     }
-    @media (max-width: 980px){ .contact-grid{grid-template-columns:1fr} }
+    .linkedin b{font-size:14px}
+    .linkedin p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6; max-width:72ch}
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media(max-width:980px){ .contact-grid{grid-template-columns:1fr} }
 
     .field{display:grid; gap:8px; margin-top:12px}
     label{font-size:12px; color:var(--muted); font-weight:850}
@@ -560,26 +461,33 @@
       width:100%;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(7,8,18,.35);
-      color: var(--text);
+      background: rgba(6,6,12,.35);
+      color:var(--text);
       padding:12px 12px;
       font-family: var(--font);
       outline:none;
     }
-    textarea{min-height: 140px; resize: vertical}
+    textarea{min-height:140px; resize:vertical}
     input:focus, textarea:focus{
       border-color: rgba(34,211,238,.35);
       box-shadow: 0 0 0 4px rgba(34,211,238,.10);
     }
 
-    footer{padding:28px 0 60px; color:var(--muted2); font-size:13px}
+    footer{
+      padding:28px 0 60px;
+      color:var(--muted2);
+      font-size:13px;
+    }
     .foot{
-      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
       border-top: 1px solid rgba(255,255,255,.10);
-      padding-top:18px
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
 
-    /* LIGHTBOX */
+    /* Lightbox */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
@@ -594,14 +502,13 @@
       width:min(980px, 96vw);
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(7,8,18,.78);
+      background: rgba(6,6,12,.80);
       backdrop-filter: blur(14px);
       box-shadow: 0 30px 120px rgba(0,0,0,.6);
       overflow:hidden;
     }
     .lb-top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
       padding:12px 14px;
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
@@ -615,24 +522,13 @@
       padding:8px 10px;
       font-weight:950;
     }
-    .lb-img{
-      background: rgba(255,255,255,.03);
-      max-height: calc(100vh - 120px);
-      overflow: auto;
-    }
-    .lb-img img{
-      width: 100%;
-      height: auto;
-      max-height: calc(100vh - 140px);
-      object-fit: contain;
-      display:block;
-    }
+    .lb-img{background: rgba(255,255,255,.03); max-height: calc(100vh - 120px); overflow:auto}
+    .lb-img img{width:100%; height:auto; object-fit:contain; display:block}
 
-    /* ✅ WhatsApp floating button */
+    /* WhatsApp */
     .whatsapp-float{
       position:fixed;
-      right:18px;
-      bottom:18px;
+      right:18px; bottom:18px;
       z-index:1200;
       display:inline-flex;
       align-items:center;
@@ -640,7 +536,7 @@
       padding:12px 14px;
       border-radius:999px;
       background: rgba(255,255,255,.92);
-      color:#070812;
+      color:#07070c;
       font-weight:950;
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
@@ -648,13 +544,9 @@
       transition: transform .12s ease;
     }
     .whatsapp-float:hover{ transform: translateY(-2px); }
-    .whatsapp-dot{
-      width:12px; height:12px;
-      border-radius:999px;
-      background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(124,58,237,.95));
-    }
-    @media (max-width:520px){
-      .whatsapp-float{ right:12px; bottom:12px; padding:11px 12px; }
+    .wh-dot{
+      width:12px;height:12px;border-radius:999px;
+      background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(139,92,246,.95));
     }
   </style>
 </head>
@@ -663,30 +555,25 @@
   <div class="nav">
     <div class="wrap">
       <div class="brand">
-        <img class="brand-photo" id="brandPhoto" src="brand-photo.jpg" alt="Logo / Photo — Eva De Abreu">
-        <div class="logo" id="brandFallback" aria-hidden="true"></div>
-
+        <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
         <div>
-          <div style="font-size:14px; line-height:1.1; font-weight:950;">Eva De Abreu</div>
-          <small>Communication & Marketing — Freelance</small>
+          <div class="name">Eva De Abreu</div>
+          <div class="sub">Communication & Marketing — Freelance</div>
         </div>
       </div>
 
-      <div class="navlinks">
+      <div class="links">
         <a href="#services">Expertises</a>
         <a href="#method">Méthode</a>
         <a href="#packs">Packs</a>
         <a href="#galerie">Portfolio</a>
-        <a href="#avis">LinkedIn</a>
+        <a href="#linkedin">LinkedIn</a>
         <a href="#contact">Contact</a>
       </div>
 
-      <!-- ✅ CTA + photo en haut à droite -->
       <div class="nav-right">
-        <a class="cta" href="#contact">Demander un devis</a>
-
-        <!-- ✅ Si tu veux brand.jpg : renomme le fichier ou change src="brand.jpg" -->
-        <img class="nav-right-photo" src="brand-photo.jpg" alt="Photo — Eva De Abreu">
+        <a class="pill" href="tel:+33765232469">📞 Appeler</a>
+        <a class="pill primary" href="#contact">Demander un devis</a>
       </div>
     </div>
   </div>
@@ -694,35 +581,28 @@
   <header class="wrap">
     <div class="hero">
       <div class="card hero-left">
-        <div class="badge-row">
-          <span class="badge">À distance • France entière</span>
-          <span class="badge">Offres mensuelles</span>
-          <span class="badge">Visuels • Réseaux • Web • SEO</span>
+        <div class="chips">
+          <span class="chip"><span class="dot"></span>À distance • France entière</span>
+          <span class="chip"><span class="dot"></span>Réseaux • Web • SEO</span>
+          <span class="chip"><span class="dot"></span>Offres mensuelles</span>
         </div>
 
         <h1>
-          Communication & marketing <span class="grad">professionnels</span> :
-          une présence <span class="grad">cohérente</span> sur le web et les réseaux.
+          Une image <span class="grad">premium</span> et une présence
+          <span class="grad">cohérente</span> sur le web.
         </h1>
 
         <p class="lead">
-          J’accompagne les TPE/PME avec une approche structurée : <b>identité visuelle</b>, <b>création de contenus</b>,
-          <b>gestion des réseaux sociaux</b>, <b>optimisation Google</b> et <b>web / SEO</b>.
-          Objectif : une image premium, claire, et orientée résultats.
+          J’aide les TPE/PME à gagner en crédibilité et en clients grâce à une communication claire :
+          identité visuelle, contenus, réseaux sociaux, optimisation Google, web & SEO.
+          <br><br>
+          <b>Objectif :</b> une marque propre, reconnaissable et orientée résultats.
         </p>
 
-        <div class="btns">
-          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Email</a>
-          <a class="btn" href="tel:+33765232469">Téléphone</a>
-          <a class="btn ghost" href="#galerie" id="goGalleryBtn">Voir le portfolio</a>
+        <div class="hero-actions">
+          <a class="btn primary" href="#packs">Voir les packs</a>
+          <a class="btn" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Email</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="trust">
-          <div class="item"><b>Secteurs</b><span>Restaurants, instituts, artisans, BTP, taxis, PME.</span></div>
-          <div class="item"><b>Livraison</b><span>Formats adaptés : print, web, réseaux (HD + déclinaisons).</span></div>
-          <div class="item"><b>Organisation</b><span>Brief → devis → production → retours → livraison.</span></div>
-          <div class="item"><b>Couverture</b><span>Accompagnement à distance partout en France.</span></div>
         </div>
       </div>
 
@@ -732,24 +612,22 @@
             <img src="profil.jpg" alt="Photo de profil — Eva De Abreu">
           </div>
           <div>
-            <div class="name">Eva De Abreu</div>
-            <div class="sub">Communication • Marketing • Design<br>Réseaux sociaux • Web • SEO</div>
+            <b>Eva De Abreu</b>
+            <span>Communication • Marketing • Design<br>Réseaux sociaux • Web • SEO</span>
           </div>
         </div>
 
-        <div class="kpi">
-          <strong>Rendu premium</strong>
-          <span>Design structuré, cohérence visuelle, hiérarchie claire et déclinaisons.</span>
+        <div class="stat">
+          <strong>Contenus qui donnent confiance</strong>
+          <p>Hiérarchie claire, visuels cohérents, déclinaisons adaptées à tes formats.</p>
         </div>
-
-        <div class="kpi">
-          <strong>Gestion multi-canal</strong>
-          <span>Intervention sur les visuels, les réseaux et votre présence web.</span>
+        <div class="stat">
+          <strong>Organisation simple</strong>
+          <p>Brief → proposition → production → retours cadrés → livraison.</p>
         </div>
-
-        <div class="kpi">
-          <strong>Suivi cadré</strong>
-          <span>Livrables définis, délais clairs et retours encadrés.</span>
+        <div class="stat">
+          <strong>Multi-canal</strong>
+          <p>Réseaux + présence web + SEO local : une stratégie globale.</p>
         </div>
       </div>
     </div>
@@ -759,237 +637,159 @@
     <section id="services">
       <div class="section-head">
         <h2>Expertises</h2>
-        <p>Un accompagnement complet et structuré.</p>
+        <p>Une base solide + une exécution propre.</p>
       </div>
 
       <div class="grid3">
-        <div class="service">
+        <div class="tile">
           <h3>Identité & supports</h3>
-          <p>Affiches, flyers, menus, brochures, cartes, bannières, templates. Print et digital.</p>
-          <div class="tags">
-            <span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span>
-          </div>
+          <p>Menus, flyers, cartes, affiches, bannières, templates. Print & digital.</p>
+          <div class="tags"><span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span></div>
         </div>
-
-        <div class="service">
+        <div class="tile">
           <h3>Réseaux sociaux</h3>
-          <p>Création de contenus, cohérence graphique, déclinaisons, planning et optimisation.</p>
-          <div class="tags">
-            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
-          </div>
+          <p>Contenus, cohérence graphique, planning, optimisation et conseils.</p>
+          <div class="tags"><span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span></div>
         </div>
-
-        <div class="service">
+        <div class="tile">
           <h3>Web & SEO</h3>
-          <p>Pages pro (type Linktree/portfolio), mise à jour de site, optimisation SEO (base / local).</p>
-          <div class="tags">
-            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
-          </div>
+          <p>Page pro, mise à jour site, SEO local, optimisation Google.</p>
+          <div class="tags"><span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span></div>
         </div>
       </div>
     </section>
 
     <section id="method">
       <div class="section-head">
-        <h2>Méthode de travail</h2>
-        <p>Simple, cadré, efficace.</p>
+        <h2>Méthode</h2>
+        <p>Cadré, rapide, efficace.</p>
       </div>
 
-      <div class="method">
+      <div class="steps">
         <div class="step">
-          <div class="n">1</div>
+          <div class="badgeN">1</div>
           <h3>Brief & objectifs</h3>
-          <p>Définition du besoin, du style, des formats, de la cible et des priorités (visibilité / conversion / image).</p>
+          <p>Style, formats, cible, offre, et priorités (image / visibilité / conversion).</p>
         </div>
         <div class="step">
-          <div class="n">2</div>
-          <h3>Devis & planning</h3>
-          <p>Proposition claire : livrables inclus, calendrier, modalités d’ajustements et conditions.</p>
+          <div class="badgeN">2</div>
+          <h3>Plan & livrables</h3>
+          <p>Devis clair, calendrier, nombre d’allers-retours, et validations.</p>
         </div>
         <div class="step">
-          <div class="n">3</div>
+          <div class="badgeN">3</div>
           <h3>Production & livraison</h3>
-          <p>Création, retours encadrés, déclinaisons, puis livraison finale (HD + formats adaptés).</p>
+          <p>Création + déclinaisons + livrables HD prêts à publier / imprimer.</p>
         </div>
       </div>
     </section>
 
     <section id="packs">
       <div class="section-head">
-        <h2>Packs mensuels (tarifs de lancement)</h2>
-        <p>France entière (à distance) • Offre de lancement limitée.</p>
+        <h2>Packs mensuels (lancement)</h2>
+        <p>Un seul pack ouvert à la fois.</p>
       </div>
 
       <div class="packs">
-        <!-- PACK 1 -->
         <details class="pack">
           <summary>
             <div>
               <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
-              <div class="pack-desc">Idéal pour poser une base propre : visibilité locale + image cohérente.</div>
+              <div class="pack-desc">Base propre : visibilité locale + image cohérente.</div>
             </div>
             <div class="price">180€ / mois<small>au lieu de 350€</small></div>
           </summary>
 
-          <div class="pack-peek">
-            <div class="peek-row"><span class="dot"></span><span>Google Business optimisé + infos à jour</span></div>
-            <div class="peek-row"><span class="dot"></span><span>4 posts/mois + 4 visuels premium</span></div>
-            <div class="peek-row"><span class="dot"></span><span>1 story/semaine + conseils SEO de base</span></div>
+          <div class="peek">
+            <div class="row"><i></i><span>Google Business optimisé + infos à jour</span></div>
+            <div class="row"><i></i><span>4 posts/mois + 4 visuels premium</span></div>
+            <div class="row"><i></i><span>1 story/semaine + conseils SEO base</span></div>
           </div>
 
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>Audit rapide de la présence en ligne</span></li>
-              <li><span class="dot"></span><span>Optimisation Google Business Profile</span></li>
-              <li><span class="dot"></span><span>4 posts / mois (Instagram ou Facebook)</span></li>
-              <li><span class="dot"></span><span>4 visuels (création premium Canva Pro)</span></li>
-              <li><span class="dot"></span><span>1 story / semaine</span></li>
-              <li><span class="dot"></span><span>Mise à jour des informations (horaires, photos, coordonnées)</span></li>
-              <li><span class="dot"></span><span>Conseils SEO de base</span></li>
+              <li><i class="dot"></i><span>Audit rapide présence en ligne</span></li>
+              <li><i class="dot"></i><span>Optimisation Google Business Profile</span></li>
+              <li><i class="dot"></i><span>4 posts / mois (IG ou Facebook)</span></li>
+              <li><i class="dot"></i><span>4 visuels premium</span></li>
+              <li><i class="dot"></i><span>1 story / semaine</span></li>
             </ul>
 
-            <div class="panel" style="padding:12px; margin-top:12px;">
-              <b>Objectif</b>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Être visible localement et présenter une image professionnelle.
-              </div>
-            </div>
-
             <div class="pack-cta">
-              <button class="btn primary sm choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
-              <a class="btn ghost sm" href="#galerie">Voir des exemples</a>
+              <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
+              <a class="btn" href="#galerie">Voir des exemples</a>
             </div>
           </div>
         </details>
 
-        <!-- PACK 2 (FEATURED) -->
         <details class="pack featured">
+          <span class="recommended">RECOMMANDÉ</span>
           <summary>
             <div>
               <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
-              <div class="pack-desc">Idéal pour accélérer : plus de contenu + acquisition + suivi mensuel.</div>
+              <div class="pack-desc">Accélérer : plus de contenu + acquisition + suivi.</div>
             </div>
             <div class="price">390€ / mois<small>au lieu de 750€</small></div>
           </summary>
 
-          <div class="pack-peek">
-            <div class="peek-row"><span class="dot"></span><span>Tout le pack 1 inclus</span></div>
-            <div class="peek-row"><span class="dot"></span><span>8 posts/mois + 8 visuels + stories</span></div>
-            <div class="peek-row"><span class="dot"></span><span>SEO local + avis Google + stats mensuelles</span></div>
+          <div class="peek">
+            <div class="row"><i></i><span>Tout le pack 1 inclus</span></div>
+            <div class="row"><i></i><span>8 posts/mois + visuels + stories</span></div>
+            <div class="row"><i></i><span>SEO local + stats mensuelles</span></div>
           </div>
 
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>Tout le pack 1 inclus</span></li>
-              <li><span class="dot"></span><span>8 posts / mois</span></li>
-              <li><span class="dot"></span><span>8 visuels premium</span></li>
-              <li><span class="dot"></span><span>4 stories / semaine</span></li>
-              <li><span class="dot"></span><span>Optimisation bio + stratégie de contenu</span></li>
-              <li><span class="dot"></span><span>Réponse aux avis Google</span></li>
-              <li><span class="dot"></span><span>Mini shooting photo (1h)</span></li>
-              <li><span class="dot"></span><span>SEO local optimisé</span></li>
-              <li><span class="dot"></span><span>Mise à jour / modifications du site web</span></li>
-              <li><span class="dot"></span><span>Analyse mensuelle des statistiques</span></li>
+              <li><i class="dot"></i><span>8 posts / mois</span></li>
+              <li><i class="dot"></i><span>Visuels premium + déclinaisons</span></li>
+              <li><i class="dot"></i><span>Stories (rythme hebdo)</span></li>
+              <li><i class="dot"></i><span>Optimisation bio + stratégie de contenu</span></li>
+              <li><i class="dot"></i><span>Analyse mensuelle des statistiques</span></li>
             </ul>
 
-            <div class="panel" style="padding:12px; margin-top:12px;">
-              <b>Objectif</b>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Générer plus de clients et augmenter l’engagement via une présence structurée.
-              </div>
-            </div>
-
             <div class="pack-cta">
-              <button class="btn primary sm choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
-              <a class="btn sm" href="tel:+33765232469">Appeler</a>
+              <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
+              <a class="btn" href="tel:+33765232469">Appeler</a>
             </div>
           </div>
         </details>
 
-        <!-- PACK 3 -->
         <details class="pack">
           <summary>
             <div>
               <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Idéal pour scaler : branding + stratégie + contenus + web + accompagnement.</div>
+              <div class="pack-desc">Scaler : stratégie + branding + contenus + web.</div>
             </div>
-            <div class="price">790€ / mois<small>au lieu de 1500€ • à partir de</small></div>
+            <div class="price">790€ / mois<small>au lieu de 1500€</small></div>
           </summary>
 
-          <div class="pack-peek">
-            <div class="peek-row"><span class="dot"></span><span>Tout le pack 2 inclus</span></div>
-            <div class="peek-row"><span class="dot"></span><span>Stratégie complète + branding + web vitrine</span></div>
-            <div class="peek-row"><span class="dot"></span><span>Événementiel possible (invitations, devis, coordination)</span></div>
+          <div class="peek">
+            <div class="row"><i></i><span>Tout le pack 2 inclus</span></div>
+            <div class="row"><i></i><span>Stratégie complète + branding + web</span></div>
+            <div class="row"><i></i><span>Reporting + call stratégique</span></div>
           </div>
 
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>Tout le pack 2 inclus</span></li>
-              <li><span class="dot"></span><span>Stratégie digitale complète</span></li>
-              <li><span class="dot"></span><span>Création ou refonte site vitrine</span></li>
-              <li><span class="dot"></span><span>12 posts / mois</span></li>
-              <li><span class="dot"></span><span>12 visuels + Reels</span></li>
-              <li><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></li>
-              <li><span class="dot"></span><span>Création d’événement / lancement produit (invitations, supports, coordination)</span></li>
-              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle</span></li>
-              <li><span class="dot"></span><span>Audit SEO complet</span></li>
-              <li><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></li>
+              <li><i class="dot"></i><span>Stratégie digitale complète</span></li>
+              <li><i class="dot"></i><span>Charte + identité visuelle</span></li>
+              <li><i class="dot"></i><span>Contenus intensifs + formats avancés</span></li>
+              <li><i class="dot"></i><span>Accompagnement & reporting</span></li>
             </ul>
 
-            <div class="panel" style="padding:12px; margin-top:12px;">
-              <b>Objectif</b>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Construire une vraie marque et développer le chiffre d’affaires grâce à une stratégie complète.
-              </div>
-            </div>
-
             <div class="pack-cta">
-              <button class="btn primary sm choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
-              <button class="btn ghost sm goContact" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Contact</button>
+              <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
+              <a class="btn" href="#contact">Contact</a>
             </div>
           </div>
         </details>
-      </div>
-
-      <div class="panel" style="padding:18px; margin-top:12px;">
-        <div style="font-weight:950;">💡 Options (à la carte)</div>
-        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Compléments possibles selon vos besoins (devis sur-mesure).
-        </div>
-
-        <div class="options">
-          <div class="opt">
-            <div><b>Création logo</b><span>Identité simple & propre</span></div>
-            <div class="p">120€</div>
-          </div>
-          <div class="opt">
-            <div><b>Carte de visite</b><span>Print prêt à imprimer</span></div>
-            <div class="p">60€</div>
-          </div>
-          <div class="opt">
-            <div><b>Flyer</b><span>Visuel + déclinaisons</span></div>
-            <div class="p">90€</div>
-          </div>
-          <div class="opt">
-            <div><b>Site vitrine simple</b><span>1 page / vitrine</span></div>
-            <div class="p">600€</div>
-          </div>
-          <div class="opt">
-            <div><b>Shooting supp.</b><span>+1h</span></div>
-            <div class="p">120€</div>
-          </div>
-          <div class="opt">
-            <div><b>Meta Ads</b><span>Gestion campagne</span></div>
-            <div class="p">+15%</div>
-          </div>
-        </div>
       </div>
     </section>
 
     <section id="galerie">
       <div class="section-head">
         <h2>Portfolio</h2>
-        <p>Filtrez par type : visuels / sites / réseaux.</p>
+        <p>Filtre par type + aperçu en grand.</p>
       </div>
 
       <div class="gallery-actions">
@@ -1001,69 +801,61 @@
       <div class="gallery" id="galleryGrid">
         <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
           <img src="produit-the.jpg" alt="Visuel produit / branding">
-          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="tagmini">Visuel</div></div>
+          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
         <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
           <img src="menu-resto.jpg" alt="Menu restauration">
-          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="tagmini">Visuel</div></div>
+          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
         <div class="shot" data-cat="visuels" data-title="Promotion" data-src="valentine.jpg">
           <img src="valentine.jpg" alt="Promotion">
-          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="tagmini">Visuel</div></div>
+          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
         <div class="shot" data-cat="visuels" data-title="Affiche / Flyer" data-src="maraude.jpg">
           <img src="maraude.jpg" alt="Affiche / flyer">
-          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="tagmini">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Logo / Identité" data-src="logo-taxi.png">
-          <img src="logo-taxi.png" alt="Logo / identité">
-          <div class="cap"><div><b>Logo</b><br><span>Identité visuelle</span></div><div class="tagmini">Visuel</div></div>
+          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
         <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
           <img src="matchday.jpg" alt="Story matchday">
-          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="tagmini">Réseaux</div></div>
+          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
         </div>
 
         <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
           <img src="classico.jpg" alt="Annonce événement">
-          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="tagmini">Réseaux</div></div>
+          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
         </div>
 
-        <div class="shot" data-cat="sites" data-title="Projets web — à ajouter" data-src="profil.jpg">
-          <img src="profil.jpg" alt="Projets web à ajouter">
-          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="tagmini">Sites</div></div>
+        <div class="shot" data-cat="sites" data-title="Projets web — à intégrer" data-src="profil.jpg">
+          <img src="profil.jpg" alt="Projets web à intégrer">
+          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="miniTag">Sites</div></div>
         </div>
       </div>
 
-      <div class="panel" style="padding:16px; margin-top:12px;">
-        <div style="font-weight:950;">Ajout de nouveaux projets</div>
+      <div class="soft" style="padding:14px; margin-top:12px;">
+        <b>Ajout de projets</b>
         <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Ajoutez une image (ex : <span class="tiny">mon-projet.jpg</span>), puis dupliquez une carte
-          <span class="tiny">shot</span> et remplacez <span class="tiny">data-src</span> / <span class="tiny">src</span> et la catégorie <span class="tiny">data-cat</span>.
+          Ajoute une image (ex : <span class="tiny">mon-projet.jpg</span>), duplique une carte
+          <span class="tiny">shot</span>, puis remplace <span class="tiny">data-src</span> / <span class="tiny">src</span> et la catégorie <span class="tiny">data-cat</span>.
         </div>
       </div>
     </section>
 
-    <!-- ✅ LINKEDIN UNIQUEMENT (garde l'ancre #avis) -->
-    <section id="avis">
+    <section id="linkedin">
       <div class="section-head">
         <h2>LinkedIn</h2>
-        <p>Profil public & parcours.</p>
+        <p>Profil & parcours.</p>
       </div>
 
-      <div class="panel" style="padding:18px;">
-        <div class="muted" style="line-height:1.7; font-size:13px;">
-          Retrouvez mon parcours et mes expériences professionnelles sur LinkedIn.
-          <br><br>
-          <span class="muted2">Zone : France entière — échanges à distance.</span>
+      <div class="linkedin">
+        <div>
+          <b>Profil public</b>
+          <p>Retrouve mon parcours et mes expériences sur LinkedIn. Je peux aussi t’envoyer un devis rapide selon ton besoin.</p>
         </div>
-
-        <div class="btns" style="margin-top:14px">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
           <a class="btn primary" href="#contact">Demander un devis</a>
         </div>
@@ -1073,11 +865,11 @@
     <section id="contact">
       <div class="section-head">
         <h2>Contact</h2>
-        <p>Réponse rapide • Devis clair.</p>
+        <p>Réponse rapide • devis clair.</p>
       </div>
 
       <div class="contact-grid">
-        <div class="card" style="padding:18px">
+        <div class="card" style="padding:18px;">
           <div class="muted" style="line-height:1.8; font-size:14px;">
             <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
             <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
@@ -1085,14 +877,14 @@
             <b>Zone :</b> France entière (à distance)
           </div>
 
-          <div class="btns" style="margin-top:14px">
+          <div class="hero-actions" style="margin-top:14px;">
             <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Me contacter</a>
             <a class="btn" href="tel:+33765232469">Appeler</a>
             <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
 
-        <div class="card" style="padding:18px">
+        <div class="card" style="padding:18px;">
           <div style="font-weight:950;">Demande de devis</div>
           <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
             Remplis et clique sur “Ouvrir le mail” : ça prépare automatiquement ton email vers <b>deabreue9@gmail.com</b>.
@@ -1118,7 +910,7 @@
             <textarea id="fMsg" placeholder="Secteur, objectif, délai, contenus, web, événementiel..."></textarea>
           </div>
 
-          <div class="btns" style="margin-top:12px">
+          <div class="hero-actions" style="margin-top:12px;">
             <button class="btn primary" id="sendMailBtn" type="button">Ouvrir le mail</button>
             <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
           </div>
@@ -1132,8 +924,8 @@
 
     <footer>
       <div class="foot">
-        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing Freelance</div>
-        <div class="muted2">Visuels • Réseaux • Web • SEO • Événementiel — France entière</div>
+        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+        <div class="muted2">Visuels • Réseaux • Web • SEO — France entière</div>
       </div>
     </footer>
   </main>
@@ -1155,7 +947,7 @@
   <a class="whatsapp-float"
      href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
      target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
-    <span class="whatsapp-dot"></span>
+    <span class="wh-dot"></span>
     WhatsApp
   </a>
 
@@ -1163,33 +955,16 @@
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Navbar photo fallback (logo gradient si photo cassée)
-    const brandPhoto = document.getElementById("brandPhoto");
-    const brandFallback = document.getElementById("brandFallback");
-    if(brandPhoto){
-      brandPhoto.addEventListener("error", () => {
-        brandPhoto.style.display = "none";
-        if(brandFallback) brandFallback.style.display = "block";
-      });
-    }
-
     // Gallery filter
     const segs = Array.from(document.querySelectorAll(".seg"));
     const shots = Array.from(document.querySelectorAll(".shot"));
 
     function setCat(cat){
       segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-      shots.forEach(it => {
-        it.style.display = (it.dataset.cat === cat) ? "" : "none";
-      });
+      shots.forEach(it => it.style.display = (it.dataset.cat === cat) ? "" : "none");
     }
-
     segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
     setCat("visuels");
-
-    // Button "Voir le portfolio" => Visuels
-    const goGalleryBtn = document.getElementById("goGalleryBtn");
-    if(goGalleryBtn){ goGalleryBtn.addEventListener("click", () => setCat("visuels")); }
 
     // Lightbox
     const lb = document.getElementById("lightbox");
@@ -1211,7 +986,6 @@
       lbImg.src = "";
       document.body.style.overflow = "";
     }
-
     lbClose.addEventListener("click", closeLB);
     lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
     window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
@@ -1224,20 +998,23 @@
       });
     });
 
-    // Packs -> remplit le champ pack + scroll contact
+    // Packs -> remplir champ + scroll contact
     const packInput = document.getElementById("fPack");
     function goContactWithPack(packName){
       if(packInput && packName) packInput.value = packName;
       document.getElementById("contact")?.scrollIntoView({behavior:"smooth", block:"start"});
     }
     document.querySelectorAll(".choosePack").forEach(btn => {
-      btn.addEventListener("click", () => {
-        goContactWithPack(btn.getAttribute("data-pack") || "");
-      });
+      btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
     });
-    document.querySelectorAll(".goContact").forEach(btn => {
-      btn.addEventListener("click", () => {
-        goContactWithPack(btn.getAttribute("data-pack") || "");
+
+    // Accordion packs (un seul ouvert)
+    const packDetails = Array.from(document.querySelectorAll("details.pack"));
+    packDetails.forEach(d => {
+      d.addEventListener("toggle", () => {
+        if(d.open){
+          packDetails.forEach(other => { if(other !== d) other.open = false; });
+        }
       });
     });
 
@@ -1279,20 +1056,6 @@
       );
 
       window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    });
-
-    // ✅ IMPORTANT : Packs -> ouvrir/fermer TOUS ensemble
-    const packDetails = Array.from(document.querySelectorAll("details.pack"));
-    packDetails.forEach(d => {
-      d.addEventListener("toggle", () => {
-        // si on ouvre un pack => on ouvre tous
-        if(d.open){
-          packDetails.forEach(other => { other.open = true; });
-        }else{
-          // si on ferme un pack => on ferme tous (cohérent)
-          packDetails.forEach(other => { other.open = false; });
-        }
-      });
     });
   </script>
 </body>
