@@ -30,6 +30,9 @@
       --r: 18px;
       --max: 1120px;
 
+      /* ✅ Hauteur fixe des packs (desktop/tablette) */
+      --packH: 560px;
+
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
     }
 
@@ -150,27 +153,45 @@
     .brand .name{font-weight:950; letter-spacing:.2px; white-space:nowrap}
     .brand .sub{font-size:12px; color:var(--muted); margin-top:3px; white-space:nowrap}
 
-    /* ✅ Menu qui “défile” (scroll horizontal) + fade edges */
+    /* ✅ Menu scrollable + flèches */
     .linksWrap{
       position:relative;
       flex: 1 1 auto;
       min-width:0;
       display:flex;
       align-items:center;
+      gap:8px;
     }
+    .navArrow{
+      width:36px; height:36px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color:rgba(255,255,255,.82);
+      cursor:pointer;
+      display:none; /* JS le montre seulement si overflow */
+      align-items:center;
+      justify-content:center;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+      flex:0 0 auto;
+    }
+    .navArrow:hover{ transform: translateY(-1px); filter:brightness(1.08); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    .navArrow:active{ transform: translateY(0); }
+
     .links{
       display:flex;
       gap:6px;
       align-items:center;
       white-space:nowrap;
-
       overflow-x:auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width:none;
       padding: 6px 4px;
       border-radius:999px;
+      min-width:0;
 
-      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+      /* fade edges */
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
     .links::-webkit-scrollbar{display:none}
 
@@ -188,22 +209,6 @@
       border-color: rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       transform: translateY(-1px);
-    }
-
-    /* little “hint” arrows for scroll */
-    .scrollHint{
-      display:none;
-      position:absolute;
-      right:-2px; top:50%;
-      transform: translateY(-50%);
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(6,6,12,.55);
-      backdrop-filter: blur(10px);
-      color:rgba(255,255,255,.70);
-      font-size:12px;
-      pointer-events:none;
     }
 
     .nav-right{display:flex; align-items:center; gap:10px; flex:0 0 auto; white-space:nowrap;}
@@ -231,16 +236,14 @@
       .brand .sub{display:none}
       .nav .wrap{padding-top:12px; padding-bottom:12px;}
       .nav-right .pill{ padding:10px 12px; }
-      .scrollHint{display:inline-flex;}
     }
     @media(max-width:560px){
-      /* ✅ Sur téléphone: on garde menu scrollable mais compact */
       .links a{ padding:9px 10px; font-size:12.5px; }
       .brand img{ width:38px; height:38px; border-radius:14px; }
       .brand .name{ font-size:13px; }
       .nav-right{ gap:8px; }
       .nav-right .pill{ padding:9px 10px; font-size:13px; }
-      .scrollHint{display:none;}
+      .navArrow{ width:34px; height:34px; }
     }
 
     /* HERO */
@@ -541,7 +544,7 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* PACKS (✅ parfaitement alignés) */
+    /* ✅ PACKS : même hauteur même ouverts */
     .packs{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -562,10 +565,16 @@
 
       display:flex;
       flex-direction:column;
-      height:100%;
 
-      /* ✅ Reserve la place du badge "RECOMMANDÉ" sur TOUTES les cartes */
+      /* réserve badge */
       padding-top: 44px;
+
+      /* ✅ la clé : hauteur FIXE (desktop) */
+      height: var(--packH);
+    }
+    /* ✅ Sur mobile : pas de hauteur fixe (sinon ça devient trop petit) */
+    @media (max-width: 520px){
+      details.pack{ height: auto; }
     }
 
     details.pack summary{
@@ -576,6 +585,7 @@
       align-items:flex-start;
       justify-content:space-between;
       gap:12px;
+      flex:0 0 auto;
     }
     details.pack summary::-webkit-details-marker{display:none}
 
@@ -602,12 +612,13 @@
       padding:0 16px 12px;
       color:rgba(255,255,255,.60);
       font-size:12px;
+      flex:0 0 auto;
     }
 
     .peek{
       padding:0 16px 12px;
       display:grid; gap:8px;
-      min-height: 152px; /* ✅ même hauteur */
+      flex:0 0 auto;
     }
     .peek .row{
       display:flex; gap:10px; align-items:flex-start;
@@ -629,8 +640,28 @@
     .pack-body{
       padding:0 16px 16px;
       margin-top:auto;
+
+      /* ✅ zone interne scrollable : la carte ne change PLUS de taille */
+      flex: 1 1 auto;
+      overflow: hidden;
+      display:flex;
+      flex-direction:column;
     }
-    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
+
+    /* ✅ le contenu détaillé est dans un "drawer" scrollable */
+    .pack-drawer{
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      border-radius:14px;
+      padding:10px;
+      overflow:auto;
+      flex: 1 1 auto;
+      display:none; /* fermé */
+    }
+
+    details.pack[open] .pack-drawer{ display:block; }
+
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:8px}
     .list li{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
@@ -644,7 +675,7 @@
     .list li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
 
     /* ✅ un seul bouton sur chaque pack */
-    .pack-cta{margin-top:12px}
+    .pack-cta{margin-top:10px}
     .pack-cta .btn{width:100%}
 
     .recommended{
@@ -660,13 +691,11 @@
       color: rgba(255,255,255,.92);
     }
     details.pack.featured{ border-color: rgba(34,211,238,.32) }
-
     details.pack[open]{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18) }
 
     @media (max-width: 520px){
       details.pack summary{flex-direction:column; align-items:flex-start; gap:10px;}
       .price{ min-width:0; width:100%; text-align:left; }
-      .peek{ min-height: 0; }
     }
 
     /* Portfolio */
@@ -709,11 +738,11 @@
     }
     .shot:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
 
-    /* ✅ Visuels : on voit TOUT + beaucoup plus grand */
+    /* ✅ Visuels : on voit TOUT + grand */
     .shot img{
       width:100%;
-      height: 320px;               /* ✅ plus grand */
-      object-fit: contain;         /* ✅ on voit tout */
+      height: 320px;
+      object-fit: contain;
       background: rgba(6,6,12,.42);
       padding:12px;
       display:block;
@@ -772,7 +801,7 @@
     .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 
     .embed{margin-top:12px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02);}
-    .embed iframe{width:100%; height:320px; border:0; display:block; background:#fff;}
+    .embed iframe{width:100%; height:340px; border:0; display:block; background:#fff;}
     @media(max-width:520px){ .embed iframe{height:260px;} }
 
     /* Contact */
@@ -815,19 +844,22 @@
     footer{padding:28px 0 60px; color:var(--muted2); font-size:13px;}
     .foot{border-top: 1px solid rgba(255,255,255,.10); padding-top:18px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;}
 
-    /* Lightbox */
+    /* ✅ Lightbox : image TOUJOURS entière (fit viewport) */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
       display:none;
       align-items:center;
       justify-content:center;
-      padding:22px;
+      padding:18px;
       z-index:1000;
     }
     .lightbox.open{display:flex}
     .lb-card{
-      width:min(980px, 96vw);
+      width:min(1100px, 96vw);
+      max-height: min(92vh, 920px);
+      display:flex;
+      flex-direction:column;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(6,6,12,.80);
@@ -841,6 +873,7 @@
       display:flex; align-items:center; justify-content:space-between; gap:10px;
       padding:12px 14px;
       border-bottom: 1px solid rgba(255,255,255,.10);
+      flex:0 0 auto;
     }
     .lb-top b{font-size:13px}
     .lb-top button{
@@ -854,8 +887,25 @@
       transition: transform .14s ease, filter .14s ease;
     }
     .lb-top button:hover{transform: translateY(-1px); filter:brightness(1.08)}
-    .lb-img{background: rgba(255,255,255,.03); max-height: calc(100vh - 120px); overflow:auto}
-    .lb-img img{width:100%; height:auto; object-fit:contain; display:block; padding: 10px;}
+    .lb-img{
+      flex: 1 1 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,255,255,.03);
+      padding: 10px;
+      overflow:auto; /* si image ultra haute, on scroll sans couper */
+    }
+    .lb-img img{
+      max-width: 100%;
+      max-height: 100%;
+      width:auto;
+      height:auto;
+      object-fit: contain;
+      display:block;
+      border-radius: 12px;
+      background: rgba(0,0,0,.15);
+    }
 
     /* WhatsApp */
     .whatsapp-float{
@@ -921,6 +971,7 @@
       </div>
 
       <div class="linksWrap" aria-label="Menu">
+        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
         <nav class="links" id="topLinks">
           <a href="#about">À propos</a>
           <a href="#services">Expertises</a>
@@ -930,7 +981,7 @@
           <a href="#socialproof">Avis</a>
           <a href="#contact">Contact</a>
         </nav>
-        <div class="scrollHint">⇆</div>
+        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
       </div>
 
       <div class="nav-right">
@@ -1148,7 +1199,7 @@
     <section id="packs" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="Packs mensuels"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Cliquez sur un pack : les détails s’affichent (pour tous).</p>
+        <p>Cliquez sur un pack : les détails s’affichent (pour tous) • taille identique ✅</p>
       </div>
 
       <div class="packs">
@@ -1170,13 +1221,17 @@
           </div>
 
           <div class="pack-body">
-            <ul class="list">
-              <li><i></i><span>Audit rapide de la présence en ligne</span></li>
-              <li><i></i><span>Optimisation Google Business Profile</span></li>
-              <li><i></i><span>4 posts / mois (Instagram ou Facebook)</span></li>
-              <li><i></i><span>4 visuels premium</span></li>
-              <li><i></i><span>1 story / semaine</span></li>
-            </ul>
+            <div class="pack-drawer" aria-label="Détails">
+              <ul class="list">
+                <li><i></i><span>Audit rapide de la présence en ligne</span></li>
+                <li><i></i><span>Optimisation Google Business Profile</span></li>
+                <li><i></i><span>4 posts / mois (Instagram ou Facebook)</span></li>
+                <li><i></i><span>4 visuels premium</span></li>
+                <li><i></i><span>1 story / semaine</span></li>
+                <li><i></i><span>Mise à jour infos (horaires, photos, coordonnées)</span></li>
+                <li><i></i><span>Conseils SEO de base</span></li>
+              </ul>
+            </div>
 
             <div class="pack-cta">
               <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
@@ -1203,13 +1258,18 @@
           </div>
 
           <div class="pack-body">
-            <ul class="list">
-              <li><i></i><span>8 posts / mois</span></li>
-              <li><i></i><span>Visuels premium + déclinaisons</span></li>
-              <li><i></i><span>Stories (rythme hebdomadaire)</span></li>
-              <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
-              <li><i></i><span>Analyse mensuelle des statistiques</span></li>
-            </ul>
+            <div class="pack-drawer" aria-label="Détails">
+              <ul class="list">
+                <li><i></i><span>Tout le pack 1 inclus</span></li>
+                <li><i></i><span>8 posts / mois</span></li>
+                <li><i></i><span>8 visuels premium + déclinaisons</span></li>
+                <li><i></i><span>Stories (rythme hebdomadaire)</span></li>
+                <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
+                <li><i></i><span>Réponse aux avis Google (si accès / droits)</span></li>
+                <li><i></i><span>Analyse mensuelle des statistiques</span></li>
+                <li><i></i><span>SEO local optimisé</span></li>
+              </ul>
+            </div>
 
             <div class="pack-cta">
               <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
@@ -1235,12 +1295,16 @@
           </div>
 
           <div class="pack-body">
-            <ul class="list">
-              <li><i></i><span>Stratégie digitale complète</span></li>
-              <li><i></i><span>Charte graphique + identité visuelle</span></li>
-              <li><i></i><span>Production de contenus intensifiée</span></li>
-              <li><i></i><span>Accompagnement et reporting</span></li>
-            </ul>
+            <div class="pack-drawer" aria-label="Détails">
+              <ul class="list">
+                <li><i></i><span>Tout le pack 2 inclus</span></li>
+                <li><i></i><span>Stratégie digitale complète</span></li>
+                <li><i></i><span>Charte graphique + identité visuelle</span></li>
+                <li><i></i><span>Production de contenus intensifiée</span></li>
+                <li><i></i><span>Accompagnement + reporting</span></li>
+                <li><i></i><span>Optimisation web / SEO (selon besoin)</span></li>
+              </ul>
+            </div>
 
             <div class="pack-cta">
               <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
@@ -1253,7 +1317,7 @@
     <section id="galerie" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Filtre par type + aperçu en grand.</p>
+        <p>Filtre par type + aperçu en grand (image entière ✅).</p>
       </div>
 
       <div class="gallery-actions">
@@ -1325,23 +1389,29 @@
 
         <div class="block glow-hover">
           <b>Avis Google</b>
-          <p>La page d’avis est prête (un élément rassurant pour vos futurs clients).</p>
+          <p>Vous pouvez consulter les avis existants et en laisser un en 1 clic.</p>
           <div class="actions">
-            <a class="btn primary" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir les avis</a>
-            <a class="btn" href="#contact">Me contacter</a>
+            <!-- ✅ Mets ici TON lien "laisser un avis" (ou le lien de ta fiche) -->
+            <a class="btn primary" id="leaveReviewBtn" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">⭐ Laisser un avis</a>
+            <a class="btn" id="viewReviewsBtn" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir les avis</a>
           </div>
 
           <div class="embed" aria-label="Aperçu avis Google">
+            <!-- ✅ IMPORTANT :
+              Remplace PASTE_GOOGLE_EMBED_SRC_HERE par ton vrai src "Intégrer une carte"
+              (Google Maps → ta fiche → Partager → Intégrer une carte → copie le src).
+            -->
             <iframe
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps?q=France&output=embed"
-              title="Aperçu Google (placeholder)">
+              data-real-src="PASTE_GOOGLE_EMBED_SRC_HERE"
+              title="Avis Google (embed)">
             </iframe>
           </div>
 
           <div class="muted2 tiny" style="margin-top:10px;">
-            Pour un embed exact, utilisez l’URL Google Maps complète de la fiche.
+            Dès que tu me donnes le <b>src embed</b> de ta fiche, je le colle ici et tu verras tes avis directement.
           </div>
         </div>
       </div>
@@ -1375,15 +1445,19 @@
             Remplissez puis cliquez sur <b>Envoyer</b> : la demande part directement par email.
           </div>
 
-          <!-- ✅ Envoi direct sans backend : FormSubmit (gratuit).
-               Important : la 1ère fois, FormSubmit peut demander de confirmer l’adresse email.
-               Tu peux changer le redirect plus bas (merci.html) si tu veux. -->
-          <form id="quoteForm" action="https://formsubmit.co/deabreue9@gmail.com" method="POST">
+          <!-- ✅ FormSubmit : OK sur GitHub Pages.
+               ✅ Astuce anti-message relou : on redirige vers #contact (pas vers FormSubmit).
+               Mets bien l’URL finale de ton site dans _next une fois publié. -->
+          <form id="quoteForm"
+                action="https://formsubmit.co/deabreue9@gmail.com"
+                method="POST"
+                accept-charset="UTF-8">
             <!-- options FormSubmit -->
             <input type="hidden" name="_subject" value="Demande de devis — Site portfolio" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="thanks.html" />
+            <!-- ✅ Remplace l'URL par TON URL finale (celle de GitHub Pages) -->
+            <input type="hidden" name="_next" value="https://evadbr91.github.io/#contact" />
 
             <div class="field">
               <label for="fName">Nom / Entreprise</label>
@@ -1411,8 +1485,8 @@
             </div>
 
             <div class="success" id="successBox">
-              Votre demande est prête à être envoyée ✅<br>
-              Si c’est la première fois, le service peut vous demander de confirmer l’adresse d’envoi.
+              Votre demande est en cours d’envoi ✅<br>
+              (Si c’est la première fois, FormSubmit peut demander une confirmation côté Eva.)
             </div>
 
             <div class="muted2 tiny" style="margin-top:10px;">
@@ -1456,29 +1530,6 @@
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // ✅ Menu scroll: petit auto-scroll doux si l'utilisateur ne touche pas (surtout mobile)
-    (function(){
-      const el = document.getElementById("topLinks");
-      if(!el) return;
-
-      let userInteracted = false;
-      let dir = 1;
-
-      const stop = () => { userInteracted = true; };
-      ["wheel","touchstart","pointerdown","keydown"].forEach(ev => window.addEventListener(ev, stop, {passive:true}));
-
-      function tick(){
-        if(!userInteracted && el.scrollWidth > el.clientWidth){
-          el.scrollLeft += (0.35 * dir);
-          // bounce
-          if(el.scrollLeft <= 0) dir = 1;
-          if(el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) dir = -1;
-        }
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })();
-
     // Reveal on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1514,7 +1565,7 @@
       out.textContent = "";
 
       let i = 0;
-      const speed = 18; // ms-ish (we use rAF)
+      const speed = 18;
       let last = performance.now();
 
       function step(now){
@@ -1541,6 +1592,31 @@
 
     document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
 
+    // ✅ Nav arrows (show only if overflow)
+    (function(){
+      const el = document.getElementById("topLinks");
+      const left = document.getElementById("navLeft");
+      const right = document.getElementById("navRight");
+      if(!el || !left || !right) return;
+
+      function refresh(){
+        const overflow = el.scrollWidth > el.clientWidth + 2;
+        left.style.display = overflow ? "inline-flex" : "none";
+        right.style.display = overflow ? "inline-flex" : "none";
+      }
+
+      function scrollByX(dx){
+        el.scrollBy({ left: dx, behavior: "smooth" });
+      }
+
+      left.addEventListener("click", () => scrollByX(-220));
+      right.addEventListener("click", () => scrollByX(220));
+
+      window.addEventListener("resize", refresh);
+      setTimeout(refresh, 60);
+      refresh();
+    })();
+
     // Gallery filter
     const segs = Array.from(document.querySelectorAll(".seg"));
     const shots = Array.from(document.querySelectorAll(".shot"));
@@ -1552,7 +1628,7 @@
     segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
     setCat("visuels");
 
-    // Lightbox
+    // ✅ Lightbox
     const lb = document.getElementById("lightbox");
     const lbImg = document.getElementById("lbImg");
     const lbTitle = document.getElementById("lbTitle");
@@ -1584,19 +1660,18 @@
       });
     });
 
-    // ✅ Packs -> choisir ce pack (unique bouton) + scroll contact + remplissage
+    // ✅ Packs -> choisir ce pack + scroll contact + remplissage
     const packInput = document.getElementById("fPack");
     function goContactWithPack(packName){
       if(packInput && packName) packInput.value = packName;
       document.getElementById("contact")?.scrollIntoView({behavior:"smooth", block:"start"});
-      // focus email pour être fluide
       setTimeout(()=> document.getElementById("fEmail")?.focus(), 450);
     }
     document.querySelectorAll(".choosePack").forEach(btn => {
       btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
     });
 
-    // ✅ Packs: si on ouvre 1 pack, on ouvre/ferme tous (clair pour l'utilisateur)
+    // ✅ Packs: si on ouvre 1 pack, on ouvre/ferme tous (comme tu veux garder)
     const packDetails = Array.from(document.querySelectorAll("details.pack"));
     let syncing = false;
     packDetails.forEach(d => {
@@ -1638,6 +1713,16 @@
         successBox.classList.add("on");
       });
     }
+
+    // ✅ Google Embed : si tu as collé un vrai src, on l'applique (sinon ça reste France propre)
+    (function(){
+      const iframe = document.querySelector("#socialproof iframe");
+      if(!iframe) return;
+      const real = iframe.getAttribute("data-real-src");
+      if(real && real.startsWith("https://www.google.com/maps/embed?pb=")){
+        iframe.src = real;
+      }
+    })();
   </script>
 </body>
 </html>
