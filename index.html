@@ -11,7 +11,6 @@
       --bg0:#070812;
       --bg1:#0b1024;
 
-      /* Surfaces opaques = rendu uniforme/pro */
       --surface: rgba(12, 14, 30, .90);
       --surface2: rgba(12, 14, 30, .82);
 
@@ -49,7 +48,7 @@
       overflow-x:hidden;
     }
 
-    /* Grain très léger (sinon ça fait des bandes/traits) */
+    /* Grain très léger */
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -103,7 +102,7 @@
     .cta:hover{transform: translateY(-1px)}
     @media (max-width: 980px){ .navlinks{display:none} }
 
-    /* SURFACES UNIFORMES */
+    /* SURFACES */
     .card{
       background: var(--surface);
       border: 1px solid var(--stroke);
@@ -158,8 +157,9 @@
       border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.05);
       font-weight:950;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
       white-space:nowrap;
+      cursor:pointer;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
     .btn.primary{
@@ -207,7 +207,7 @@
     .section-head h2{margin:0; font-size:18px; letter-spacing:.2px}
     .section-head p{margin:0; color:var(--muted2); font-size:13px}
 
-    /* TRUST STRIP */
+    /* TRUST */
     .trust{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -273,13 +273,15 @@
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
     /* =========================
-       PACKS (FIX + DESIGN)
+       PACKS
        ========================= */
-
     .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:stretch;}
     @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
 
-    /* ✅ égalise le gabarit des cartes (résout l’impression “pack 3 pas aligné”) */
+    /* Actions packs */
+    .pack-actions{display:flex; gap:10px; flex-wrap:wrap}
+    .pack-actions .btn{padding:10px 12px; border-radius:12px; font-size:13px}
+
     details.pack{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
@@ -287,9 +289,9 @@
       overflow:hidden;
       box-shadow: var(--shadow2);
 
-      display:flex;            /* clé */
-      flex-direction:column;   /* clé */
-      min-height: 560px;       /* clé (ajuste si tu veux plus/moins grand) */
+      display:flex;
+      flex-direction:column;
+      min-height: 560px;
       position:relative;
 
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
@@ -297,22 +299,20 @@
       isolation:isolate;
     }
 
-    /* ✅ le "trait" vertical qui peut apparaître (souvent dû à un bord/pixel) -> on évite tout divider */
-    /* (il n’y a plus aucun border-left / border-right spécifique ici) */
-
-    /* Glow + bordure gradient (stylé) */
+    /* ✅ on bouge/compresse l'effet "forme transparente" : plus de grand arc */
     details.pack::before{
       content:"";
       position:absolute;
-      inset:-120px;
+      inset:-40px; /* <- plus petit qu'avant */
       background:
-        radial-gradient(420px 280px at 22% 10%, rgba(34,211,238,.22), transparent 62%),
-        radial-gradient(420px 320px at 85% 15%, rgba(124,58,237,.22), transparent 62%),
-        radial-gradient(520px 360px at 60% 90%, rgba(244,114,182,.16), transparent 66%);
+        radial-gradient(280px 220px at 12% 8%, rgba(34,211,238,.18), transparent 62%),
+        radial-gradient(260px 240px at 88% 14%, rgba(124,58,237,.18), transparent 62%),
+        radial-gradient(300px 260px at 65% 92%, rgba(244,114,182,.12), transparent 66%);
       opacity:0;
       transition: opacity .18s ease;
       pointer-events:none;
       z-index:0;
+      filter: blur(.2px);
     }
 
     details.pack::after{
@@ -341,25 +341,24 @@
     details.pack:hover::before{opacity:1}
     details.pack:hover::after{opacity:1}
 
-    /* ✅ on garde tout au-dessus des pseudo-elements */
     details.pack > *{position:relative; z-index:1;}
 
-    /* Featured: plus premium sans “scale” (le scale faisait croire que les packs n’étaient pas alignés) */
+    /* Featured */
     details.pack.featured{
       border-color: rgba(34,211,238,.35);
       box-shadow: 0 34px 120px rgba(34,211,238,.12);
     }
-    details.pack.featured::before{opacity:.55}
-    details.pack.featured::after{opacity:.35}
+    details.pack.featured::before{opacity:.35} /* glow léger, pas envahissant */
+    details.pack.featured::after{opacity:.22}
+
     details.pack.featured:hover{
       transform: translateY(-6px);
       border-color: rgba(34,211,238,.45);
       box-shadow: 0 40px 135px rgba(34,211,238,.14);
     }
 
-    details.pack.featured:before{
-      /* on garde ton label mais on le rend plus “premium” */
-      content:"PACK RECOMMANDÉ";
+    /* Badge recommandé : on le met en HTML (plus de conflit avec ::before) */
+    .ribbon{
       position:absolute; top:14px; right:14px;
       font-size:11px; font-weight:950;
       padding:7px 10px; border-radius:999px;
@@ -379,13 +378,17 @@
       display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
     }
     details.pack summary::-webkit-details-marker{display:none}
+
+    /* click zone + hint */
+    .pack-kicker{display:flex; align-items:center; gap:8px; color:var(--muted2); font-size:12px; margin-top:10px}
+    .chev{display:inline-block; transition: transform .18s ease; opacity:.9}
+    details.pack[open] .chev{transform: rotate(180deg)}
+
     .pack-title{margin:0; font-size:15px; font-weight:950}
     .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
 
-    /* ✅ fixe visuellement les hauteurs des “headers” */
-    details.pack summary > div:first-child{
-      min-height: 76px; /* titre + desc -> cohérence sur les 3 */
-    }
+    /* Cohérence : même hauteur de header */
+    details.pack summary > div:first-child{min-height: 90px;}
 
     .price{
       text-align:right;
@@ -404,9 +407,9 @@
 
     .pack-body{
       padding:0 18px 18px;
-      display:flex;            /* clé */
-      flex-direction:column;   /* clé */
-      flex:1;                  /* clé */
+      display:flex;
+      flex-direction:column;
+      flex:1;
     }
 
     .list{
@@ -438,12 +441,9 @@
       box-shadow: 0 0 18px rgba(244,114,182,.14);
     }
 
-    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto} /* ✅ pousse les CTA en bas */
+    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto}
 
-    /* CTA pack : petit glow au survol */
-    details.pack .btn.primary{
-      box-shadow: 0 22px 60px rgba(124,58,237,.14);
-    }
+    details.pack .btn.primary{box-shadow: 0 22px 60px rgba(124,58,237,.14)}
     details.pack:hover .btn.primary{
       box-shadow:
         0 28px 75px rgba(34,211,238,.10),
@@ -451,7 +451,7 @@
       transform: translateY(-1px);
     }
 
-    /* OPTIONS (UPSELL) */
+    /* OPTIONS */
     .options{
       display:grid;
       grid-template-columns: repeat(5, 1fr);
@@ -567,6 +567,42 @@
     }
     .reviews iframe{width:100%; height:360px; border:0; border-radius:14px; background:#fff}
 
+    /* CONTACT FORM */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .contact-grid{grid-template-columns:1fr} }
+
+    .form{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+    }
+    .field{display:grid; gap:8px; margin-top:12px}
+    label{font-size:12px; color:var(--muted); font-weight:850}
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(7,8,18,.35);
+      color: var(--text);
+      padding:12px 12px;
+      font-family: var(--font);
+      outline:none;
+    }
+    textarea{min-height: 140px; resize: vertical}
+    input:focus, textarea:focus{
+      border-color: rgba(34,211,238,.35);
+      box-shadow: 0 0 0 4px rgba(34,211,238,.10);
+    }
+    .form-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .note{margin-top:10px; font-size:12px; color:var(--muted2); line-height:1.5}
+
     footer{padding:28px 0 60px; color:var(--muted2); font-size:13px}
     .foot{
       display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
@@ -574,7 +610,7 @@
       padding-top:18px
     }
 
-    /* LIGHTBOX (images entières) */
+    /* LIGHTBOX */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
@@ -623,7 +659,6 @@
       display:block;
     }
 
-    /* Accessibilité : réduit les animations si demandé */
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important; animation:none !important}
       details.pack:hover{transform:none}
@@ -781,18 +816,25 @@
 
     <section id="packs">
       <div class="section-head">
-        <h2>Packs mensuels (tarifs de lancement)</h2>
-        <p>France entière (à distance) • Offre de lancement limitée.</p>
+        <div>
+          <h2>Packs mensuels (tarifs de lancement)</h2>
+          <p class="muted2" style="margin-top:6px;">Clique sur un pack pour afficher tous les détails.</p>
+        </div>
+        <div class="pack-actions">
+          <button type="button" class="btn" id="openAllPacks">Tout afficher</button>
+          <button type="button" class="btn" id="closeAllPacks">Tout réduire</button>
+        </div>
       </div>
 
       <div class="packs">
 
-        <!-- PACK 1 -->
-        <details class="pack" open>
+        <!-- PACK 1 (par défaut fermé pour “cliquer et découvrir”) -->
+        <details class="pack">
           <summary>
             <div>
               <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
-              <div class="pack-desc">Idéal TPE / petits commerces / artisans : visibilité locale et image cohérente.</div>
+              <div class="pack-desc">Idéal pour poser une base propre : visibilité locale + image cohérente.</div>
+              <div class="pack-kicker"><span class="chev">▾</span> Détails du pack</div>
             </div>
             <div class="price">180€ / mois<small>au lieu de 350€</small></div>
           </summary>
@@ -804,30 +846,32 @@
               <li><span class="dot"></span><span>4 posts / mois (Instagram ou Facebook)</span></li>
               <li><span class="dot"></span><span>4 visuels (création premium Canva Pro)</span></li>
               <li><span class="dot"></span><span>1 story / semaine</span></li>
-              <li><span class="dot"></span><span>Mise à jour des informations (horaires, photos, coordonnées)</span></li>
+              <li><span class="dot"></span><span>Mise à jour des infos (horaires, photos, coordonnées)</span></li>
               <li><span class="dot"></span><span>Conseils SEO de base</span></li>
             </ul>
 
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Être visible localement et présenter une image professionnelle et propre.
+                Être visible localement et inspirer confiance avec une communication propre.
               </div>
             </div>
 
             <div class="pack-cta">
-              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%201%20—%20Visibilité%20Essentielle">Demander ce pack</a>
+              <a class="btn primary" href="#contact" data-scroll="contact">Demander ce pack</a>
               <a class="btn ghost" href="#galerie">Voir des exemples</a>
             </div>
           </div>
         </details>
 
         <!-- PACK 2 (FEATURED) -->
-        <details class="pack featured" open>
+        <details class="pack featured">
+          <span class="ribbon">PACK RECOMMANDÉ</span>
           <summary>
             <div>
               <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
-              <div class="pack-desc">Idéal restaurants, PME, salons, instituts : engagement + acquisition clients.</div>
+              <div class="pack-desc">Idéal pour accélérer : plus de contenu + acquisition + suivi mensuel.</div>
+              <div class="pack-kicker"><span class="chev">▾</span> Détails du pack</div>
             </div>
             <div class="price">390€ / mois<small>au lieu de 750€</small></div>
           </summary>
@@ -849,23 +893,24 @@
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Générer plus de clients et augmenter l’engagement via une présence digitale structurée.
+                Générer plus de clients et augmenter l’engagement avec une présence structurée.
               </div>
             </div>
 
             <div class="pack-cta">
-              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%202%20—%20Croissance%20Digitale">Demander ce pack</a>
+              <a class="btn primary" href="#contact" data-scroll="contact">Demander ce pack</a>
               <a class="btn" href="tel:+33767208655">Appeler</a>
             </div>
           </div>
         </details>
 
-        <!-- PACK 3 (✅ maintenant aligné + contenu bien visible + version premium + événementiel inclus) -->
-        <details class="pack" open>
+        <!-- PACK 3 -->
+        <details class="pack">
           <summary>
             <div>
               <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Idéal entreprises qui veulent vraiment scaler : image de marque + acquisition + structure.</div>
+              <div class="pack-desc">Idéal pour scaler : branding + stratégie + contenus + web + accompagnement.</div>
+              <div class="pack-kicker"><span class="chev">▾</span> Détails du pack</div>
             </div>
             <div class="price">790€ / mois<small>au lieu de 1500€ • à partir de</small></div>
           </summary>
@@ -873,30 +918,30 @@
           <div class="pack-body">
             <ul class="list">
               <li><span class="dot"></span><span>Tout le pack 2 inclus</span></li>
-              <li><span class="dot"></span><span>Stratégie digitale complète (objectifs, offres, cibles, contenu, plan d’action)</span></li>
+              <li><span class="dot"></span><span>Stratégie digitale complète (objectifs, offres, cibles, plan d’action)</span></li>
               <li><span class="dot"></span><span>Création ou refonte site vitrine <span class="muted2">(périmètre défini ensemble)</span></span></li>
               <li><span class="dot"></span><span>12 posts / mois</span></li>
               <li><span class="dot"></span><span>12 visuels + Reels <span class="muted2">(selon formats)</span></span></li>
               <li><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></li>
-              <li><span class="dot"></span><span>Événementiel : invitations, visuels, coordination, devis <span class="muted2">(selon événement)</span></span></li>
-              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle (cohérence premium)</span></li>
-              <li><span class="dot"></span><span>Audit SEO complet + recommandations priorisées</span></li>
+              <li><span class="dot"></span><span>Événementiel : invitations, visuels, coordination, devis <span class="muted2">(selon projet)</span></span></li>
+              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle</span></li>
+              <li><span class="dot"></span><span>Audit SEO complet + priorisation des actions</span></li>
               <li><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></li>
             </ul>
 
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Construire une vraie marque, structurer la com/marketing et développer le chiffre d’affaires avec une stratégie complète.
+                Construire une vraie marque et développer le chiffre d’affaires avec une stratégie complète.
               </div>
               <div class="muted2 tiny" style="margin-top:10px; line-height:1.6;">
-                *Le Pack 3 est “à partir de” car la partie site/événementiel dépend du périmètre (nombre de pages, type d’événement, délais).
+                *“À partir de” : la partie site/événementiel dépend du périmètre (pages, délais, complexité).
               </div>
             </div>
 
             <div class="pack-cta">
-              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%203%20—%20Stratégie%20%26%20Image%20Premium">Demander ce pack</a>
-              <a class="btn ghost" href="#contact">Contact</a>
+              <a class="btn primary" href="#contact" data-scroll="contact">Demander ce pack</a>
+              <button type="button" class="btn ghost" id="copyEmailBtn">Copier l’email</button>
             </div>
           </div>
         </details>
@@ -945,9 +990,10 @@
       </div>
 
       <div class="gallery-actions">
-        <button class="seg active" data-cat="visuels">Visuels</button>
-        <button class="seg" data-cat="sites">Sites internet</button>
-        <button class="seg" data-cat="reseaux">Réseaux sociaux</button>
+        <!-- ✅ type="button" pour éviter tout comportement bizarre -->
+        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
+        <button type="button" class="seg" data-cat="sites">Sites internet</button>
+        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
       </div>
 
       <div class="gallery" id="galleryGrid">
@@ -998,7 +1044,7 @@
       <div class="panel" style="padding:16px; margin-top:12px;">
         <div style="font-weight:950;">Ajout de nouveaux projets</div>
         <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Ajoutez une image dans le repository (ex : <span class="tiny">mon-projet.jpg</span>), puis dupliquez une carte
+          Ajoutez une image dans le dossier (ex : <span class="tiny">mon-projet.jpg</span>), puis dupliquez une carte
           <span class="tiny">shot</span> et remplacez <span class="tiny">data-src</span> / <span class="tiny">src</span> et la catégorie <span class="tiny">data-cat</span>.
         </div>
       </div>
@@ -1019,7 +1065,7 @@
 
         <div class="btns" style="margin-top:14px">
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
-          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Demander un devis</a>
+          <a class="btn primary" href="#contact" data-scroll="contact">Demander un devis</a>
         </div>
       </div>
 
@@ -1035,24 +1081,63 @@
       </div>
     </section>
 
+    <!-- ✅ CONTACT : un vrai formulaire + bouton mailto généré -->
     <section id="contact">
-      <div class="card" style="padding:18px">
-        <div class="section-head" style="margin-top:0">
-          <h2>Contact</h2>
-          <p>Réponse rapide • Devis clair.</p>
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Réponse rapide • Devis clair.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card" style="padding:18px">
+          <div class="muted" style="line-height:1.8; font-size:14px;">
+            <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
+            <b>Téléphone :</b> <a href="tel:+33767208655">07 67 20 86 55</a><br>
+            <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
+            <b>Zone :</b> France entière (à distance)
+          </div>
+
+          <div class="btns" style="margin-top:14px">
+            <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Envoyer un email</a>
+            <a class="btn" href="tel:+33767208655">Appeler</a>
+            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
         </div>
 
-        <div class="muted" style="line-height:1.8; font-size:14px;">
-          <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
-          <b>Téléphone :</b> <a href="tel:+33767208655">07 67 20 86 55</a><br>
-          <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
-          <b>Zone :</b> France entière (à distance)
-        </div>
+        <div class="form">
+          <div style="font-weight:950;">Demande de devis</div>
+          <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+            Remplis le formulaire : je prépare le mail automatiquement.
+          </div>
 
-        <div class="btns" style="margin-top:14px">
-          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Me contacter</a>
-          <a class="btn" href="tel:+33767208655">Appeler</a>
-          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          <div class="field">
+            <label for="fName">Nom / Entreprise</label>
+            <input id="fName" type="text" placeholder="Ex : Restaurant Le Sud" autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label for="fEmail">Email</label>
+            <input id="fEmail" type="email" placeholder="Ex : contact@..." autocomplete="email" />
+          </div>
+
+          <div class="field">
+            <label for="fPack">Pack souhaité</label>
+            <input id="fPack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
+          </div>
+
+          <div class="field">
+            <label for="fMsg">Message</label>
+            <textarea id="fMsg" placeholder="Décris ton besoin (secteur, objectif, délai, contenus, web, événementiel...)"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn primary" id="sendMailBtn">Ouvrir le mail</button>
+            <button type="button" class="btn" id="copyMailBtn">Copier mon email</button>
+          </div>
+
+          <div class="note">
+            Le bouton “Ouvrir le mail” prépare un email vers <b>deabreue9@gmail.com</b> avec ton message.
+          </div>
         </div>
       </div>
     </section>
@@ -1082,9 +1167,30 @@
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Gallery filter
-    const segs = document.querySelectorAll(".seg");
-    const shots = document.querySelectorAll(".shot");
+    // Smooth scroll helper (et évite certains bugs de click dans <details>)
+    document.querySelectorAll('[data-scroll="contact"]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById('contact');
+        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // Packs open/close all
+    const packs = Array.from(document.querySelectorAll('details.pack'));
+    const openAllBtn = document.getElementById('openAllPacks');
+    const closeAllBtn = document.getElementById('closeAllPacks');
+
+    if(openAllBtn){
+      openAllBtn.addEventListener('click', () => packs.forEach(p => p.open = true));
+    }
+    if(closeAllBtn){
+      closeAllBtn.addEventListener('click', () => packs.forEach(p => p.open = false));
+    }
+
+    // Gallery filter (fiabilisé)
+    const segs = Array.from(document.querySelectorAll(".seg"));
+    const shots = Array.from(document.querySelectorAll(".shot"));
 
     function setCat(cat){
       segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
@@ -1098,7 +1204,9 @@
 
     // Button "Voir le portfolio" => Visuels
     const goGalleryBtn = document.getElementById("goGalleryBtn");
-    if(goGalleryBtn){ goGalleryBtn.addEventListener("click", () => setCat("visuels")); }
+    if(goGalleryBtn){
+      goGalleryBtn.addEventListener("click", () => setCat("visuels"));
+    }
 
     // Lightbox
     const lb = document.getElementById("lightbox");
@@ -1121,8 +1229,8 @@
       document.body.style.overflow = "";
     }
 
-    lbClose.addEventListener("click", closeLB);
-    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
+    if(lbClose) lbClose.addEventListener("click", closeLB);
+    if(lb) lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
     window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
 
     shots.forEach(s => {
@@ -1132,6 +1240,63 @@
         if(src) openLB(src, title);
       });
     });
+
+    // Copy email buttons
+    function copyToClipboard(text){
+      if(navigator.clipboard && window.isSecureContext){
+        return navigator.clipboard.writeText(text);
+      }
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      return Promise.resolve();
+    }
+
+    const EMAIL = "deabreue9@gmail.com";
+    const copyMailBtn = document.getElementById('copyMailBtn');
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+
+    if(copyMailBtn){
+      copyMailBtn.addEventListener('click', async () => {
+        await copyToClipboard(EMAIL);
+        copyMailBtn.textContent = "Copié ✅";
+        setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
+      });
+    }
+    if(copyEmailBtn){
+      copyEmailBtn.addEventListener('click', async () => {
+        await copyToClipboard(EMAIL);
+        copyEmailBtn.textContent = "Copié ✅";
+        setTimeout(() => copyEmailBtn.textContent = "Copier l’email", 1200);
+      });
+    }
+
+    // Contact form => mailto builder
+    const sendMailBtn = document.getElementById('sendMailBtn');
+    if(sendMailBtn){
+      sendMailBtn.addEventListener('click', () => {
+        const name = (document.getElementById('fName')?.value || "").trim();
+        const from = (document.getElementById('fEmail')?.value || "").trim();
+        const pack = (document.getElementById('fPack')?.value || "").trim();
+        const msg  = (document.getElementById('fMsg')?.value || "").trim();
+
+        const subject = encodeURIComponent(`Demande de devis${pack ? " — " + pack : ""}`);
+        const body = encodeURIComponent(
+          `Bonjour Eva,\n\n` +
+          `${msg ? msg + "\n\n" : ""}` +
+          `${pack ? "Pack souhaité : " + pack + "\n" : ""}` +
+          `${name ? "Nom / Entreprise : " + name + "\n" : ""}` +
+          `${from ? "Mon email : " + from + "\n" : ""}` +
+          `\nMerci !`
+        );
+
+        window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+      });
+    }
   </script>
 </body>
 </html>
