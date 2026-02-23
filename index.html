@@ -611,6 +611,86 @@
     .wh-dot{
       width:12px;height:12px;border-radius:999px;
       background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(139,92,246,.95));
+      /* =========================
+   ✅ RESPONSIVE PATCH (SAFE)
+   À coller tout en bas du <style>
+   ========================= */
+
+/* Empêche les débordements horizontaux */
+html, body { overflow-x: hidden; }
+
+/* NAV : meilleur rendu mobile */
+@media (max-width: 980px){
+  .nav .wrap{
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .brand .sub{ display:none; } /* libère de la place */
+  .nav-right .pill{ padding:10px 12px; }
+}
+
+/* Très petits écrans : garder les 2 boutons mais compacts */
+@media (max-width: 420px){
+  .nav-right{ gap:8px; }
+  .nav-right .pill{
+    padding:9px 10px;
+    font-size:13px;
+  }
+  .brand img{ width:38px; height:38px; border-radius:14px; }
+  .brand .name{ font-size:13px; }
+}
+
+/* HERO : améliorer l’espace / lecture sur mobile */
+@media (max-width: 600px){
+  .wrap{ padding:18px; }
+  .hero-left{ padding:18px; }
+  .hero-right{ padding:12px; }
+  h1{ font-size: 34px; line-height: 1.06; }
+  .lead{ font-size:14px; }
+  .chip{ font-size:11px; padding:7px 9px; }
+}
+
+/* Boutons : stack plus propre sur mobile */
+@media (max-width: 520px){
+  .hero-actions .btn{
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-actions{ gap:10px; }
+}
+
+/* Packs : éviter que le prix casse la mise en page */
+@media (max-width: 520px){
+  details.pack summary{
+    flex-direction: column;
+    align-items: flex-start;
+    gap:10px;
+  }
+  .price{
+    min-width: 0;
+    width: 100%;
+    text-align: left;
+  }
+  details.pack.featured summary{ padding-top: 56px; } /* badge au-dessus */
+}
+
+/* Portfolio : hauteur d’image plus adaptée sur mobile */
+@media (max-width: 520px){
+  .shot img{ height: 200px; }
+}
+
+/* Social proof embed : éviter trop haut sur mobile */
+@media (max-width: 520px){
+  .embed iframe{ height: 260px; }
+}
+
+/* WhatsApp : ne pas gêner sur mobile */
+@media (max-width: 520px){
+  .whatsapp-float{
+    right:12px; bottom:12px;
+    padding:11px 12px;
+  }
+}
     }
   </style>
 </head>
