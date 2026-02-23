@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eva De Abreu — Communication & Marketing</title>
   <meta name="description" content="Freelance communication & marketing : identité visuelle, réseaux sociaux, web & SEO. France entière (à distance)." />
+  <meta name="theme-color" content="#07070c" />
 
   <style>
     :root{
-      --bg:#07070c;
+      --bg0:#06060b;
+      --bg1:#090a12;
 
       --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.08);
+      --panel2: rgba(255,255,255,.09);
       --stroke: rgba(255,255,255,.14);
       --stroke2: rgba(255,255,255,.10);
 
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.48);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.52);
 
       --a1:#8b5cf6;
       --a2:#22d3ee;
@@ -34,39 +36,13 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
+    html, body { overflow-x:hidden; }
     body{
       margin:0;
       font-family:var(--font);
       color:var(--text);
-
-      /* ✅ FOND UNIFORME (anti "traits") */
-      background: linear-gradient(180deg, #06060b, #090a12 55%, #060610);
+      background: linear-gradient(180deg, var(--bg0), var(--bg1) 55%, #060610);
       overflow-x:hidden;
-    }
-
-    /* ✅ Glow très doux, MAIS stable (1 seul layer, pas d’artefacts) */
-    .bg-glow{
-      position:fixed;
-      inset:-20vmax;
-      pointer-events:none;
-      z-index:-1;
-      background:
-        radial-gradient(60vmax 50vmax at 20% 20%, rgba(34,211,238,.14), transparent 60%),
-        radial-gradient(60vmax 50vmax at 78% 18%, rgba(139,92,246,.16), transparent 60%),
-        radial-gradient(60vmax 50vmax at 55% 85%, rgba(244,114,182,.10), transparent 62%);
-      filter: blur(20px);
-      transform: translateZ(0);
-      opacity:.95;
-    }
-
-    /* grain discret */
-    body:before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:.05;
-      mix-blend-mode: overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
     }
 
     a{color:inherit; text-decoration:none}
@@ -74,6 +50,77 @@
     .muted{color:var(--muted)}
     .muted2{color:var(--muted2)}
     .tiny{font-size:12px}
+    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+
+    /* Background: clean + premium */
+    .bg-glow{
+      position:fixed;
+      inset:-24vmax;
+      pointer-events:none;
+      z-index:-2;
+      background:
+        radial-gradient(70vmax 55vmax at 18% 18%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(70vmax 55vmax at 84% 16%, rgba(139,92,246,.18), transparent 60%),
+        radial-gradient(70vmax 55vmax at 55% 88%, rgba(244,114,182,.12), transparent 64%);
+      filter: blur(22px);
+      transform: translateZ(0);
+      opacity: .95;
+    }
+
+    /* subtle moving blobs */
+    .blobs{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:-1;
+      opacity:.6;
+      filter: blur(20px);
+      transform: translateZ(0);
+    }
+    .blob{
+      position:absolute;
+      width: 44vmax;
+      height: 44vmax;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 55%),
+                  radial-gradient(circle at 70% 60%, rgba(139,92,246,.18), transparent 55%),
+                  radial-gradient(circle at 40% 80%, rgba(244,114,182,.12), transparent 60%);
+      mix-blend-mode: screen;
+      opacity:.55;
+      animation: floaty 12s ease-in-out infinite;
+    }
+    .blob.b2{left:62%; top:-10%; animation-duration: 14s; opacity:.50}
+    .blob.b1{left:-14%; top:10%;}
+    .blob.b3{left:14%; top:62%; animation-duration: 16s; opacity:.45}
+
+    @keyframes floaty{
+      0%,100%{transform: translate(0,0) scale(1)}
+      50%{transform: translate(28px, -22px) scale(1.05)}
+    }
+
+    /* grain */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.05;
+      mix-blend-mode: overlay;
+      z-index:-1;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+    }
+
+    /* Cards */
+    .card{
+      border-radius: var(--r);
+      border:1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .soft{
+      border-radius: var(--r);
+      border:1px solid var(--stroke2);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+    }
 
     /* NAV */
     .nav{
@@ -82,8 +129,6 @@
       background: rgba(6,6,12,.70);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
-
-    /* ✅ Tout sur une ligne */
     .nav .wrap{
       display:flex;
       align-items:center;
@@ -107,10 +152,9 @@
     .brand .name{font-weight:950; letter-spacing:.2px; white-space:nowrap}
     .brand .sub{font-size:12px; color:var(--muted); margin-top:3px; white-space:nowrap}
 
-    /* ✅ menu sur une seule ligne (Contact ne descend plus) */
     .links{
       display:flex;
-      gap:8px;
+      gap:6px;
       align-items:center;
       justify-content:center;
       flex: 1 1 auto;
@@ -126,15 +170,13 @@
       border-radius:999px;
       border:1px solid transparent;
       flex:0 0 auto;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
     .links a:hover{
       color:var(--text);
       border-color: rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-    }
-
-    @media(max-width:980px){
-      .links{display:none}
+      transform: translateY(-1px);
     }
 
     .nav-right{
@@ -159,37 +201,48 @@
     }
     .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
     .pill.primary{
-      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
+      background: linear-gradient(135deg, rgba(34,211,238,.88), rgba(139,92,246,.88));
       color:#07070c;
       border-color: rgba(255,255,255,.18);
       box-shadow: 0 18px 55px rgba(34,211,238,.10);
     }
 
-    /* Layout blocks */
-    .card{
-      border-radius: var(--r);
-      border:1px solid var(--stroke);
-      background: var(--panel);
-      box-shadow: var(--shadow);
+    @media(max-width:980px){
+      .links{display:none}
+      .brand .sub{display:none}
+      .nav .wrap{padding-top:14px; padding-bottom:14px;}
+      .nav-right .pill{ padding:10px 12px; }
     }
-    .soft{
-      border-radius: var(--r);
-      border:1px solid var(--stroke2);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
+    @media(max-width:420px){
+      .nav-right{ gap:8px; }
+      .nav-right .pill{ padding:9px 10px; font-size:13px; }
+      .brand img{ width:38px; height:38px; border-radius:14px; }
+      .brand .name{ font-size:13px; }
     }
 
     /* HERO */
-    header{padding:40px 0 10px}
+    header{padding:44px 0 8px}
     .hero{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.15fr .85fr;
       gap:14px;
     }
     @media(max-width:980px){ .hero{grid-template-columns:1fr} header{padding:26px 0 8px} }
 
-    .hero-left{padding:26px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+    .hero-left{padding:26px; position:relative; overflow:hidden}
+    .hero-left:after{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: var(--r);
+      pointer-events:none;
+      background: radial-gradient(1200px 400px at 30% 0%, rgba(34,211,238,.12), transparent 55%),
+                  radial-gradient(1200px 420px at 100% 40%, rgba(139,92,246,.14), transparent 55%),
+                  radial-gradient(900px 420px at 70% 100%, rgba(244,114,182,.10), transparent 60%);
+      opacity:.85;
+      mask: linear-gradient(#000, transparent 120%);
+    }
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; position:relative; z-index:1}
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 10px;
@@ -198,7 +251,9 @@
       background: rgba(255,255,255,.03);
       font-size:12px;
       color:var(--muted);
+      transition: transform .12s ease;
     }
+    .chip:hover{ transform: translateY(-1px); }
     .dot{
       width:8px; height:8px; border-radius:999px;
       background: linear-gradient(135deg, var(--a2), var(--a1));
@@ -207,9 +262,10 @@
 
     h1{
       margin:0 0 12px;
-      font-size: clamp(34px, 4.3vw, 56px);
-      line-height:1.03;
-      letter-spacing:-.7px;
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height:1.02;
+      letter-spacing:-.9px;
+      position:relative; z-index:1;
     }
     .grad{
       background: linear-gradient(135deg, var(--a2), var(--a1), var(--a3));
@@ -221,9 +277,10 @@
       color:var(--muted);
       font-size:15px;
       max-width:78ch;
+      position:relative; z-index:1;
     }
 
-    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; position:relative; z-index:1}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:12px 14px;
@@ -238,14 +295,17 @@
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
     .btn.primary{
-      background: linear-gradient(135deg, rgba(139,92,246,.90), rgba(244,114,182,.72));
+      background: linear-gradient(135deg, rgba(139,92,246,.92), rgba(244,114,182,.72));
       color:#07070c;
       border-color: rgba(255,255,255,.18);
     }
     .btn.linkedin{
-      background: linear-gradient(135deg, rgba(34,211,238,.82), rgba(139,92,246,.82));
+      background: linear-gradient(135deg, rgba(34,211,238,.84), rgba(139,92,246,.84));
       color:#07070c;
       border-color: rgba(255,255,255,.18);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.02);
     }
 
     .hero-right{padding:14px; display:flex; flex-direction:column; gap:10px}
@@ -259,7 +319,7 @@
       background: rgba(255,255,255,.03);
     }
     .avatar{
-      width:72px; height:72px;
+      width:76px; height:76px;
       border-radius:22px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.16);
@@ -280,14 +340,143 @@
     .stat strong{display:block; font-size:14px}
     .stat p{margin:6px 0 0; color:var(--muted); font-size:12.5px; line-height:1.55}
 
+    /* marquee mini */
+    .marquee{
+      margin-top:12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+      position:relative;
+    }
+    .marquee .track{
+      display:flex;
+      gap:16px;
+      padding:10px 0;
+      width:max-content;
+      animation: slide 18s linear infinite;
+    }
+    .marquee .item{
+      display:flex; align-items:center; gap:10px;
+      padding:0 14px;
+      color: rgba(255,255,255,.72);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .spark{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(244,114,182,.90));
+    }
+    @keyframes slide{
+      from{transform: translateX(0)}
+      to{transform: translateX(-50%)}
+    }
+
     /* Sections */
-    section{padding:20px 0}
+    section{padding:22px 0}
     .section-head{
       display:flex; align-items:flex-end; justify-content:space-between;
       gap:12px; margin:12px 0 12px;
     }
     .section-head h2{margin:0; font-size:16px; letter-spacing:.2px}
     .section-head p{margin:0; color:var(--muted2); font-size:13px}
+
+    /* ABOUT */
+    .about{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:12px;
+      align-items:stretch;
+    }
+    @media(max-width:980px){ .about{grid-template-columns:1fr} }
+
+    .about-left{ padding:18px; position:relative; overflow:hidden; }
+    .about-left:before{
+      content:"";
+      position:absolute; inset:-1px;
+      pointer-events:none;
+      border-radius: var(--r);
+      background: radial-gradient(900px 400px at 0% 0%, rgba(139,92,246,.14), transparent 55%),
+                  radial-gradient(900px 420px at 100% 40%, rgba(34,211,238,.12), transparent 58%);
+      opacity:.75;
+      mask: linear-gradient(#000, transparent 120%);
+    }
+    .about-right{ padding:18px; display:grid; gap:10px; }
+
+    .about h3{ margin:0 0 8px; font-size:14px; letter-spacing:.2px; position:relative; z-index:1 }
+    .about p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.75; position:relative; z-index:1 }
+
+    .proofline{ margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; position:relative; z-index:1 }
+    .tag{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:6px 9px;
+      border-radius:999px;
+      font-weight:900;
+    }
+
+    .points{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+      position:relative; z-index:1;
+    }
+    .points li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .points li i{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--a2), var(--a1));
+      margin-top:4px; flex:0 0 auto; display:inline-block;
+    }
+
+    .mini-cards{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media(max-width:520px){ .mini-cards{grid-template-columns:1fr} }
+    .mini-card{
+      padding:14px;
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow2);
+    }
+    .mini-card b{ display:block; font-size:13px }
+    .mini-card span{ display:block; margin-top:6px; color:var(--muted); font-size:12.5px; line-height:1.55 }
+
+    /* skill bars */
+    .skills{
+      padding:14px;
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+    }
+    .skill{ display:grid; gap:8px; margin-top:10px; }
+    .skill:first-child{ margin-top:0; }
+    .skill .top{ display:flex; justify-content:space-between; gap:10px; font-size:12px; color:rgba(255,255,255,.78); font-weight:900; }
+    .bar{
+      height:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .bar > span{
+      display:block;
+      height:100%;
+      width: 40%;
+      border-radius:999px;
+      background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.90), rgba(244,114,182,.75));
+      box-shadow: 0 10px 30px rgba(34,211,238,.10);
+    }
 
     /* Expertise grid */
     .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
@@ -300,19 +489,22 @@
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
       transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      position:relative;
+      overflow:hidden;
     }
+    .tile:before{
+      content:"";
+      position:absolute; inset:-1px;
+      pointer-events:none;
+      background: radial-gradient(420px 220px at 10% 0%, rgba(34,211,238,.10), transparent 60%),
+                  radial-gradient(420px 220px at 100% 60%, rgba(139,92,246,.10), transparent 60%);
+      opacity:.9;
+      transform: translateZ(0);
+    }
+    .tile > *{ position:relative; z-index:1; }
     .tile:hover{transform: translateY(-2px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
     .tile h3{margin:0 0 8px; font-size:14px}
     .tile p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .tag{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      padding:6px 9px;
-      border-radius:999px;
-    }
 
     /* Method */
     .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
@@ -323,7 +515,17 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
     }
+    .step:before{
+      content:"";
+      position:absolute; inset:-1px;
+      pointer-events:none;
+      background: radial-gradient(480px 240px at 20% 0%, rgba(244,114,182,.10), transparent 60%);
+      opacity:.85;
+    }
+    .step > *{ position:relative; z-index:1; }
     .badgeN{
       width:30px;height:30px;border-radius:12px;
       display:inline-flex; align-items:center; justify-content:center;
@@ -347,6 +549,7 @@
       overflow:hidden;
       transform: translateZ(0);
       background-clip: padding-box;
+      position:relative;
     }
     details.pack summary{
       list-style:none;
@@ -418,9 +621,19 @@
       font-weight:950;
       color: rgba(255,255,255,.92);
     }
-    details.pack.featured{ position:relative; border-color: rgba(34,211,238,.32) }
+    details.pack.featured{ border-color: rgba(34,211,238,.32) }
     details.pack.featured summary{ padding-top:48px }
     details.pack[open]{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18) }
+
+    @media (max-width: 520px){
+      details.pack summary{
+        flex-direction: column;
+        align-items: flex-start;
+        gap:10px;
+      }
+      .price{ min-width:0; width:100%; text-align:left; }
+      details.pack.featured summary{ padding-top:56px; }
+    }
 
     /* Portfolio */
     .gallery-actions{display:flex; gap:10px; flex-wrap:wrap}
@@ -461,14 +674,23 @@
       position:relative;
     }
     .shot:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18)}
-    .shot img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.03) contrast(1.02)}
+    .shot img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.03) contrast(1.02);
+      transform: scale(1.01);
+      transition: transform .35s ease;
+    }
+    .shot:hover img{ transform: scale(1.06); }
     .cap{
       position:absolute;
       left:10px; right:10px; bottom:10px;
       border-radius:14px;
       padding:10px 12px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(6,6,12,.70);
+      background: rgba(6,6,12,.72);
       backdrop-filter: blur(12px);
       display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
@@ -483,23 +705,35 @@
       background: rgba(139,92,246,.16);
       white-space:nowrap;
     }
+    @media (max-width: 520px){
+      .shot img{ height:200px; }
+    }
 
-    /* LinkedIn + Avis */
+    /* Social proof */
     .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     @media(max-width:980px){ .grid2{grid-template-columns:1fr} }
-
     .block{
       padding:18px;
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
     }
+    .block:before{
+      content:"";
+      position:absolute; inset:-1px;
+      pointer-events:none;
+      background: radial-gradient(520px 240px at 0% 0%, rgba(34,211,238,.10), transparent 60%),
+                  radial-gradient(520px 240px at 100% 70%, rgba(244,114,182,.09), transparent 60%);
+      opacity:.85;
+    }
+    .block > *{ position:relative; z-index:1; }
     .block b{font-size:14px}
     .block p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 
-    /* Avis embed */
     .embed{
       margin-top:12px;
       border-radius: 14px;
@@ -513,6 +747,9 @@
       border:0;
       display:block;
       background:#fff;
+    }
+    @media(max-width:520px){
+      .embed iframe{ height:260px; }
     }
 
     /* Contact */
@@ -611,97 +848,42 @@
     .wh-dot{
       width:12px;height:12px;border-radius:999px;
       background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(139,92,246,.95));
-      /* =========================
-   ✅ RESPONSIVE PATCH (SAFE)
-   À coller tout en bas du <style>
-   ========================= */
+    }
+    @media (max-width: 520px){
+      .wrap{ padding:18px; }
+      .hero-left{ padding:18px; }
+      .hero-right{ padding:12px; }
+      h1{ font-size:34px; line-height:1.06; }
+      .lead{ font-size:14px; }
+      .chip{ font-size:11px; padding:7px 9px; }
+      .hero-actions .btn{ width:100%; justify-content:center; }
+      .whatsapp-float{ right:12px; bottom:12px; padding:11px 12px; }
+    }
 
-/* Empêche les débordements horizontaux */
-html, body { overflow-x: hidden; }
+    /* scroll reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease;}
+    .reveal.on{opacity:1; transform: translateY(0);}
 
-/* NAV : meilleur rendu mobile */
-@media (max-width: 980px){
-  .nav .wrap{
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-  .brand .sub{ display:none; } /* libère de la place */
-  .nav-right .pill{ padding:10px 12px; }
-}
-
-/* Très petits écrans : garder les 2 boutons mais compacts */
-@media (max-width: 420px){
-  .nav-right{ gap:8px; }
-  .nav-right .pill{
-    padding:9px 10px;
-    font-size:13px;
-  }
-  .brand img{ width:38px; height:38px; border-radius:14px; }
-  .brand .name{ font-size:13px; }
-}
-
-/* HERO : améliorer l’espace / lecture sur mobile */
-@media (max-width: 600px){
-  .wrap{ padding:18px; }
-  .hero-left{ padding:18px; }
-  .hero-right{ padding:12px; }
-  h1{ font-size: 34px; line-height: 1.06; }
-  .lead{ font-size:14px; }
-  .chip{ font-size:11px; padding:7px 9px; }
-}
-
-/* Boutons : stack plus propre sur mobile */
-@media (max-width: 520px){
-  .hero-actions .btn{
-    width: 100%;
-    justify-content: center;
-  }
-  .hero-actions{ gap:10px; }
-}
-
-/* Packs : éviter que le prix casse la mise en page */
-@media (max-width: 520px){
-  details.pack summary{
-    flex-direction: column;
-    align-items: flex-start;
-    gap:10px;
-  }
-  .price{
-    min-width: 0;
-    width: 100%;
-    text-align: left;
-  }
-  details.pack.featured summary{ padding-top: 56px; } /* badge au-dessus */
-}
-
-/* Portfolio : hauteur d’image plus adaptée sur mobile */
-@media (max-width: 520px){
-  .shot img{ height: 200px; }
-}
-
-/* Social proof embed : éviter trop haut sur mobile */
-@media (max-width: 520px){
-  .embed iframe{ height: 260px; }
-}
-
-/* WhatsApp : ne pas gêner sur mobile */
-@media (max-width: 520px){
-  .whatsapp-float{
-    right:12px; bottom:12px;
-    padding:11px 12px;
-  }
-}
+    /* reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .blob, .marquee .track{ animation: none !important; }
+      .reveal{ transition:none !important; }
+      *{ scroll-behavior:auto !important; }
     }
   </style>
 </head>
 
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
 
   <div class="nav">
     <div class="wrap">
       <div class="brand">
-        <!-- ✅ même photo partout -->
         <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
         <div>
           <div class="name">Eva De Abreu</div>
@@ -710,6 +892,7 @@ html, body { overflow-x: hidden; }
       </div>
 
       <div class="links">
+        <a href="#about">À propos</a>
         <a href="#services">Expertises</a>
         <a href="#method">Méthode</a>
         <a href="#packs">Packs</a>
@@ -727,37 +910,55 @@ html, body { overflow-x: hidden; }
 
   <header class="wrap">
     <div class="hero">
-      <div class="card hero-left">
+      <div class="card hero-left reveal">
         <div class="chips">
           <span class="chip"><span class="dot"></span>À distance • France entière</span>
           <span class="chip"><span class="dot"></span>Réseaux • Web • SEO</span>
-          <span class="chip"><span class="dot"></span>Offres mensuelles</span>
+          <span class="chip"><span class="dot"></span>Packs mensuels</span>
         </div>
 
         <h1>
-          Une image <span class="grad">premium</span> et une présence
-          <span class="grad">cohérente</span> sur le web.
+          Une com’ <span class="grad">premium</span> qui donne confiance…
+          et qui <span class="grad">convertit</span>.
         </h1>
 
         <p class="lead">
-          J’aide les TPE/PME à gagner en crédibilité et en clients grâce à une communication claire :
-          identité visuelle, contenus, réseaux sociaux, optimisation Google, web & SEO.
+          J’aide les TPE/PME à gagner en crédibilité et en demandes grâce à une présence claire et cohérente :
+          <b>identité visuelle</b>, <b>contenus</b>, <b>réseaux sociaux</b>, <b>Google</b>, <b>web & SEO</b>.
           <br><br>
-          <b>Objectif :</b> une marque propre, reconnaissable et orientée résultats.
+          <b>Objectif :</b> une marque propre, reconnaissable et orientée résultats — sans prise de tête.
         </p>
 
         <div class="hero-actions">
           <a class="btn primary" href="#packs">Voir les packs</a>
-          <a class="btn" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Email</a>
+          <a class="btn ghost" href="#galerie">Voir le portfolio</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="track" id="marqueeTrack">
+            <div class="item"><span class="spark"></span>Identité visuelle</div>
+            <div class="item"><span class="spark"></span>Google Business</div>
+            <div class="item"><span class="spark"></span>SEO local</div>
+            <div class="item"><span class="spark"></span>Visuels premium</div>
+            <div class="item"><span class="spark"></span>Réseaux sociaux</div>
+            <div class="item"><span class="spark"></span>Templates</div>
+
+            <!-- duplicated for seamless loop -->
+            <div class="item"><span class="spark"></span>Identité visuelle</div>
+            <div class="item"><span class="spark"></span>Google Business</div>
+            <div class="item"><span class="spark"></span>SEO local</div>
+            <div class="item"><span class="spark"></span>Visuels premium</div>
+            <div class="item"><span class="spark"></span>Réseaux sociaux</div>
+            <div class="item"><span class="spark"></span>Templates</div>
+          </div>
         </div>
       </div>
 
-      <div class="card hero-right">
+      <div class="card hero-right reveal">
         <div class="profile">
           <div class="avatar">
-            <!-- ✅ même photo partout -->
-            <img src="brand-photo.jpg" alt="Photo — Eva De Abreu">
+            <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
           </div>
           <div>
             <b>Eva De Abreu</b>
@@ -766,23 +967,111 @@ html, body { overflow-x: hidden; }
         </div>
 
         <div class="stat">
-          <strong>Contenus qui donnent confiance</strong>
-          <p>Hiérarchie claire, visuels cohérents, déclinaisons adaptées à tes formats.</p>
+          <strong>Ce que mes clients aiment</strong>
+          <p>Des visuels cohérents + une organisation claire = une image pro qui rassure.</p>
         </div>
         <div class="stat">
-          <strong>Organisation simple</strong>
+          <strong>Un process simple</strong>
           <p>Brief → proposition → production → retours cadrés → livraison.</p>
         </div>
         <div class="stat">
-          <strong>Multi-canal</strong>
-          <p>Réseaux + présence web + SEO local : une stratégie globale.</p>
+          <strong>Une vraie cohérence</strong>
+          <p>Réseaux + Google + web : tout “se tient” et ça se voit.</p>
         </div>
       </div>
     </div>
   </header>
 
   <main class="wrap">
-    <section id="services">
+
+    <section id="about" class="reveal">
+      <div class="section-head">
+        <h2>À propos</h2>
+        <p>Style premium, messages clairs, résultats concrets.</p>
+      </div>
+
+      <div class="about">
+        <div class="card about-left">
+          <h3>Je m’occupe de ta com’ comme si c’était la mienne.</h3>
+          <p>
+            Je suis <b>Eva</b>, freelance en <b>communication & marketing</b>.
+            Mon rôle : rendre ta marque <b>pro</b>, <b>cohérente</b> et <b>mémorable</b> sur tous tes supports.
+            <br><br>
+            Si ta présence en ligne n’inspire pas assez confiance (visuels irréguliers, pas d’identité stable, Google pas optimisé),
+            je te construis une base solide + je produis des contenus qui donnent envie de te contacter.
+          </p>
+
+          <div class="proofline" aria-label="forces">
+            <span class="tag">⚡ Exécution rapide</span>
+            <span class="tag">🧩 Cohérence de marque</span>
+            <span class="tag">📍 SEO local</span>
+            <span class="tag">📅 Organisation</span>
+          </div>
+
+          <ul class="points">
+            <li><i></i><span><b>On clarifie l’offre</b> : ce que tu vends + à qui + pourquoi toi.</span></li>
+            <li><i></i><span><b>On harmonise l’identité</b> : visuels, messages, ton, formats.</span></li>
+            <li><i></i><span><b>On publie utile</b> : contenu régulier qui rassure et déclenche des demandes.</span></li>
+          </ul>
+
+          <div class="hero-actions" style="margin-top:12px;">
+            <a class="btn primary" href="#packs">Choisir un pack</a>
+            <a class="btn" href="#contact">Me parler du projet</a>
+          </div>
+        </div>
+
+        <div class="card about-right">
+          <div class="mini-cards">
+            <div class="mini-card">
+              <b>Ce que tu gagnes</b>
+              <span>Une image pro + une présence cohérente qui rassure et convertit.</span>
+            </div>
+            <div class="mini-card">
+              <b>Ce que je livre</b>
+              <span>Des visuels premium + des formats prêts à publier / imprimer.</span>
+            </div>
+          </div>
+
+          <div class="skills">
+            <div style="font-weight:950; font-size:13px;">Mes axes forts</div>
+
+            <div class="skill">
+              <div class="top"><span>Identité visuelle / templates</span><span>Premium</span></div>
+              <div class="bar"><span style="width:88%"></span></div>
+            </div>
+
+            <div class="skill">
+              <div class="top"><span>Réseaux sociaux (contenu)</span><span>Régularité</span></div>
+              <div class="bar"><span style="width:84%"></span></div>
+            </div>
+
+            <div class="skill">
+              <div class="top"><span>SEO local / Google Business</span><span>Visibilité</span></div>
+              <div class="bar"><span style="width:78%"></span></div>
+            </div>
+
+            <div class="skill">
+              <div class="top"><span>Web / optimisation</span><span>Conversion</span></div>
+              <div class="bar"><span style="width:74%"></span></div>
+            </div>
+          </div>
+
+          <div class="soft" style="padding:14px;">
+            <b>Mini audit offert (rapide)</b>
+            <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+              Envoie ton Instagram + ta fiche Google + ton site :
+              je te dis <b>3 actions prioritaires</b> pour améliorer la crédibilité.
+            </div>
+            <div class="hero-actions" style="margin-top:10px;">
+              <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn primary" href="#contact">Je veux le mini audit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="reveal">
       <div class="section-head">
         <h2>Expertises</h2>
         <p>Une base solide + une exécution propre.</p>
@@ -792,22 +1081,30 @@ html, body { overflow-x: hidden; }
         <div class="tile">
           <h3>Identité & supports</h3>
           <p>Menus, flyers, cartes, affiches, bannières, templates. Print & digital.</p>
-          <div class="tags"><span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span></div>
+          <div class="proofline" style="margin-top:12px;">
+            <span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span>
+          </div>
         </div>
+
         <div class="tile">
           <h3>Réseaux sociaux</h3>
           <p>Contenus, cohérence graphique, planning, optimisation et conseils.</p>
-          <div class="tags"><span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span></div>
+          <div class="proofline" style="margin-top:12px;">
+            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
+          </div>
         </div>
+
         <div class="tile">
           <h3>Web & SEO</h3>
           <p>Page pro, mise à jour site, SEO local, optimisation Google.</p>
-          <div class="tags"><span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span></div>
+          <div class="proofline" style="margin-top:12px;">
+            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="method">
+    <section id="method" class="reveal">
       <div class="section-head">
         <h2>Méthode</h2>
         <p>Cadré, rapide, efficace.</p>
@@ -832,7 +1129,7 @@ html, body { overflow-x: hidden; }
       </div>
     </section>
 
-    <section id="packs">
+    <section id="packs" class="reveal">
       <div class="section-head">
         <h2>Packs mensuels (lancement)</h2>
         <p>Un seul pack ouvert à la fois.</p>
@@ -932,9 +1229,16 @@ html, body { overflow-x: hidden; }
           </div>
         </details>
       </div>
+
+      <div class="soft" style="padding:14px; margin-top:12px;">
+        <b>Conseil</b>
+        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+          Tu veux un rendu “portfolio premium” ? Mets 6 à 10 projets max, très propres, et montre <b>avant/après</b> quand c’est possible.
+        </div>
+      </div>
     </section>
 
-    <section id="galerie">
+    <section id="galerie" class="reveal">
       <div class="section-head">
         <h2>Portfolio</h2>
         <p>Filtre par type + aperçu en grand.</p>
@@ -947,6 +1251,7 @@ html, body { overflow-x: hidden; }
       </div>
 
       <div class="gallery" id="galleryGrid">
+        <!-- Visuels -->
         <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
           <img src="produit-the.jpg" alt="Visuel produit / branding">
           <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
@@ -967,6 +1272,7 @@ html, body { overflow-x: hidden; }
           <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
+        <!-- Réseaux -->
         <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
           <img src="matchday.jpg" alt="Story matchday">
           <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
@@ -977,7 +1283,8 @@ html, body { overflow-x: hidden; }
           <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
         </div>
 
-        <div class="shot" data-cat="sites" data-title="Projets web — à intégrer" data-src="brand-photo.jpg">
+        <!-- Sites -->
+        <div class="shot" data-cat="sites" data-title="Sites internet — Projets à intégrer" data-src="brand-photo.jpg">
           <img src="brand-photo.jpg" alt="Projets web à intégrer">
           <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="miniTag">Sites</div></div>
         </div>
@@ -986,14 +1293,12 @@ html, body { overflow-x: hidden; }
       <div class="soft" style="padding:14px; margin-top:12px;">
         <b>Ajout de projets</b>
         <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Ajoute une image (ex : <span class="tiny">mon-projet.jpg</span>), duplique une carte
-          <span class="tiny">shot</span>, puis remplace <span class="tiny">data-src</span> / <span class="tiny">src</span> et la catégorie <span class="tiny">data-cat</span>.
+          Duplique une carte <span class="tiny">shot</span>, remplace <span class="tiny">data-src</span> / <span class="tiny">src</span>, et choisis la catégorie <span class="tiny">data-cat</span>.
         </div>
       </div>
     </section>
 
-    <!-- ✅ SOCIAL PROOF : LinkedIn + Avis Google -->
-    <section id="socialproof">
+    <section id="socialproof" class="reveal">
       <div class="section-head">
         <h2>LinkedIn & Avis</h2>
         <p>Crédibilité & transparence.</p>
@@ -1018,7 +1323,7 @@ html, body { overflow-x: hidden; }
             <a class="btn" href="#contact">Me contacter</a>
           </div>
 
-          <!-- ✅ Embed simple (placeholder) : si Google bloque, le bouton au-dessus suffit -->
+          <!-- Placeholder embed (Google bloque souvent les embeds directs) -->
           <div class="embed" aria-label="Aperçu avis Google">
             <iframe
               loading="lazy"
@@ -1029,13 +1334,13 @@ html, body { overflow-x: hidden; }
           </div>
 
           <div class="muted2 tiny" style="margin-top:10px;">
-            Si tu veux un embed EXACT de ta fiche, il me faut l’URL Google Maps de ta fiche (pas le share.google).
+            Pour un embed EXACT, il faut l’URL Google Maps de ta fiche (pas le share.google).
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="reveal">
       <div class="section-head">
         <h2>Contact</h2>
         <p>Réponse rapide • devis clair.</p>
@@ -1127,6 +1432,18 @@ html, body { overflow-x: hidden; }
   <script>
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Scroll reveal (simple + propre)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add("on");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
     // Gallery filter
     const segs = Array.from(document.querySelectorAll(".seg"));
