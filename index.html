@@ -75,7 +75,7 @@
 
     .brand{display:flex; align-items:center; gap:10px; font-weight:950}
 
-    /* ✅ Photo/logo à gauche */
+    /* Photo/logo à gauche */
     .brand-photo{
       width:40px; height:40px;
       border-radius:14px;
@@ -117,6 +117,19 @@
     }
     .cta:hover{transform: translateY(-1px)}
     @media (max-width: 980px){ .navlinks{display:none} }
+
+    /* ✅ Photo en haut à droite */
+    .nav-right{display:flex; align-items:center; gap:10px}
+    .nav-right-photo{
+      width:40px; height:40px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      object-fit:cover;
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 14px 30px rgba(0,0,0,.30);
+      flex:0 0 auto;
+      display:block;
+    }
 
     /* SURFACES */
     .card{
@@ -290,7 +303,7 @@
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
     /* =========================
-       ✅ PACKS (fix bug badge + fix trait)
+       ✅ PACKS (TRAITS FIX DEFINITIF)
        ========================= */
     .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
     @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
@@ -303,13 +316,22 @@
       box-shadow: var(--shadow2);
       position:relative;
       transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
+
+      /* ✅ anti-artefacts (traits) */
+      isolation:isolate;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      background-clip: padding-box;
     }
 
-   /* ✅ SUPPRESSION DEFINITIVE DU GLOW (corrige les traits sur tel + PC) */
-details.pack::after{
-  display:none !important;
-  content:none !important;
-}
+    /* ✅ on supprime le glow source de traits (même si présent ailleurs) */
+    details.pack::before,
+    details.pack::after{
+      content:none !important;
+      display:none !important;
+    }
 
     details.pack:hover{
       transform: translateY(-3px);
@@ -317,7 +339,6 @@ details.pack::after{
       border-color: rgba(255,255,255,.20);
       box-shadow: 0 24px 80px rgba(0,0,0,.40);
     }
-    details.pack:hover::after{opacity:1}
     details.pack[open]{background: rgba(255,255,255,.055)}
 
     details.pack summary{
@@ -348,7 +369,6 @@ details.pack::after{
     }
     .price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
 
-    /* aperçu compact */
     .pack-peek{
       padding:0 18px 16px;
       display:grid;
@@ -356,6 +376,7 @@ details.pack::after{
       position:relative;
       z-index:1;
     }
+
     .peek-row{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
@@ -391,7 +412,6 @@ details.pack::after{
     }
     .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
 
-    /* ✅ FIX badge featured : ne cache plus le prix (badge en haut à gauche + padding) */
     details.pack.featured{
       border-color: rgba(34,211,238,.35);
       box-shadow: 0 30px 110px rgba(34,211,238,.10);
@@ -614,38 +634,27 @@ details.pack::after{
       right:18px;
       bottom:18px;
       z-index:1200;
-
       display:inline-flex;
       align-items:center;
       gap:10px;
-
       padding:12px 14px;
       border-radius:999px;
-
       background: rgba(255,255,255,.92);
       color:#070812;
       font-weight:950;
-
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
-
       transition: transform .12s ease;
     }
     .whatsapp-float:hover{ transform: translateY(-2px); }
-
     .whatsapp-dot{
       width:12px; height:12px;
       border-radius:999px;
       background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(124,58,237,.95));
     }
-
     @media (max-width:520px){
-      .whatsapp-float{
-        right:12px;
-        bottom:12px;
-        padding:11px 12px;
-      }
+      .whatsapp-float{ right:12px; bottom:12px; padding:11px 12px; }
     }
   </style>
 </head>
@@ -668,11 +677,17 @@ details.pack::after{
         <a href="#method">Méthode</a>
         <a href="#packs">Packs</a>
         <a href="#galerie">Portfolio</a>
-        <a href="#avis">Avis</a>
+        <a href="#avis">LinkedIn</a>
         <a href="#contact">Contact</a>
       </div>
 
-      <a class="cta" href="#contact">Demander un devis</a>
+      <!-- ✅ CTA + photo en haut à droite -->
+      <div class="nav-right">
+        <a class="cta" href="#contact">Demander un devis</a>
+
+        <!-- ✅ Si tu veux brand.jpg : renomme le fichier ou change src="brand.jpg" -->
+        <img class="nav-right-photo" src="brand-photo.jpg" alt="Photo — Eva De Abreu">
+      </div>
     </div>
   </div>
 
@@ -806,7 +821,6 @@ details.pack::after{
       </div>
 
       <div class="packs">
-
         <!-- PACK 1 -->
         <details class="pack">
           <summary>
@@ -1035,56 +1049,23 @@ details.pack::after{
       </div>
     </section>
 
-    <section class="split" id="avis">
-      <div class="panel" style="padding:18px;">
-        <div class="section-head" style="margin-top:0">
-          <h2>LinkedIn & avis</h2>
-          <p>Transparence et crédibilité.</p>
-        </div>
+    <!-- ✅ LINKEDIN UNIQUEMENT (garde l'ancre #avis) -->
+    <section id="avis">
+      <div class="section-head">
+        <h2>LinkedIn</h2>
+        <p>Profil public & parcours.</p>
+      </div>
 
+      <div class="panel" style="padding:18px;">
         <div class="muted" style="line-height:1.7; font-size:13px;">
-          <b>LinkedIn :</b> profil public et parcours consultable.<br>
-          <b>Avis Google :</b> espace dédié + bouton “Voir / laisser un avis”.<br><br>
+          Retrouvez mon parcours et mes expériences professionnelles sur LinkedIn.
+          <br><br>
           <span class="muted2">Zone : France entière — échanges à distance.</span>
         </div>
 
         <div class="btns" style="margin-top:14px">
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
           <a class="btn primary" href="#contact">Demander un devis</a>
-        </div>
-      </div>
-
-      <!-- ✅ Avis Google design (remplace la map placeholder) -->
-      <div class="reviews">
-        <div class="section-head" style="margin-top:0">
-          <h2>Avis Google</h2>
-          <p>Ils arrivent ⭐</p>
-        </div>
-
-        <div class="panel" style="padding:14px; margin-top:10px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-            <div style="min-width:240px;">
-              <div style="font-weight:950;">Votre avis compte</div>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Même si je débute, les retours clients vont s’afficher ici au fur et à mesure.
-              </div>
-              <div class="muted2 tiny" style="margin-top:10px;">
-                Cliquez pour voir / laisser un avis.
-              </div>
-
-              <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-                <span class="tag">⭐ Google</span>
-                <span class="tag">Confiance</span>
-                <span class="tag">Transparence</span>
-              </div>
-            </div>
-
-            <a class="btn primary sm"
-              href="https://share.google/7C5r2c80N5s6zFYwQ"
-              target="_blank" rel="noopener">
-              Voir / laisser un avis
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -1170,11 +1151,10 @@ details.pack::after{
     </div>
   </div>
 
-  <!-- ✅ WhatsApp Business floating button -->
+  <!-- WhatsApp Business -->
   <a class="whatsapp-float"
      href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
-     target="_blank" rel="noopener"
-     aria-label="Contacter Eva sur WhatsApp">
+     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
     <span class="whatsapp-dot"></span>
     WhatsApp
   </a>
@@ -1183,7 +1163,7 @@ details.pack::after{
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Navbar photo fallback
+    // Navbar photo fallback (logo gradient si photo cassée)
     const brandPhoto = document.getElementById("brandPhoto");
     const brandFallback = document.getElementById("brandFallback");
     if(brandPhoto){
@@ -1218,19 +1198,17 @@ details.pack::after{
     const lbClose = document.getElementById("lbClose");
 
     function openLB(src, title){
-      if(!src) return;
       lbTitle.textContent = title || "Aperçu";
+      lbImg.src = src;
       lbImg.alt = title || "Aperçu";
       lb.classList.add("open");
       lb.setAttribute("aria-hidden","false");
       document.body.style.overflow = "hidden";
-      requestAnimationFrame(() => { lbImg.src = src; });
-      lbClose?.focus();
     }
     function closeLB(){
       lb.classList.remove("open");
       lb.setAttribute("aria-hidden","true");
-      lbImg.removeAttribute("src");
+      lbImg.src = "";
       document.body.style.overflow = "";
     }
 
@@ -1301,6 +1279,20 @@ details.pack::after{
       );
 
       window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    });
+
+    // ✅ IMPORTANT : Packs -> ouvrir/fermer TOUS ensemble
+    const packDetails = Array.from(document.querySelectorAll("details.pack"));
+    packDetails.forEach(d => {
+      d.addEventListener("toggle", () => {
+        // si on ouvre un pack => on ouvre tous
+        if(d.open){
+          packDetails.forEach(other => { other.open = true; });
+        }else{
+          // si on ferme un pack => on ferme tous (cohérent)
+          packDetails.forEach(other => { other.open = false; });
+        }
+      });
     });
   </script>
 </body>
