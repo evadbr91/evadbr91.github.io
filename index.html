@@ -4,20 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eva De Abreu — Communication & Marketing Freelance</title>
-  <meta name="description" content="Freelance communication & marketing : identité visuelle, création de contenus, réseaux sociaux, web, SEO. France entière (à distance)." />
+  <meta name="description" content="Freelance communication & marketing : identité visuelle, création de contenus, réseaux sociaux, web & SEO. France entière (à distance)." />
 
   <style>
     :root{
       --bg0:#070812;
       --bg1:#0b1024;
 
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.04);
-      --stroke: rgba(255,255,255,.12);
+      /* Surfaces opaques = rendu uniforme/pro */
+      --surface: rgba(12, 14, 30, .90);
+      --surface2: rgba(12, 14, 30, .82);
+
+      --stroke: rgba(255,255,255,.14);
+      --stroke2: rgba(255,255,255,.10);
 
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.66);
-      --muted2: rgba(255,255,255,.46);
+      --muted: rgba(255,255,255,.68);
+      --muted2: rgba(255,255,255,.48);
 
       --a1:#7c3aed; /* violet */
       --a2:#22d3ee; /* cyan */
@@ -25,6 +28,7 @@
 
       --shadow: 0 20px 80px rgba(0,0,0,.55);
       --shadow2: 0 14px 55px rgba(0,0,0,.30);
+
       --r: 22px;
       --max: 1160px;
 
@@ -34,20 +38,24 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family:var(--font); color:var(--text);
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
       background:
-        radial-gradient(1200px 800px at 14% 10%, rgba(124,58,237,.30), transparent 55%),
-        radial-gradient(900px 700px at 82% 18%, rgba(34,211,238,.20), transparent 55%),
-        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.14), transparent 60%),
+        radial-gradient(1100px 780px at 14% 10%, rgba(124,58,237,.28), transparent 58%),
+        radial-gradient(900px 700px at 82% 18%, rgba(34,211,238,.18), transparent 58%),
+        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.12), transparent 62%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
+
+    /* Grain très léger (sinon ça fait des bandes/traits) */
     body:before{
       content:"";
       position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
       mix-blend-mode:overlay;
-      opacity:.14;
+      opacity:.06;
       pointer-events:none;
     }
 
@@ -61,7 +69,7 @@
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(7,8,18,.58);
+      background: rgba(7,8,18,.62);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
@@ -88,23 +96,23 @@
       color:#070812;
       font-weight:950;
       border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 18px 50px rgba(124,58,237,.18);
+      box-shadow: 0 18px 50px rgba(124,58,237,.16);
       transition: transform .12s ease;
       white-space:nowrap;
     }
     .cta:hover{transform: translateY(-1px)}
     @media (max-width: 980px){ .navlinks{display:none} }
 
-    /* GLOBAL CARDS */
+    /* SURFACES UNIFORMES */
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.12);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
       border-radius: var(--r);
       box-shadow: var(--shadow);
     }
     .panel{
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.12);
+      background: var(--surface2);
+      border: 1px solid var(--stroke);
       border-radius: 18px;
       box-shadow: var(--shadow2);
     }
@@ -119,7 +127,7 @@
     .badge{
       display:inline-flex; align-items:center; gap:8px;
       padding:7px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
       color: var(--muted);
       font-size:13px;
@@ -140,20 +148,20 @@
       font-size:16px;
       color:var(--muted);
       line-height:1.7;
-      max-width: 74ch;
+      max-width: 78ch;
     }
 
     .btns{display:flex; gap:12px; flex-wrap:wrap}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:12px 14px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.05);
       font-weight:950;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18)}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
     .btn.primary{
       background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.72));
       color:#070812; border-color: rgba(255,255,255,.18);
@@ -163,14 +171,13 @@
       color:#070812; border-color: rgba(255,255,255,.18);
     }
     .btn.ghost{background: rgba(255,255,255,.04)}
-    .btn small{font-weight:950; opacity:.85}
 
     .hero-right{padding:22px; display:flex; flex-direction:column; gap:12px}
     .profile{
       display:flex; align-items:center; gap:14px;
       padding:16px; border-radius:18px;
       background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
     }
     .avatar{
       width:82px; height:82px; border-radius:26px;
@@ -186,15 +193,7 @@
     .kpi{
       padding:16px; border-radius:18px;
       background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.10);
-      position:relative; overflow:hidden;
-    }
-    .kpi:before{
-      content:""; position:absolute; inset:-55px -55px auto auto;
-      width:190px; height:190px;
-      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 58%);
-      transform: rotate(18deg);
-      pointer-events:none;
+      border:1px solid rgba(255,255,255,.12);
     }
     .kpi strong{display:block; font-size:16px}
     .kpi span{display:block; color:var(--muted); margin-top:6px; font-size:13px; line-height:1.45}
@@ -235,15 +234,7 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       box-shadow: var(--shadow2);
-      position:relative; overflow:hidden;
       transition: transform .15s ease, background .15s ease;
-    }
-    .service:before{
-      content:""; position:absolute; inset:-60px -60px auto auto;
-      width:180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(244,114,182,.12), transparent 58%);
-      transform: rotate(18deg);
-      pointer-events:none;
     }
     .service:hover{transform: translateY(-2px); background: rgba(255,255,255,.055)}
     .service h3{margin:0 0 8px; font-size:15px}
@@ -288,31 +279,30 @@
     details.pack{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      background: rgba(255,255,255,.04);
       overflow:hidden;
       box-shadow: var(--shadow2);
       transition: transform .16s ease, background .16s ease;
     }
     details.pack:hover{transform: translateY(-2px); background: rgba(255,255,255,.05)}
     details.pack[open]{background: rgba(255,255,255,.06)}
+
     details.pack.featured{
       border-color: rgba(34,211,238,.35);
       box-shadow: 0 30px 110px rgba(34,211,238,.10);
-      transform: scale(1.055);
-      background:
-        radial-gradient(420px 280px at 80% 20%, rgba(34,211,238,.13), transparent 58%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      transform: scale(1.045);
       position:relative;
     }
     details.pack.featured:before{
-      content:"OFFRE LA PLUS DEMANDÉE";
+      content:"PACK RECOMMANDÉ";
       position:absolute; top:14px; right:14px;
       font-size:11px; font-weight:950;
       padding:7px 10px; border-radius:999px;
       background: rgba(34,211,238,.16);
       border:1px solid rgba(34,211,238,.35);
-      color: rgba(255,255,255,.90);
+      color: rgba(255,255,255,.92);
       letter-spacing:.2px;
+      z-index:2;
     }
     @media (max-width: 980px){ details.pack.featured{transform:none} }
 
@@ -324,18 +314,21 @@
     details.pack summary::-webkit-details-marker{display:none}
     .pack-title{margin:0; font-size:15px; font-weight:950}
     .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
+
     .price{
       text-align:right;
-      min-width: 132px;
+      min-width: 170px;
       font-weight:950;
       color:#070812;
       padding:10px 12px;
       border-radius:999px;
-      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(124,58,237,.90));
+      background: linear-gradient(135deg, rgba(34,211,238,.86), rgba(124,58,237,.92));
       border:1px solid rgba(255,255,255,.16);
       white-space:nowrap;
+      line-height:1.2;
     }
-    .price small{display:block; font-weight:950; opacity:.82; font-size:11px}
+    .price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
+
     .pack-body{padding:0 18px 18px}
     .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px; color:var(--muted); font-size:13px}
     .list li{
@@ -351,6 +344,43 @@
       flex:0 0 auto;
     }
     .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    /* OPTIONS (UPSELL) */
+    .options{
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width: 1100px){ .options{grid-template-columns: repeat(3,1fr)} }
+    @media (max-width: 700px){ .options{grid-template-columns: 1fr 1fr} }
+    @media (max-width: 420px){ .options{grid-template-columns: 1fr} }
+
+    .opt{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      transition: transform .12s ease;
+    }
+    .opt:hover{transform: translateY(-2px)}
+    .opt b{font-size:13px}
+    .opt span{color:var(--muted); font-size:12px; display:block; margin-top:4px; line-height:1.4}
+    .opt .p{
+      font-weight:950;
+      color:#070812;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.86);
+      border:1px solid rgba(255,255,255,.18);
+      white-space:nowrap;
+      font-size:12px;
+    }
 
     /* GALLERY FILTER */
     .gallery-actions{display:flex; gap:10px; flex-wrap:wrap}
@@ -403,7 +433,7 @@
       left:10px; right:10px; bottom:10px;
       padding:10px 12px;
       border-radius:14px;
-      background: rgba(7,8,18,.60);
+      background: rgba(7,8,18,.66);
       border:1px solid rgba(255,255,255,.14);
       backdrop-filter: blur(10px);
       display:flex; justify-content:space-between; gap:10px; align-items:center;
@@ -432,9 +462,13 @@
     .reviews iframe{width:100%; height:360px; border:0; border-radius:14px; background:#fff}
 
     footer{padding:28px 0 60px; color:var(--muted2); font-size:13px}
-    .foot{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; border-top: 1px solid rgba(255,255,255,.10); padding-top:18px}
+    .foot{
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top:18px
+    }
 
-    /* LIGHTBOX */
+    /* LIGHTBOX (images entières) */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
@@ -449,7 +483,7 @@
       width:min(980px, 96vw);
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(7,8,18,.72);
+      background: rgba(7,8,18,.78);
       backdrop-filter: blur(14px);
       box-shadow: 0 30px 120px rgba(0,0,0,.6);
       overflow:hidden;
@@ -472,10 +506,14 @@
     }
     .lb-img{
       background: rgba(255,255,255,.03);
+      max-height: calc(100vh - 120px);
+      overflow: auto;
     }
     .lb-img img{
-      width:100%;
-      height:auto;
+      width: 100%;
+      height: auto;
+      max-height: calc(100vh - 140px);
+      object-fit: contain;
       display:block;
     }
   </style>
@@ -510,8 +548,8 @@
       <div class="card hero-left">
         <div class="badge-row">
           <span class="badge">À distance • France entière</span>
-          <span class="badge">Devis rapide</span>
-          <span class="badge">Identité • Social • Web</span>
+          <span class="badge">Offres mensuelles</span>
+          <span class="badge">Visuels • Réseaux • Web • SEO</span>
         </div>
 
         <h1>
@@ -520,9 +558,9 @@
         </h1>
 
         <p class="lead">
-          J’accompagne les TPE/PME sur des besoins concrets : <b>identité visuelle</b>, <b>création de contenus</b>,
-          <b>gestion des réseaux sociaux</b>, <b>pages web / mini-sites</b> et <b>optimisation SEO</b>.
-          L’objectif : un rendu premium, clair et efficace, adapté à votre secteur.
+          J’accompagne les TPE/PME avec une approche structurée : <b>identité visuelle</b>, <b>création de contenus</b>,
+          <b>gestion des réseaux sociaux</b>, <b>optimisation Google</b> et <b>web / SEO</b>.
+          Objectif : une image premium, claire, et orientée résultats.
         </p>
 
         <div class="btns">
@@ -553,17 +591,17 @@
 
         <div class="kpi">
           <strong>Rendu premium</strong>
-          <span>Design structuré, hiérarchie visuelle, cohérence de marque et déclinaisons.</span>
+          <span>Design structuré, cohérence visuelle, hiérarchie claire et déclinaisons.</span>
         </div>
 
         <div class="kpi">
           <strong>Gestion multi-canal</strong>
-          <span>Je peux intervenir sur les visuels, les réseaux et votre présence web.</span>
+          <span>Intervention sur les visuels, les réseaux et votre présence web.</span>
         </div>
 
         <div class="kpi">
-          <strong>Communication claire</strong>
-          <span>Un suivi simple : objectifs, livrables, délais et retours encadrés.</span>
+          <strong>Suivi cadré</strong>
+          <span>Livrables définis, délais clairs et retours encadrés.</span>
         </div>
       </div>
     </div>
@@ -588,17 +626,17 @@
 
         <div class="service">
           <h3>Réseaux sociaux</h3>
-          <p>Création de contenus, déclinaisons, cohérence graphique, planning et optimisation.</p>
+          <p>Création de contenus, cohérence graphique, déclinaisons, planning et optimisation.</p>
           <div class="tags">
-            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Calendrier</span>
+            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
           </div>
         </div>
 
         <div class="service">
           <h3>Web & SEO</h3>
-          <p>Pages pro (type Linktree/portfolio), mise à jour de site, optimisation SEO de base.</p>
+          <p>Pages pro (type Linktree/portfolio), mise à jour de site, optimisation SEO (base / local).</p>
           <div class="tags">
-            <span class="tag">Web</span><span class="tag">SEO</span><span class="tag">Conversion</span>
+            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
           </div>
         </div>
       </div>
@@ -614,107 +652,172 @@
         <div class="step">
           <div class="n">1</div>
           <h3>Brief & objectifs</h3>
-          <p>On définit votre besoin, le style attendu, les formats, la cible et la priorité (visibilité / conversion / image).</p>
+          <p>Définition du besoin, du style, des formats, de la cible et des priorités (visibilité / conversion / image).</p>
         </div>
         <div class="step">
           <div class="n">2</div>
           <h3>Devis & planning</h3>
-          <p>Je vous envoie un devis clair avec les livrables inclus, les délais et les conditions d’ajustements.</p>
+          <p>Proposition claire : livrables inclus, calendrier, modalités d’ajustements et conditions.</p>
         </div>
         <div class="step">
           <div class="n">3</div>
           <h3>Production & livraison</h3>
-          <p>Création, retours encadrés, déclinaisons nécessaires, puis livraison finale (HD + formats adaptés).</p>
+          <p>Création, retours encadrés, déclinaisons, puis livraison finale (HD + formats adaptés).</p>
         </div>
       </div>
     </section>
 
     <section id="packs">
       <div class="section-head">
-        <h2>Packs de lancement</h2>
-        <p>Tarifs accessibles pour démarrer (devis sur-mesure possible).</p>
+        <h2>Packs mensuels (tarifs de lancement)</h2>
+        <p>France entière (à distance) • Offre de lancement limitée.</p>
       </div>
 
       <div class="packs">
 
-        <details class="pack">
+        <!-- PACK 1 -->
+        <details class="pack" open>
           <summary>
             <div>
-              <div class="pack-title">Pack Essentiel</div>
-              <div class="pack-desc">Pour une base visuelle cohérente et utilisable immédiatement.</div>
+              <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
+              <div class="pack-desc">Idéal TPE / petits commerces / artisans : visibilité locale et image cohérente.</div>
             </div>
-            <div class="price">69€<small>lancement</small></div>
+            <div class="price">180€ / mois<small>au lieu de 350€</small></div>
           </summary>
+
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>Brief : objectif, style, formats et contraintes</span></li>
-              <li><span class="dot"></span><span>Mini base graphique : couleurs/typos & cohérence</span></li>
-              <li><span class="dot"></span><span>3 visuels au choix (post / story / support simple)</span></li>
-              <li><span class="dot"></span><span>1 template réutilisable (déclinaisons facilitées)</span></li>
-              <li><span class="dot"></span><span>Exports HD + formats adaptés (Instagram/Facebook)</span></li>
-              <li><span class="dot"></span><span>1 série d’ajustements incluse</span></li>
+              <li><span class="dot"></span><span>Audit rapide de la présence en ligne</span></li>
+              <li><span class="dot"></span><span>Optimisation Google Business Profile</span></li>
+              <li><span class="dot"></span><span>4 posts / mois (Instagram ou Facebook)</span></li>
+              <li><span class="dot"></span><span>4 visuels (création premium Canva Pro)</span></li>
+              <li><span class="dot"></span><span>1 story / semaine</span></li>
+              <li><span class="dot"></span><span>Mise à jour des informations (horaires, photos, coordonnées)</span></li>
+              <li><span class="dot"></span><span>Conseils SEO de base</span></li>
             </ul>
+
+            <div class="panel" style="padding:12px; margin-top:12px;">
+              <b>Objectif</b>
+              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+                Être visible localement et présenter une image professionnelle et propre.
+              </div>
+            </div>
+
             <div class="pack-cta">
-              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%20Essentiel">Demander ce pack</a>
+              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%201%20—%20Visibilité%20Essentielle">Demander ce pack</a>
               <a class="btn ghost" href="#galerie">Voir des exemples</a>
             </div>
           </div>
         </details>
 
+        <!-- PACK 2 (FEATURED) -->
         <details class="pack featured" open>
           <summary>
             <div>
-              <div class="pack-title">Pack Réseaux</div>
-              <div class="pack-desc">Pour publier régulièrement avec une identité premium.</div>
+              <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
+              <div class="pack-desc">Idéal restaurants, PME, salons, instituts : engagement + acquisition clients.</div>
             </div>
-            <div class="price">129€<small>lancement</small></div>
+            <div class="price">390€ / mois<small>au lieu de 750€</small></div>
           </summary>
+
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>Brief + ligne graphique (cohérence & hiérarchie)</span></li>
-              <li><span class="dot"></span><span>10 visuels (posts + stories), cohérents et déclinables</span></li>
-              <li><span class="dot"></span><span>2 templates réutilisables (gain de temps)</span></li>
-              <li><span class="dot"></span><span>Mini planning : 8–10 idées de contenus selon votre activité</span></li>
-              <li><span class="dot"></span><span>Optimisation : lisibilité, CTA, structure et message</span></li>
-              <li><span class="dot"></span><span>2 séries d’ajustements incluses</span></li>
+              <li><span class="dot"></span><span>Tout le pack 1 inclus</span></li>
+              <li><span class="dot"></span><span>8 posts / mois</span></li>
+              <li><span class="dot"></span><span>8 visuels premium</span></li>
+              <li><span class="dot"></span><span>4 stories / semaine</span></li>
+              <li><span class="dot"></span><span>Optimisation bio + stratégie de contenu</span></li>
+              <li><span class="dot"></span><span>Réponse aux avis Google</span></li>
+              <li><span class="dot"></span><span>Mini shooting photo (1h)</span></li>
+              <li><span class="dot"></span><span>SEO local optimisé</span></li>
+              <li><span class="dot"></span><span>Mise à jour / modifications du site web</span></li>
+              <li><span class="dot"></span><span>Analyse mensuelle des statistiques</span></li>
             </ul>
+
+            <div class="panel" style="padding:12px; margin-top:12px;">
+              <b>Objectif</b>
+              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+                Générer plus de clients et augmenter l’engagement via une présence digitale structurée.
+              </div>
+            </div>
+
             <div class="pack-cta">
-              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%20R%C3%A9seaux">Demander ce pack</a>
+              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%202%20—%20Croissance%20Digitale">Demander ce pack</a>
               <a class="btn" href="tel:+33767208655">Appeler</a>
             </div>
           </div>
         </details>
 
+        <!-- PACK 3 -->
         <details class="pack">
           <summary>
             <div>
-              <div class="pack-title">Pack Web</div>
-              <div class="pack-desc">Une page professionnelle (type Linktree/portfolio) prête à convertir.</div>
+              <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
+              <div class="pack-desc">Idéal entreprises qui souhaitent structurer une marque et accélérer la croissance.</div>
             </div>
-            <div class="price">179€<small>lancement</small></div>
+            <div class="price">790€ / mois<small>au lieu de 1500€</small></div>
           </summary>
+
           <div class="pack-body">
             <ul class="list">
-              <li><span class="dot"></span><span>1 page pro : structure, sections, CTA, contact</span></li>
-              <li><span class="dot"></span><span>Textes optimisés : clarté + SEO basique</span></li>
-              <li><span class="dot"></span><span>Intégration liens : LinkedIn + réseaux (Instagram pro ensuite)</span></li>
-              <li><span class="dot"></span><span>Zone “Avis Google” prête (lien à ajouter plus tard)</span></li>
-              <li><span class="dot"></span><span>2 séries d’ajustements incluses</span></li>
+              <li><span class="dot"></span><span>Tout le pack 2 inclus</span></li>
+              <li><span class="dot"></span><span>Stratégie digitale complète</span></li>
+              <li><span class="dot"></span><span>Création ou refonte site vitrine</span></li>
+              <li><span class="dot"></span><span>12 posts / mois</span></li>
+              <li><span class="dot"></span><span>12 visuels + Reels</span></li>
+              <li><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></li>
+              <li><span class="dot"></span><span>Création d’événement / lancement produit</span></li>
+              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle</span></li>
+              <li><span class="dot"></span><span>Audit SEO complet</span></li>
+              <li><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></li>
             </ul>
+
+            <div class="panel" style="padding:12px; margin-top:12px;">
+              <b>Objectif</b>
+              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+                Construire une vraie marque et développer le chiffre d’affaires grâce à une stratégie complète.
+              </div>
+            </div>
+
             <div class="pack-cta">
-              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%20Web">Demander ce pack</a>
+              <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Devis%20Pack%203%20—%20Stratégie%20%26%20Image%20Premium">Demander ce pack</a>
               <a class="btn ghost" href="#contact">Contact</a>
             </div>
           </div>
         </details>
-
       </div>
 
-      <div class="panel" style="padding:16px; margin-top:12px;">
-        <div style="font-weight:950;">France entière • Travail à distance</div>
+      <div class="panel" style="padding:18px; margin-top:12px;">
+        <div style="font-weight:950;">💡 Options (à la carte)</div>
         <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Si votre besoin ne rentre pas dans un pack (ex : gestion mensuelle, site complet, événementiel),
-          je propose un devis sur-mesure avec livrables et délais.
+          Compléments possibles selon vos besoins (devis sur-mesure).
+        </div>
+
+        <div class="options">
+          <div class="opt">
+            <div><b>Création logo</b><span>Identité simple & propre</span></div>
+            <div class="p">120€</div>
+          </div>
+          <div class="opt">
+            <div><b>Carte de visite</b><span>Print prêt à imprimer</span></div>
+            <div class="p">60€</div>
+          </div>
+          <div class="opt">
+            <div><b>Flyer</b><span>Visuel + déclinaisons</span></div>
+            <div class="p">90€</div>
+          </div>
+          <div class="opt">
+            <div><b>Site vitrine simple</b><span>1 page / vitrine</span></div>
+            <div class="p">600€</div>
+          </div>
+          <div class="opt">
+            <div><b>Shooting supp.</b><span>+1h</span></div>
+            <div class="p">120€</div>
+          </div>
+          <div class="opt">
+            <div><b>Meta Ads</b><span>Gestion campagne</span></div>
+            <div class="p">+15%</div>
+          </div>
         </div>
       </div>
     </section>
@@ -764,23 +867,23 @@
           <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="tagmini">Réseaux</div></div>
         </div>
 
-        <div class="shot" data-cat="reseaux" data-title="Annonce — Event" data-src="classico.jpg">
-          <img src="classico.jpg" alt="Annonce event">
+        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
+          <img src="classico.jpg" alt="Annonce événement">
           <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="tagmini">Réseaux</div></div>
         </div>
 
         <!-- SITES (placeholder, prêt à recevoir tes projets) -->
-        <div class="shot" data-cat="sites" data-title="Projets web" data-src="profil.jpg">
+        <div class="shot" data-cat="sites" data-title="Projets web — à ajouter" data-src="profil.jpg">
           <img src="profil.jpg" alt="Projets web à ajouter">
-          <div class="cap"><div><b>Sites internet</b><br><span>Projets à ajouter</span></div><div class="tagmini">Sites</div></div>
+          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="tagmini">Sites</div></div>
         </div>
       </div>
 
       <div class="panel" style="padding:16px; margin-top:12px;">
         <div style="font-weight:950;">Ajout de nouveaux projets</div>
         <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Ajoutez un fichier (ex : <span class="tiny">mon-projet.jpg</span>) puis dupliquez un bloc <span class="tiny">shot</span>
-          et remplacez <span class="tiny">data-src</span> / <span class="tiny">src</span> + la catégorie <span class="tiny">data-cat</span>.
+          Ajoutez une image dans le repository (ex : <span class="tiny">mon-projet.jpg</span>), puis dupliquez une carte
+          <span class="tiny">shot</span> et remplacez <span class="tiny">data-src</span> / <span class="tiny">src</span> et la catégorie <span class="tiny">data-cat</span>.
         </div>
       </div>
     </section>
@@ -789,13 +892,12 @@
       <div class="panel" style="padding:18px;">
         <div class="section-head" style="margin-top:0">
           <h2>LinkedIn & avis</h2>
-          <p>Présence professionnelle et transparence.</p>
+          <p>Transparence et crédibilité.</p>
         </div>
 
         <div class="muted" style="line-height:1.7; font-size:13px;">
           <b>LinkedIn :</b> profil public et parcours consultable.<br>
-          <b>Avis Google :</b> emplacement prêt. Dès que votre fiche est créée, je remplace la carte par le lien exact
-          (et j’ajoute un bouton “Voir les avis”).<br><br>
+          <b>Avis Google :</b> emplacement prêt. Dès que vous avez votre fiche, j’intègre la carte exacte et un bouton “Voir les avis”.<br><br>
           <span class="muted2">Zone : France entière — échanges à distance.</span>
         </div>
 
@@ -813,7 +915,7 @@
         <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=France&output=embed"
           title="Carte Google (placeholder)"></iframe>
-        <div class="muted2 tiny" style="margin-top:10px;">Dès que vous avez le lien, j’intègre la bonne carte et le bouton.</div>
+        <div class="muted2 tiny" style="margin-top:10px;">Dès que vous avez le lien, je l’intègre ici.</div>
       </div>
     </section>
 
@@ -832,7 +934,7 @@
         </div>
 
         <div class="btns" style="margin-top:14px">
-          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Envoyer un email</a>
+          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Me contacter</a>
           <a class="btn" href="tel:+33767208655">Appeler</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
@@ -842,7 +944,7 @@
     <footer>
       <div class="foot">
         <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing Freelance</div>
-        <div class="muted2">Identité • Contenus • Réseaux • Web • SEO — France entière</div>
+        <div class="muted2">Visuels • Réseaux • Web • SEO • Événementiel — France entière</div>
       </div>
     </footer>
   </main>
@@ -867,16 +969,18 @@
     // Gallery filter
     const segs = document.querySelectorAll(".seg");
     const shots = document.querySelectorAll(".shot");
+
     function setCat(cat){
       segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
       shots.forEach(it => {
         it.style.display = (it.dataset.cat === cat) ? "" : "none";
       });
     }
+
     segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
     setCat("visuels");
 
-    // Ensure "Voir le portfolio" selects Visuels
+    // Button "Voir le portfolio" => Visuels
     const goGalleryBtn = document.getElementById("goGalleryBtn");
     if(goGalleryBtn){ goGalleryBtn.addEventListener("click", () => setCat("visuels")); }
 
@@ -900,6 +1004,7 @@
       lbImg.src = "";
       document.body.style.overflow = "";
     }
+
     lbClose.addEventListener("click", closeLB);
     lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
     window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
