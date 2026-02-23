@@ -272,48 +272,120 @@
     .step h3{margin:0 0 8px; font-size:15px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* PACKS */
-    .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    /* =========================
+       PACKS (FIX + DESIGN)
+       ========================= */
+
+    .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:stretch;}
     @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
 
+    /* ✅ égalise le gabarit des cartes (résout l’impression “pack 3 pas aligné”) */
     details.pack{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       overflow:hidden;
       box-shadow: var(--shadow2);
-      transition: transform .16s ease, background .16s ease;
-    }
-    details.pack:hover{transform: translateY(-2px); background: rgba(255,255,255,.05)}
-    details.pack[open]{background: rgba(255,255,255,.06)}
 
+      display:flex;            /* clé */
+      flex-direction:column;   /* clé */
+      min-height: 560px;       /* clé (ajuste si tu veux plus/moins grand) */
+      position:relative;
+
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      transform: translateZ(0);
+      isolation:isolate;
+    }
+
+    /* ✅ le "trait" vertical qui peut apparaître (souvent dû à un bord/pixel) -> on évite tout divider */
+    /* (il n’y a plus aucun border-left / border-right spécifique ici) */
+
+    /* Glow + bordure gradient (stylé) */
+    details.pack::before{
+      content:"";
+      position:absolute;
+      inset:-120px;
+      background:
+        radial-gradient(420px 280px at 22% 10%, rgba(34,211,238,.22), transparent 62%),
+        radial-gradient(420px 320px at 85% 15%, rgba(124,58,237,.22), transparent 62%),
+        radial-gradient(520px 360px at 60% 90%, rgba(244,114,182,.16), transparent 66%);
+      opacity:0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    details.pack::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:18px;
+      padding:1px;
+      background: linear-gradient(135deg, rgba(34,211,238,.55), rgba(124,58,237,.35), rgba(244,114,182,.25), rgba(255,255,255,.10));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity:0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    details.pack:hover{
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.20);
+      box-shadow: 0 26px 90px rgba(0,0,0,.42);
+    }
+    details.pack:hover::before{opacity:1}
+    details.pack:hover::after{opacity:1}
+
+    /* ✅ on garde tout au-dessus des pseudo-elements */
+    details.pack > *{position:relative; z-index:1;}
+
+    /* Featured: plus premium sans “scale” (le scale faisait croire que les packs n’étaient pas alignés) */
     details.pack.featured{
       border-color: rgba(34,211,238,.35);
-      box-shadow: 0 30px 110px rgba(34,211,238,.10);
-      transform: scale(1.045);
-      position:relative;
+      box-shadow: 0 34px 120px rgba(34,211,238,.12);
     }
+    details.pack.featured::before{opacity:.55}
+    details.pack.featured::after{opacity:.35}
+    details.pack.featured:hover{
+      transform: translateY(-6px);
+      border-color: rgba(34,211,238,.45);
+      box-shadow: 0 40px 135px rgba(34,211,238,.14);
+    }
+
     details.pack.featured:before{
+      /* on garde ton label mais on le rend plus “premium” */
       content:"PACK RECOMMANDÉ";
       position:absolute; top:14px; right:14px;
       font-size:11px; font-weight:950;
       padding:7px 10px; border-radius:999px;
-      background: rgba(34,211,238,.16);
-      border:1px solid rgba(34,211,238,.35);
+      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(124,58,237,.18));
+      border:1px solid rgba(34,211,238,.40);
       color: rgba(255,255,255,.92);
       letter-spacing:.2px;
       z-index:2;
+      backdrop-filter: blur(10px);
     }
-    @media (max-width: 980px){ details.pack.featured{transform:none} }
 
+    /* Summary */
     details.pack summary{
-      cursor:pointer; list-style:none;
+      cursor:pointer;
+      list-style:none;
       padding:18px;
       display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
     }
     details.pack summary::-webkit-details-marker{display:none}
     .pack-title{margin:0; font-size:15px; font-weight:950}
     .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
+
+    /* ✅ fixe visuellement les hauteurs des “headers” */
+    details.pack summary > div:first-child{
+      min-height: 76px; /* titre + desc -> cohérence sur les 3 */
+    }
 
     .price{
       text-align:right;
@@ -326,24 +398,58 @@
       border:1px solid rgba(255,255,255,.16);
       white-space:nowrap;
       line-height:1.2;
+      box-shadow: 0 18px 45px rgba(34,211,238,.10);
     }
     .price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
 
-    .pack-body{padding:0 18px 18px}
-    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px; color:var(--muted); font-size:13px}
+    .pack-body{
+      padding:0 18px 18px;
+      display:flex;            /* clé */
+      flex-direction:column;   /* clé */
+      flex:1;                  /* clé */
+    }
+
+    .list{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
     .list li{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
+      transition: border-color .18s ease, background .18s ease;
     }
+    details.pack:hover .list li{
+      border-color: rgba(255,255,255,.14);
+      background: rgba(255,255,255,.035);
+    }
+
     .dot{
       width:10px; height:10px; border-radius:999px; margin-top:4px;
       background: linear-gradient(135deg, var(--a3), var(--a2));
       flex:0 0 auto;
+      box-shadow: 0 0 18px rgba(244,114,182,.14);
     }
-    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto} /* ✅ pousse les CTA en bas */
+
+    /* CTA pack : petit glow au survol */
+    details.pack .btn.primary{
+      box-shadow: 0 22px 60px rgba(124,58,237,.14);
+    }
+    details.pack:hover .btn.primary{
+      box-shadow:
+        0 28px 75px rgba(34,211,238,.10),
+        0 16px 55px rgba(124,58,237,.10);
+      transform: translateY(-1px);
+    }
 
     /* OPTIONS (UPSELL) */
     .options{
@@ -515,6 +621,12 @@
       max-height: calc(100vh - 140px);
       object-fit: contain;
       display:block;
+    }
+
+    /* Accessibilité : réduit les animations si demandé */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; animation:none !important}
+      details.pack:hover{transform:none}
     }
   </style>
 </head>
@@ -748,34 +860,37 @@
           </div>
         </details>
 
-        <!-- PACK 3 -->
-        <details class="pack">
+        <!-- PACK 3 (✅ maintenant aligné + contenu bien visible + version premium + événementiel inclus) -->
+        <details class="pack" open>
           <summary>
             <div>
               <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Idéal entreprises qui souhaitent structurer une marque et accélérer la croissance.</div>
+              <div class="pack-desc">Idéal entreprises qui veulent vraiment scaler : image de marque + acquisition + structure.</div>
             </div>
-            <div class="price">790€ / mois<small>au lieu de 1500€</small></div>
+            <div class="price">790€ / mois<small>au lieu de 1500€ • à partir de</small></div>
           </summary>
 
           <div class="pack-body">
             <ul class="list">
               <li><span class="dot"></span><span>Tout le pack 2 inclus</span></li>
-              <li><span class="dot"></span><span>Stratégie digitale complète</span></li>
-              <li><span class="dot"></span><span>Création ou refonte site vitrine</span></li>
+              <li><span class="dot"></span><span>Stratégie digitale complète (objectifs, offres, cibles, contenu, plan d’action)</span></li>
+              <li><span class="dot"></span><span>Création ou refonte site vitrine <span class="muted2">(périmètre défini ensemble)</span></span></li>
               <li><span class="dot"></span><span>12 posts / mois</span></li>
-              <li><span class="dot"></span><span>12 visuels + Reels</span></li>
+              <li><span class="dot"></span><span>12 visuels + Reels <span class="muted2">(selon formats)</span></span></li>
               <li><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></li>
-              <li><span class="dot"></span><span>Création d’événement / lancement produit</span></li>
-              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle</span></li>
-              <li><span class="dot"></span><span>Audit SEO complet</span></li>
+              <li><span class="dot"></span><span>Événementiel : invitations, visuels, coordination, devis <span class="muted2">(selon événement)</span></span></li>
+              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle (cohérence premium)</span></li>
+              <li><span class="dot"></span><span>Audit SEO complet + recommandations priorisées</span></li>
               <li><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></li>
             </ul>
 
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Construire une vraie marque et développer le chiffre d’affaires grâce à une stratégie complète.
+                Construire une vraie marque, structurer la com/marketing et développer le chiffre d’affaires avec une stratégie complète.
+              </div>
+              <div class="muted2 tiny" style="margin-top:10px; line-height:1.6;">
+                *Le Pack 3 est “à partir de” car la partie site/événementiel dépend du périmètre (nombre de pages, type d’événement, délais).
               </div>
             </div>
 
@@ -785,6 +900,7 @@
             </div>
           </div>
         </details>
+
       </div>
 
       <div class="panel" style="padding:18px; margin-top:12px;">
@@ -872,7 +988,7 @@
           <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="tagmini">Réseaux</div></div>
         </div>
 
-        <!-- SITES (placeholder, prêt à recevoir tes projets) -->
+        <!-- SITES (placeholder) -->
         <div class="shot" data-cat="sites" data-title="Projets web — à ajouter" data-src="profil.jpg">
           <img src="profil.jpg" alt="Projets web à ajouter">
           <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="tagmini">Sites</div></div>
