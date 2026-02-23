@@ -10,27 +10,19 @@
     :root{
       --bg0:#070812;
       --bg1:#0b1024;
-
       --surface: rgba(12, 14, 30, .90);
       --surface2: rgba(12, 14, 30, .82);
-
       --stroke: rgba(255,255,255,.14);
-      --stroke2: rgba(255,255,255,.10);
-
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
       --muted2: rgba(255,255,255,.48);
-
       --a1:#7c3aed;
       --a2:#22d3ee;
       --a3:#f472b6;
-
       --shadow: 0 20px 80px rgba(0,0,0,.55);
       --shadow2: 0 14px 55px rgba(0,0,0,.30);
-
       --r: 22px;
       --max: 1160px;
-
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
     }
 
@@ -48,15 +40,6 @@
       overflow-x:hidden;
     }
 
-    body:before{
-      content:"";
-      position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
-      mix-blend-mode:overlay;
-      opacity:.06;
-      pointer-events:none;
-    }
-
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:24px}
     .muted{color:var(--muted)}
@@ -71,10 +54,7 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
-
     .brand{display:flex; align-items:center; gap:10px; font-weight:950}
-
-    /* ✅ photo à côté du prénom */
     .brand-photo{
       width:40px; height:40px;
       border-radius:14px;
@@ -84,9 +64,7 @@
       box-shadow: 0 14px 30px rgba(0,0,0,.30);
       flex:0 0 auto;
     }
-
     .brand small{display:block; color:var(--muted); font-weight:650; margin-top:2px}
-
     .navlinks{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .navlinks a{
       font-size:14px; color:var(--muted);
@@ -122,88 +100,6 @@
       box-shadow: var(--shadow2);
     }
 
-    /* HERO */
-    header{padding:54px 0 18px}
-    .hero{display:grid; grid-template-columns: 1.08fr .92fr; gap:18px}
-    @media (max-width: 980px){ .hero{grid-template-columns:1fr} header{padding:40px 0 14px} }
-
-    .hero-left{padding:28px}
-    .badge-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size:13px;
-    }
-
-    h1{
-      margin:0 0 12px;
-      font-size: clamp(34px, 4.3vw, 56px);
-      line-height:1.05;
-      letter-spacing:-.6px;
-    }
-    .grad{
-      background:linear-gradient(135deg,var(--a2),var(--a1),var(--a3));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .lead{
-      margin:0 0 18px;
-      font-size:16px;
-      color:var(--muted);
-      line-height:1.7;
-      max-width: 78ch;
-    }
-
-    .btns{display:flex; gap:12px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.05);
-      font-weight:950;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
-      white-space:nowrap;
-      cursor:pointer;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.72));
-      color:#070812; border-color: rgba(255,255,255,.18);
-    }
-    .btn.linkedin{
-      background: linear-gradient(135deg, rgba(34,211,238,.78), rgba(124,58,237,.78));
-      color:#070812; border-color: rgba(255,255,255,.18);
-    }
-    .btn.ghost{background: rgba(255,255,255,.04)}
-
-    .hero-right{padding:22px; display:flex; flex-direction:column; gap:12px}
-    .profile{
-      display:flex; align-items:center; gap:14px;
-      padding:16px; border-radius:18px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .avatar{
-      width:82px; height:82px; border-radius:26px;
-      border:1px solid rgba(255,255,255,.18);
-      overflow:hidden; background: rgba(255,255,255,.06);
-      box-shadow: 0 16px 55px rgba(0,0,0,.35);
-      flex:0 0 auto;
-    }
-    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .name{font-weight:950}
-    .sub{color:var(--muted); font-size:13px; margin-top:4px; line-height:1.4}
-
-    .kpi{
-      padding:16px; border-radius:18px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .kpi strong{display:block; font-size:16px}
-    .kpi span{display:block; color:var(--muted); margin-top:6px; font-size:13px; line-height:1.45}
-
     /* SECTION HEADER */
     section{padding:22px 0}
     .section-head{
@@ -213,115 +109,61 @@
     .section-head h2{margin:0; font-size:18px; letter-spacing:.2px}
     .section-head p{margin:0; color:var(--muted2); font-size:13px}
 
-    /* TRUST */
-    .trust{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){ .trust{grid-template-columns:1fr 1fr} }
-    @media (max-width: 520px){ .trust{grid-template-columns:1fr} }
-    .trust .item{
-      padding:14px 14px;
-      border-radius:18px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: var(--shadow2);
-    }
-    .trust .item b{display:block; font-size:13px}
-    .trust .item span{display:block; margin-top:6px; font-size:12px; color:var(--muted); line-height:1.5}
-
-    /* SERVICES */
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
-    .service{
-      padding:18px; border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      transition: transform .15s ease, background .15s ease;
-    }
-    .service:hover{transform: translateY(-2px); background: rgba(255,255,255,.055)}
-    .service h3{margin:0 0 8px; font-size:15px}
-    .service p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .tag{
-      font-size:12px; color:var(--muted);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      padding:6px 9px; border-radius:999px;
-    }
-
-    /* METHOD */
-    .method{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;}
-    @media (max-width: 980px){ .method{grid-template-columns:1fr} }
-    .step{
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-    }
-    .step .n{
-      width:34px; height:34px; border-radius:12px;
-      display:inline-flex; align-items:center; justify-content:center;
-      font-weight:950; color:#070812;
-      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(124,58,237,.90));
+    /* BUTTONS */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px; border-radius:14px;
       border:1px solid rgba(255,255,255,.16);
-      margin-bottom:10px;
+      background: rgba(255,255,255,.05);
+      font-weight:950;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
+      cursor:pointer;
+      color:var(--text);
     }
-    .step h3{margin:0 0 8px; font-size:15px}
-    .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.92), rgba(244,114,182,.72));
+      color:#070812; border-color: rgba(255,255,255,.18);
+    }
+    .btn.ghost{background: rgba(255,255,255,.04)}
+    .btn.sm{padding:10px 12px; border-radius:12px; font-size:13px}
 
-    /* =========================
-       PACKS (✅ COMPACTS)
-       ========================= */
-    .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+    /* ✅ PACKS REFAIT (compact + beau) */
+    .packs{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
     @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
 
-    details.pack{
+    .p-card{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      overflow:hidden;
       box-shadow: var(--shadow2);
+      overflow:hidden;
       position:relative;
       transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
     }
-
-    /* glow discret (plus de grosse forme) */
-    details.pack::before{
-      content:"";
-      position:absolute; inset:-12px;
-      background:
-        radial-gradient(260px 220px at 20% 10%, rgba(34,211,238,.12), transparent 62%),
-        radial-gradient(240px 220px at 85% 12%, rgba(124,58,237,.12), transparent 62%);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .16s ease;
-    }
-
-    details.pack:hover{
+    .p-card:hover{
       transform: translateY(-3px);
       border-color: rgba(255,255,255,.20);
       background: rgba(255,255,255,.05);
       box-shadow: 0 24px 80px rgba(0,0,0,.40);
     }
-    details.pack:hover::before{opacity:1}
 
-    details.pack summary{
-      cursor:pointer;
-      list-style:none;
+    .p-top{
       padding:18px;
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
     }
-    details.pack summary::-webkit-details-marker{display:none}
+    .p-title{font-weight:950; font-size:15px; margin:0}
+    .p-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
 
-    .pack-title{margin:0; font-size:15px; font-weight:950}
-    .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
-
-    .price{
+    .p-price{
       text-align:right;
       min-width: 160px;
       font-weight:950;
@@ -333,11 +175,10 @@
       white-space:nowrap;
       line-height:1.2;
     }
-    .price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
+    .p-price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
 
-    /* ✅ points clés visibles même fermé */
-    .highlights{
-      margin-top:12px;
+    .p-chips{
+      padding:0 18px 14px;
       display:flex; gap:8px; flex-wrap:wrap;
     }
     .chip{
@@ -349,19 +190,14 @@
       background: rgba(255,255,255,.03);
     }
 
-    /* body compact */
-    .pack-body{padding:0 18px 18px}
-
-    .list{
-      margin:12px 0 0;
-      padding:0;
-      list-style:none;
+    .p-mini{
+      padding:0 18px 16px;
       display:grid;
       gap:8px;
       color:var(--muted);
       font-size:13px;
     }
-    .list li{
+    .mini-row{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px;
       border-radius:14px;
@@ -374,7 +210,46 @@
       flex:0 0 auto;
     }
 
-    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .p-actions{
+      padding: 0 18px 18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    /* Détails (collapsible, compact) */
+    details.p-details{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding: 0;
+      margin: 0 18px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+    }
+    details.p-details summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 12px 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,.88);
+      font-weight:950;
+      font-size:13px;
+    }
+    details.p-details summary::-webkit-details-marker{display:none}
+    .chev{opacity:.8; transition: transform .16s ease}
+    details.p-details[open] .chev{transform: rotate(180deg)}
+    .p-full{
+      padding: 0 12px 12px;
+      display:grid;
+      gap:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
 
     .ribbon{
       position:absolute; top:14px; right:14px;
@@ -387,72 +262,6 @@
       backdrop-filter: blur(10px);
     }
 
-    /* GALLERY FILTER */
-    .gallery-actions{display:flex; gap:10px; flex-wrap:wrap}
-    .seg{
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-weight:950;
-      cursor:pointer;
-      transition: transform .12s ease, background .12s ease;
-    }
-    .seg:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
-    .seg.active{
-      color:#070812;
-      background: linear-gradient(135deg, rgba(124,58,237,.88), rgba(34,211,238,.72));
-      border-color: rgba(255,255,255,.16);
-    }
-
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-      margin-top:12px;
-    }
-    @media (max-width: 980px){ .gallery{grid-template-columns:1fr 1fr} }
-    @media (max-width: 520px){ .gallery{grid-template-columns:1fr} }
-
-    .shot{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-      position:relative;
-      transition: transform .16s ease;
-      box-shadow: var(--shadow2);
-      cursor:pointer;
-    }
-    .shot:hover{transform: translateY(-3px)}
-    .shot img{
-      width:100%;
-      height:230px;
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.05) contrast(1.03);
-    }
-    .cap{
-      position:absolute;
-      left:10px; right:10px; bottom:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      background: rgba(7,8,18,.66);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(10px);
-      display:flex; justify-content:space-between; gap:10px; align-items:center;
-    }
-    .cap b{font-size:12px; letter-spacing:.2px}
-    .cap span{font-size:11px; color:var(--muted)}
-    .tagmini{
-      padding:6px 9px; border-radius:999px;
-      background: rgba(124,58,237,.20);
-      border:1px solid rgba(124,58,237,.35);
-      font-weight:950; font-size:11px;
-      white-space:nowrap;
-    }
-
     /* CONTACT */
     .contact{
       padding:18px;
@@ -463,7 +272,6 @@
     }
     .contact-grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
     @media (max-width: 980px){ .contact-grid{grid-template-columns:1fr} }
-
     .field{display:grid; gap:8px; margin-top:12px}
     label{font-size:12px; color:var(--muted); font-weight:850}
     input, textarea{
@@ -488,60 +296,6 @@
       border-top: 1px solid rgba(255,255,255,.10);
       padding-top:18px
     }
-
-    /* LIGHTBOX */
-    .lightbox{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:22px;
-      z-index:1000;
-    }
-    .lightbox.open{display:flex}
-    .lb-card{
-      width:min(980px, 96vw);
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(7,8,18,.78);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 30px 120px rgba(0,0,0,.6);
-      overflow:hidden;
-    }
-    .lb-top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      padding:12px 14px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .lb-top b{font-size:13px}
-    .lb-top button{
-      cursor:pointer;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      border-radius:12px;
-      padding:8px 10px;
-      font-weight:950;
-    }
-    .lb-img{
-      background: rgba(255,255,255,.03);
-      max-height: calc(100vh - 120px);
-      overflow: auto;
-    }
-    .lb-img img{
-      width: 100%;
-      height: auto;
-      max-height: calc(100vh - 140px);
-      object-fit: contain;
-      display:block;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{transition:none !important; animation:none !important}
-      details.pack:hover{transform:none}
-    }
   </style>
 </head>
 
@@ -549,7 +303,7 @@
   <div class="nav">
     <div class="wrap">
       <div class="brand">
-        <!-- ✅ Mets ton image ici -->
+        <!-- ✅ Mets ton image ici (logo ou portrait) -->
         <img class="brand-photo" src="brand-photo.jpg" alt="Photo Eva">
         <div>
           <div style="font-size:14px; line-height:1.1; font-weight:950;">Eva De Abreu</div>
@@ -558,11 +312,7 @@
       </div>
 
       <div class="navlinks">
-        <a href="#services">Expertises</a>
-        <a href="#method">Méthode</a>
         <a href="#packs">Packs</a>
-        <a href="#galerie">Portfolio</a>
-        <a href="#avis">Avis</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -570,324 +320,145 @@
     </div>
   </div>
 
-  <header class="wrap">
-    <div class="hero">
-      <div class="card hero-left">
-        <div class="badge-row">
-          <span class="badge">À distance • France entière</span>
-          <span class="badge">Offres mensuelles</span>
-          <span class="badge">Visuels • Réseaux • Web • SEO</span>
-        </div>
-
-        <h1>
-          Communication & marketing <span class="grad">professionnels</span> :
-          une présence <span class="grad">cohérente</span> sur le web et les réseaux.
-        </h1>
-
-        <p class="lead">
-          J’accompagne les TPE/PME avec une approche structurée : <b>identité visuelle</b>, <b>création de contenus</b>,
-          <b>gestion des réseaux sociaux</b>, <b>optimisation Google</b> et <b>web / SEO</b>.
-          Objectif : une image premium, claire, et orientée résultats.
-        </p>
-
-        <div class="btns">
-          <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Email</a>
-          <a class="btn" href="tel:+33767208655">Téléphone</a>
-          <a class="btn ghost" href="#galerie" id="goGalleryBtn">Voir le portfolio</a>
-          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="trust">
-          <div class="item"><b>Secteurs</b><span>Restaurants, instituts, artisans, BTP, taxis, PME.</span></div>
-          <div class="item"><b>Livraison</b><span>Formats adaptés : print, web, réseaux (HD + déclinaisons).</span></div>
-          <div class="item"><b>Organisation</b><span>Brief → devis → production → retours → livraison.</span></div>
-          <div class="item"><b>Couverture</b><span>Accompagnement à distance partout en France.</span></div>
-        </div>
-      </div>
-
-      <div class="card hero-right">
-        <div class="profile">
-          <div class="avatar">
-            <img src="profil.jpg" alt="Photo de profil — Eva De Abreu">
-          </div>
-          <div>
-            <div class="name">Eva De Abreu</div>
-            <div class="sub">Communication • Marketing • Design<br>Réseaux sociaux • Web • SEO</div>
-          </div>
-        </div>
-
-        <div class="kpi">
-          <strong>Rendu premium</strong>
-          <span>Design structuré, cohérence visuelle, hiérarchie claire et déclinaisons.</span>
-        </div>
-
-        <div class="kpi">
-          <strong>Gestion multi-canal</strong>
-          <span>Visuels, réseaux, web, SEO… avec un suivi cadré.</span>
-        </div>
-
-        <div class="kpi">
-          <strong>Suivi clair</strong>
-          <span>Livrables définis, délais annoncés, retours encadrés.</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <main class="wrap">
-
-    <section id="services">
-      <div class="section-head">
-        <h2>Expertises</h2>
-        <p>Un accompagnement complet et structuré.</p>
-      </div>
-
-      <div class="grid3">
-        <div class="service">
-          <h3>Identité & supports</h3>
-          <p>Affiches, flyers, menus, brochures, cartes, bannières, templates. Print et digital.</p>
-          <div class="tags">
-            <span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span>
-          </div>
-        </div>
-
-        <div class="service">
-          <h3>Réseaux sociaux</h3>
-          <p>Création de contenus, cohérence graphique, déclinaisons, planning et optimisation.</p>
-          <div class="tags">
-            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
-          </div>
-        </div>
-
-        <div class="service">
-          <h3>Web & SEO</h3>
-          <p>Pages pro, mise à jour de site, SEO (base / local) et optimisation conversion.</p>
-          <div class="tags">
-            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="method">
-      <div class="section-head">
-        <h2>Méthode de travail</h2>
-        <p>Simple, cadré, efficace.</p>
-      </div>
-
-      <div class="method">
-        <div class="step">
-          <div class="n">1</div>
-          <h3>Brief & objectifs</h3>
-          <p>Besoin, style, formats, cible et priorités (visibilité / conversion / image).</p>
-        </div>
-        <div class="step">
-          <div class="n">2</div>
-          <h3>Devis & planning</h3>
-          <p>Livrables, calendrier, règles de retours et conditions.</p>
-        </div>
-        <div class="step">
-          <div class="n">3</div>
-          <h3>Production & livraison</h3>
-          <p>Création, ajustements, déclinaisons, puis livraison finale.</p>
-        </div>
-      </div>
-    </section>
 
     <section id="packs">
       <div class="section-head">
         <h2>Packs mensuels (tarifs de lancement)</h2>
-        <p>Clique sur un pack pour voir le détail.</p>
+        <p>Compact. Clair. Le détail est dans “Voir le détail”.</p>
       </div>
 
       <div class="packs">
 
         <!-- PACK 1 -->
-        <details class="pack">
-          <summary>
+        <article class="p-card">
+          <div class="p-top">
             <div>
-              <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
-              <div class="pack-desc">Base pro + visibilité locale.</div>
-              <div class="highlights">
-                <span class="chip">Google Business</span>
-                <span class="chip">4 posts/mois</span>
-                <span class="chip">4 visuels</span>
-                <span class="chip">1 story/sem</span>
-              </div>
+              <div class="p-title">🌿 Pack 1 — Visibilité Essentielle</div>
+              <div class="p-desc">Base pro + visibilité locale.</div>
             </div>
-            <div class="price">180€ / mois<small>au lieu de 350€</small></div>
-          </summary>
-
-          <div class="pack-body">
-            <ul class="list">
-              <li><span class="dot"></span><span>Audit rapide de la présence en ligne</span></li>
-              <li><span class="dot"></span><span>Optimisation Google Business Profile</span></li>
-              <li><span class="dot"></span><span>4 posts / mois + 4 visuels premium</span></li>
-              <li><span class="dot"></span><span>1 story / semaine</span></li>
-              <li><span class="dot"></span><span>Mise à jour des infos (horaires, photos, coordonnées)</span></li>
-              <li><span class="dot"></span><span>Conseils SEO de base</span></li>
-            </ul>
-
-            <div class="panel" style="padding:12px; margin-top:12px;">
-              <b>Objectif</b>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Être visible et inspirer confiance avec une communication propre.
-              </div>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary" type="button" data-pack="Pack 1 — Visibilité Essentielle">Demander ce pack</button>
-              <a class="btn ghost" href="#galerie">Voir des exemples</a>
-            </div>
+            <div class="p-price">180€ / mois<small>au lieu de 350€</small></div>
           </div>
-        </details>
+
+          <div class="p-chips">
+            <span class="chip">Google Business</span>
+            <span class="chip">4 posts/mois</span>
+            <span class="chip">4 visuels</span>
+            <span class="chip">1 story/sem</span>
+          </div>
+
+          <div class="p-mini">
+            <div class="mini-row"><span class="dot"></span><span>Optimisation Google Business Profile</span></div>
+            <div class="mini-row"><span class="dot"></span><span>Contenus prêts à poster (visuels premium)</span></div>
+            <div class="mini-row"><span class="dot"></span><span>Conseils SEO de base + mise à jour infos</span></div>
+          </div>
+
+          <details class="p-details">
+            <summary>Voir le détail <span class="chev">▾</span></summary>
+            <div class="p-full">
+              <div class="mini-row"><span class="dot"></span><span>Audit rapide de la présence en ligne</span></div>
+              <div class="mini-row"><span class="dot"></span><span>4 posts / mois (Instagram ou Facebook)</span></div>
+              <div class="mini-row"><span class="dot"></span><span>4 visuels premium Canva Pro</span></div>
+              <div class="mini-row"><span class="dot"></span><span>1 story / semaine</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Mise à jour horaires, photos, coordonnées</span></div>
+            </div>
+          </details>
+
+          <div class="p-actions">
+            <button class="btn primary sm" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
+            <span class="muted2 tiny">Objectif : base pro + confiance.</span>
+          </div>
+        </article>
 
         <!-- PACK 2 -->
-        <details class="pack">
+        <article class="p-card">
           <span class="ribbon">RECOMMANDÉ</span>
-          <summary>
+
+          <div class="p-top">
             <div>
-              <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
-              <div class="pack-desc">Plus de contenu + acquisition.</div>
-              <div class="highlights">
-                <span class="chip">8 posts/mois</span>
-                <span class="chip">8 visuels</span>
-                <span class="chip">Stories</span>
-                <span class="chip">Reporting</span>
-              </div>
+              <div class="p-title">🚀 Pack 2 — Croissance Digitale</div>
+              <div class="p-desc">Plus de contenu + acquisition.</div>
             </div>
-            <div class="price">390€ / mois<small>au lieu de 750€</small></div>
-          </summary>
-
-          <div class="pack-body">
-            <ul class="list">
-              <li><span class="dot"></span><span>Tout le pack 1 inclus</span></li>
-              <li><span class="dot"></span><span>8 posts / mois + 8 visuels premium</span></li>
-              <li><span class="dot"></span><span>4 stories / semaine</span></li>
-              <li><span class="dot"></span><span>Optimisation bio + stratégie de contenu</span></li>
-              <li><span class="dot"></span><span>Réponse aux avis Google</span></li>
-              <li><span class="dot"></span><span>Mini shooting photo (1h)</span></li>
-              <li><span class="dot"></span><span>SEO local optimisé + stats mensuelles</span></li>
-            </ul>
-
-            <div class="panel" style="padding:12px; margin-top:12px;">
-              <b>Objectif</b>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Attirer plus de clients et augmenter l’engagement avec une présence structurée.
-              </div>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary" type="button" data-pack="Pack 2 — Croissance Digitale">Demander ce pack</button>
-              <a class="btn" href="tel:+33767208655">Appeler</a>
-            </div>
+            <div class="p-price">390€ / mois<small>au lieu de 750€</small></div>
           </div>
-        </details>
+
+          <div class="p-chips">
+            <span class="chip">8 posts/mois</span>
+            <span class="chip">Stories</span>
+            <span class="chip">Mini shooting</span>
+            <span class="chip">Reporting</span>
+          </div>
+
+          <div class="p-mini">
+            <div class="mini-row"><span class="dot"></span><span>Tout le pack 1 inclus</span></div>
+            <div class="mini-row"><span class="dot"></span><span>8 posts / mois + 8 visuels premium</span></div>
+            <div class="mini-row"><span class="dot"></span><span>SEO local + stats mensuelles</span></div>
+          </div>
+
+          <details class="p-details">
+            <summary>Voir le détail <span class="chev">▾</span></summary>
+            <div class="p-full">
+              <div class="mini-row"><span class="dot"></span><span>4 stories / semaine</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Optimisation bio + stratégie de contenu</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Réponse aux avis Google</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Mini shooting photo (1h)</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Mise à jour / modifications du site (léger)</span></div>
+            </div>
+          </details>
+
+          <div class="p-actions">
+            <button class="btn primary sm" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
+            <span class="muted2 tiny">Objectif : + clients & + engagement.</span>
+          </div>
+        </article>
 
         <!-- PACK 3 -->
-        <details class="pack">
-          <summary>
+        <article class="p-card">
+          <div class="p-top">
             <div>
-              <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Branding + stratégie + web + accompagnement.</div>
-              <div class="highlights">
-                <span class="chip">12 posts/mois</span>
-                <span class="chip">Reels</span>
-                <span class="chip">Site vitrine</span>
-                <span class="chip">Call mensuel</span>
-              </div>
+              <div class="p-title">👑 Pack 3 — Stratégie & Image Premium</div>
+              <div class="p-desc">Marque + contenu + web + accompagnement.</div>
             </div>
-            <div class="price">790€ / mois<small>au lieu de 1500€ • à partir de</small></div>
-          </summary>
-
-          <div class="pack-body">
-            <ul class="list">
-              <li><span class="dot"></span><span>Tout le pack 2 inclus</span></li>
-              <li><span class="dot"></span><span>Stratégie digitale complète (objectifs, offres, cibles, plan d’action)</span></li>
-              <li><span class="dot"></span><span>Création/refonte site vitrine (périmètre défini ensemble)</span></li>
-              <li><span class="dot"></span><span>12 posts / mois + 12 visuels + Reels (selon formats)</span></li>
-              <li><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></li>
-              <li><span class="dot"></span><span>Événementiel : invitations, visuels, coordination, devis (selon projet)</span></li>
-              <li><span class="dot"></span><span>Audit SEO complet + priorisation des actions</span></li>
-              <li><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></li>
-            </ul>
-
-            <div class="panel" style="padding:12px; margin-top:12px;">
-              <b>Objectif</b>
-              <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Construire une vraie marque et développer le chiffre d’affaires grâce à une stratégie complète.
-              </div>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Demander ce pack</button>
-              <a class="btn ghost" href="#contact">Contact</a>
-            </div>
+            <div class="p-price">790€ / mois<small>au lieu de 1500€ • à partir de</small></div>
           </div>
-        </details>
 
-      </div>
-    </section>
+          <div class="p-chips">
+            <span class="chip">12 posts/mois</span>
+            <span class="chip">Reels</span>
+            <span class="chip">Site vitrine</span>
+            <span class="chip">Call mensuel</span>
+          </div>
 
-    <section id="galerie">
-      <div class="section-head">
-        <h2>Portfolio</h2>
-        <p>Filtrez par type : visuels / sites / réseaux.</p>
-      </div>
+          <div class="p-mini">
+            <div class="mini-row"><span class="dot"></span><span>Tout le pack 2 inclus</span></div>
+            <div class="mini-row"><span class="dot"></span><span>Stratégie digitale complète + branding</span></div>
+            <div class="mini-row"><span class="dot"></span><span>Événementiel possible (invits / visuels / coordination)</span></div>
+          </div>
 
-      <div class="gallery-actions">
-        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
-        <button type="button" class="seg" data-cat="sites">Sites internet</button>
-        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
-      </div>
+          <details class="p-details">
+            <summary>Voir le détail <span class="chev">▾</span></summary>
+            <div class="p-full">
+              <div class="mini-row"><span class="dot"></span><span>Création / refonte site vitrine (périmètre défini ensemble)</span></div>
+              <div class="mini-row"><span class="dot"></span><span>12 posts + 12 visuels + Reels (selon formats)</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Audit SEO complet + priorisation des actions</span></div>
+              <div class="mini-row"><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></div>
+            </div>
+          </details>
 
-      <div class="gallery" id="galleryGrid">
-        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
-          <img src="produit-the.jpg" alt="Visuel produit / branding">
-          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="tagmini">Visuel</div></div>
-        </div>
+          <div class="p-actions">
+            <button class="btn primary sm" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
+            <span class="muted2 tiny">Objectif : scaler proprement.</span>
+          </div>
+        </article>
 
-        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
-          <img src="menu-resto.jpg" alt="Menu restauration">
-          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="tagmini">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Promotion" data-src="valentine.jpg">
-          <img src="valentine.jpg" alt="Promotion">
-          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="tagmini">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Affiche / Flyer" data-src="maraude.jpg">
-          <img src="maraude.jpg" alt="Affiche / flyer">
-          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="tagmini">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Logo / Identité" data-src="logo-taxi.png">
-          <img src="logo-taxi.png" alt="Logo / identité">
-          <div class="cap"><div><b>Logo</b><br><span>Identité visuelle</span></div><div class="tagmini">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
-          <img src="matchday.jpg" alt="Story matchday">
-          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="tagmini">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
-          <img src="classico.jpg" alt="Annonce événement">
-          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="tagmini">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="sites" data-title="Projets web — à ajouter" data-src="profil.jpg">
-          <img src="profil.jpg" alt="Projets web à ajouter">
-          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="tagmini">Sites</div></div>
-        </div>
       </div>
     </section>
 
     <section id="contact">
       <div class="section-head">
         <h2>Contact</h2>
-        <p>Réponse rapide • Devis clair.</p>
+        <p>Le pack choisi se remplit automatiquement.</p>
       </div>
 
       <div class="contact-grid">
@@ -898,18 +469,12 @@
             <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
             <b>Zone :</b> France entière (à distance)
           </div>
-
-          <div class="btns" style="margin-top:14px">
-            <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Envoyer un email</a>
-            <a class="btn" href="tel:+33767208655">Appeler</a>
-            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
         </div>
 
         <div class="contact">
           <div style="font-weight:950;">Demande de devis</div>
           <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-            Remplis et clique sur “Ouvrir le mail” : ton email se prépare automatiquement.
+            Remplis et clique sur “Ouvrir le mail”.
           </div>
 
           <div class="field">
@@ -929,16 +494,16 @@
 
           <div class="field">
             <label for="fMsg">Message</label>
-            <textarea id="fMsg" placeholder="Décris ton besoin (secteur, objectif, délai, contenus, web, événementiel...)"></textarea>
+            <textarea id="fMsg" placeholder="Secteur, objectif, délai, contenus, web, événementiel..."></textarea>
           </div>
 
-          <div class="btns" style="margin-top:12px">
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
             <button type="button" class="btn primary" id="sendMailBtn">Ouvrir le mail</button>
             <button type="button" class="btn" id="copyMailBtn">Copier mon email</button>
           </div>
 
           <div class="muted2 tiny" style="margin-top:10px;">
-            Le mail part vers <b>deabreue9@gmail.com</b> avec ton message.
+            Le mail part vers <b>deabreue9@gmail.com</b>.
           </div>
         </div>
       </div>
@@ -950,73 +515,13 @@
         <div class="muted2">Visuels • Réseaux • Web • SEO • Événementiel — France entière</div>
       </div>
     </footer>
+
   </main>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lb-card" role="dialog" aria-modal="true">
-      <div class="lb-top">
-        <b id="lbTitle">Aperçu</b>
-        <button id="lbClose" type="button">Fermer ✕</button>
-      </div>
-      <div class="lb-img">
-        <img id="lbImg" src="" alt="">
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Gallery filter
-    const segs = Array.from(document.querySelectorAll(".seg"));
-    const shots = Array.from(document.querySelectorAll(".shot"));
-
-    function setCat(cat){
-      segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-      shots.forEach(it => it.style.display = (it.dataset.cat === cat) ? "" : "none");
-    }
-    segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
-    setCat("visuels");
-
-    const goGalleryBtn = document.getElementById("goGalleryBtn");
-    if(goGalleryBtn){ goGalleryBtn.addEventListener("click", () => setCat("visuels")); }
-
-    // Lightbox
-    const lb = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbTitle = document.getElementById("lbTitle");
-    const lbClose = document.getElementById("lbClose");
-
-    function openLB(src, title){
-      lbTitle.textContent = title || "Aperçu";
-      lbImg.src = src;
-      lbImg.alt = title || "Aperçu";
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeLB(){
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden","true");
-      lbImg.src = "";
-      document.body.style.overflow = "";
-    }
-
-    lbClose.addEventListener("click", closeLB);
-    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
-    window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
-
-    shots.forEach(s => {
-      s.addEventListener("click", () => {
-        const src = s.getAttribute("data-src");
-        const title = s.getAttribute("data-title");
-        if(src) openLB(src, title);
-      });
-    });
-
-    // Pack CTA => scroll + fill pack
+    // Pack -> remplit champ + scroll
     const packBtns = document.querySelectorAll('[data-pack]');
     const packInput = document.getElementById('fPack');
     packBtns.forEach(b => {
@@ -1028,7 +533,6 @@
 
     // Copy + mailto builder
     const EMAIL = "deabreue9@gmail.com";
-
     function copyToClipboard(text){
       if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
       const ta = document.createElement('textarea');
@@ -1062,6 +566,7 @@
         `${from ? "Mon email : " + from + "\n" : ""}` +
         `\nMerci !`
       );
+
       window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
     });
   </script>
