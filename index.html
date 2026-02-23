@@ -9,6 +9,7 @@
   <style>
     :root{
       --bg:#07070c;
+
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.08);
       --stroke: rgba(255,255,255,.14);
@@ -27,6 +28,7 @@
 
       --r: 18px;
       --max: 1120px;
+
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
     }
 
@@ -36,20 +38,33 @@
       margin:0;
       font-family:var(--font);
       color:var(--text);
-      background:
-        radial-gradient(900px 600px at 18% 18%, rgba(34,211,238,.20), transparent 60%),
-        radial-gradient(900px 600px at 78% 22%, rgba(139,92,246,.22), transparent 60%),
-        radial-gradient(900px 600px at 60% 85%, rgba(244,114,182,.14), transparent 62%),
-        linear-gradient(180deg, #05050a, #090a12 40%, #060610);
+
+      /* ✅ FOND UNIFORME (anti "traits") */
+      background: linear-gradient(180deg, #06060b, #090a12 55%, #060610);
       overflow-x:hidden;
     }
 
-    /* grain */
+    /* ✅ Glow très doux, MAIS stable (1 seul layer, pas d’artefacts) */
+    .bg-glow{
+      position:fixed;
+      inset:-20vmax;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        radial-gradient(60vmax 50vmax at 20% 20%, rgba(34,211,238,.14), transparent 60%),
+        radial-gradient(60vmax 50vmax at 78% 18%, rgba(139,92,246,.16), transparent 60%),
+        radial-gradient(60vmax 50vmax at 55% 85%, rgba(244,114,182,.10), transparent 62%);
+      filter: blur(20px);
+      transform: translateZ(0);
+      opacity:.95;
+    }
+
+    /* grain discret */
     body:before{
       content:"";
       position:fixed; inset:0;
       pointer-events:none;
-      opacity:.06;
+      opacity:.05;
       mix-blend-mode: overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
     }
@@ -64,37 +79,72 @@
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(6,6,12,.65);
+      background: rgba(6,6,12,.70);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
 
-    .brand{display:flex; align-items:center; gap:12px; min-width:260px}
+    /* ✅ Tout sur une ligne */
+    .nav .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:nowrap;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 0;
+      flex: 0 0 auto;
+    }
     .brand img{
       width:42px; height:42px; border-radius:16px;
       object-fit:cover; border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.06);
       box-shadow: var(--shadow2);
+      flex:0 0 auto;
     }
-    .brand .name{font-weight:950; letter-spacing:.2px}
-    .brand .sub{font-size:12px; color:var(--muted); margin-top:3px}
+    .brand .name{font-weight:950; letter-spacing:.2px; white-space:nowrap}
+    .brand .sub{font-size:12px; color:var(--muted); margin-top:3px; white-space:nowrap}
 
-    .links{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+    /* ✅ menu sur une seule ligne (Contact ne descend plus) */
+    .links{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      flex: 1 1 auto;
+      min-width: 0;
+      flex-wrap:nowrap;
+      white-space:nowrap;
+      overflow:hidden;
+    }
     .links a{
       font-size:13px;
       color:var(--muted);
       padding:10px 12px;
       border-radius:999px;
       border:1px solid transparent;
+      flex:0 0 auto;
     }
     .links a:hover{
       color:var(--text);
       border-color: rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
     }
-    @media(max-width:980px){ .links{display:none} }
 
-    .nav-right{display:flex; align-items:center; gap:10px}
+    @media(max-width:980px){
+      .links{display:none}
+    }
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex: 0 0 auto;
+      white-space:nowrap;
+    }
+
     .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding:11px 14px;
@@ -285,7 +335,7 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* Packs (no glow, no pseudo elements) */
+    /* Packs */
     .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
     @media(max-width:980px){ .packs{grid-template-columns:1fr} }
 
@@ -327,7 +377,6 @@
     .pack-body{padding:0 16px 16px}
 
     .peek{
-      margin-top:0;
       padding:0 16px 12px;
       display:grid; gap:8px;
     }
@@ -435,21 +484,36 @@
       white-space:nowrap;
     }
 
-    /* LinkedIn */
-    .linkedin{
+    /* LinkedIn + Avis */
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media(max-width:980px){ .grid2{grid-template-columns:1fr} }
+
+    .block{
       padding:18px;
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
     }
-    .linkedin b{font-size:14px}
-    .linkedin p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6; max-width:72ch}
+    .block b{font-size:14px}
+    .block p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
+    .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
+
+    /* Avis embed */
+    .embed{
+      margin-top:12px;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.02);
+    }
+    .embed iframe{
+      width:100%;
+      height:320px;
+      border:0;
+      display:block;
+      background:#fff;
+    }
 
     /* Contact */
     .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
@@ -552,9 +616,12 @@
 </head>
 
 <body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
   <div class="nav">
     <div class="wrap">
       <div class="brand">
+        <!-- ✅ même photo partout -->
         <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
         <div>
           <div class="name">Eva De Abreu</div>
@@ -567,7 +634,7 @@
         <a href="#method">Méthode</a>
         <a href="#packs">Packs</a>
         <a href="#galerie">Portfolio</a>
-        <a href="#linkedin">LinkedIn</a>
+        <a href="#socialproof">Avis</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -609,7 +676,8 @@
       <div class="card hero-right">
         <div class="profile">
           <div class="avatar">
-            <img src="profil.jpg" alt="Photo de profil — Eva De Abreu">
+            <!-- ✅ même photo partout -->
+            <img src="brand-photo.jpg" alt="Photo — Eva De Abreu">
           </div>
           <div>
             <b>Eva De Abreu</b>
@@ -708,11 +776,11 @@
 
           <div class="pack-body">
             <ul class="list">
-              <li><i class="dot"></i><span>Audit rapide présence en ligne</span></li>
-              <li><i class="dot"></i><span>Optimisation Google Business Profile</span></li>
-              <li><i class="dot"></i><span>4 posts / mois (IG ou Facebook)</span></li>
-              <li><i class="dot"></i><span>4 visuels premium</span></li>
-              <li><i class="dot"></i><span>1 story / semaine</span></li>
+              <li><i></i><span>Audit rapide présence en ligne</span></li>
+              <li><i></i><span>Optimisation Google Business Profile</span></li>
+              <li><i></i><span>4 posts / mois (IG ou Facebook)</span></li>
+              <li><i></i><span>4 visuels premium</span></li>
+              <li><i></i><span>1 story / semaine</span></li>
             </ul>
 
             <div class="pack-cta">
@@ -740,11 +808,11 @@
 
           <div class="pack-body">
             <ul class="list">
-              <li><i class="dot"></i><span>8 posts / mois</span></li>
-              <li><i class="dot"></i><span>Visuels premium + déclinaisons</span></li>
-              <li><i class="dot"></i><span>Stories (rythme hebdo)</span></li>
-              <li><i class="dot"></i><span>Optimisation bio + stratégie de contenu</span></li>
-              <li><i class="dot"></i><span>Analyse mensuelle des statistiques</span></li>
+              <li><i></i><span>8 posts / mois</span></li>
+              <li><i></i><span>Visuels premium + déclinaisons</span></li>
+              <li><i></i><span>Stories (rythme hebdo)</span></li>
+              <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
+              <li><i></i><span>Analyse mensuelle des statistiques</span></li>
             </ul>
 
             <div class="pack-cta">
@@ -771,10 +839,10 @@
 
           <div class="pack-body">
             <ul class="list">
-              <li><i class="dot"></i><span>Stratégie digitale complète</span></li>
-              <li><i class="dot"></i><span>Charte + identité visuelle</span></li>
-              <li><i class="dot"></i><span>Contenus intensifs + formats avancés</span></li>
-              <li><i class="dot"></i><span>Accompagnement & reporting</span></li>
+              <li><i></i><span>Stratégie digitale complète</span></li>
+              <li><i></i><span>Charte + identité visuelle</span></li>
+              <li><i></i><span>Contenus intensifs + formats avancés</span></li>
+              <li><i></i><span>Accompagnement & reporting</span></li>
             </ul>
 
             <div class="pack-cta">
@@ -829,8 +897,8 @@
           <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
         </div>
 
-        <div class="shot" data-cat="sites" data-title="Projets web — à intégrer" data-src="profil.jpg">
-          <img src="profil.jpg" alt="Projets web à intégrer">
+        <div class="shot" data-cat="sites" data-title="Projets web — à intégrer" data-src="brand-photo.jpg">
+          <img src="brand-photo.jpg" alt="Projets web à intégrer">
           <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="miniTag">Sites</div></div>
         </div>
       </div>
@@ -844,20 +912,45 @@
       </div>
     </section>
 
-    <section id="linkedin">
+    <!-- ✅ SOCIAL PROOF : LinkedIn + Avis Google -->
+    <section id="socialproof">
       <div class="section-head">
-        <h2>LinkedIn</h2>
-        <p>Profil & parcours.</p>
+        <h2>LinkedIn & Avis</h2>
+        <p>Crédibilité & transparence.</p>
       </div>
 
-      <div class="linkedin">
-        <div>
-          <b>Profil public</b>
-          <p>Retrouve mon parcours et mes expériences sur LinkedIn. Je peux aussi t’envoyer un devis rapide selon ton besoin.</p>
+      <div class="grid2">
+        <div class="block">
+          <b>LinkedIn</b>
+          <p>Retrouve mon parcours et mes expériences professionnelles sur LinkedIn.</p>
+          <div class="actions">
+            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
+            <a class="btn primary" href="#contact">Demander un devis</a>
+          </div>
         </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
-          <a class="btn primary" href="#contact">Demander un devis</a>
+
+        <div class="block">
+          <b>Avis Google</b>
+          <p>Même si les avis arrivent petit à petit, la page est prête (et ça rassure beaucoup).</p>
+
+          <div class="actions">
+            <a class="btn primary" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir les avis</a>
+            <a class="btn" href="#contact">Me contacter</a>
+          </div>
+
+          <!-- ✅ Embed simple (placeholder) : si Google bloque, le bouton au-dessus suffit -->
+          <div class="embed" aria-label="Aperçu avis Google">
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=France&output=embed"
+              title="Aperçu Google (placeholder)">
+            </iframe>
+          </div>
+
+          <div class="muted2 tiny" style="margin-top:10px;">
+            Si tu veux un embed EXACT de ta fiche, il me faut l’URL Google Maps de ta fiche (pas le share.google).
+          </div>
         </div>
       </div>
     </section>
@@ -907,7 +1000,7 @@
 
           <div class="field">
             <label for="fMsg">Message</label>
-            <textarea id="fMsg" placeholder="Secteur, objectif, délai, contenus, web, événementiel..."></textarea>
+            <textarea id="fMsg" placeholder="Secteur, objectif, délai, contenus, web..."></textarea>
           </div>
 
           <div class="hero-actions" style="margin-top:12px;">
@@ -916,7 +1009,7 @@
           </div>
 
           <div class="muted2 tiny" style="margin-top:10px;">
-            Astuce : clique sur “Choisir ce pack” dans les packs → le champ se remplit tout seul.
+            Astuce : clique sur “Choisir ce pack” → le champ se remplit.
           </div>
         </div>
       </div>
