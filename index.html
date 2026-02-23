@@ -49,11 +49,11 @@
     .muted{color:var(--muted)}
     .muted2{color:var(--muted2)}
     .tiny{font-size:12px}
+    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
 
     /* Background */
     .bg-glow{
-      position:fixed;
-      inset:-24vmax;
+      position:fixed; inset:-24vmax;
       pointer-events:none;
       z-index:-2;
       background:
@@ -64,7 +64,7 @@
       transform: translateZ(0);
       opacity: .95;
     }
-    .blobs{position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.6; filter: blur(20px); transform: translateZ(0);}
+    .blobs{position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.55; filter: blur(20px); transform: translateZ(0);}
     .blob{
       position:absolute;
       width: 44vmax; height: 44vmax; border-radius: 999px;
@@ -104,18 +104,42 @@
       box-shadow: var(--shadow2);
     }
 
+    /* Glow/hover micro-interactions */
+    .glow-hover{
+      position:relative;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease, filter .18s ease;
+      will-change: transform;
+    }
+    .glow-hover:hover{
+      transform: translateY(-3px) scale(1.01);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.07);
+      box-shadow: 0 22px 90px rgba(0,0,0,.55);
+    }
+    .glow-hover:after{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: inherit;
+      pointer-events:none;
+      opacity:0;
+      transition: opacity .18s ease;
+      background: radial-gradient(520px 220px at 20% 10%, rgba(34,211,238,.16), transparent 55%),
+                  radial-gradient(520px 220px at 90% 70%, rgba(139,92,246,.16), transparent 55%);
+    }
+    .glow-hover:hover:after{opacity:1}
+
     /* NAV */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(6,6,12,.70);
+      background: rgba(6,6,12,.72);
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{
       display:flex; align-items:center; justify-content:space-between;
-      gap:14px; flex-wrap:nowrap;
+      gap:12px; flex-wrap:nowrap;
     }
-    .brand{display:flex; align-items:center; gap:12px; flex:0 0 auto;}
+    .brand{display:flex; align-items:center; gap:12px; flex:0 0 auto; min-width:0;}
     .brand img{
       width:42px; height:42px; border-radius:16px;
       object-fit:cover; border:1px solid rgba(255,255,255,.18);
@@ -126,11 +150,30 @@
     .brand .name{font-weight:950; letter-spacing:.2px; white-space:nowrap}
     .brand .sub{font-size:12px; color:var(--muted); margin-top:3px; white-space:nowrap}
 
-    .links{
-      display:flex; gap:6px; align-items:center; justify-content:center;
-      flex: 1 1 auto; min-width:0;
-      white-space:nowrap; overflow:hidden;
+    /* ✅ Menu qui “défile” (scroll horizontal) + fade edges */
+    .linksWrap{
+      position:relative;
+      flex: 1 1 auto;
+      min-width:0;
+      display:flex;
+      align-items:center;
     }
+    .links{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      white-space:nowrap;
+
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width:none;
+      padding: 6px 4px;
+      border-radius:999px;
+
+      mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+    .links::-webkit-scrollbar{display:none}
+
     .links a{
       font-size:13px;
       color:var(--muted);
@@ -147,6 +190,22 @@
       transform: translateY(-1px);
     }
 
+    /* little “hint” arrows for scroll */
+    .scrollHint{
+      display:none;
+      position:absolute;
+      right:-2px; top:50%;
+      transform: translateY(-50%);
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(6,6,12,.55);
+      backdrop-filter: blur(10px);
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+      pointer-events:none;
+    }
+
     .nav-right{display:flex; align-items:center; gap:10px; flex:0 0 auto; white-space:nowrap;}
     .pill{
       display:inline-flex; align-items:center; gap:10px;
@@ -157,10 +216,10 @@
       color:var(--text);
       font-weight:900;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, filter .12s ease;
       white-space:nowrap;
     }
-    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
+    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
     .pill.primary{
       background: linear-gradient(135deg, rgba(34,211,238,.88), rgba(139,92,246,.88));
       color:#07070c;
@@ -169,16 +228,19 @@
     }
 
     @media(max-width:980px){
-      .links{display:none}
       .brand .sub{display:none}
-      .nav .wrap{padding-top:14px; padding-bottom:14px;}
+      .nav .wrap{padding-top:12px; padding-bottom:12px;}
       .nav-right .pill{ padding:10px 12px; }
+      .scrollHint{display:inline-flex;}
     }
-    @media(max-width:420px){
-      .nav-right{ gap:8px; }
-      .nav-right .pill{ padding:9px 10px; font-size:13px; }
+    @media(max-width:560px){
+      /* ✅ Sur téléphone: on garde menu scrollable mais compact */
+      .links a{ padding:9px 10px; font-size:12.5px; }
       .brand img{ width:38px; height:38px; border-radius:14px; }
       .brand .name{ font-size:13px; }
+      .nav-right{ gap:8px; }
+      .nav-right .pill{ padding:9px 10px; font-size:13px; }
+      .scrollHint{display:none;}
     }
 
     /* HERO */
@@ -208,9 +270,9 @@
       background: rgba(255,255,255,.03);
       font-size:12px;
       color:var(--muted);
-      transition: transform .12s ease;
+      transition: transform .14s ease, filter .14s ease;
     }
-    .chip:hover{ transform: translateY(-1px); }
+    .chip:hover{ transform: translateY(-2px); filter:brightness(1.08); }
     .dot{width:8px; height:8px; border-radius:999px; background: linear-gradient(135deg, var(--a2), var(--a1)); display:inline-block;}
 
     h1{
@@ -243,10 +305,10 @@
       color:var(--text);
       font-weight:950;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease, filter .14s ease;
       white-space:nowrap;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18)}
+    .btn:hover{transform: translateY(-2px) scale(1.01); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); filter:brightness(1.07)}
     .btn.primary{
       background: linear-gradient(135deg, rgba(139,92,246,.92), rgba(244,114,182,.72));
       color:#07070c;
@@ -260,6 +322,7 @@
     .btn.ghost{ background: rgba(255,255,255,.02); }
 
     .hero-right{padding:14px; display:flex; flex-direction:column; gap:10px}
+
     .profile{
       padding:16px;
       display:flex;
@@ -268,7 +331,34 @@
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
+      position:relative;
+      overflow:hidden;
     }
+
+    /* ✅ petit truc qui tourne (orb) */
+    .orb{
+      position:absolute;
+      right:-24px; top:-24px;
+      width:90px; height:90px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(34,211,238,.22), transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(139,92,246,.22), transparent 55%),
+        radial-gradient(circle at 40% 80%, rgba(244,114,182,.14), transparent 60%);
+      filter: blur(.2px);
+      opacity:.8;
+      animation: spin 8s linear infinite;
+    }
+    .orb:after{
+      content:"";
+      position:absolute; inset:10px;
+      border-radius:999px;
+      border:1px dashed rgba(255,255,255,.18);
+      opacity:.7;
+    }
+    @keyframes spin{to{transform: rotate(360deg)}}
+
     .avatar{
       width:76px; height:76px;
       border-radius:22px;
@@ -277,7 +367,9 @@
       background: rgba(255,255,255,.05);
       box-shadow: var(--shadow2);
       flex:0 0 auto;
+      transition: transform .18s ease;
     }
+    .profile:hover .avatar{transform: scale(1.03)}
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
     .profile b{display:block; font-size:14px}
     .profile span{display:block; margin-top:5px; color:var(--muted); font-size:12px; line-height:1.4}
@@ -297,7 +389,26 @@
       display:flex; align-items:flex-end; justify-content:space-between;
       gap:12px; margin:12px 0 12px;
     }
-    .section-head h2{margin:0; font-size:16px; letter-spacing:.2px}
+
+    /* ✅ titres “qui s’écrivent” */
+    .type-title{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+      min-height: 22px;
+      display:flex;
+      align-items:flex-end;
+      gap:8px;
+    }
+    .caret{
+      width:10px;
+      height:18px;
+      border-right:2px solid rgba(255,255,255,.7);
+      transform: translateY(2px);
+      animation: blink 1s steps(1) infinite;
+      opacity:.9;
+    }
+    @keyframes blink{50%{opacity:0}}
     .section-head p{margin:0; color:var(--muted2); font-size:13px}
 
     /* ABOUT */
@@ -321,7 +432,10 @@
       background: rgba(255,255,255,.03);
       padding:6px 9px; border-radius:999px;
       font-weight:900;
+      transition: transform .14s ease, filter .14s ease;
     }
+    .tag:hover{transform: translateY(-2px); filter:brightness(1.1)}
+
     .points{ margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px; position:relative; z-index:1; }
     .points li{
       display:flex; gap:10px; align-items:flex-start;
@@ -329,7 +443,9 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
       color:var(--muted); font-size:13px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
+    .points li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
     .points li i{
       width:10px; height:10px; border-radius:999px;
       background: linear-gradient(135deg, var(--a2), var(--a1));
@@ -343,7 +459,9 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
+      transition: transform .18s ease, filter .18s ease;
     }
+    .mini-card:hover{transform: translateY(-2px) scale(1.01); filter:brightness(1.08)}
     .mini-card b{ display:block; font-size:13px }
     .mini-card span{ display:block; margin-top:6px; color:var(--muted); font-size:12.5px; line-height:1.55 }
 
@@ -366,7 +484,11 @@
       border-radius:999px;
       background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.90), rgba(244,114,182,.75));
       box-shadow: 0 10px 30px rgba(34,211,238,.10);
+      transform: scaleX(0);
+      transform-origin:left;
+      transition: transform .9s cubic-bezier(.2,.9,.2,1);
     }
+    .skills.on .bar > span{transform: scaleX(1);}
 
     /* Expertise grid */
     .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
@@ -376,8 +498,8 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
-      transition: transform .14s ease, background .14s ease, border-color .14s ease;
       position:relative; overflow:hidden;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, filter .18s ease;
     }
     .tile:before{
       content:""; position:absolute; inset:-1px; pointer-events:none;
@@ -386,7 +508,7 @@
       opacity:.9;
     }
     .tile > *{ position:relative; z-index:1; }
-    .tile:hover{transform: translateY(-2px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
+    .tile:hover{transform: translateY(-3px) scale(1.01); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
     .tile h3{margin:0 0 8px; font-size:14px}
     .tile p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
@@ -399,6 +521,7 @@
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
       position:relative; overflow:hidden;
+      transition: transform .18s ease, filter .18s ease, border-color .18s ease;
     }
     .step:before{
       content:""; position:absolute; inset:-1px; pointer-events:none;
@@ -406,6 +529,7 @@
       opacity:.85;
     }
     .step > *{ position:relative; z-index:1; }
+    .step:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
     .badgeN{
       width:30px;height:30px;border-radius:12px;
       display:inline-flex; align-items:center; justify-content:center;
@@ -417,7 +541,7 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* PACKS (✅ alignés / carrés / mêmes hauteurs) */
+    /* PACKS (✅ parfaitement alignés) */
     .packs{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -436,10 +560,12 @@
       background-clip: padding-box;
       position:relative;
 
-      /* ✅ pour que chaque card prenne toute la hauteur */
       display:flex;
       flex-direction:column;
       height:100%;
+
+      /* ✅ Reserve la place du badge "RECOMMANDÉ" sur TOUTES les cartes */
+      padding-top: 44px;
     }
 
     details.pack summary{
@@ -453,10 +579,7 @@
     }
     details.pack summary::-webkit-details-marker{display:none}
 
-    /* ✅ zone titre + description fixe (alignement visuel) */
-    .pack-head{
-      min-height: 82px;
-    }
+    .pack-head{min-height: 90px;}
     .pack-title{font-weight:950; font-size:14px}
     .pack-desc{margin-top:6px; color:var(--muted); font-size:12.8px; line-height:1.55}
 
@@ -475,17 +598,16 @@
     }
     .price small{display:block; opacity:.82; font-size:11px; margin-top:4px}
 
-    /* ✅ hint pour comprendre que c'est cliquable */
     .open-hint{
       padding:0 16px 12px;
-      color:rgba(255,255,255,.58);
+      color:rgba(255,255,255,.60);
       font-size:12px;
     }
 
     .peek{
       padding:0 16px 12px;
       display:grid; gap:8px;
-      min-height: 140px; /* ✅ garde l'alignement entre cartes */
+      min-height: 152px; /* ✅ même hauteur */
     }
     .peek .row{
       display:flex; gap:10px; align-items:flex-start;
@@ -495,7 +617,9 @@
       background: rgba(255,255,255,.03);
       color:var(--muted);
       font-size:13px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
+    .peek .row:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
     .row i{
       width:10px; height:10px; border-radius:999px;
       background: linear-gradient(135deg, var(--a3), var(--a2));
@@ -504,7 +628,7 @@
 
     .pack-body{
       padding:0 16px 16px;
-      margin-top:auto; /* ✅ pousse le contenu final pour une base alignée */
+      margin-top:auto;
     }
     .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
     .list li{
@@ -515,8 +639,13 @@
       background: rgba(255,255,255,.03);
       color:var(--muted);
       font-size:13px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
-    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .list li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
+
+    /* ✅ un seul bouton sur chaque pack */
+    .pack-cta{margin-top:12px}
+    .pack-cta .btn{width:100%}
 
     .recommended{
       position:absolute;
@@ -531,13 +660,12 @@
       color: rgba(255,255,255,.92);
     }
     details.pack.featured{ border-color: rgba(34,211,238,.32) }
-    details.pack.featured summary{ padding-top:48px }
+
     details.pack[open]{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18) }
 
     @media (max-width: 520px){
       details.pack summary{flex-direction:column; align-items:flex-start; gap:10px;}
       .price{ min-width:0; width:100%; text-align:left; }
-      details.pack.featured summary{ padding-top:56px; }
       .peek{ min-height: 0; }
     }
 
@@ -551,9 +679,9 @@
       color:var(--muted);
       font-weight:950;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, filter .12s ease;
     }
-    .seg:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
+    .seg:hover{transform: translateY(-2px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); filter:brightness(1.07)}
     .seg.active{
       color:#07070c;
       background: linear-gradient(135deg, rgba(139,92,246,.88), rgba(34,211,238,.72));
@@ -576,22 +704,23 @@
       overflow:hidden;
       box-shadow: var(--shadow2);
       cursor:pointer;
-      transition: transform .14s ease, border-color .14s ease;
+      transition: transform .18s ease, border-color .18s ease, filter .18s ease;
       position:relative;
     }
-    .shot:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18)}
+    .shot:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
 
-    /* ✅ voir les images en entier */
+    /* ✅ Visuels : on voit TOUT + beaucoup plus grand */
     .shot img{
       width:100%;
-      height:240px;
-      object-fit: contain;          /* ✅ au lieu de cover */
-      background: rgba(6,6,12,.40); /* ✅ fond propre */
-      padding:10px;                 /* ✅ évite que ça touche les bords */
+      height: 320px;               /* ✅ plus grand */
+      object-fit: contain;         /* ✅ on voit tout */
+      background: rgba(6,6,12,.42);
+      padding:12px;
       display:block;
       filter:saturate(1.03) contrast(1.02);
     }
-    @media (max-width: 520px){ .shot img{ height:220px; } }
+    @media (max-width: 980px){ .shot img{ height: 300px; } }
+    @media (max-width: 520px){ .shot img{ height: 320px; padding:14px; } }
 
     .cap{
       position:absolute;
@@ -626,6 +755,7 @@
       box-shadow: var(--shadow2);
       position:relative;
       overflow:hidden;
+      transition: transform .18s ease, filter .18s ease, border-color .18s ease;
     }
     .block:before{
       content:"";
@@ -636,6 +766,7 @@
       opacity:.85;
     }
     .block > *{ position:relative; z-index:1; }
+    .block:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
     .block b{font-size:14px}
     .block p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
@@ -659,12 +790,27 @@
       padding:12px 12px;
       font-family: var(--font);
       outline:none;
+      transition: border-color .14s ease, box-shadow .14s ease, filter .14s ease;
     }
     textarea{min-height:140px; resize:vertical}
     input:focus, textarea:focus{
       border-color: rgba(34,211,238,.35);
       box-shadow: 0 0 0 4px rgba(34,211,238,.10);
+      filter:brightness(1.03);
     }
+
+    .success{
+      display:none;
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(34,211,238,.28);
+      background: rgba(34,211,238,.10);
+      color: rgba(255,255,255,.88);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .success.on{display:block}
 
     footer{padding:28px 0 60px; color:var(--muted2); font-size:13px;}
     .foot{border-top: 1px solid rgba(255,255,255,.10); padding-top:18px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;}
@@ -688,7 +834,9 @@
       backdrop-filter: blur(14px);
       box-shadow: 0 30px 120px rgba(0,0,0,.6);
       overflow:hidden;
+      animation: pop .18s ease-out;
     }
+    @keyframes pop{from{transform: scale(.98); opacity:.7} to{transform: scale(1); opacity:1}}
     .lb-top{
       display:flex; align-items:center; justify-content:space-between; gap:10px;
       padding:12px 14px;
@@ -703,9 +851,11 @@
       border-radius:12px;
       padding:8px 10px;
       font-weight:950;
+      transition: transform .14s ease, filter .14s ease;
     }
+    .lb-top button:hover{transform: translateY(-1px); filter:brightness(1.08)}
     .lb-img{background: rgba(255,255,255,.03); max-height: calc(100vh - 120px); overflow:auto}
-    .lb-img img{width:100%; height:auto; object-fit:contain; display:block}
+    .lb-img img{width:100%; height:auto; object-fit:contain; display:block; padding: 10px;}
 
     /* WhatsApp */
     .whatsapp-float{
@@ -723,9 +873,9 @@
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
-      transition: transform .12s ease;
+      transition: transform .14s ease, filter .14s ease;
     }
-    .whatsapp-float:hover{ transform: translateY(-2px); }
+    .whatsapp-float:hover{ transform: translateY(-2px); filter:brightness(1.02); }
     .wh-dot{width:12px;height:12px;border-radius:999px; background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(139,92,246,.95));}
     @media (max-width: 520px){
       .wrap{ padding:18px; }
@@ -739,13 +889,15 @@
     }
 
     /* Reveal */
-    .reveal{opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease;}
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .55s ease, transform .55s ease;}
     .reveal.on{opacity:1; transform: translateY(0);}
 
+    html{scroll-behavior:smooth}
     @media (prefers-reduced-motion: reduce){
-      .blob{ animation:none !important; }
+      .blob, .orb{ animation:none !important; }
       .reveal{ transition:none !important; }
-      *{ scroll-behavior:auto !important; }
+      .caret{ animation:none !important; opacity:1; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
@@ -768,14 +920,17 @@
         </div>
       </div>
 
-      <div class="links">
-        <a href="#about">À propos</a>
-        <a href="#services">Expertises</a>
-        <a href="#method">Méthode</a>
-        <a href="#packs">Packs</a>
-        <a href="#galerie">Portfolio</a>
-        <a href="#socialproof">Avis</a>
-        <a href="#contact">Contact</a>
+      <div class="linksWrap" aria-label="Menu">
+        <nav class="links" id="topLinks">
+          <a href="#about">À propos</a>
+          <a href="#services">Expertises</a>
+          <a href="#method">Méthode</a>
+          <a href="#packs">Packs</a>
+          <a href="#galerie">Portfolio</a>
+          <a href="#socialproof">Avis</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="scrollHint">⇆</div>
       </div>
 
       <div class="nav-right">
@@ -787,7 +942,7 @@
 
   <header class="wrap">
     <div class="hero">
-      <div class="card hero-left reveal">
+      <div class="card hero-left glow-hover reveal">
         <div class="chips">
           <span class="chip"><span class="dot"></span>À distance • France entière</span>
           <span class="chip"><span class="dot"></span>Réseaux sociaux • Web • SEO</span>
@@ -814,7 +969,8 @@
       </div>
 
       <div class="card hero-right reveal">
-        <div class="profile">
+        <div class="profile glow-hover">
+          <div class="orb" aria-hidden="true"></div>
           <div class="avatar">
             <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
           </div>
@@ -824,15 +980,15 @@
           </div>
         </div>
 
-        <div class="stat">
+        <div class="stat glow-hover">
           <strong>Image de marque</strong>
           <p>Supports cohérents, lisibles et prêts à publier / imprimer.</p>
         </div>
-        <div class="stat">
+        <div class="stat glow-hover">
           <strong>Process structuré</strong>
           <p>Brief → proposition → production → retours cadrés → livraison.</p>
         </div>
-        <div class="stat">
+        <div class="stat glow-hover">
           <strong>Vision globale</strong>
           <p>Réseaux + Google + web : une présence harmonisée.</p>
         </div>
@@ -841,14 +997,15 @@
   </header>
 
   <main class="wrap">
+
     <section id="about" class="reveal">
       <div class="section-head">
-        <h2>À propos</h2>
+        <h2 class="type-title" data-text="À propos"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
         <p>Une approche structurée, orientée image et conversion.</p>
       </div>
 
       <div class="about">
-        <div class="card about-left">
+        <div class="card about-left glow-hover">
           <h3>Une communication claire, cohérente et rentable.</h3>
 
           <p>
@@ -879,7 +1036,7 @@
           </div>
         </div>
 
-        <div class="card about-right">
+        <div class="card about-right glow-hover">
           <div class="mini-cards">
             <div class="mini-card">
               <b>Ce que vous obtenez</b>
@@ -891,7 +1048,7 @@
             </div>
           </div>
 
-          <div class="skills">
+          <div class="skills" id="skillsBox">
             <div style="font-weight:950; font-size:13px;">Compétences clés</div>
 
             <div class="skill">
@@ -915,7 +1072,7 @@
             </div>
           </div>
 
-          <div class="soft" style="padding:14px;">
+          <div class="soft glow-hover" style="padding:14px;">
             <b>Analyse rapide offerte</b>
             <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
               Partagez votre Instagram, votre fiche Google et votre site :
@@ -932,12 +1089,12 @@
 
     <section id="services" class="reveal">
       <div class="section-head">
-        <h2>Expertises</h2>
+        <h2 class="type-title" data-text="Expertises"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
         <p>Une base solide + une exécution maîtrisée.</p>
       </div>
 
       <div class="grid3">
-        <div class="tile">
+        <div class="tile glow-hover">
           <h3>Identité & supports</h3>
           <p>Menus, flyers, cartes, affiches, bannières, templates. Print & digital.</p>
           <div class="proofline" style="margin-top:12px;">
@@ -945,7 +1102,7 @@
           </div>
         </div>
 
-        <div class="tile">
+        <div class="tile glow-hover">
           <h3>Réseaux sociaux</h3>
           <p>Contenus, cohérence graphique, calendrier éditorial, optimisation et conseils.</p>
           <div class="proofline" style="margin-top:12px;">
@@ -953,7 +1110,7 @@
           </div>
         </div>
 
-        <div class="tile">
+        <div class="tile glow-hover">
           <h3>Web & SEO</h3>
           <p>Page professionnelle, mise à jour site, SEO local, optimisation Google.</p>
           <div class="proofline" style="margin-top:12px;">
@@ -965,22 +1122,22 @@
 
     <section id="method" class="reveal">
       <div class="section-head">
-        <h2>Méthode</h2>
+        <h2 class="type-title" data-text="Méthode"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
         <p>Un cadre clair, pour avancer efficacement.</p>
       </div>
 
       <div class="steps">
-        <div class="step">
+        <div class="step glow-hover">
           <div class="badgeN">1</div>
           <h3>Brief & objectifs</h3>
           <p>Style, formats, cible, offre, priorités (image, visibilité, conversion).</p>
         </div>
-        <div class="step">
+        <div class="step glow-hover">
           <div class="badgeN">2</div>
           <h3>Plan & livrables</h3>
           <p>Devis clair, calendrier, nombre d’allers-retours, validations.</p>
         </div>
-        <div class="step">
+        <div class="step glow-hover">
           <div class="badgeN">3</div>
           <h3>Production & livraison</h3>
           <p>Création, déclinaisons et livraison des fichiers HD prêts à l’usage.</p>
@@ -990,12 +1147,12 @@
 
     <section id="packs" class="reveal">
       <div class="section-head">
-        <h2>Packs mensuels (lancement)</h2>
+        <h2 class="type-title" data-text="Packs mensuels"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
         <p>Cliquez sur un pack : les détails s’affichent (pour tous).</p>
       </div>
 
       <div class="packs">
-        <details class="pack">
+        <details class="pack glow-hover">
           <summary>
             <div class="pack-head">
               <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
@@ -1023,12 +1180,11 @@
 
             <div class="pack-cta">
               <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
-              <a class="btn" href="#galerie">Voir des exemples</a>
             </div>
           </div>
         </details>
 
-        <details class="pack featured">
+        <details class="pack featured glow-hover">
           <span class="recommended">RECOMMANDÉ</span>
           <summary>
             <div class="pack-head">
@@ -1057,12 +1213,11 @@
 
             <div class="pack-cta">
               <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
-              <a class="btn" href="tel:+33765232469">Appeler</a>
             </div>
           </div>
         </details>
 
-        <details class="pack">
+        <details class="pack glow-hover">
           <summary>
             <div class="pack-head">
               <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
@@ -1089,7 +1244,6 @@
 
             <div class="pack-cta">
               <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
-              <a class="btn" href="#contact">Contact</a>
             </div>
           </div>
         </details>
@@ -1098,7 +1252,7 @@
 
     <section id="galerie" class="reveal">
       <div class="section-head">
-        <h2>Portfolio</h2>
+        <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
         <p>Filtre par type + aperçu en grand.</p>
       </div>
 
@@ -1145,7 +1299,7 @@
         </div>
       </div>
 
-      <div class="soft" style="padding:14px; margin-top:12px;">
+      <div class="soft glow-hover" style="padding:14px; margin-top:12px;">
         <b>Ajout de projets</b>
         <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
           Duplique une carte <span class="tiny">shot</span>, remplace <span class="tiny">data-src</span> / <span class="tiny">src</span>, et choisis la catégorie <span class="tiny">data-cat</span>.
@@ -1155,12 +1309,12 @@
 
     <section id="socialproof" class="reveal">
       <div class="section-head">
-        <h2>LinkedIn & Avis</h2>
+        <h2 class="type-title" data-text="LinkedIn & Avis"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
         <p>Crédibilité & transparence.</p>
       </div>
 
       <div class="grid2">
-        <div class="block">
+        <div class="block glow-hover">
           <b>LinkedIn</b>
           <p>Retrouvez mon parcours et mes expériences professionnelles sur LinkedIn.</p>
           <div class="actions">
@@ -1169,10 +1323,9 @@
           </div>
         </div>
 
-        <div class="block">
+        <div class="block glow-hover">
           <b>Avis Google</b>
           <p>La page d’avis est prête (un élément rassurant pour vos futurs clients).</p>
-
           <div class="actions">
             <a class="btn primary" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir les avis</a>
             <a class="btn" href="#contact">Me contacter</a>
@@ -1196,12 +1349,12 @@
 
     <section id="contact" class="reveal">
       <div class="section-head">
-        <h2>Contact</h2>
-        <p>Réponse rapide • devis clair.</p>
+        <h2 class="type-title" data-text="Contact"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Réponse rapide • demande envoyée en direct.</p>
       </div>
 
       <div class="contact-grid">
-        <div class="card" style="padding:18px;">
+        <div class="card glow-hover" style="padding:18px;">
           <div class="muted" style="line-height:1.8; font-size:14px;">
             <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
             <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
@@ -1210,46 +1363,62 @@
           </div>
 
           <div class="hero-actions" style="margin-top:14px;">
-            <a class="btn primary" href="mailto:deabreue9@gmail.com?subject=Demande%20de%20devis">Me contacter</a>
+            <a class="btn primary" href="#contact">Demander un devis</a>
             <a class="btn" href="tel:+33765232469">Appeler</a>
             <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
 
-        <div class="card" style="padding:18px;">
+        <div class="card glow-hover" style="padding:18px;">
           <div style="font-weight:950;">Demande de devis</div>
           <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-            Remplissez puis cliquez sur “Ouvrir le mail” : cela prépare automatiquement votre email vers <b>deabreue9@gmail.com</b>.
+            Remplissez puis cliquez sur <b>Envoyer</b> : la demande part directement par email.
           </div>
 
-          <div class="field">
-            <label for="fName">Nom / Entreprise</label>
-            <input id="fName" type="text" placeholder="Ex : Restaurant Le Sud" />
-          </div>
+          <!-- ✅ Envoi direct sans backend : FormSubmit (gratuit).
+               Important : la 1ère fois, FormSubmit peut demander de confirmer l’adresse email.
+               Tu peux changer le redirect plus bas (merci.html) si tu veux. -->
+          <form id="quoteForm" action="https://formsubmit.co/deabreue9@gmail.com" method="POST">
+            <!-- options FormSubmit -->
+            <input type="hidden" name="_subject" value="Demande de devis — Site portfolio" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="thanks.html" />
 
-          <div class="field">
-            <label for="fEmail">Votre email</label>
-            <input id="fEmail" type="email" placeholder="Ex : contact@..." />
-          </div>
+            <div class="field">
+              <label for="fName">Nom / Entreprise</label>
+              <input id="fName" name="Nom / Entreprise" type="text" placeholder="Ex : Restaurant Le Sud" required />
+            </div>
 
-          <div class="field">
-            <label for="fPack">Pack souhaité</label>
-            <input id="fPack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
-          </div>
+            <div class="field">
+              <label for="fEmail">Votre email</label>
+              <input id="fEmail" name="Email" type="email" placeholder="Ex : contact@..." required />
+            </div>
 
-          <div class="field">
-            <label for="fMsg">Message</label>
-            <textarea id="fMsg" placeholder="Secteur, objectif, délai, contenus, web..."></textarea>
-          </div>
+            <div class="field">
+              <label for="fPack">Pack souhaité</label>
+              <input id="fPack" name="Pack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
+            </div>
 
-          <div class="hero-actions" style="margin-top:12px;">
-            <button class="btn primary" id="sendMailBtn" type="button">Ouvrir le mail</button>
-            <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
-          </div>
+            <div class="field">
+              <label for="fMsg">Message</label>
+              <textarea id="fMsg" name="Message" placeholder="Secteur, objectif, délai, contenus, web..." required></textarea>
+            </div>
 
-          <div class="muted2 tiny" style="margin-top:10px;">
-            Astuce : cliquez sur “Choisir ce pack” → le champ se remplit automatiquement.
-          </div>
+            <div class="hero-actions" style="margin-top:12px;">
+              <button class="btn primary" id="sendBtn" type="submit">Envoyer la demande</button>
+              <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
+            </div>
+
+            <div class="success" id="successBox">
+              Votre demande est prête à être envoyée ✅<br>
+              Si c’est la première fois, le service peut vous demander de confirmer l’adresse d’envoi.
+            </div>
+
+            <div class="muted2 tiny" style="margin-top:10px;">
+              Astuce : cliquez sur “Choisir ce pack” → le champ “Pack souhaité” se remplit automatiquement.
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -1287,7 +1456,30 @@
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Reveal
+    // ✅ Menu scroll: petit auto-scroll doux si l'utilisateur ne touche pas (surtout mobile)
+    (function(){
+      const el = document.getElementById("topLinks");
+      if(!el) return;
+
+      let userInteracted = false;
+      let dir = 1;
+
+      const stop = () => { userInteracted = true; };
+      ["wheel","touchstart","pointerdown","keydown"].forEach(ev => window.addEventListener(ev, stop, {passive:true}));
+
+      function tick(){
+        if(!userInteracted && el.scrollWidth > el.clientWidth){
+          el.scrollLeft += (0.35 * dir);
+          // bounce
+          if(el.scrollLeft <= 0) dir = 1;
+          if(el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) dir = -1;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+
+    // Reveal on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if(e.isIntersecting){
@@ -1297,6 +1489,57 @@
       });
     }, { threshold: 0.08 });
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // ✅ Animate skill bars when visible
+    const skillsBox = document.getElementById("skillsBox");
+    if(skillsBox){
+      const obs2 = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            skillsBox.classList.add("on");
+            obs2.disconnect();
+          }
+        });
+      }, {threshold: 0.3});
+      obs2.observe(skillsBox);
+    }
+
+    // ✅ Typewriter titles (once when section becomes visible)
+    function typeOnce(el){
+      const target = el.getAttribute("data-text") || "";
+      const out = el.querySelector(".typeOut");
+      const caret = el.querySelector(".caret");
+      if(!out || el.dataset.typed === "1") return;
+      el.dataset.typed = "1";
+      out.textContent = "";
+
+      let i = 0;
+      const speed = 18; // ms-ish (we use rAF)
+      let last = performance.now();
+
+      function step(now){
+        if(now - last < speed){ requestAnimationFrame(step); return; }
+        last = now;
+        out.textContent = target.slice(0, i++);
+        if(i <= target.length){
+          requestAnimationFrame(step);
+        }else{
+          if(caret) caret.style.opacity = "0.0";
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    const titleObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          typeOnce(e.target);
+          titleObserver.unobserve(e.target);
+        }
+      });
+    }, {threshold: 0.3});
+
+    document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
 
     // Gallery filter
     const segs = Array.from(document.querySelectorAll(".seg"));
@@ -1341,29 +1584,33 @@
       });
     });
 
-    // Packs -> remplir champ + scroll contact
+    // ✅ Packs -> choisir ce pack (unique bouton) + scroll contact + remplissage
     const packInput = document.getElementById("fPack");
     function goContactWithPack(packName){
       if(packInput && packName) packInput.value = packName;
       document.getElementById("contact")?.scrollIntoView({behavior:"smooth", block:"start"});
+      // focus email pour être fluide
+      setTimeout(()=> document.getElementById("fEmail")?.focus(), 450);
     }
     document.querySelectorAll(".choosePack").forEach(btn => {
       btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
     });
 
-    // ✅ Packs: si on ouvre 1 pack, on ouvre aussi les autres (meilleure compréhension)
+    // ✅ Packs: si on ouvre 1 pack, on ouvre/ferme tous (clair pour l'utilisateur)
     const packDetails = Array.from(document.querySelectorAll("details.pack"));
+    let syncing = false;
     packDetails.forEach(d => {
       d.addEventListener("toggle", () => {
-        if(d.open){
-          packDetails.forEach(other => { other.open = true; });
-        }
+        if(syncing) return;
+        syncing = true;
+        const state = d.open;
+        packDetails.forEach(other => { other.open = state; });
+        syncing = false;
       });
     });
 
-    // Contact -> mailto + copy
+    // Copy email
     const EMAIL = "deabreue9@gmail.com";
-
     function copyToClipboard(text){
       if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
       const ta = document.createElement("textarea");
@@ -1374,7 +1621,6 @@
       ta.remove();
       return Promise.resolve();
     }
-
     const copyMailBtn = document.getElementById("copyMailBtn");
     copyMailBtn.addEventListener("click", async () => {
       await copyToClipboard(EMAIL);
@@ -1382,24 +1628,16 @@
       setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
     });
 
-    document.getElementById("sendMailBtn").addEventListener("click", () => {
-      const name = (document.getElementById("fName").value || "").trim();
-      const from = (document.getElementById("fEmail").value || "").trim();
-      const pack = (document.getElementById("fPack").value || "").trim();
-      const msg  = (document.getElementById("fMsg").value || "").trim();
-
-      const subject = encodeURIComponent(`Demande de devis${pack ? " — " + pack : ""}`);
-      const body = encodeURIComponent(
-        `Bonjour Eva,\n\n` +
-        `${msg ? msg + "\n\n" : ""}` +
-        `${pack ? "Pack souhaité : " + pack + "\n" : ""}` +
-        `${name ? "Nom / Entreprise : " + name + "\n" : ""}` +
-        `${from ? "Mon email : " + from + "\n" : ""}` +
-        `\nMerci.`
-      );
-
-      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    });
+    // Form UX (message)
+    const quoteForm = document.getElementById("quoteForm");
+    const successBox = document.getElementById("successBox");
+    const sendBtn = document.getElementById("sendBtn");
+    if(quoteForm){
+      quoteForm.addEventListener("submit", () => {
+        sendBtn.textContent = "Envoi...";
+        successBox.classList.add("on");
+      });
+    }
   </script>
 </body>
 </html>
