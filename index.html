@@ -21,9 +21,9 @@
       --muted: rgba(255,255,255,.68);
       --muted2: rgba(255,255,255,.48);
 
-      --a1:#7c3aed; /* violet */
-      --a2:#22d3ee; /* cyan */
-      --a3:#f472b6; /* rose */
+      --a1:#7c3aed;
+      --a2:#22d3ee;
+      --a3:#f472b6;
 
       --shadow: 0 20px 80px rgba(0,0,0,.55);
       --shadow2: 0 14px 55px rgba(0,0,0,.30);
@@ -41,14 +41,13 @@
       font-family:var(--font);
       color:var(--text);
       background:
-        radial-gradient(1100px 780px at 14% 10%, rgba(124,58,237,.28), transparent 58%),
-        radial-gradient(900px 700px at 82% 18%, rgba(34,211,238,.18), transparent 58%),
-        radial-gradient(900px 700px at 70% 85%, rgba(244,114,182,.12), transparent 62%),
+        radial-gradient(900px 680px at 14% 10%, rgba(124,58,237,.22), transparent 58%),
+        radial-gradient(850px 650px at 82% 18%, rgba(34,211,238,.14), transparent 58%),
+        radial-gradient(850px 650px at 70% 85%, rgba(244,114,182,.10), transparent 62%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
 
-    /* Grain très léger */
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -72,15 +71,22 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:14px}
+
     .brand{display:flex; align-items:center; gap:10px; font-weight:950}
-    .logo{
-      width:36px; height:36px; border-radius:12px;
-      background: linear-gradient(135deg, var(--a1), var(--a2));
-      box-shadow: 0 14px 30px rgba(124,58,237,.20);
-      border: 1px solid rgba(255,255,255,.18);
+
+    /* ✅ photo à côté du prénom */
+    .brand-photo{
+      width:40px; height:40px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      object-fit:cover;
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 14px 30px rgba(0,0,0,.30);
       flex:0 0 auto;
     }
+
     .brand small{display:block; color:var(--muted); font-weight:650; margin-top:2px}
+
     .navlinks{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .navlinks a{
       font-size:14px; color:var(--muted);
@@ -117,11 +123,11 @@
     }
 
     /* HERO */
-    header{padding:58px 0 22px}
+    header{padding:54px 0 18px}
     .hero{display:grid; grid-template-columns: 1.08fr .92fr; gap:18px}
-    @media (max-width: 980px){ .hero{grid-template-columns:1fr} header{padding:42px 0 16px} }
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr} header{padding:40px 0 14px} }
 
-    .hero-left{padding:30px}
+    .hero-left{padding:28px}
     .badge-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px}
     .badge{
       display:inline-flex; align-items:center; gap:8px;
@@ -143,7 +149,7 @@
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
     .lead{
-      margin:0 0 20px;
+      margin:0 0 18px;
       font-size:16px;
       color:var(--muted);
       line-height:1.7;
@@ -248,11 +254,7 @@
     }
 
     /* METHOD */
-    .method{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
+    .method{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;}
     @media (max-width: 980px){ .method{grid-template-columns:1fr} }
     .step{
       padding:18px;
@@ -273,14 +275,10 @@
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
     /* =========================
-       PACKS
+       PACKS (✅ COMPACTS)
        ========================= */
-    .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:stretch;}
+    .packs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
     @media (max-width: 980px){ .packs{grid-template-columns:1fr} }
-
-    /* Actions packs */
-    .pack-actions{display:flex; gap:10px; flex-wrap:wrap}
-    .pack-actions .btn{padding:10px 12px; border-radius:12px; font-size:13px}
 
     details.pack{
       border-radius:18px;
@@ -288,89 +286,30 @@
       background: rgba(255,255,255,.04);
       overflow:hidden;
       box-shadow: var(--shadow2);
-
-      display:flex;
-      flex-direction:column;
-      min-height: 560px;
       position:relative;
-
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-      transform: translateZ(0);
-      isolation:isolate;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
     }
 
-    /* ✅ on bouge/compresse l'effet "forme transparente" : plus de grand arc */
+    /* glow discret (plus de grosse forme) */
     details.pack::before{
       content:"";
-      position:absolute;
-      inset:-40px; /* <- plus petit qu'avant */
+      position:absolute; inset:-12px;
       background:
-        radial-gradient(280px 220px at 12% 8%, rgba(34,211,238,.18), transparent 62%),
-        radial-gradient(260px 240px at 88% 14%, rgba(124,58,237,.18), transparent 62%),
-        radial-gradient(300px 260px at 65% 92%, rgba(244,114,182,.12), transparent 66%);
+        radial-gradient(260px 220px at 20% 10%, rgba(34,211,238,.12), transparent 62%),
+        radial-gradient(240px 220px at 85% 12%, rgba(124,58,237,.12), transparent 62%);
       opacity:0;
-      transition: opacity .18s ease;
       pointer-events:none;
-      z-index:0;
-      filter: blur(.2px);
-    }
-
-    details.pack::after{
-      content:"";
-      position:absolute; inset:0;
-      border-radius:18px;
-      padding:1px;
-      background: linear-gradient(135deg, rgba(34,211,238,.55), rgba(124,58,237,.35), rgba(244,114,182,.25), rgba(255,255,255,.10));
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity:0;
-      transition: opacity .18s ease;
-      pointer-events:none;
-      z-index:0;
+      transition: opacity .16s ease;
     }
 
     details.pack:hover{
-      transform: translateY(-4px);
-      background: rgba(255,255,255,.05);
+      transform: translateY(-3px);
       border-color: rgba(255,255,255,.20);
-      box-shadow: 0 26px 90px rgba(0,0,0,.42);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 24px 80px rgba(0,0,0,.40);
     }
     details.pack:hover::before{opacity:1}
-    details.pack:hover::after{opacity:1}
 
-    details.pack > *{position:relative; z-index:1;}
-
-    /* Featured */
-    details.pack.featured{
-      border-color: rgba(34,211,238,.35);
-      box-shadow: 0 34px 120px rgba(34,211,238,.12);
-    }
-    details.pack.featured::before{opacity:.35} /* glow léger, pas envahissant */
-    details.pack.featured::after{opacity:.22}
-
-    details.pack.featured:hover{
-      transform: translateY(-6px);
-      border-color: rgba(34,211,238,.45);
-      box-shadow: 0 40px 135px rgba(34,211,238,.14);
-    }
-
-    /* Badge recommandé : on le met en HTML (plus de conflit avec ::before) */
-    .ribbon{
-      position:absolute; top:14px; right:14px;
-      font-size:11px; font-weight:950;
-      padding:7px 10px; border-radius:999px;
-      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(124,58,237,.18));
-      border:1px solid rgba(34,211,238,.40);
-      color: rgba(255,255,255,.92);
-      letter-spacing:.2px;
-      z-index:2;
-      backdrop-filter: blur(10px);
-    }
-
-    /* Summary */
     details.pack summary{
       cursor:pointer;
       list-style:none;
@@ -379,20 +318,12 @@
     }
     details.pack summary::-webkit-details-marker{display:none}
 
-    /* click zone + hint */
-    .pack-kicker{display:flex; align-items:center; gap:8px; color:var(--muted2); font-size:12px; margin-top:10px}
-    .chev{display:inline-block; transition: transform .18s ease; opacity:.9}
-    details.pack[open] .chev{transform: rotate(180deg)}
-
     .pack-title{margin:0; font-size:15px; font-weight:950}
     .pack-desc{margin-top:8px; color:var(--muted); font-size:13px; line-height:1.55}
 
-    /* Cohérence : même hauteur de header */
-    details.pack summary > div:first-child{min-height: 90px;}
-
     .price{
       text-align:right;
-      min-width: 170px;
+      min-width: 160px;
       font-weight:950;
       color:#070812;
       padding:10px 12px;
@@ -401,16 +332,25 @@
       border:1px solid rgba(255,255,255,.16);
       white-space:nowrap;
       line-height:1.2;
-      box-shadow: 0 18px 45px rgba(34,211,238,.10);
     }
     .price small{display:block; font-weight:950; opacity:.84; font-size:11px; margin-top:4px}
 
-    .pack-body{
-      padding:0 18px 18px;
-      display:flex;
-      flex-direction:column;
-      flex:1;
+    /* ✅ points clés visibles même fermé */
+    .highlights{
+      margin-top:12px;
+      display:flex; gap:8px; flex-wrap:wrap;
     }
+    .chip{
+      font-size:12px;
+      color: rgba(255,255,255,.84);
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* body compact */
+    .pack-body{padding:0 18px 18px}
 
     .list{
       margin:12px 0 0;
@@ -427,65 +367,24 @@
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      transition: border-color .18s ease, background .18s ease;
     }
-    details.pack:hover .list li{
-      border-color: rgba(255,255,255,.14);
-      background: rgba(255,255,255,.035);
-    }
-
     .dot{
       width:10px; height:10px; border-radius:999px; margin-top:4px;
       background: linear-gradient(135deg, var(--a3), var(--a2));
       flex:0 0 auto;
-      box-shadow: 0 0 18px rgba(244,114,182,.14);
     }
 
-    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto}
+    .pack-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
 
-    details.pack .btn.primary{box-shadow: 0 22px 60px rgba(124,58,237,.14)}
-    details.pack:hover .btn.primary{
-      box-shadow:
-        0 28px 75px rgba(34,211,238,.10),
-        0 16px 55px rgba(124,58,237,.10);
-      transform: translateY(-1px);
-    }
-
-    /* OPTIONS */
-    .options{
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    @media (max-width: 1100px){ .options{grid-template-columns: repeat(3,1fr)} }
-    @media (max-width: 700px){ .options{grid-template-columns: 1fr 1fr} }
-    @media (max-width: 420px){ .options{grid-template-columns: 1fr} }
-
-    .opt{
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-      transition: transform .12s ease;
-    }
-    .opt:hover{transform: translateY(-2px)}
-    .opt b{font-size:13px}
-    .opt span{color:var(--muted); font-size:12px; display:block; margin-top:4px; line-height:1.4}
-    .opt .p{
-      font-weight:950;
-      color:#070812;
-      padding:7px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.86);
-      border:1px solid rgba(255,255,255,.18);
-      white-space:nowrap;
-      font-size:12px;
+    .ribbon{
+      position:absolute; top:14px; right:14px;
+      font-size:11px; font-weight:950;
+      padding:7px 10px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(124,58,237,.18));
+      border:1px solid rgba(34,211,238,.40);
+      color: rgba(255,255,255,.92);
+      letter-spacing:.2px;
+      backdrop-filter: blur(10px);
     }
 
     /* GALLERY FILTER */
@@ -554,35 +453,17 @@
       white-space:nowrap;
     }
 
-    /* SPLIT */
-    .split{display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:stretch}
-    @media (max-width: 980px){ .split{grid-template-columns:1fr} }
-
-    .reviews{
-      padding:18px; border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-      box-shadow: var(--shadow2);
-    }
-    .reviews iframe{width:100%; height:360px; border:0; border-radius:14px; background:#fff}
-
-    /* CONTACT FORM */
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){ .contact-grid{grid-template-columns:1fr} }
-
-    .form{
+    /* CONTACT */
+    .contact{
       padding:18px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       box-shadow: var(--shadow2);
     }
+    .contact-grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    @media (max-width: 980px){ .contact-grid{grid-template-columns:1fr} }
+
     .field{display:grid; gap:8px; margin-top:12px}
     label{font-size:12px; color:var(--muted); font-weight:850}
     input, textarea{
@@ -600,8 +481,6 @@
       border-color: rgba(34,211,238,.35);
       box-shadow: 0 0 0 4px rgba(34,211,238,.10);
     }
-    .form-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .note{margin-top:10px; font-size:12px; color:var(--muted2); line-height:1.5}
 
     footer{padding:28px 0 60px; color:var(--muted2); font-size:13px}
     .foot{
@@ -670,7 +549,8 @@
   <div class="nav">
     <div class="wrap">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <!-- ✅ Mets ton image ici -->
+        <img class="brand-photo" src="brand-photo.jpg" alt="Photo Eva">
         <div>
           <div style="font-size:14px; line-height:1.1; font-weight:950;">Eva De Abreu</div>
           <small>Communication & Marketing — Freelance</small>
@@ -743,12 +623,12 @@
 
         <div class="kpi">
           <strong>Gestion multi-canal</strong>
-          <span>Intervention sur les visuels, les réseaux et votre présence web.</span>
+          <span>Visuels, réseaux, web, SEO… avec un suivi cadré.</span>
         </div>
 
         <div class="kpi">
-          <strong>Suivi cadré</strong>
-          <span>Livrables définis, délais clairs et retours encadrés.</span>
+          <strong>Suivi clair</strong>
+          <span>Livrables définis, délais annoncés, retours encadrés.</span>
         </div>
       </div>
     </div>
@@ -781,7 +661,7 @@
 
         <div class="service">
           <h3>Web & SEO</h3>
-          <p>Pages pro (type Linktree/portfolio), mise à jour de site, optimisation SEO (base / local).</p>
+          <p>Pages pro, mise à jour de site, SEO (base / local) et optimisation conversion.</p>
           <div class="tags">
             <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
           </div>
@@ -799,42 +679,41 @@
         <div class="step">
           <div class="n">1</div>
           <h3>Brief & objectifs</h3>
-          <p>Définition du besoin, du style, des formats, de la cible et des priorités (visibilité / conversion / image).</p>
+          <p>Besoin, style, formats, cible et priorités (visibilité / conversion / image).</p>
         </div>
         <div class="step">
           <div class="n">2</div>
           <h3>Devis & planning</h3>
-          <p>Proposition claire : livrables inclus, calendrier, modalités d’ajustements et conditions.</p>
+          <p>Livrables, calendrier, règles de retours et conditions.</p>
         </div>
         <div class="step">
           <div class="n">3</div>
           <h3>Production & livraison</h3>
-          <p>Création, retours encadrés, déclinaisons, puis livraison finale (HD + formats adaptés).</p>
+          <p>Création, ajustements, déclinaisons, puis livraison finale.</p>
         </div>
       </div>
     </section>
 
     <section id="packs">
       <div class="section-head">
-        <div>
-          <h2>Packs mensuels (tarifs de lancement)</h2>
-          <p class="muted2" style="margin-top:6px;">Clique sur un pack pour afficher tous les détails.</p>
-        </div>
-        <div class="pack-actions">
-          <button type="button" class="btn" id="openAllPacks">Tout afficher</button>
-          <button type="button" class="btn" id="closeAllPacks">Tout réduire</button>
-        </div>
+        <h2>Packs mensuels (tarifs de lancement)</h2>
+        <p>Clique sur un pack pour voir le détail.</p>
       </div>
 
       <div class="packs">
 
-        <!-- PACK 1 (par défaut fermé pour “cliquer et découvrir”) -->
+        <!-- PACK 1 -->
         <details class="pack">
           <summary>
             <div>
               <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
-              <div class="pack-desc">Idéal pour poser une base propre : visibilité locale + image cohérente.</div>
-              <div class="pack-kicker"><span class="chev">▾</span> Détails du pack</div>
+              <div class="pack-desc">Base pro + visibilité locale.</div>
+              <div class="highlights">
+                <span class="chip">Google Business</span>
+                <span class="chip">4 posts/mois</span>
+                <span class="chip">4 visuels</span>
+                <span class="chip">1 story/sem</span>
+              </div>
             </div>
             <div class="price">180€ / mois<small>au lieu de 350€</small></div>
           </summary>
@@ -843,8 +722,7 @@
             <ul class="list">
               <li><span class="dot"></span><span>Audit rapide de la présence en ligne</span></li>
               <li><span class="dot"></span><span>Optimisation Google Business Profile</span></li>
-              <li><span class="dot"></span><span>4 posts / mois (Instagram ou Facebook)</span></li>
-              <li><span class="dot"></span><span>4 visuels (création premium Canva Pro)</span></li>
+              <li><span class="dot"></span><span>4 posts / mois + 4 visuels premium</span></li>
               <li><span class="dot"></span><span>1 story / semaine</span></li>
               <li><span class="dot"></span><span>Mise à jour des infos (horaires, photos, coordonnées)</span></li>
               <li><span class="dot"></span><span>Conseils SEO de base</span></li>
@@ -853,25 +731,30 @@
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Être visible localement et inspirer confiance avec une communication propre.
+                Être visible et inspirer confiance avec une communication propre.
               </div>
             </div>
 
             <div class="pack-cta">
-              <a class="btn primary" href="#contact" data-scroll="contact">Demander ce pack</a>
+              <button class="btn primary" type="button" data-pack="Pack 1 — Visibilité Essentielle">Demander ce pack</button>
               <a class="btn ghost" href="#galerie">Voir des exemples</a>
             </div>
           </div>
         </details>
 
-        <!-- PACK 2 (FEATURED) -->
-        <details class="pack featured">
-          <span class="ribbon">PACK RECOMMANDÉ</span>
+        <!-- PACK 2 -->
+        <details class="pack">
+          <span class="ribbon">RECOMMANDÉ</span>
           <summary>
             <div>
               <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
-              <div class="pack-desc">Idéal pour accélérer : plus de contenu + acquisition + suivi mensuel.</div>
-              <div class="pack-kicker"><span class="chev">▾</span> Détails du pack</div>
+              <div class="pack-desc">Plus de contenu + acquisition.</div>
+              <div class="highlights">
+                <span class="chip">8 posts/mois</span>
+                <span class="chip">8 visuels</span>
+                <span class="chip">Stories</span>
+                <span class="chip">Reporting</span>
+              </div>
             </div>
             <div class="price">390€ / mois<small>au lieu de 750€</small></div>
           </summary>
@@ -879,26 +762,23 @@
           <div class="pack-body">
             <ul class="list">
               <li><span class="dot"></span><span>Tout le pack 1 inclus</span></li>
-              <li><span class="dot"></span><span>8 posts / mois</span></li>
-              <li><span class="dot"></span><span>8 visuels premium</span></li>
+              <li><span class="dot"></span><span>8 posts / mois + 8 visuels premium</span></li>
               <li><span class="dot"></span><span>4 stories / semaine</span></li>
               <li><span class="dot"></span><span>Optimisation bio + stratégie de contenu</span></li>
               <li><span class="dot"></span><span>Réponse aux avis Google</span></li>
               <li><span class="dot"></span><span>Mini shooting photo (1h)</span></li>
-              <li><span class="dot"></span><span>SEO local optimisé</span></li>
-              <li><span class="dot"></span><span>Mise à jour / modifications du site web</span></li>
-              <li><span class="dot"></span><span>Analyse mensuelle des statistiques</span></li>
+              <li><span class="dot"></span><span>SEO local optimisé + stats mensuelles</span></li>
             </ul>
 
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Générer plus de clients et augmenter l’engagement avec une présence structurée.
+                Attirer plus de clients et augmenter l’engagement avec une présence structurée.
               </div>
             </div>
 
             <div class="pack-cta">
-              <a class="btn primary" href="#contact" data-scroll="contact">Demander ce pack</a>
+              <button class="btn primary" type="button" data-pack="Pack 2 — Croissance Digitale">Demander ce pack</button>
               <a class="btn" href="tel:+33767208655">Appeler</a>
             </div>
           </div>
@@ -909,8 +789,13 @@
           <summary>
             <div>
               <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Idéal pour scaler : branding + stratégie + contenus + web + accompagnement.</div>
-              <div class="pack-kicker"><span class="chev">▾</span> Détails du pack</div>
+              <div class="pack-desc">Branding + stratégie + web + accompagnement.</div>
+              <div class="highlights">
+                <span class="chip">12 posts/mois</span>
+                <span class="chip">Reels</span>
+                <span class="chip">Site vitrine</span>
+                <span class="chip">Call mensuel</span>
+              </div>
             </div>
             <div class="price">790€ / mois<small>au lieu de 1500€ • à partir de</small></div>
           </summary>
@@ -919,12 +804,10 @@
             <ul class="list">
               <li><span class="dot"></span><span>Tout le pack 2 inclus</span></li>
               <li><span class="dot"></span><span>Stratégie digitale complète (objectifs, offres, cibles, plan d’action)</span></li>
-              <li><span class="dot"></span><span>Création ou refonte site vitrine <span class="muted2">(périmètre défini ensemble)</span></span></li>
-              <li><span class="dot"></span><span>12 posts / mois</span></li>
-              <li><span class="dot"></span><span>12 visuels + Reels <span class="muted2">(selon formats)</span></span></li>
+              <li><span class="dot"></span><span>Création/refonte site vitrine (périmètre défini ensemble)</span></li>
+              <li><span class="dot"></span><span>12 posts / mois + 12 visuels + Reels (selon formats)</span></li>
               <li><span class="dot"></span><span>Email marketing : 1 campagne / mois</span></li>
-              <li><span class="dot"></span><span>Événementiel : invitations, visuels, coordination, devis <span class="muted2">(selon projet)</span></span></li>
-              <li><span class="dot"></span><span>Branding : charte simple + identité visuelle</span></li>
+              <li><span class="dot"></span><span>Événementiel : invitations, visuels, coordination, devis (selon projet)</span></li>
               <li><span class="dot"></span><span>Audit SEO complet + priorisation des actions</span></li>
               <li><span class="dot"></span><span>Reporting détaillé + call stratégique mensuel</span></li>
             </ul>
@@ -932,54 +815,17 @@
             <div class="panel" style="padding:12px; margin-top:12px;">
               <b>Objectif</b>
               <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-                Construire une vraie marque et développer le chiffre d’affaires avec une stratégie complète.
-              </div>
-              <div class="muted2 tiny" style="margin-top:10px; line-height:1.6;">
-                *“À partir de” : la partie site/événementiel dépend du périmètre (pages, délais, complexité).
+                Construire une vraie marque et développer le chiffre d’affaires grâce à une stratégie complète.
               </div>
             </div>
 
             <div class="pack-cta">
-              <a class="btn primary" href="#contact" data-scroll="contact">Demander ce pack</a>
-              <button type="button" class="btn ghost" id="copyEmailBtn">Copier l’email</button>
+              <button class="btn primary" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Demander ce pack</button>
+              <a class="btn ghost" href="#contact">Contact</a>
             </div>
           </div>
         </details>
 
-      </div>
-
-      <div class="panel" style="padding:18px; margin-top:12px;">
-        <div style="font-weight:950;">💡 Options (à la carte)</div>
-        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Compléments possibles selon vos besoins (devis sur-mesure).
-        </div>
-
-        <div class="options">
-          <div class="opt">
-            <div><b>Création logo</b><span>Identité simple & propre</span></div>
-            <div class="p">120€</div>
-          </div>
-          <div class="opt">
-            <div><b>Carte de visite</b><span>Print prêt à imprimer</span></div>
-            <div class="p">60€</div>
-          </div>
-          <div class="opt">
-            <div><b>Flyer</b><span>Visuel + déclinaisons</span></div>
-            <div class="p">90€</div>
-          </div>
-          <div class="opt">
-            <div><b>Site vitrine simple</b><span>1 page / vitrine</span></div>
-            <div class="p">600€</div>
-          </div>
-          <div class="opt">
-            <div><b>Shooting supp.</b><span>+1h</span></div>
-            <div class="p">120€</div>
-          </div>
-          <div class="opt">
-            <div><b>Meta Ads</b><span>Gestion campagne</span></div>
-            <div class="p">+15%</div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -990,14 +836,12 @@
       </div>
 
       <div class="gallery-actions">
-        <!-- ✅ type="button" pour éviter tout comportement bizarre -->
         <button type="button" class="seg active" data-cat="visuels">Visuels</button>
         <button type="button" class="seg" data-cat="sites">Sites internet</button>
         <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
       </div>
 
       <div class="gallery" id="galleryGrid">
-        <!-- VISUELS -->
         <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
           <img src="produit-the.jpg" alt="Visuel produit / branding">
           <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="tagmini">Visuel</div></div>
@@ -1023,7 +867,6 @@
           <div class="cap"><div><b>Logo</b><br><span>Identité visuelle</span></div><div class="tagmini">Visuel</div></div>
         </div>
 
-        <!-- RESEAUX -->
         <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
           <img src="matchday.jpg" alt="Story matchday">
           <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="tagmini">Réseaux</div></div>
@@ -1034,54 +877,13 @@
           <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="tagmini">Réseaux</div></div>
         </div>
 
-        <!-- SITES (placeholder) -->
         <div class="shot" data-cat="sites" data-title="Projets web — à ajouter" data-src="profil.jpg">
           <img src="profil.jpg" alt="Projets web à ajouter">
           <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="tagmini">Sites</div></div>
         </div>
       </div>
-
-      <div class="panel" style="padding:16px; margin-top:12px;">
-        <div style="font-weight:950;">Ajout de nouveaux projets</div>
-        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Ajoutez une image dans le dossier (ex : <span class="tiny">mon-projet.jpg</span>), puis dupliquez une carte
-          <span class="tiny">shot</span> et remplacez <span class="tiny">data-src</span> / <span class="tiny">src</span> et la catégorie <span class="tiny">data-cat</span>.
-        </div>
-      </div>
     </section>
 
-    <section class="split" id="avis">
-      <div class="panel" style="padding:18px;">
-        <div class="section-head" style="margin-top:0">
-          <h2>LinkedIn & avis</h2>
-          <p>Transparence et crédibilité.</p>
-        </div>
-
-        <div class="muted" style="line-height:1.7; font-size:13px;">
-          <b>LinkedIn :</b> profil public et parcours consultable.<br>
-          <b>Avis Google :</b> emplacement prêt. Dès que vous avez votre fiche, j’intègre la carte exacte et un bouton “Voir les avis”.<br><br>
-          <span class="muted2">Zone : France entière — échanges à distance.</span>
-        </div>
-
-        <div class="btns" style="margin-top:14px">
-          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
-          <a class="btn primary" href="#contact" data-scroll="contact">Demander un devis</a>
-        </div>
-      </div>
-
-      <div class="reviews">
-        <div class="section-head" style="margin-top:0">
-          <h2>Emplacement Google</h2>
-          <p>Placeholder (France) — à remplacer par votre fiche.</p>
-        </div>
-        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=France&output=embed"
-          title="Carte Google (placeholder)"></iframe>
-        <div class="muted2 tiny" style="margin-top:10px;">Dès que vous avez le lien, je l’intègre ici.</div>
-      </div>
-    </section>
-
-    <!-- ✅ CONTACT : un vrai formulaire + bouton mailto généré -->
     <section id="contact">
       <div class="section-head">
         <h2>Contact</h2>
@@ -1089,7 +891,7 @@
       </div>
 
       <div class="contact-grid">
-        <div class="card" style="padding:18px">
+        <div class="contact">
           <div class="muted" style="line-height:1.8; font-size:14px;">
             <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
             <b>Téléphone :</b> <a href="tel:+33767208655">07 67 20 86 55</a><br>
@@ -1104,20 +906,20 @@
           </div>
         </div>
 
-        <div class="form">
+        <div class="contact">
           <div style="font-weight:950;">Demande de devis</div>
           <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-            Remplis le formulaire : je prépare le mail automatiquement.
+            Remplis et clique sur “Ouvrir le mail” : ton email se prépare automatiquement.
           </div>
 
           <div class="field">
             <label for="fName">Nom / Entreprise</label>
-            <input id="fName" type="text" placeholder="Ex : Restaurant Le Sud" autocomplete="organization" />
+            <input id="fName" type="text" placeholder="Ex : Restaurant Le Sud" />
           </div>
 
           <div class="field">
             <label for="fEmail">Email</label>
-            <input id="fEmail" type="email" placeholder="Ex : contact@..." autocomplete="email" />
+            <input id="fEmail" type="email" placeholder="Ex : contact@..." />
           </div>
 
           <div class="field">
@@ -1130,13 +932,13 @@
             <textarea id="fMsg" placeholder="Décris ton besoin (secteur, objectif, délai, contenus, web, événementiel...)"></textarea>
           </div>
 
-          <div class="form-actions">
+          <div class="btns" style="margin-top:12px">
             <button type="button" class="btn primary" id="sendMailBtn">Ouvrir le mail</button>
             <button type="button" class="btn" id="copyMailBtn">Copier mon email</button>
           </div>
 
-          <div class="note">
-            Le bouton “Ouvrir le mail” prépare un email vers <b>deabreue9@gmail.com</b> avec ton message.
+          <div class="muted2 tiny" style="margin-top:10px;">
+            Le mail part vers <b>deabreue9@gmail.com</b> avec ton message.
           </div>
         </div>
       </div>
@@ -1167,46 +969,19 @@
     // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Smooth scroll helper (et évite certains bugs de click dans <details>)
-    document.querySelectorAll('[data-scroll="contact"]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.getElementById('contact');
-        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    });
-
-    // Packs open/close all
-    const packs = Array.from(document.querySelectorAll('details.pack'));
-    const openAllBtn = document.getElementById('openAllPacks');
-    const closeAllBtn = document.getElementById('closeAllPacks');
-
-    if(openAllBtn){
-      openAllBtn.addEventListener('click', () => packs.forEach(p => p.open = true));
-    }
-    if(closeAllBtn){
-      closeAllBtn.addEventListener('click', () => packs.forEach(p => p.open = false));
-    }
-
-    // Gallery filter (fiabilisé)
+    // Gallery filter
     const segs = Array.from(document.querySelectorAll(".seg"));
     const shots = Array.from(document.querySelectorAll(".shot"));
 
     function setCat(cat){
       segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-      shots.forEach(it => {
-        it.style.display = (it.dataset.cat === cat) ? "" : "none";
-      });
+      shots.forEach(it => it.style.display = (it.dataset.cat === cat) ? "" : "none");
     }
-
     segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
     setCat("visuels");
 
-    // Button "Voir le portfolio" => Visuels
     const goGalleryBtn = document.getElementById("goGalleryBtn");
-    if(goGalleryBtn){
-      goGalleryBtn.addEventListener("click", () => setCat("visuels"));
-    }
+    if(goGalleryBtn){ goGalleryBtn.addEventListener("click", () => setCat("visuels")); }
 
     // Lightbox
     const lb = document.getElementById("lightbox");
@@ -1229,8 +1004,8 @@
       document.body.style.overflow = "";
     }
 
-    if(lbClose) lbClose.addEventListener("click", closeLB);
-    if(lb) lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
+    lbClose.addEventListener("click", closeLB);
+    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
     window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
 
     shots.forEach(s => {
@@ -1241,12 +1016,21 @@
       });
     });
 
-    // Copy email buttons
+    // Pack CTA => scroll + fill pack
+    const packBtns = document.querySelectorAll('[data-pack]');
+    const packInput = document.getElementById('fPack');
+    packBtns.forEach(b => {
+      b.addEventListener('click', () => {
+        if(packInput) packInput.value = b.getAttribute('data-pack') || "";
+        document.getElementById('contact')?.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // Copy + mailto builder
+    const EMAIL = "deabreue9@gmail.com";
+
     function copyToClipboard(text){
-      if(navigator.clipboard && window.isSecureContext){
-        return navigator.clipboard.writeText(text);
-      }
-      // fallback
+      if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
       const ta = document.createElement('textarea');
       ta.value = text;
       document.body.appendChild(ta);
@@ -1256,47 +1040,30 @@
       return Promise.resolve();
     }
 
-    const EMAIL = "deabreue9@gmail.com";
     const copyMailBtn = document.getElementById('copyMailBtn');
-    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    copyMailBtn.addEventListener('click', async () => {
+      await copyToClipboard(EMAIL);
+      copyMailBtn.textContent = "Copié ✅";
+      setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
+    });
 
-    if(copyMailBtn){
-      copyMailBtn.addEventListener('click', async () => {
-        await copyToClipboard(EMAIL);
-        copyMailBtn.textContent = "Copié ✅";
-        setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
-      });
-    }
-    if(copyEmailBtn){
-      copyEmailBtn.addEventListener('click', async () => {
-        await copyToClipboard(EMAIL);
-        copyEmailBtn.textContent = "Copié ✅";
-        setTimeout(() => copyEmailBtn.textContent = "Copier l’email", 1200);
-      });
-    }
+    document.getElementById('sendMailBtn').addEventListener('click', () => {
+      const name = (document.getElementById('fName').value || "").trim();
+      const from = (document.getElementById('fEmail').value || "").trim();
+      const pack = (document.getElementById('fPack').value || "").trim();
+      const msg  = (document.getElementById('fMsg').value || "").trim();
 
-    // Contact form => mailto builder
-    const sendMailBtn = document.getElementById('sendMailBtn');
-    if(sendMailBtn){
-      sendMailBtn.addEventListener('click', () => {
-        const name = (document.getElementById('fName')?.value || "").trim();
-        const from = (document.getElementById('fEmail')?.value || "").trim();
-        const pack = (document.getElementById('fPack')?.value || "").trim();
-        const msg  = (document.getElementById('fMsg')?.value || "").trim();
-
-        const subject = encodeURIComponent(`Demande de devis${pack ? " — " + pack : ""}`);
-        const body = encodeURIComponent(
-          `Bonjour Eva,\n\n` +
-          `${msg ? msg + "\n\n" : ""}` +
-          `${pack ? "Pack souhaité : " + pack + "\n" : ""}` +
-          `${name ? "Nom / Entreprise : " + name + "\n" : ""}` +
-          `${from ? "Mon email : " + from + "\n" : ""}` +
-          `\nMerci !`
-        );
-
-        window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-      });
-    }
+      const subject = encodeURIComponent(`Demande de devis${pack ? " — " + pack : ""}`);
+      const body = encodeURIComponent(
+        `Bonjour Eva,\n\n` +
+        `${msg ? msg + "\n\n" : ""}` +
+        `${pack ? "Pack souhaité : " + pack + "\n" : ""}` +
+        `${name ? "Nom / Entreprise : " + name + "\n" : ""}` +
+        `${from ? "Mon email : " + from + "\n" : ""}` +
+        `\nMerci !`
+      );
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    });
   </script>
 </body>
 </html>
