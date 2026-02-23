@@ -446,20 +446,21 @@
       mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     }
     .packsTrack::-webkit-scrollbar{display:none}
-    .packCard{
-      flex: 0 0 92%;
-      scroll-snap-align:start;
-      border-radius: var(--r);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      min-height: 520px;
-      transform: translateZ(0);
-    }
+   .packCard{
+  flex: 0 0 92%;
+  scroll-snap-align:start;
+  border-radius: var(--r);
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  box-shadow: var(--shadow2);
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-height: 520px;
+  transform: translateZ(0);
+  padding-top: 18px;
+}
     @media(min-width: 760px){
       .packCard{ flex-basis: 58%; }
     }
@@ -469,25 +470,25 @@
     }
 
     .packBadge{
-      position:absolute;
-      top:8px;
-      left:12px;
-      font-size:11px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(34,211,238,.35);
-      background: rgba(34,211,238,.12);
-      backdrop-filter: blur(10px);
-      font-weight:950;
-      color: rgba(255,255,255,.92);
-      z-index:6;
-    }
-    .packTop{
-      padding:26px 18px 18px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      position:relative;
-      overflow:hidden;
-    }
+  position:absolute;
+  top:10px;
+  left:12px;
+  font-size:11px;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(34,211,238,.35);
+  background: rgba(34,211,238,.12);
+  backdrop-filter: blur(10px);
+  font-weight:950;
+  color: rgba(255,255,255,.92);
+  z-index:6;
+}
+   .packTop{
+  padding:18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  position:relative;
+  overflow:hidden;
+}
     .packTop:before{
       content:"";
       position:absolute; inset:-1px;
