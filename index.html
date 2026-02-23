@@ -24,10 +24,6 @@
       --shadow2: 0 10px 40px rgba(0,0,0,.25);
       --r: 18px;
       --max: 1120px;
-
-      /* ✅ Hauteur fixe des packs (desktop/tablette) */
-      --packH: 560px;
-
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
     }
     *{box-sizing:border-box}
@@ -144,7 +140,7 @@
       background: rgba(255,255,255,.04);
       color:rgba(255,255,255,.82);
       cursor:pointer;
-      display:none; /* JS le montre seulement si overflow */
+      display:none;
       align-items:center; justify-content:center;
       transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
       flex:0 0 auto;
@@ -254,7 +250,6 @@
     .btn.primary{ background: linear-gradient(135deg, rgba(139,92,246,.92), rgba(244,114,182,.72)); color:#07070c; border-color: rgba(255,255,255,.18); }
     .btn.linkedin{ background: linear-gradient(135deg, rgba(34,211,238,.84), rgba(139,92,246,.84)); color:#07070c; border-color: rgba(255,255,255,.18); }
     .btn.ghost{ background: rgba(255,255,255,.02); }
-
     .hero-right{padding:14px; display:flex; flex-direction:column; gap:10px}
     .profile{
       padding:16px; display:flex; gap:12px; align-items:center;
@@ -263,7 +258,6 @@
       background: rgba(255,255,255,.03);
       position:relative; overflow:hidden;
     }
-    /* ✅ petit truc qui tourne (orb) */
     .orb{
       position:absolute; right:-24px; top:-24px; width:90px; height:90px; border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
@@ -304,7 +298,6 @@
       display:flex; align-items:flex-end; justify-content:space-between;
       gap:12px; margin:12px 0 12px;
     }
-    /* ✅ titres “qui s’écrivent” */
     .type-title{
       margin:0; font-size:16px; letter-spacing:.2px;
       min-height: 22px; display:flex; align-items:flex-end; gap:8px;
@@ -447,91 +440,49 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* ✅ PACKS : même hauteur même ouverts */
-    .packs{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:stretch;
+    /* =========================
+       ✅ PACKS (NOUVEAU) : carrousel + contenu visible + scroll interne
+       ========================= */
+    .packsWrap{
+      position:relative;
+      margin-top:12px;
+      border-radius: var(--r);
     }
-    @media(max-width:980px){ .packs{grid-template-columns:1fr} }
-    details.pack{
+    .packsTrack{
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none;
+      padding: 4px 2px 14px;
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .packsTrack::-webkit-scrollbar{display:none}
+    .packCard{
+      flex: 0 0 92%;
+      scroll-snap-align:start;
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
       overflow:hidden;
-      transform: translateZ(0);
-      background-clip: padding-box;
       position:relative;
-      display:flex; flex-direction:column;
-      padding-top: 44px;
-      height: var(--packH);
+      display:flex;
+      flex-direction:column;
+      min-height: 520px;
+      transform: translateZ(0);
     }
-    @media (max-width: 520px){ details.pack{ height: auto; } }
-    details.pack summary{
-      list-style:none; cursor:pointer;
-      padding:16px;
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-      flex:0 0 auto;
+    @media(min-width: 760px){
+      .packCard{ flex-basis: 58%; }
     }
-    details.pack summary::-webkit-details-marker{display:none}
-    .pack-head{min-height: 90px;}
-    .pack-title{font-weight:950; font-size:14px}
-    .pack-desc{margin-top:6px; color:var(--muted); font-size:12.8px; line-height:1.55}
-    .price{
-      flex:0 0 auto;
-      padding:10px 12px; border-radius:999px;
-      color:#07070c; font-weight:950;
-      background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.92));
-      border:1px solid rgba(255,255,255,.16);
-      white-space:nowrap; text-align:right; line-height:1.2;
-      min-width: 160px;
+    @media(min-width: 980px){
+      .packCard{ flex-basis: calc(33.333% - 8px); min-height: 560px; }
+      .packsTrack{ overflow: hidden; scroll-snap-type:none; mask-image:none; padding-bottom: 2px; }
+      /* Desktop : pas besoin de swipe, on affiche les 3 cartes alignées */
     }
-    .price small{display:block; opacity:.82; font-size:11px; margin-top:4px}
-    .open-hint{ padding:0 16px 12px; color:rgba(255,255,255,.60); font-size:12px; flex:0 0 auto; }
-    .peek{ padding:0 16px 12px; display:grid; gap:8px; flex:0 0 auto; }
-    .peek .row{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color:var(--muted); font-size:13px;
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
-    }
-    .peek .row:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
-    .row i{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--a3), var(--a2));
-      margin-top:4px; flex:0 0 auto; display:inline-block;
-    }
-    .pack-body{
-      padding:0 16px 16px;
-      margin-top:auto;
-      flex: 1 1 auto;
-      overflow: hidden;
-      display:flex; flex-direction:column;
-    }
-    .pack-drawer{
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      border-radius:14px;
-      padding:10px;
-      overflow:auto;
-      flex: 1 1 auto;
-      display:none;
-    }
-    details.pack[open] .pack-drawer{ display:block; }
-    .list{margin:0; padding:0; list-style:none; display:grid; gap:8px}
-    .list li{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color:var(--muted); font-size:13px;
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
-    }
-    .list li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
-    .pack-cta{margin-top:10px}
-    .pack-cta .btn{width:100%}
-    .recommended{
+
+    .packBadge{
       position:absolute; top:12px; left:12px;
       font-size:11px; padding:7px 10px; border-radius:999px;
       border:1px solid rgba(34,211,238,.35);
@@ -539,12 +490,166 @@
       backdrop-filter: blur(10px);
       font-weight:950;
       color: rgba(255,255,255,.92);
+      z-index:2;
     }
-    details.pack.featured{ border-color: rgba(34,211,238,.32) }
-    details.pack[open]{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18) }
-    @media (max-width: 520px){
-      details.pack summary{flex-direction:column; align-items:flex-start; gap:10px;}
-      .price{ min-width:0; width:100%; text-align:left; }
+    .packTop{
+      padding:18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .packTop:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 220px at 10% 0%, rgba(34,211,238,.10), transparent 60%),
+        radial-gradient(520px 240px at 100% 70%, rgba(139,92,246,.10), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .packTop > *{ position:relative; z-index:1; }
+    .packTitle{ font-weight:950; font-size:14px; }
+    .packDesc{ margin-top:6px; color:var(--muted); font-size:12.8px; line-height:1.55; max-width: 52ch; }
+    .packPrice{
+      margin-top:12px;
+      display:inline-flex;
+      flex-direction:column;
+      gap:3px;
+      padding:10px 12px;
+      border-radius:999px;
+      color:#07070c;
+      font-weight:950;
+      background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.92));
+      border:1px solid rgba(255,255,255,.16);
+      width: fit-content;
+    }
+    .packPrice small{ opacity:.84; font-size:11px; font-weight:900; }
+
+    .packInner{
+      padding:14px 16px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    /* ✅ liste visible + scroll interne propre */
+    .packListWrap{
+      position:relative;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      padding:10px;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow:hidden;
+    }
+    .packList{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+      max-height: 260px; /* ✅ on force une hauteur + scroll */
+      overflow:auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.22) transparent;
+      padding-right: 6px;
+    }
+    @media(min-width:980px){
+      .packList{ max-height: 320px; }
+    }
+    .packList::-webkit-scrollbar{ width:10px; }
+    .packList::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,.18);
+      border-radius:999px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+    .packList::-webkit-scrollbar-track{ background: transparent; }
+
+    .packList li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .packList li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
+    .packList li i{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--a2), var(--a1));
+      margin-top:4px; flex:0 0 auto; display:inline-block;
+    }
+
+    /* petit indice scroll (fade + label) */
+    .scrollHint{
+      position:absolute;
+      left:12px; right:12px; bottom:10px;
+      display:flex; justify-content:space-between; align-items:center;
+      pointer-events:none;
+      font-size:11px;
+      color: rgba(255,255,255,.55);
+      opacity:.9;
+    }
+    .scrollHint:before{
+      content:"";
+      position:absolute;
+      left:-10px; right:-10px; bottom:-10px; height:52px;
+      background: linear-gradient(180deg, transparent, rgba(6,6,12,.85));
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      pointer-events:none;
+      opacity:.9;
+    }
+    .scrollHint span{ position:relative; z-index:1; }
+    .scrollPill{
+      position:relative; z-index:1;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,12,.45);
+      backdrop-filter: blur(10px);
+      font-weight:950;
+    }
+
+    .packCtaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+    .packCtaRow .btn{ width:100%; }
+
+    /* flèches du carrousel packs (mobile/tablette) */
+    .packArrow{
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      width:36px; height:36px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,12,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.86);
+      cursor:pointer;
+      display:none; /* JS l'active si scroll */
+      align-items:center;
+      justify-content:center;
+      transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+      z-index:5;
+    }
+    .packArrow:hover{ transform: translateY(-50%) scale(1.05); filter:brightness(1.07); border-color: rgba(255,255,255,.18); }
+    .packArrow.left{ left: -6px; }
+    .packArrow.right{ right: -6px; }
+    @media(min-width:980px){
+      .packArrow{ display:none !important; }
     }
 
     /* Portfolio */
@@ -574,7 +679,6 @@
       position:relative;
     }
     .shot:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
-    /* ✅ Visuels : on voit TOUT + grand */
     .shot img{
       width:100%;
       height: 320px;
@@ -627,6 +731,70 @@
     .block p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 
+    /* ✅ Reviews carousel */
+    .reviews{
+      position:relative;
+      margin-top:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+      padding:12px;
+      min-height: 210px;
+    }
+    .reviews-track{
+      display:flex;
+      gap:12px;
+      overflow:hidden;
+      scroll-snap-type:x mandatory;
+    }
+    .review{
+      flex: 0 0 100%;
+      scroll-snap-align:start;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding:14px;
+      box-shadow: var(--shadow2);
+      position:relative;
+    }
+    @media(min-width:980px){
+      .review{ flex-basis: calc(50% - 6px); }
+    }
+    .revTop{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .revName{ font-weight:950; font-size:13px; }
+    .revStars{ font-size:12px; color: rgba(255,255,255,.85); white-space:nowrap; }
+    .revText{ margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.65; }
+    .revArrow{
+      position:absolute; top:50%; transform: translateY(-50%);
+      width:34px; height:34px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,12,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .revArrow:hover{ transform: translateY(-50%) scale(1.05); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
+    .revArrow.left{ left:10px; }
+    .revArrow.right{ right:10px; }
+    .revDots{ display:flex; justify-content:center; gap:6px; margin-top:10px; }
+    .revDot{
+      width:7px; height:7px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      opacity:.7;
+    }
+    .revDot.on{
+      opacity:1;
+      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* ✅ Instagram button disabled look */
+    a[aria-disabled="true"]{ pointer-events:none; opacity:.55; filter: grayscale(.25); }
+
     /* Contact */
     .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     @media(max-width:980px){ .contact-grid{grid-template-columns:1fr} }
@@ -669,7 +837,7 @@
       display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
     }
 
-    /* ✅ Lightbox : image TOUJOURS entière (fit viewport) */
+    /* ✅ Lightbox + Zoom (AMÉLIORÉ) */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
@@ -698,6 +866,7 @@
       flex:0 0 auto;
     }
     .lb-top b{font-size:13px}
+    .lb-top .lb-actions{display:flex; gap:8px; align-items:center;}
     .lb-top button{
       cursor:pointer;
       border:1px solid rgba(255,255,255,.14);
@@ -714,7 +883,8 @@
       display:flex; align-items:center; justify-content:center;
       background: rgba(255,255,255,.03);
       padding: 10px;
-      overflow:auto;
+      overflow:auto; /* ✅ en zoom: scroll */
+      cursor: zoom-in;
     }
     .lb-img img{
       max-width: 100%;
@@ -724,6 +894,13 @@
       display:block;
       border-radius: 12px;
       background: rgba(0,0,0,.15);
+      transform-origin: center center;
+      transition: transform .12s ease;
+    }
+    .lb-img.zoom{ cursor: zoom-out; }
+    .lb-img.zoom img{
+      max-width: none;
+      max-height: none;
     }
 
     /* WhatsApp */
@@ -765,70 +942,6 @@
       .caret{ animation:none !important; opacity:1; }
       html{ scroll-behavior:auto; }
     }
-
-    /* ✅ Reviews carousel (AJOUT) */
-    .reviews{
-      position:relative;
-      margin-top:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.02);
-      overflow:hidden;
-      padding:12px;
-      min-height: 210px; /* pas trop grand */
-    }
-    .reviews-track{
-      display:flex;
-      gap:12px;
-      overflow:hidden;
-      scroll-snap-type:x mandatory;
-    }
-    .review{
-      flex: 0 0 100%;
-      scroll-snap-align:start;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding:14px;
-      box-shadow: var(--shadow2);
-      position:relative;
-    }
-    @media(min-width:980px){
-      .review{ flex-basis: calc(50% - 6px); } /* 2 avis visibles sur desktop */
-    }
-    .revTop{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
-    .revName{ font-weight:950; font-size:13px; }
-    .revStars{ font-size:12px; color: rgba(255,255,255,.85); white-space:nowrap; }
-    .revText{ margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.65; }
-    .revArrow{
-      position:absolute; top:50%; transform: translateY(-50%);
-      width:34px; height:34px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(6,6,12,.55);
-      backdrop-filter: blur(10px);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      display:inline-flex; align-items:center; justify-content:center;
-      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .revArrow:hover{ transform: translateY(-50%) scale(1.05); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
-    .revArrow.left{ left:10px; }
-    .revArrow.right{ right:10px; }
-    .revDots{ display:flex; justify-content:center; gap:6px; margin-top:10px; }
-    .revDot{
-      width:7px; height:7px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
-      opacity:.7;
-    }
-    .revDot.on{
-      opacity:1;
-      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
-      border-color: rgba(255,255,255,.18);
-    }
-
-    /* ✅ Instagram button disabled look */
-    a[aria-disabled="true"]{ pointer-events:none; opacity:.55; filter: grayscale(.25); }
   </style>
 </head>
 
@@ -1070,125 +1183,119 @@
       </div>
     </section>
 
+    <!-- ✅ PACKS (REFONTE) -->
     <section id="packs" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="Packs mensuels"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Cliquez sur un pack : les détails s’affichent (pour tous) • taille identique ✅</p>
+        <p>Tout est visible + scroller sur mobile. ✅</p>
       </div>
 
-      <div class="packs">
-        <details class="pack glow-hover">
-          <summary>
-            <div class="pack-head">
-              <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
-              <div class="pack-desc">Base solide : visibilité locale + image cohérente.</div>
-            </div>
-            <div class="price">180€ / mois<small>au lieu de 350€</small></div>
-          </summary>
+      <div class="packsWrap">
+        <button class="packArrow left" id="packPrev" type="button" aria-label="Pack précédent">‹</button>
+        <button class="packArrow right" id="packNext" type="button" aria-label="Pack suivant">›</button>
 
-          <div class="open-hint">Détails du pack</div>
-          <div class="peek">
-            <div class="row"><i></i><span>Optimisation Google Business + informations à jour</span></div>
-            <div class="row"><i></i><span>4 posts/mois + 4 visuels premium</span></div>
-            <div class="row"><i></i><span>1 story/semaine + conseils SEO de base</span></div>
-          </div>
-
-          <div class="pack-body">
-            <div class="pack-drawer" aria-label="Détails">
-              <ul class="list">
-                <li><i></i><span>Audit rapide de la présence en ligne</span></li>
-                <li><i></i><span>Optimisation Google Business Profile</span></li>
-                <li><i></i><span>4 posts / mois (Instagram ou Facebook)</span></li>
-                <li><i></i><span>4 visuels premium</span></li>
-                <li><i></i><span>1 story / semaine</span></li>
-                <li><i></i><span>Mise à jour infos (horaires, photos, coordonnées)</span></li>
-                <li><i></i><span>Conseils SEO de base</span></li>
-              </ul>
+        <div class="packsTrack" id="packsTrack" aria-label="Packs (carrousel)">
+          <!-- Pack 1 -->
+          <div class="packCard glow-hover" data-pack="Pack 1 — Visibilité Essentielle">
+            <div class="packTop">
+              <div class="packTitle">🌿 Pack 1 — Visibilité Essentielle</div>
+              <div class="packDesc">Base solide : visibilité locale + image cohérente.</div>
+              <div class="packPrice">180€ / mois <small>au lieu de 350€</small></div>
             </div>
 
-            <div class="pack-cta">
-              <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
-            </div>
-          </div>
-        </details>
+            <div class="packInner">
+              <div class="packListWrap" aria-label="Détails pack 1">
+                <ul class="packList">
+                  <li><i></i><span>Audit rapide de la présence en ligne</span></li>
+                  <li><i></i><span>Optimisation Google Business Profile</span></li>
+                  <li><i></i><span>4 posts / mois (Instagram ou Facebook)</span></li>
+                  <li><i></i><span>4 visuels premium</span></li>
+                  <li><i></i><span>1 story / semaine</span></li>
+                  <li><i></i><span>Mise à jour infos (horaires, photos, coordonnées)</span></li>
+                  <li><i></i><span>Conseils SEO de base</span></li>
+                </ul>
+                <div class="scrollHint" aria-hidden="true">
+                  <span>Fais défiler</span>
+                  <span class="scrollPill">⌄</span>
+                </div>
+              </div>
 
-        <details class="pack featured glow-hover">
-          <span class="recommended">RECOMMANDÉ</span>
-          <summary>
-            <div class="pack-head">
-              <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
-              <div class="pack-desc">Accélérer : plus de contenu + suivi + visibilité.</div>
-            </div>
-            <div class="price">390€ / mois<small>au lieu de 750€</small></div>
-          </summary>
-
-          <div class="open-hint">Détails du pack</div>
-          <div class="peek">
-            <div class="row"><i></i><span>Tout le pack 1 inclus</span></div>
-            <div class="row"><i></i><span>8 posts/mois + visuels + stories</span></div>
-            <div class="row"><i></i><span>SEO local + analyse mensuelle</span></div>
-          </div>
-
-          <div class="pack-body">
-            <div class="pack-drawer" aria-label="Détails">
-              <ul class="list">
-                <li><i></i><span>Tout le pack 1 inclus</span></li>
-                <li><i></i><span>8 posts / mois</span></li>
-                <li><i></i><span>8 visuels premium + déclinaisons</span></li>
-                <li><i></i><span>Stories (rythme hebdomadaire)</span></li>
-                <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
-                <li><i></i><span>Réponse aux avis Google (si accès / droits)</span></li>
-                <li><i></i><span>Analyse mensuelle des statistiques</span></li>
-                <li><i></i><span>SEO local optimisé</span></li>
-              </ul>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
+              <div class="packCtaRow">
+                <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
+              </div>
             </div>
           </div>
-        </details>
 
-        <details class="pack glow-hover">
-          <summary>
-            <div class="pack-head">
-              <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Développer : stratégie, branding, contenus + web.</div>
+          <!-- Pack 2 -->
+          <div class="packCard glow-hover" data-pack="Pack 2 — Croissance Digitale">
+            <span class="packBadge">RECOMMANDÉ</span>
+            <div class="packTop">
+              <div class="packTitle">🚀 Pack 2 — Croissance Digitale</div>
+              <div class="packDesc">Accélérer : plus de contenu + suivi + visibilité.</div>
+              <div class="packPrice">390€ / mois <small>au lieu de 750€</small></div>
             </div>
-            <div class="price">790€ / mois<small>au lieu de 1500€</small></div>
-          </summary>
 
-          <div class="open-hint">Détails du pack</div>
-          <div class="peek">
-            <div class="row"><i></i><span>Tout le pack 2 inclus</span></div>
-            <div class="row"><i></i><span>Stratégie complète + identité visuelle</span></div>
-            <div class="row"><i></i><span>Accompagnement + reporting</span></div>
+            <div class="packInner">
+              <div class="packListWrap" aria-label="Détails pack 2">
+                <ul class="packList">
+                  <li><i></i><span>Tout le pack 1 inclus</span></li>
+                  <li><i></i><span>8 posts / mois</span></li>
+                  <li><i></i><span>8 visuels premium + déclinaisons</span></li>
+                  <li><i></i><span>Stories (rythme hebdomadaire)</span></li>
+                  <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
+                  <li><i></i><span>Réponse aux avis Google (si accès / droits)</span></li>
+                  <li><i></i><span>Analyse mensuelle des statistiques</span></li>
+                  <li><i></i><span>SEO local optimisé</span></li>
+                </ul>
+                <div class="scrollHint" aria-hidden="true">
+                  <span>Fais défiler</span>
+                  <span class="scrollPill">⌄</span>
+                </div>
+              </div>
+
+              <div class="packCtaRow">
+                <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
+              </div>
+            </div>
           </div>
 
-          <div class="pack-body">
-            <div class="pack-drawer" aria-label="Détails">
-              <ul class="list">
-                <li><i></i><span>Tout le pack 2 inclus</span></li>
-                <li><i></i><span>Stratégie digitale complète</span></li>
-                <li><i></i><span>Charte graphique + identité visuelle</span></li>
-                <li><i></i><span>Production de contenus intensifiée</span></li>
-                <li><i></i><span>Accompagnement + reporting</span></li>
-                <li><i></i><span>Optimisation web / SEO (selon besoin)</span></li>
-              </ul>
+          <!-- Pack 3 -->
+          <div class="packCard glow-hover" data-pack="Pack 3 — Stratégie & Image Premium">
+            <div class="packTop">
+              <div class="packTitle">👑 Pack 3 — Stratégie & Image Premium</div>
+              <div class="packDesc">Développer : stratégie, branding, contenus + web.</div>
+              <div class="packPrice">790€ / mois <small>au lieu de 1500€</small></div>
             </div>
 
-            <div class="pack-cta">
-              <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
+            <div class="packInner">
+              <div class="packListWrap" aria-label="Détails pack 3">
+                <ul class="packList">
+                  <li><i></i><span>Tout le pack 2 inclus</span></li>
+                  <li><i></i><span>Stratégie digitale complète</span></li>
+                  <li><i></i><span>Charte graphique + identité visuelle</span></li>
+                  <li><i></i><span>Production de contenus intensifiée</span></li>
+                  <li><i></i><span>Accompagnement + reporting</span></li>
+                  <li><i></i><span>Optimisation web / SEO (selon besoin)</span></li>
+                </ul>
+                <div class="scrollHint" aria-hidden="true">
+                  <span>Fais défiler</span>
+                  <span class="scrollPill">⌄</span>
+                </div>
+              </div>
+
+              <div class="packCtaRow">
+                <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
+              </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </section>
 
     <section id="galerie" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Filtre par type + aperçu en grand (image entière ✅).</p>
+        <p>Filtre par type + aperçu en grand (image entière ✅ + zoom au clic).</p>
       </div>
 
       <div class="gallery-actions">
@@ -1243,7 +1350,6 @@
       </div>
     </section>
 
-    <!-- ✅ SOCIALPROOF (REMPLACÉ) -->
     <section id="socialproof" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="Réseaux & avis"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
@@ -1251,7 +1357,6 @@
       </div>
 
       <div class="grid2">
-        <!-- ✅ Bloc Réseaux sociaux (LinkedIn + Instagram) -->
         <div class="block glow-hover">
           <b>Réseaux sociaux</b>
           <p>Suivez mes actus, projets et avant/après : contenu, visuels, communication.</p>
@@ -1260,12 +1365,9 @@
             <a class="btn" id="igBtn" href="#" aria-disabled="true" title="Instagram bientôt disponible">Instagram (bientôt)</a>
             <a class="btn primary" href="#contact">Demander un devis</a>
           </div>
-          <div class="muted2 tiny" style="margin-top:10px;">
-            Astuce : dès que ton Instagram est prêt, remplace juste le lien dans le script (IG_URL).
-          </div>
+          <div class="muted2 tiny" style="margin-top:10px;">Astuce : dès que ton Instagram est prêt, remplace juste le lien dans le script (IG_URL).</div>
         </div>
 
-        <!-- ✅ Bloc Avis (carrousel) -->
         <div class="block glow-hover">
           <b>Avis clients</b>
           <p>Quelques retours (le carrousel défile automatiquement).</p>
@@ -1281,9 +1383,7 @@
             <div class="revDots" id="revDots" aria-hidden="true"></div>
           </div>
 
-          <div class="muted2 tiny" style="margin-top:10px;">
-            Tu pourras remplacer / ajouter des avis (nom/texte) dans le script en 2 minutes.
-          </div>
+          <div class="muted2 tiny" style="margin-top:10px;">Tu pourras remplacer / ajouter des avis (nom/texte) dans le script en 2 minutes.</div>
         </div>
       </div>
     </section>
@@ -1370,9 +1470,12 @@
     <div class="lb-card" role="dialog" aria-modal="true">
       <div class="lb-top">
         <b id="lbTitle">Aperçu</b>
-        <button id="lbClose" type="button">Fermer ✕</button>
+        <div class="lb-actions">
+          <button id="lbZoom" type="button" title="Zoom">Zoom</button>
+          <button id="lbClose" type="button">Fermer ✕</button>
+        </div>
       </div>
-      <div class="lb-img">
+      <div class="lb-img" id="lbArea" title="Clique pour zoomer">
         <img id="lbImg" src="" alt="">
       </div>
     </div>
@@ -1414,7 +1517,7 @@
       obs2.observe(skillsBox);
     }
 
-    // ✅ Typewriter titles (once when section becomes visible)
+    // ✅ Typewriter titles
     function typeOnce(el){
       const target = el.getAttribute("data-text") || "";
       const out = el.querySelector(".typeOut");
@@ -1449,7 +1552,7 @@
     }, {threshold: 0.3});
     document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
 
-    // ✅ Nav arrows (show only if overflow)
+    // ✅ Nav arrows
     (function(){
       const el = document.getElementById("topLinks");
       const left = document.getElementById("navLeft");
@@ -1481,11 +1584,13 @@
     segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
     setCat("visuels");
 
-    // ✅ Lightbox
+    // ✅ Lightbox + zoom
     const lb = document.getElementById("lightbox");
     const lbImg = document.getElementById("lbImg");
     const lbTitle = document.getElementById("lbTitle");
     const lbClose = document.getElementById("lbClose");
+    const lbZoom = document.getElementById("lbZoom");
+    const lbArea = document.getElementById("lbArea");
 
     function openLB(src, title){
       lbTitle.textContent = title || "Aperçu";
@@ -1494,16 +1599,45 @@
       lb.classList.add("open");
       lb.setAttribute("aria-hidden","false");
       document.body.style.overflow = "hidden";
+      lbArea.classList.remove("zoom");
+      lbImg.style.transform = "scale(1)";
+      lbZoom.textContent = "Zoom";
     }
     function closeLB(){
       lb.classList.remove("open");
       lb.setAttribute("aria-hidden","true");
       lbImg.src = "";
       document.body.style.overflow = "";
+      lbArea.classList.remove("zoom");
+      lbImg.style.transform = "scale(1)";
+      lbZoom.textContent = "Zoom";
     }
+    function toggleZoom(){
+      const on = lbArea.classList.toggle("zoom");
+      lbZoom.textContent = on ? "Adapter" : "Zoom";
+      lbImg.style.transform = "scale(1)";
+      // en zoom, on garde la taille native -> scroll si nécessaire
+    }
+
     lbClose.addEventListener("click", closeLB);
     lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
     window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
+
+    lbZoom.addEventListener("click", toggleZoom);
+    lbArea.addEventListener("click", (e) => {
+      // évite double toggle quand on clique exactement l'image
+      if(e.target === lbImg || e.target === lbArea) toggleZoom();
+    });
+
+    // Wheel zoom léger en mode zoom (optionnel mais pratique)
+    let z = 1;
+    lbArea.addEventListener("wheel", (e) => {
+      if(!lbArea.classList.contains("zoom")) return;
+      e.preventDefault();
+      const delta = Math.sign(e.deltaY);
+      z = Math.max(1, Math.min(3, z + (delta > 0 ? -0.12 : 0.12)));
+      lbImg.style.transform = `scale(${z.toFixed(2)})`;
+    }, { passive:false });
 
     shots.forEach(s => {
       s.addEventListener("click", () => {
@@ -1524,18 +1658,40 @@
       btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
     });
 
-    // ✅ Packs: si on ouvre 1 pack, on ouvre/ferme tous (comme tu veux garder)
-    const packDetails = Array.from(document.querySelectorAll("details.pack"));
-    let syncing = false;
-    packDetails.forEach(d => {
-      d.addEventListener("toggle", () => {
-        if(syncing) return;
-        syncing = true;
-        const state = d.open;
-        packDetails.forEach(other => { other.open = state; });
-        syncing = false;
-      });
-    });
+    // ✅ Packs carousel arrows (mobile/tablette)
+    (function initPackCarousel(){
+      const track = document.getElementById("packsTrack");
+      const prev = document.getElementById("packPrev");
+      const next = document.getElementById("packNext");
+      if(!track || !prev || !next) return;
+
+      function isDesktop(){
+        return window.matchMedia("(min-width: 980px)").matches;
+      }
+
+      function refresh(){
+        if(isDesktop()){
+          prev.style.display = "none";
+          next.style.display = "none";
+          return;
+        }
+        const overflow = track.scrollWidth > track.clientWidth + 4;
+        prev.style.display = overflow ? "inline-flex" : "none";
+        next.style.display = overflow ? "inline-flex" : "none";
+      }
+
+      function scrollByCard(dir){
+        const card = track.querySelector(".packCard");
+        const dx = (card ? card.getBoundingClientRect().width : 320) + 12;
+        track.scrollBy({ left: dir * dx, behavior:"smooth" });
+      }
+
+      prev.addEventListener("click", () => scrollByCard(-1));
+      next.addEventListener("click", () => scrollByCard(1));
+      window.addEventListener("resize", () => setTimeout(refresh, 50));
+      setTimeout(refresh, 80);
+      refresh();
+    })();
 
     // Copy email
     const EMAIL = "deabreue9@gmail.com";
@@ -1568,10 +1724,8 @@
     }
 
     /* ===========================
-       ✅ AJOUTS : Instagram + Avis
+       ✅ Instagram + Avis
        =========================== */
-
-    // ✅ Instagram: active le bouton dès que tu as ton lien
     const IG_URL = "https://www.instagram.com/edbra_nd/";
     const igBtn = document.getElementById("igBtn");
     if(igBtn){
@@ -1585,7 +1739,6 @@
       }
     }
 
-    // ✅ Avis carousel (auto + manuel) — tes 2 avis actuels
     const reviews = [
       {
         name: "Sheylie Berkane",
@@ -1613,7 +1766,6 @@
 
       if(!track || !dots || !prev || !next) return;
 
-      // Render cards
       track.innerHTML = reviews.map(r => `
         <div class="review" role="group" aria-label="Avis client">
           <div class="revTop">
@@ -1643,8 +1795,6 @@
           d.addEventListener("click", () => go(i, true));
           dots.appendChild(d);
         }
-
-        // Si 1 page, on peut masquer flèches/dots (optionnel)
         const showNav = p > 1;
         prev.style.display = showNav ? "inline-flex" : "none";
         next.style.display = showNav ? "inline-flex" : "none";
@@ -1652,8 +1802,7 @@
       }
 
       function updateDots(){
-        const ds = Array.from(dots.children);
-        ds.forEach((d,i)=> d.classList.toggle("on", i===idx));
+        Array.from(dots.children).forEach((d,i)=> d.classList.toggle("on", i===idx));
       }
 
       function clampIdx(){
@@ -1680,7 +1829,6 @@
       prev.addEventListener("click", prevOne);
       next.addEventListener("click", nextOne);
 
-      // Autoplay (pause on hover/focus)
       function start(){
         stop();
         if(pages() <= 1) return;
@@ -1695,7 +1843,6 @@
       wrap?.addEventListener("focusin", stop);
       wrap?.addEventListener("focusout", start);
 
-      // Rebuild on resize (perView changes)
       function onResize(){
         const p = pages();
         if(idx > p - 1) idx = p - 1;
@@ -1707,7 +1854,6 @@
 
       mq.addEventListener?.("change", onResize);
       window.addEventListener("resize", () => {
-        // léger debounce
         clearTimeout(window.__revResize);
         window.__revResize = setTimeout(onResize, 120);
       });
