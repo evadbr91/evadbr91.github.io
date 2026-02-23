@@ -441,7 +441,7 @@
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
     /* =========================
-       ✅ PACKS (NOUVEAU) : carrousel + contenu visible + scroll interne
+       ✅ PACKS : carrousel + contenu visible + scroll interne
        ========================= */
     .packsWrap{
       position:relative;
@@ -479,21 +479,27 @@
     @media(min-width: 980px){
       .packCard{ flex-basis: calc(33.333% - 8px); min-height: 560px; }
       .packsTrack{ overflow: hidden; scroll-snap-type:none; mask-image:none; padding-bottom: 2px; }
-      /* Desktop : pas besoin de swipe, on affiche les 3 cartes alignées */
     }
 
+    /* ✅ FIX RECOMMANDÉ */
     .packBadge{
-      position:absolute; top:12px; left:12px;
-      font-size:11px; padding:7px 10px; border-radius:999px;
+      position:absolute;
+      top:8px;
+      left:12px;
+      font-size:11px;
+      padding:7px 10px;
+      border-radius:999px;
       border:1px solid rgba(34,211,238,.35);
       background: rgba(34,211,238,.12);
       backdrop-filter: blur(10px);
       font-weight:950;
       color: rgba(255,255,255,.92);
-      z-index:2;
+      z-index:6;
     }
+
+    /* ✅ plus d'espace en haut pour ne jamais cacher le titre */
     .packTop{
-      padding:18px;
+      padding:26px 18px 18px;
       border-bottom: 1px solid rgba(255,255,255,.08);
       position:relative;
       overflow:hidden;
@@ -534,7 +540,6 @@
       min-height: 0;
     }
 
-    /* ✅ liste visible + scroll interne propre */
     .packListWrap{
       position:relative;
       border-radius:14px;
@@ -551,7 +556,7 @@
       list-style:none;
       display:grid;
       gap:8px;
-      max-height: 260px; /* ✅ on force une hauteur + scroll */
+      max-height: 260px;
       overflow:auto;
       scrollbar-width: thin;
       scrollbar-color: rgba(255,255,255,.22) transparent;
@@ -588,36 +593,8 @@
       margin-top:4px; flex:0 0 auto; display:inline-block;
     }
 
-    /* petit indice scroll (fade + label) */
-    .scrollHint{
-      position:absolute;
-      left:12px; right:12px; bottom:10px;
-      display:flex; justify-content:space-between; align-items:center;
-      pointer-events:none;
-      font-size:11px;
-      color: rgba(255,255,255,.55);
-      opacity:.9;
-    }
-    .scrollHint:before{
-      content:"";
-      position:absolute;
-      left:-10px; right:-10px; bottom:-10px; height:52px;
-      background: linear-gradient(180deg, transparent, rgba(6,6,12,.85));
-      border-bottom-left-radius: 14px;
-      border-bottom-right-radius: 14px;
-      pointer-events:none;
-      opacity:.9;
-    }
-    .scrollHint span{ position:relative; z-index:1; }
-    .scrollPill{
-      position:relative; z-index:1;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(6,6,12,.45);
-      backdrop-filter: blur(10px);
-      font-weight:950;
-    }
+    /* ✅ enlever "Fais défiler" */
+    .scrollHint{ display:none !important; }
 
     .packCtaRow{
       display:flex;
@@ -627,7 +604,6 @@
     }
     .packCtaRow .btn{ width:100%; }
 
-    /* flèches du carrousel packs (mobile/tablette) */
     .packArrow{
       position:absolute;
       top:50%;
@@ -639,7 +615,7 @@
       backdrop-filter: blur(10px);
       color: rgba(255,255,255,.86);
       cursor:pointer;
-      display:none; /* JS l'active si scroll */
+      display:none;
       align-items:center;
       justify-content:center;
       transition: transform .12s ease, filter .12s ease, border-color .12s ease;
@@ -791,8 +767,6 @@
       background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
       border-color: rgba(255,255,255,.18);
     }
-
-    /* ✅ Instagram button disabled look */
     a[aria-disabled="true"]{ pointer-events:none; opacity:.55; filter: grayscale(.25); }
 
     /* Contact */
@@ -837,7 +811,7 @@
       display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
     }
 
-    /* ✅ Lightbox + Zoom (AMÉLIORÉ) */
+    /* Lightbox */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
@@ -883,7 +857,7 @@
       display:flex; align-items:center; justify-content:center;
       background: rgba(255,255,255,.03);
       padding: 10px;
-      overflow:auto; /* ✅ en zoom: scroll */
+      overflow:auto;
       cursor: zoom-in;
     }
     .lb-img img{
@@ -1041,149 +1015,6 @@
   </header>
 
   <main class="wrap">
-    <section id="about" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="À propos"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Une approche structurée, orientée image et conversion.</p>
-      </div>
-
-      <div class="about">
-        <div class="card about-left glow-hover">
-          <h3>Une communication claire, cohérente et rentable.</h3>
-          <p>
-            Je suis <b>Eva De Abreu</b>, freelance en <b>communication & marketing</b>. J’accompagne les TPE/PME, indépendants et commerces
-            dans la construction d’une présence en ligne <b>professionnelle</b>, <b>harmonisée</b> et <b>efficace</b>.
-            <br><br>
-            Mon objectif : transformer votre image en <b>levier de confiance</b> et vos supports (réseaux, Google, site) en
-            <b>levier de demandes</b>.
-          </p>
-
-          <div class="proofline">
-            <span class="tag">Image de marque</span>
-            <span class="tag">Régularité</span>
-            <span class="tag">SEO local</span>
-            <span class="tag">Conversion</span>
-          </div>
-
-          <ul class="points">
-            <li><i></i><span><b>Clarification de l’offre</b> : message, cible, avantages et priorités.</span></li>
-            <li><i></i><span><b>Harmonisation de l’identité</b> : visuels, typographies, ton et déclinaisons.</span></li>
-            <li><i></i><span><b>Production & diffusion</b> : contenus réguliers, prêts à publier, orientés résultats.</span></li>
-          </ul>
-
-          <div class="hero-actions" style="margin-top:12px;">
-            <a class="btn primary" href="#packs">Découvrir les packs</a>
-            <a class="btn" href="#contact">Décrire mon besoin</a>
-          </div>
-        </div>
-
-        <div class="card about-right glow-hover">
-          <div class="mini-cards">
-            <div class="mini-card">
-              <b>Ce que vous obtenez</b>
-              <span>Une image professionnelle et une présence cohérente sur l’ensemble de vos supports.</span>
-            </div>
-            <div class="mini-card">
-              <b>Ma méthode</b>
-              <span>Brief → proposition → production → retours cadrés → livraison des fichiers.</span>
-            </div>
-          </div>
-
-          <div class="skills" id="skillsBox">
-            <div style="font-weight:950; font-size:13px;">Compétences clés</div>
-
-            <div class="skill">
-              <div class="top"><span>Identité visuelle & supports</span><span>Expertise</span></div>
-              <div class="bar"><span style="width:88%"></span></div>
-            </div>
-            <div class="skill">
-              <div class="top"><span>Réseaux sociaux & contenu</span><span>Stratégie</span></div>
-              <div class="bar"><span style="width:84%"></span></div>
-            </div>
-            <div class="skill">
-              <div class="top"><span>Google Business & SEO local</span><span>Visibilité</span></div>
-              <div class="bar"><span style="width:78%"></span></div>
-            </div>
-            <div class="skill">
-              <div class="top"><span>Web & optimisation</span><span>Performance</span></div>
-              <div class="bar"><span style="width:74%"></span></div>
-            </div>
-          </div>
-
-          <div class="soft glow-hover" style="padding:14px;">
-            <b>Analyse rapide offerte</b>
-            <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-              Partagez votre Instagram, votre fiche Google et votre site : je vous indique <b>3 actions prioritaires</b>
-              pour renforcer la crédibilité et améliorer la visibilité.
-            </div>
-            <div class="hero-actions" style="margin-top:10px;">
-              <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-              <a class="btn primary" href="#contact">Demander l’analyse</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Expertises"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Une base solide + une exécution maîtrisée.</p>
-      </div>
-
-      <div class="grid3">
-        <div class="tile glow-hover">
-          <h3>Identité & supports</h3>
-          <p>Menus, flyers, cartes, affiches, bannières, templates. Print & digital.</p>
-          <div class="proofline" style="margin-top:12px;">
-            <span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span>
-          </div>
-        </div>
-
-        <div class="tile glow-hover">
-          <h3>Réseaux sociaux</h3>
-          <p>Contenus, cohérence graphique, calendrier éditorial, optimisation et conseils.</p>
-          <div class="proofline" style="margin-top:12px;">
-            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
-          </div>
-        </div>
-
-        <div class="tile glow-hover">
-          <h3>Web & SEO</h3>
-          <p>Page professionnelle, mise à jour site, SEO local, optimisation Google.</p>
-          <div class="proofline" style="margin-top:12px;">
-            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="method" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Méthode"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Un cadre clair, pour avancer efficacement.</p>
-      </div>
-
-      <div class="steps">
-        <div class="step glow-hover">
-          <div class="badgeN">1</div>
-          <h3>Brief & objectifs</h3>
-          <p>Style, formats, cible, offre, priorités (image, visibilité, conversion).</p>
-        </div>
-        <div class="step glow-hover">
-          <div class="badgeN">2</div>
-          <h3>Plan & livrables</h3>
-          <p>Devis clair, calendrier, nombre d’allers-retours, validations.</p>
-        </div>
-        <div class="step glow-hover">
-          <div class="badgeN">3</div>
-          <h3>Production & livraison</h3>
-          <p>Création, déclinaisons et livraison des fichiers HD prêts à l’usage.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ✅ PACKS (REFONTE) -->
     <section id="packs" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="Packs mensuels"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
@@ -1214,10 +1045,6 @@
                   <li><i></i><span>Mise à jour infos (horaires, photos, coordonnées)</span></li>
                   <li><i></i><span>Conseils SEO de base</span></li>
                 </ul>
-                <div class="scrollHint" aria-hidden="true">
-                  <span>Fais défiler</span>
-                  <span class="scrollPill">⌄</span>
-                </div>
               </div>
 
               <div class="packCtaRow">
@@ -1247,10 +1074,6 @@
                   <li><i></i><span>Analyse mensuelle des statistiques</span></li>
                   <li><i></i><span>SEO local optimisé</span></li>
                 </ul>
-                <div class="scrollHint" aria-hidden="true">
-                  <span>Fais défiler</span>
-                  <span class="scrollPill">⌄</span>
-                </div>
               </div>
 
               <div class="packCtaRow">
@@ -1277,10 +1100,6 @@
                   <li><i></i><span>Accompagnement + reporting</span></li>
                   <li><i></i><span>Optimisation web / SEO (selon besoin)</span></li>
                 </ul>
-                <div class="scrollHint" aria-hidden="true">
-                  <span>Fais défiler</span>
-                  <span class="scrollPill">⌄</span>
-                </div>
               </div>
 
               <div class="packCtaRow">
@@ -1291,373 +1110,9 @@
         </div>
       </div>
     </section>
-
-    <section id="galerie" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Filtre par type + aperçu en grand (image entière ✅ + zoom au clic).</p>
-      </div>
-
-      <div class="gallery-actions">
-        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
-        <button type="button" class="seg" data-cat="sites">Sites internet</button>
-        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
-      </div>
-
-      <div class="gallery" id="galleryGrid">
-        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
-          <img src="produit-the.jpg" alt="Visuel produit / branding">
-          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
-          <img src="menu-resto.jpg" alt="Menu restauration">
-          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Promotion" data-src="valentine.jpg">
-          <img src="valentine.jpg" alt="Promotion">
-          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Affiche / Flyer" data-src="maraude.jpg">
-          <img src="maraude.jpg" alt="Affiche / flyer">
-          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
-          <img src="matchday.jpg" alt="Story matchday">
-          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
-          <img src="classico.jpg" alt="Annonce événement">
-          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="sites" data-title="Sites internet — Projets à intégrer" data-src="brand-photo.jpg">
-          <img src="brand-photo.jpg" alt="Projets web à intégrer">
-          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="miniTag">Sites</div></div>
-        </div>
-      </div>
-
-      <div class="soft glow-hover" style="padding:14px; margin-top:12px;">
-        <b>Ajout de projets</b>
-        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Duplique une carte <span class="tiny">shot</span>, remplace <span class="tiny">data-src</span> / <span class="tiny">src</span>,
-          et choisis la catégorie <span class="tiny">data-cat</span>.
-        </div>
-      </div>
-    </section>
-
-    <section id="socialproof" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Réseaux & avis"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Crédibilité & transparence.</p>
-      </div>
-
-      <div class="grid2">
-        <div class="block glow-hover">
-          <b>Réseaux sociaux</b>
-          <p>Suivez mes actus, projets et avant/après : contenu, visuels, communication.</p>
-          <div class="actions">
-            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="btn" id="igBtn" href="#" aria-disabled="true" title="Instagram bientôt disponible">Instagram (bientôt)</a>
-            <a class="btn primary" href="#contact">Demander un devis</a>
-          </div>
-          <div class="muted2 tiny" style="margin-top:10px;">Astuce : dès que ton Instagram est prêt, remplace juste le lien dans le script (IG_URL).</div>
-        </div>
-
-        <div class="block glow-hover">
-          <b>Avis clients</b>
-          <p>Quelques retours (le carrousel défile automatiquement).</p>
-          <div class="actions">
-            <a class="btn primary" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">⭐ Laisser un avis</a>
-            <a class="btn" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir sur Google</a>
-          </div>
-
-          <div class="reviews">
-            <div class="reviews-track" id="reviewsTrack" aria-label="Carrousel d'avis"></div>
-            <button class="revArrow left" type="button" id="revPrev" aria-label="Avis précédent">‹</button>
-            <button class="revArrow right" type="button" id="revNext" aria-label="Avis suivant">›</button>
-            <div class="revDots" id="revDots" aria-hidden="true"></div>
-          </div>
-
-          <div class="muted2 tiny" style="margin-top:10px;">Tu pourras remplacer / ajouter des avis (nom/texte) dans le script en 2 minutes.</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Contact"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Réponse rapide • demande envoyée en direct.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="card glow-hover" style="padding:18px;">
-          <div class="muted" style="line-height:1.8; font-size:14px;">
-            <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
-            <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
-            <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
-            <b>Zone :</b> France entière (à distance)
-          </div>
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="btn primary" href="#contact">Demander un devis</a>
-            <a class="btn" href="tel:+33765232469">Appeler</a>
-            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-        </div>
-
-        <div class="card glow-hover" style="padding:18px;">
-          <div style="font-weight:950;">Demande de devis</div>
-          <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-            Remplissez puis cliquez sur <b>Envoyer</b> : la demande part directement par email.
-          </div>
-
-          <form id="quoteForm" action="https://formsubmit.co/deabreue9@gmail.com" method="POST" accept-charset="UTF-8">
-            <input type="hidden" name="_subject" value="Demande de devis — Site portfolio" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://evadbr91.github.io/#contact" />
-
-            <div class="field">
-              <label for="fName">Nom / Entreprise</label>
-              <input id="fName" name="Nom / Entreprise" type="text" placeholder="Ex : Restaurant Le Sud" required />
-            </div>
-            <div class="field">
-              <label for="fEmail">Votre email</label>
-              <input id="fEmail" name="Email" type="email" placeholder="Ex : contact@..." required />
-            </div>
-            <div class="field">
-              <label for="fPack">Pack souhaité</label>
-              <input id="fPack" name="Pack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
-            </div>
-            <div class="field">
-              <label for="fMsg">Message</label>
-              <textarea id="fMsg" name="Message" placeholder="Secteur, objectif, délai, contenus, web..." required></textarea>
-            </div>
-
-            <div class="hero-actions" style="margin-top:12px;">
-              <button class="btn primary" id="sendBtn" type="submit">Envoyer la demande</button>
-              <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
-            </div>
-
-            <div class="success" id="successBox">
-              Votre demande est en cours d’envoi ✅<br>
-              (Si c’est la première fois, FormSubmit peut demander une confirmation côté Eva.)
-            </div>
-
-            <div class="muted2 tiny" style="margin-top:10px;">
-              Astuce : cliquez sur “Choisir ce pack” → le champ “Pack souhaité” se remplit automatiquement.
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="foot">
-        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
-        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
-      </div>
-    </footer>
   </main>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lb-card" role="dialog" aria-modal="true">
-      <div class="lb-top">
-        <b id="lbTitle">Aperçu</b>
-        <div class="lb-actions">
-          <button id="lbZoom" type="button" title="Zoom">Zoom</button>
-          <button id="lbClose" type="button">Fermer ✕</button>
-        </div>
-      </div>
-      <div class="lb-img" id="lbArea" title="Clique pour zoomer">
-        <img id="lbImg" src="" alt="">
-      </div>
-    </div>
-  </div>
-
-  <!-- WhatsApp Business -->
-  <a class="whatsapp-float"
-     href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
-     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
-    <span class="wh-dot"></span> WhatsApp
-  </a>
-
   <script>
-    // Year
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    // Reveal on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          e.target.classList.add("on");
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-    // ✅ Animate skill bars when visible
-    const skillsBox = document.getElementById("skillsBox");
-    if(skillsBox){
-      const obs2 = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            skillsBox.classList.add("on");
-            obs2.disconnect();
-          }
-        });
-      }, {threshold: 0.3});
-      obs2.observe(skillsBox);
-    }
-
-    // ✅ Typewriter titles
-    function typeOnce(el){
-      const target = el.getAttribute("data-text") || "";
-      const out = el.querySelector(".typeOut");
-      const caret = el.querySelector(".caret");
-      if(!out || el.dataset.typed === "1") return;
-
-      el.dataset.typed = "1";
-      out.textContent = "";
-      let i = 0;
-      const speed = 18;
-      let last = performance.now();
-
-      function step(now){
-        if(now - last < speed){ requestAnimationFrame(step); return; }
-        last = now;
-        out.textContent = target.slice(0, i++);
-        if(i <= target.length){
-          requestAnimationFrame(step);
-        }else{
-          if(caret) caret.style.opacity = "0.0";
-        }
-      }
-      requestAnimationFrame(step);
-    }
-    const titleObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          typeOnce(e.target);
-          titleObserver.unobserve(e.target);
-        }
-      });
-    }, {threshold: 0.3});
-    document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
-
-    // ✅ Nav arrows
-    (function(){
-      const el = document.getElementById("topLinks");
-      const left = document.getElementById("navLeft");
-      const right = document.getElementById("navRight");
-      if(!el || !left || !right) return;
-
-      function refresh(){
-        const overflow = el.scrollWidth > el.clientWidth + 2;
-        left.style.display = overflow ? "inline-flex" : "none";
-        right.style.display = overflow ? "inline-flex" : "none";
-      }
-      function scrollByX(dx){
-        el.scrollBy({ left: dx, behavior: "smooth" });
-      }
-      left.addEventListener("click", () => scrollByX(-220));
-      right.addEventListener("click", () => scrollByX(220));
-      window.addEventListener("resize", refresh);
-      setTimeout(refresh, 60);
-      refresh();
-    })();
-
-    // Gallery filter
-    const segs = Array.from(document.querySelectorAll(".seg"));
-    const shots = Array.from(document.querySelectorAll(".shot"));
-    function setCat(cat){
-      segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-      shots.forEach(it => it.style.display = (it.dataset.cat === cat) ? "" : "none");
-    }
-    segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
-    setCat("visuels");
-
-    // ✅ Lightbox + zoom
-    const lb = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbTitle = document.getElementById("lbTitle");
-    const lbClose = document.getElementById("lbClose");
-    const lbZoom = document.getElementById("lbZoom");
-    const lbArea = document.getElementById("lbArea");
-
-    function openLB(src, title){
-      lbTitle.textContent = title || "Aperçu";
-      lbImg.src = src;
-      lbImg.alt = title || "Aperçu";
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-      lbArea.classList.remove("zoom");
-      lbImg.style.transform = "scale(1)";
-      lbZoom.textContent = "Zoom";
-    }
-    function closeLB(){
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden","true");
-      lbImg.src = "";
-      document.body.style.overflow = "";
-      lbArea.classList.remove("zoom");
-      lbImg.style.transform = "scale(1)";
-      lbZoom.textContent = "Zoom";
-    }
-    function toggleZoom(){
-      const on = lbArea.classList.toggle("zoom");
-      lbZoom.textContent = on ? "Adapter" : "Zoom";
-      lbImg.style.transform = "scale(1)";
-      // en zoom, on garde la taille native -> scroll si nécessaire
-    }
-
-    lbClose.addEventListener("click", closeLB);
-    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
-    window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
-
-    lbZoom.addEventListener("click", toggleZoom);
-    lbArea.addEventListener("click", (e) => {
-      // évite double toggle quand on clique exactement l'image
-      if(e.target === lbImg || e.target === lbArea) toggleZoom();
-    });
-
-    // Wheel zoom léger en mode zoom (optionnel mais pratique)
-    let z = 1;
-    lbArea.addEventListener("wheel", (e) => {
-      if(!lbArea.classList.contains("zoom")) return;
-      e.preventDefault();
-      const delta = Math.sign(e.deltaY);
-      z = Math.max(1, Math.min(3, z + (delta > 0 ? -0.12 : 0.12)));
-      lbImg.style.transform = `scale(${z.toFixed(2)})`;
-    }, { passive:false });
-
-    shots.forEach(s => {
-      s.addEventListener("click", () => {
-        const src = s.getAttribute("data-src");
-        const title = s.getAttribute("data-title");
-        if(src) openLB(src, title);
-      });
-    });
-
-    // ✅ Packs -> choisir ce pack + scroll contact + remplissage
-    const packInput = document.getElementById("fPack");
-    function goContactWithPack(packName){
-      if(packInput && packName) packInput.value = packName;
-      document.getElementById("contact")?.scrollIntoView({behavior:"smooth", block:"start"});
-      setTimeout(()=> document.getElementById("fEmail")?.focus(), 450);
-    }
-    document.querySelectorAll(".choosePack").forEach(btn => {
-      btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
-    });
-
     // ✅ Packs carousel arrows (mobile/tablette)
     (function initPackCarousel(){
       const track = document.getElementById("packsTrack");
@@ -1691,176 +1146,6 @@
       window.addEventListener("resize", () => setTimeout(refresh, 50));
       setTimeout(refresh, 80);
       refresh();
-    })();
-
-    // Copy email
-    const EMAIL = "deabreue9@gmail.com";
-    function copyToClipboard(text){
-      if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-      return Promise.resolve();
-    }
-    const copyMailBtn = document.getElementById("copyMailBtn");
-    copyMailBtn.addEventListener("click", async () => {
-      await copyToClipboard(EMAIL);
-      copyMailBtn.textContent = "Copié ✅";
-      setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
-    });
-
-    // Form UX (message)
-    const quoteForm = document.getElementById("quoteForm");
-    const successBox = document.getElementById("successBox");
-    const sendBtn = document.getElementById("sendBtn");
-    if(quoteForm){
-      quoteForm.addEventListener("submit", () => {
-        sendBtn.textContent = "Envoi...";
-        successBox.classList.add("on");
-      });
-    }
-
-    /* ===========================
-       ✅ Instagram + Avis
-       =========================== */
-    const IG_URL = "https://www.instagram.com/edbra_nd/";
-    const igBtn = document.getElementById("igBtn");
-    if(igBtn){
-      if(IG_URL && IG_URL.startsWith("http")){
-        igBtn.href = IG_URL;
-        igBtn.target = "_blank";
-        igBtn.rel = "noopener";
-        igBtn.textContent = "Instagram";
-        igBtn.removeAttribute("aria-disabled");
-        igBtn.removeAttribute("title");
-      }
-    }
-
-    const reviews = [
-      {
-        name: "Sheylie Berkane",
-        stars: 5,
-        text: "Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février."
-      },
-      {
-        name: "Sandiyya",
-        stars: 5,
-        text: "Je recommande sans hésiter ses services ! Visité en janvier."
-      }
-    ];
-
-    function starsStr(n){
-      const x = Math.max(0, Math.min(5, n));
-      return "★".repeat(x) + "☆".repeat(5 - x);
-    }
-
-    (function initReviews(){
-      const track = document.getElementById("reviewsTrack");
-      const dots = document.getElementById("revDots");
-      const prev = document.getElementById("revPrev");
-      const next = document.getElementById("revNext");
-      const wrap = track?.closest(".reviews");
-
-      if(!track || !dots || !prev || !next) return;
-
-      track.innerHTML = reviews.map(r => `
-        <div class="review" role="group" aria-label="Avis client">
-          <div class="revTop">
-            <div class="revName">${r.name}</div>
-            <div class="revStars" aria-label="${r.stars} sur 5">${starsStr(r.stars)}</div>
-          </div>
-          <div class="revText">${r.text}</div>
-        </div>
-      `).join("");
-
-      const mq = window.matchMedia("(min-width: 980px)");
-      let idx = 0;
-      let timer = null;
-
-      function perView(){ return mq.matches ? 2 : 1; }
-      function pages(){
-        const pv = perView();
-        return Math.max(1, Math.ceil(reviews.length / pv));
-      }
-
-      function buildDots(){
-        const p = pages();
-        dots.innerHTML = "";
-        for(let i=0;i<p;i++){
-          const d = document.createElement("div");
-          d.className = "revDot" + (i===idx ? " on" : "");
-          d.addEventListener("click", () => go(i, true));
-          dots.appendChild(d);
-        }
-        const showNav = p > 1;
-        prev.style.display = showNav ? "inline-flex" : "none";
-        next.style.display = showNav ? "inline-flex" : "none";
-        dots.style.display = showNav ? "flex" : "none";
-      }
-
-      function updateDots(){
-        Array.from(dots.children).forEach((d,i)=> d.classList.toggle("on", i===idx));
-      }
-
-      function clampIdx(){
-        const p = pages();
-        if(idx < 0) idx = p - 1;
-        if(idx > p - 1) idx = 0;
-      }
-
-      function scrollToIdx(smooth){
-        const left = track.clientWidth * idx;
-        track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
-      }
-
-      function go(n, smooth){
-        idx = n;
-        clampIdx();
-        scrollToIdx(smooth);
-        updateDots();
-      }
-
-      function nextOne(){ go(idx + 1, true); }
-      function prevOne(){ go(idx - 1, true); }
-
-      prev.addEventListener("click", prevOne);
-      next.addEventListener("click", nextOne);
-
-      function start(){
-        stop();
-        if(pages() <= 1) return;
-        timer = setInterval(nextOne, 4200);
-      }
-      function stop(){
-        if(timer){ clearInterval(timer); timer = null; }
-      }
-
-      wrap?.addEventListener("mouseenter", stop);
-      wrap?.addEventListener("mouseleave", start);
-      wrap?.addEventListener("focusin", stop);
-      wrap?.addEventListener("focusout", start);
-
-      function onResize(){
-        const p = pages();
-        if(idx > p - 1) idx = p - 1;
-        buildDots();
-        scrollToIdx(false);
-        updateDots();
-        start();
-      }
-
-      mq.addEventListener?.("change", onResize);
-      window.addEventListener("resize", () => {
-        clearTimeout(window.__revResize);
-        window.__revResize = setTimeout(onResize, 120);
-      });
-
-      buildDots();
-      scrollToIdx(false);
-      start();
     })();
   </script>
 </body>
