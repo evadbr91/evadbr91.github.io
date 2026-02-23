@@ -169,7 +169,7 @@
       background: rgba(255,255,255,.04);
       color:rgba(255,255,255,.82);
       cursor:pointer;
-      display:none; /* JS le montre seulement si overflow */
+      display:none;
       align-items:center;
       justify-content:center;
       transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
@@ -190,7 +190,6 @@
       border-radius:999px;
       min-width:0;
 
-      /* fade edges */
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
     .links::-webkit-scrollbar{display:none}
@@ -319,6 +318,11 @@
     }
     .btn.linkedin{
       background: linear-gradient(135deg, rgba(34,211,238,.84), rgba(139,92,246,.84));
+      color:#07070c;
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.ig{
+      background: linear-gradient(135deg, rgba(244,114,182,.85), rgba(139,92,246,.80));
       color:#07070c;
       border-color: rgba(255,255,255,.18);
     }
@@ -544,7 +548,7 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* ✅ PACKS : même hauteur même ouverts */
+    /* ✅ PACKS : même hauteur + drawer scrollable + fade + flèche */
     .packs{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -566,13 +570,9 @@
       display:flex;
       flex-direction:column;
 
-      /* réserve badge */
       padding-top: 44px;
-
-      /* ✅ la clé : hauteur FIXE (desktop) */
       height: var(--packH);
     }
-    /* ✅ Sur mobile : pas de hauteur fixe (sinon ça devient trop petit) */
     @media (max-width: 520px){
       details.pack{ height: auto; }
     }
@@ -641,25 +641,73 @@
       padding:0 16px 16px;
       margin-top:auto;
 
-      /* ✅ zone interne scrollable : la carte ne change PLUS de taille */
       flex: 1 1 auto;
       overflow: hidden;
       display:flex;
       flex-direction:column;
+      gap:10px;
     }
 
-    /* ✅ le contenu détaillé est dans un "drawer" scrollable */
     .pack-drawer{
-      border-top: 1px solid rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.02);
       border-radius:14px;
       padding:10px;
+
       overflow:auto;
       flex: 1 1 auto;
-      display:none; /* fermé */
+      display:none;
+      position:relative;
     }
 
+    /* ✅ scrollbar discrète */
+    .pack-drawer{
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.18) rgba(255,255,255,.04);
+    }
+    .pack-drawer::-webkit-scrollbar{width:10px}
+    .pack-drawer::-webkit-scrollbar-track{background: rgba(255,255,255,.04); border-radius:999px}
+    .pack-drawer::-webkit-scrollbar-thumb{background: rgba(255,255,255,.18); border-radius:999px; border:2px solid rgba(255,255,255,.04)}
+    .pack-drawer::-webkit-scrollbar-thumb:hover{background: rgba(255,255,255,.25)}
+
+    /* ✅ fade bas pour indiquer "y'a du contenu" */
+    .pack-drawer:after{
+      content:"";
+      position:sticky;
+      display:block;
+      bottom:-10px;
+      height:34px;
+      margin-top:-24px;
+      background: linear-gradient(180deg, transparent, rgba(6,6,12,.85));
+      pointer-events:none;
+      border-radius: 0 0 14px 14px;
+    }
+
+    /* ✅ chevron discret */
+    .packScrollHint{
+      position:absolute;
+      right:10px;
+      bottom:12px;
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,12,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:2;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .packScrollHint:hover{ transform: scale(1.06); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
+    .packScrollHint.pulse{ animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse{ 0%,100%{transform: scale(1)} 50%{transform: scale(1.07)} }
+
     details.pack[open] .pack-drawer{ display:block; }
+    details.pack[open] .packScrollHint{ display:inline-flex; }
 
     .list{margin:0; padding:0; list-style:none; display:grid; gap:8px}
     .list li{
@@ -674,8 +722,7 @@
     }
     .list li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
 
-    /* ✅ un seul bouton sur chaque pack */
-    .pack-cta{margin-top:10px}
+    .pack-cta{ margin-top: 0; }
     .pack-cta .btn{width:100%}
 
     .recommended{
@@ -696,6 +743,8 @@
     @media (max-width: 520px){
       details.pack summary{flex-direction:column; align-items:flex-start; gap:10px;}
       .price{ min-width:0; width:100%; text-align:left; }
+      .packScrollHint{ display:none !important; }
+      .pack-drawer:after{ display:none; }
     }
 
     /* Portfolio */
@@ -738,7 +787,6 @@
     }
     .shot:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
 
-    /* ✅ Visuels : on voit TOUT + grand */
     .shot img{
       width:100%;
       height: 320px;
@@ -800,9 +848,110 @@
     .block p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 
-    .embed{margin-top:12px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.02);}
-    .embed iframe{width:100%; height:340px; border:0; display:block; background:#fff;}
-    @media(max-width:520px){ .embed iframe{height:260px;} }
+    /* ✅ Reviews carousel */
+    .reviews{
+      position:relative;
+      margin-top:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+      padding:12px;
+      min-height: 210px;
+    }
+
+    .reviews-track{
+      display:flex;
+      gap:12px;
+      overflow:hidden;
+      scroll-snap-type:x mandatory;
+    }
+
+    .review{
+      flex: 0 0 100%;
+      scroll-snap-align:start;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding:14px;
+      box-shadow: var(--shadow2);
+      position:relative;
+    }
+    @media(min-width:980px){
+      .review{ flex-basis: calc(50% - 6px); }
+    }
+
+    .revTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .revName{
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .revStars{
+      font-size:12px;
+      color: rgba(255,255,255,.85);
+      white-space:nowrap;
+    }
+
+    .revText{
+      margin:10px 0 0;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .revMeta{
+      margin-top:10px;
+      font-size:12px;
+      color: rgba(255,255,255,.55);
+    }
+
+    .revArrow{
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,12,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+      z-index:2;
+    }
+    .revArrow:hover{ transform: translateY(-50%) scale(1.05); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
+    .revArrow.left{ left:10px; }
+    .revArrow.right{ right:10px; }
+
+    .revDots{
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      margin-top:10px;
+    }
+    .revDot{
+      width:7px; height:7px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      opacity:.7;
+    }
+    .revDot.on{
+      opacity:1;
+      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
+      border-color: rgba(255,255,255,.18);
+    }
 
     /* Contact */
     .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
@@ -894,7 +1043,7 @@
       justify-content:center;
       background: rgba(255,255,255,.03);
       padding: 10px;
-      overflow:auto; /* si image ultra haute, on scroll sans couper */
+      overflow:auto;
     }
     .lb-img img{
       max-width: 100%;
@@ -978,7 +1127,7 @@
           <a href="#method">Méthode</a>
           <a href="#packs">Packs</a>
           <a href="#galerie">Portfolio</a>
-          <a href="#socialproof">Avis</a>
+          <a href="#socialproof">Réseaux & Avis</a>
           <a href="#contact">Contact</a>
         </nav>
         <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
@@ -1016,6 +1165,7 @@
           <a class="btn primary" href="#packs">Découvrir les packs</a>
           <a class="btn ghost" href="#galerie">Voir le portfolio</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ig" href="https://www.instagram.com/edbra_nd/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
 
@@ -1104,625 +1254,4 @@
 
             <div class="skill">
               <div class="top"><span>Identité visuelle & supports</span><span>Expertise</span></div>
-              <div class="bar"><span style="width:88%"></span></div>
-            </div>
-
-            <div class="skill">
-              <div class="top"><span>Réseaux sociaux & contenu</span><span>Stratégie</span></div>
-              <div class="bar"><span style="width:84%"></span></div>
-            </div>
-
-            <div class="skill">
-              <div class="top"><span>Google Business & SEO local</span><span>Visibilité</span></div>
-              <div class="bar"><span style="width:78%"></span></div>
-            </div>
-
-            <div class="skill">
-              <div class="top"><span>Web & optimisation</span><span>Performance</span></div>
-              <div class="bar"><span style="width:74%"></span></div>
-            </div>
-          </div>
-
-          <div class="soft glow-hover" style="padding:14px;">
-            <b>Analyse rapide offerte</b>
-            <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-              Partagez votre Instagram, votre fiche Google et votre site :
-              je vous indique <b>3 actions prioritaires</b> pour renforcer la crédibilité et améliorer la visibilité.
-            </div>
-            <div class="hero-actions" style="margin-top:10px;">
-              <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-              <a class="btn primary" href="#contact">Demander l’analyse</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Expertises"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Une base solide + une exécution maîtrisée.</p>
-      </div>
-
-      <div class="grid3">
-        <div class="tile glow-hover">
-          <h3>Identité & supports</h3>
-          <p>Menus, flyers, cartes, affiches, bannières, templates. Print & digital.</p>
-          <div class="proofline" style="margin-top:12px;">
-            <span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span>
-          </div>
-        </div>
-
-        <div class="tile glow-hover">
-          <h3>Réseaux sociaux</h3>
-          <p>Contenus, cohérence graphique, calendrier éditorial, optimisation et conseils.</p>
-          <div class="proofline" style="margin-top:12px;">
-            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
-          </div>
-        </div>
-
-        <div class="tile glow-hover">
-          <h3>Web & SEO</h3>
-          <p>Page professionnelle, mise à jour site, SEO local, optimisation Google.</p>
-          <div class="proofline" style="margin-top:12px;">
-            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="method" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Méthode"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Un cadre clair, pour avancer efficacement.</p>
-      </div>
-
-      <div class="steps">
-        <div class="step glow-hover">
-          <div class="badgeN">1</div>
-          <h3>Brief & objectifs</h3>
-          <p>Style, formats, cible, offre, priorités (image, visibilité, conversion).</p>
-        </div>
-        <div class="step glow-hover">
-          <div class="badgeN">2</div>
-          <h3>Plan & livrables</h3>
-          <p>Devis clair, calendrier, nombre d’allers-retours, validations.</p>
-        </div>
-        <div class="step glow-hover">
-          <div class="badgeN">3</div>
-          <h3>Production & livraison</h3>
-          <p>Création, déclinaisons et livraison des fichiers HD prêts à l’usage.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="packs" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Packs mensuels"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Cliquez sur un pack : les détails s’affichent (pour tous) • taille identique ✅</p>
-      </div>
-
-      <div class="packs">
-        <details class="pack glow-hover">
-          <summary>
-            <div class="pack-head">
-              <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
-              <div class="pack-desc">Base solide : visibilité locale + image cohérente.</div>
-            </div>
-            <div class="price">180€ / mois<small>au lieu de 350€</small></div>
-          </summary>
-
-          <div class="open-hint">Détails du pack</div>
-
-          <div class="peek">
-            <div class="row"><i></i><span>Optimisation Google Business + informations à jour</span></div>
-            <div class="row"><i></i><span>4 posts/mois + 4 visuels premium</span></div>
-            <div class="row"><i></i><span>1 story/semaine + conseils SEO de base</span></div>
-          </div>
-
-          <div class="pack-body">
-            <div class="pack-drawer" aria-label="Détails">
-              <ul class="list">
-                <li><i></i><span>Audit rapide de la présence en ligne</span></li>
-                <li><i></i><span>Optimisation Google Business Profile</span></li>
-                <li><i></i><span>4 posts / mois (Instagram ou Facebook)</span></li>
-                <li><i></i><span>4 visuels premium</span></li>
-                <li><i></i><span>1 story / semaine</span></li>
-                <li><i></i><span>Mise à jour infos (horaires, photos, coordonnées)</span></li>
-                <li><i></i><span>Conseils SEO de base</span></li>
-              </ul>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
-            </div>
-          </div>
-        </details>
-
-        <details class="pack featured glow-hover">
-          <span class="recommended">RECOMMANDÉ</span>
-          <summary>
-            <div class="pack-head">
-              <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
-              <div class="pack-desc">Accélérer : plus de contenu + suivi + visibilité.</div>
-            </div>
-            <div class="price">390€ / mois<small>au lieu de 750€</small></div>
-          </summary>
-
-          <div class="open-hint">Détails du pack</div>
-
-          <div class="peek">
-            <div class="row"><i></i><span>Tout le pack 1 inclus</span></div>
-            <div class="row"><i></i><span>8 posts/mois + visuels + stories</span></div>
-            <div class="row"><i></i><span>SEO local + analyse mensuelle</span></div>
-          </div>
-
-          <div class="pack-body">
-            <div class="pack-drawer" aria-label="Détails">
-              <ul class="list">
-                <li><i></i><span>Tout le pack 1 inclus</span></li>
-                <li><i></i><span>8 posts / mois</span></li>
-                <li><i></i><span>8 visuels premium + déclinaisons</span></li>
-                <li><i></i><span>Stories (rythme hebdomadaire)</span></li>
-                <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
-                <li><i></i><span>Réponse aux avis Google (si accès / droits)</span></li>
-                <li><i></i><span>Analyse mensuelle des statistiques</span></li>
-                <li><i></i><span>SEO local optimisé</span></li>
-              </ul>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
-            </div>
-          </div>
-        </details>
-
-        <details class="pack glow-hover">
-          <summary>
-            <div class="pack-head">
-              <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
-              <div class="pack-desc">Développer : stratégie, branding, contenus + web.</div>
-            </div>
-            <div class="price">790€ / mois<small>au lieu de 1500€</small></div>
-          </summary>
-
-          <div class="open-hint">Détails du pack</div>
-
-          <div class="peek">
-            <div class="row"><i></i><span>Tout le pack 2 inclus</span></div>
-            <div class="row"><i></i><span>Stratégie complète + identité visuelle</span></div>
-            <div class="row"><i></i><span>Accompagnement + reporting</span></div>
-          </div>
-
-          <div class="pack-body">
-            <div class="pack-drawer" aria-label="Détails">
-              <ul class="list">
-                <li><i></i><span>Tout le pack 2 inclus</span></li>
-                <li><i></i><span>Stratégie digitale complète</span></li>
-                <li><i></i><span>Charte graphique + identité visuelle</span></li>
-                <li><i></i><span>Production de contenus intensifiée</span></li>
-                <li><i></i><span>Accompagnement + reporting</span></li>
-                <li><i></i><span>Optimisation web / SEO (selon besoin)</span></li>
-              </ul>
-            </div>
-
-            <div class="pack-cta">
-              <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
-            </div>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <section id="galerie" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Filtre par type + aperçu en grand (image entière ✅).</p>
-      </div>
-
-      <div class="gallery-actions">
-        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
-        <button type="button" class="seg" data-cat="sites">Sites internet</button>
-        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
-      </div>
-
-      <div class="gallery" id="galleryGrid">
-        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
-          <img src="produit-the.jpg" alt="Visuel produit / branding">
-          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
-          <img src="menu-resto.jpg" alt="Menu restauration">
-          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Promotion" data-src="valentine.jpg">
-          <img src="valentine.jpg" alt="Promotion">
-          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="visuels" data-title="Affiche / Flyer" data-src="maraude.jpg">
-          <img src="maraude.jpg" alt="Affiche / flyer">
-          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
-          <img src="matchday.jpg" alt="Story matchday">
-          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
-          <img src="classico.jpg" alt="Annonce événement">
-          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="sites" data-title="Sites internet — Projets à intégrer" data-src="brand-photo.jpg">
-          <img src="brand-photo.jpg" alt="Projets web à intégrer">
-          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="miniTag">Sites</div></div>
-        </div>
-      </div>
-
-      <div class="soft glow-hover" style="padding:14px; margin-top:12px;">
-        <b>Ajout de projets</b>
-        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-          Duplique une carte <span class="tiny">shot</span>, remplace <span class="tiny">data-src</span> / <span class="tiny">src</span>, et choisis la catégorie <span class="tiny">data-cat</span>.
-        </div>
-      </div>
-    </section>
-
-    <section id="socialproof" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="LinkedIn & Avis"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Crédibilité & transparence.</p>
-      </div>
-
-      <div class="grid2">
-        <div class="block glow-hover">
-          <b>LinkedIn</b>
-          <p>Retrouvez mon parcours et mes expériences professionnelles sur LinkedIn.</p>
-          <div class="actions">
-            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir LinkedIn</a>
-            <a class="btn primary" href="#contact">Demander un devis</a>
-          </div>
-        </div>
-
-        <div class="block glow-hover">
-          <b>Avis Google</b>
-          <p>Vous pouvez consulter les avis existants et en laisser un en 1 clic.</p>
-          <div class="actions">
-            <!-- ✅ Mets ici TON lien "laisser un avis" (ou le lien de ta fiche) -->
-            <a class="btn primary" id="leaveReviewBtn" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">⭐ Laisser un avis</a>
-            <a class="btn" id="viewReviewsBtn" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir les avis</a>
-          </div>
-
-          <div class="embed" aria-label="Aperçu avis Google">
-            <!-- ✅ IMPORTANT :
-              Remplace PASTE_GOOGLE_EMBED_SRC_HERE par ton vrai src "Intégrer une carte"
-              (Google Maps → ta fiche → Partager → Intégrer une carte → copie le src).
-            -->
-            <iframe
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=France&output=embed"
-              data-real-src="PASTE_GOOGLE_EMBED_SRC_HERE"
-              title="Avis Google (embed)">
-            </iframe>
-          </div>
-
-          <div class="muted2 tiny" style="margin-top:10px;">
-            Dès que tu me donnes le <b>src embed</b> de ta fiche, je le colle ici et tu verras tes avis directement.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="reveal">
-      <div class="section-head">
-        <h2 class="type-title" data-text="Contact"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Réponse rapide • demande envoyée en direct.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="card glow-hover" style="padding:18px;">
-          <div class="muted" style="line-height:1.8; font-size:14px;">
-            <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
-            <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
-            <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
-            <b>Zone :</b> France entière (à distance)
-          </div>
-
-          <div class="hero-actions" style="margin-top:14px;">
-            <a class="btn primary" href="#contact">Demander un devis</a>
-            <a class="btn" href="tel:+33765232469">Appeler</a>
-            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-        </div>
-
-        <div class="card glow-hover" style="padding:18px;">
-          <div style="font-weight:950;">Demande de devis</div>
-          <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
-            Remplissez puis cliquez sur <b>Envoyer</b> : la demande part directement par email.
-          </div>
-
-          <!-- ✅ FormSubmit : OK sur GitHub Pages.
-               ✅ Astuce anti-message relou : on redirige vers #contact (pas vers FormSubmit).
-               Mets bien l’URL finale de ton site dans _next une fois publié. -->
-          <form id="quoteForm"
-                action="https://formsubmit.co/deabreue9@gmail.com"
-                method="POST"
-                accept-charset="UTF-8">
-            <!-- options FormSubmit -->
-            <input type="hidden" name="_subject" value="Demande de devis — Site portfolio" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <!-- ✅ Remplace l'URL par TON URL finale (celle de GitHub Pages) -->
-            <input type="hidden" name="_next" value="https://evadbr91.github.io/#contact" />
-
-            <div class="field">
-              <label for="fName">Nom / Entreprise</label>
-              <input id="fName" name="Nom / Entreprise" type="text" placeholder="Ex : Restaurant Le Sud" required />
-            </div>
-
-            <div class="field">
-              <label for="fEmail">Votre email</label>
-              <input id="fEmail" name="Email" type="email" placeholder="Ex : contact@..." required />
-            </div>
-
-            <div class="field">
-              <label for="fPack">Pack souhaité</label>
-              <input id="fPack" name="Pack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
-            </div>
-
-            <div class="field">
-              <label for="fMsg">Message</label>
-              <textarea id="fMsg" name="Message" placeholder="Secteur, objectif, délai, contenus, web..." required></textarea>
-            </div>
-
-            <div class="hero-actions" style="margin-top:12px;">
-              <button class="btn primary" id="sendBtn" type="submit">Envoyer la demande</button>
-              <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
-            </div>
-
-            <div class="success" id="successBox">
-              Votre demande est en cours d’envoi ✅<br>
-              (Si c’est la première fois, FormSubmit peut demander une confirmation côté Eva.)
-            </div>
-
-            <div class="muted2 tiny" style="margin-top:10px;">
-              Astuce : cliquez sur “Choisir ce pack” → le champ “Pack souhaité” se remplit automatiquement.
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="foot">
-        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
-        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
-      </div>
-    </footer>
-  </main>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lb-card" role="dialog" aria-modal="true">
-      <div class="lb-top">
-        <b id="lbTitle">Aperçu</b>
-        <button id="lbClose" type="button">Fermer ✕</button>
-      </div>
-      <div class="lb-img">
-        <img id="lbImg" src="" alt="">
-      </div>
-    </div>
-  </div>
-
-  <!-- WhatsApp Business -->
-  <a class="whatsapp-float"
-     href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
-     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
-    <span class="wh-dot"></span>
-    WhatsApp
-  </a>
-
-  <script>
-    // Year
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    // Reveal on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          e.target.classList.add("on");
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-    // ✅ Animate skill bars when visible
-    const skillsBox = document.getElementById("skillsBox");
-    if(skillsBox){
-      const obs2 = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            skillsBox.classList.add("on");
-            obs2.disconnect();
-          }
-        });
-      }, {threshold: 0.3});
-      obs2.observe(skillsBox);
-    }
-
-    // ✅ Typewriter titles (once when section becomes visible)
-    function typeOnce(el){
-      const target = el.getAttribute("data-text") || "";
-      const out = el.querySelector(".typeOut");
-      const caret = el.querySelector(".caret");
-      if(!out || el.dataset.typed === "1") return;
-      el.dataset.typed = "1";
-      out.textContent = "";
-
-      let i = 0;
-      const speed = 18;
-      let last = performance.now();
-
-      function step(now){
-        if(now - last < speed){ requestAnimationFrame(step); return; }
-        last = now;
-        out.textContent = target.slice(0, i++);
-        if(i <= target.length){
-          requestAnimationFrame(step);
-        }else{
-          if(caret) caret.style.opacity = "0.0";
-        }
-      }
-      requestAnimationFrame(step);
-    }
-
-    const titleObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          typeOnce(e.target);
-          titleObserver.unobserve(e.target);
-        }
-      });
-    }, {threshold: 0.3});
-
-    document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
-
-    // ✅ Nav arrows (show only if overflow)
-    (function(){
-      const el = document.getElementById("topLinks");
-      const left = document.getElementById("navLeft");
-      const right = document.getElementById("navRight");
-      if(!el || !left || !right) return;
-
-      function refresh(){
-        const overflow = el.scrollWidth > el.clientWidth + 2;
-        left.style.display = overflow ? "inline-flex" : "none";
-        right.style.display = overflow ? "inline-flex" : "none";
-      }
-
-      function scrollByX(dx){
-        el.scrollBy({ left: dx, behavior: "smooth" });
-      }
-
-      left.addEventListener("click", () => scrollByX(-220));
-      right.addEventListener("click", () => scrollByX(220));
-
-      window.addEventListener("resize", refresh);
-      setTimeout(refresh, 60);
-      refresh();
-    })();
-
-    // Gallery filter
-    const segs = Array.from(document.querySelectorAll(".seg"));
-    const shots = Array.from(document.querySelectorAll(".shot"));
-
-    function setCat(cat){
-      segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-      shots.forEach(it => it.style.display = (it.dataset.cat === cat) ? "" : "none");
-    }
-    segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
-    setCat("visuels");
-
-    // ✅ Lightbox
-    const lb = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbTitle = document.getElementById("lbTitle");
-    const lbClose = document.getElementById("lbClose");
-
-    function openLB(src, title){
-      lbTitle.textContent = title || "Aperçu";
-      lbImg.src = src;
-      lbImg.alt = title || "Aperçu";
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeLB(){
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden","true");
-      lbImg.src = "";
-      document.body.style.overflow = "";
-    }
-    lbClose.addEventListener("click", closeLB);
-    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
-    window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
-
-    shots.forEach(s => {
-      s.addEventListener("click", () => {
-        const src = s.getAttribute("data-src");
-        const title = s.getAttribute("data-title");
-        if(src) openLB(src, title);
-      });
-    });
-
-    // ✅ Packs -> choisir ce pack + scroll contact + remplissage
-    const packInput = document.getElementById("fPack");
-    function goContactWithPack(packName){
-      if(packInput && packName) packInput.value = packName;
-      document.getElementById("contact")?.scrollIntoView({behavior:"smooth", block:"start"});
-      setTimeout(()=> document.getElementById("fEmail")?.focus(), 450);
-    }
-    document.querySelectorAll(".choosePack").forEach(btn => {
-      btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
-    });
-
-    // ✅ Packs: si on ouvre 1 pack, on ouvre/ferme tous (comme tu veux garder)
-    const packDetails = Array.from(document.querySelectorAll("details.pack"));
-    let syncing = false;
-    packDetails.forEach(d => {
-      d.addEventListener("toggle", () => {
-        if(syncing) return;
-        syncing = true;
-        const state = d.open;
-        packDetails.forEach(other => { other.open = state; });
-        syncing = false;
-      });
-    });
-
-    // Copy email
-    const EMAIL = "deabreue9@gmail.com";
-    function copyToClipboard(text){
-      if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-      return Promise.resolve();
-    }
-    const copyMailBtn = document.getElementById("copyMailBtn");
-    copyMailBtn.addEventListener("click", async () => {
-      await copyToClipboard(EMAIL);
-      copyMailBtn.textContent = "Copié ✅";
-      setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
-    });
-
-    // Form UX (message)
-    const quoteForm = document.getElementById("quoteForm");
-    const successBox = document.getElementById("successBox");
-    const sendBtn = document.getElementById("sendBtn");
-    if(quoteForm){
-      quoteForm.addEventListener("submit", () => {
-        sendBtn.textContent = "Envoi...";
-        successBox.classList.add("on");
-      });
-    }
-
-    // ✅ Google Embed : si tu as collé un vrai src, on l'applique (sinon ça reste France propre)
-    (function(){
-      const iframe = document.querySelector("#socialproof iframe");
-      if(!iframe) return;
-      const real = iframe.getAttribute("data-real-src");
-      if(real && real.startsWith("https://www.google.com/maps/embed?pb=")){
-        iframe.src = real;
-      }
-    })();
-  </script>
-</body>
-</html>
+              <div class="bar"><span style="width
