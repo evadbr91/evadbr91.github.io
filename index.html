@@ -305,20 +305,10 @@
       transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
     }
 
-    /* ✅ FIX "trait moche" : pseudo glow sans inset négatif (plus d’artefacts) */
+   /* ✅ SUPPRESSION DEFINITIVE DU GLOW (corrige les traits sur tel + PC) */
 details.pack::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  background:
-    radial-gradient(360px 260px at 22% 8%, rgba(34,211,238,.12), transparent 64%),
-    radial-gradient(380px 280px at 88% 10%, rgba(124,58,237,.12), transparent 66%),
-    radial-gradient(300px 260px at 70% 90%, rgba(244,114,182,.08), transparent 66%);
-  opacity:0;
-  pointer-events:none;
-  transition: opacity .16s ease;
-  z-index:0;
+  display:none !important;
+  content:none !important;
 }
 
     details.pack:hover{
