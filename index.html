@@ -11,22 +11,17 @@
     :root{
       --bg0:#06060b;
       --bg1:#090a12;
-
       --panel: rgba(255,255,255,.06);
       --stroke: rgba(255,255,255,.14);
       --stroke2: rgba(255,255,255,.10);
-
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.70);
       --muted2: rgba(255,255,255,.52);
-
       --a1:#8b5cf6;
       --a2:#22d3ee;
       --a3:#f472b6;
-
       --shadow: 0 18px 70px rgba(0,0,0,.45);
       --shadow2: 0 10px 40px rgba(0,0,0,.25);
-
       --r: 18px;
       --max: 1120px;
 
@@ -35,7 +30,6 @@
 
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     html, body { overflow-x:hidden; }
@@ -46,7 +40,6 @@
       background: linear-gradient(180deg, var(--bg0), var(--bg1) 55%, #060610);
       overflow-x:hidden;
     }
-
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:24px}
     .muted{color:var(--muted)}
@@ -56,9 +49,7 @@
 
     /* Background */
     .bg-glow{
-      position:fixed; inset:-24vmax;
-      pointer-events:none;
-      z-index:-2;
+      position:fixed; inset:-24vmax; pointer-events:none; z-index:-2;
       background:
         radial-gradient(70vmax 55vmax at 18% 18%, rgba(34,211,238,.14), transparent 60%),
         radial-gradient(70vmax 55vmax at 84% 16%, rgba(139,92,246,.18), transparent 60%),
@@ -69,11 +60,11 @@
     }
     .blobs{position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.55; filter: blur(20px); transform: translateZ(0);}
     .blob{
-      position:absolute;
-      width: 44vmax; height: 44vmax; border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 55%),
-                  radial-gradient(circle at 70% 60%, rgba(139,92,246,.18), transparent 55%),
-                  radial-gradient(circle at 40% 80%, rgba(244,114,182,.12), transparent 60%);
+      position:absolute; width: 44vmax; height: 44vmax; border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(139,92,246,.18), transparent 55%),
+        radial-gradient(circle at 40% 80%, rgba(244,114,182,.12), transparent 60%);
       mix-blend-mode: screen;
       opacity:.55;
       animation: floaty 12s ease-in-out infinite;
@@ -82,14 +73,8 @@
     .blob.b2{left:62%; top:-10%; animation-duration: 14s; opacity:.50}
     .blob.b3{left:14%; top:62%; animation-duration: 16s; opacity:.45}
     @keyframes floaty{0%,100%{transform: translate(0,0) scale(1)} 50%{transform: translate(28px,-22px) scale(1.05)}}
-
     body:before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:.05;
-      mix-blend-mode: overlay;
-      z-index:-1;
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.05; mix-blend-mode: overlay; z-index:-1;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
     }
 
@@ -120,14 +105,11 @@
       box-shadow: 0 22px 90px rgba(0,0,0,.55);
     }
     .glow-hover:after{
-      content:"";
-      position:absolute; inset:-1px;
-      border-radius: inherit;
-      pointer-events:none;
-      opacity:0;
-      transition: opacity .18s ease;
-      background: radial-gradient(520px 220px at 20% 10%, rgba(34,211,238,.16), transparent 55%),
-                  radial-gradient(520px 220px at 90% 70%, rgba(139,92,246,.16), transparent 55%);
+      content:""; position:absolute; inset:-1px; border-radius: inherit; pointer-events:none;
+      opacity:0; transition: opacity .18s ease;
+      background:
+        radial-gradient(520px 220px at 20% 10%, rgba(34,211,238,.16), transparent 55%),
+        radial-gradient(520px 220px at 90% 70%, rgba(139,92,246,.16), transparent 55%);
     }
     .glow-hover:hover:after{opacity:1}
 
@@ -139,13 +121,12 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav .wrap{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:nowrap;
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:nowrap;
     }
     .brand{display:flex; align-items:center; gap:12px; flex:0 0 auto; min-width:0;}
     .brand img{
-      width:42px; height:42px; border-radius:16px;
-      object-fit:cover; border:1px solid rgba(255,255,255,.18);
+      width:42px; height:42px; border-radius:16px; object-fit:cover;
+      border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.06);
       box-shadow: var(--shadow2);
       flex:0 0 auto;
@@ -155,52 +136,31 @@
 
     /* ✅ Menu scrollable + flèches */
     .linksWrap{
-      position:relative;
-      flex: 1 1 auto;
-      min-width:0;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      position:relative; flex: 1 1 auto; min-width:0; display:flex; align-items:center; gap:8px;
     }
     .navArrow{
-      width:36px; height:36px;
-      border-radius:999px;
+      width:36px; height:36px; border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
       color:rgba(255,255,255,.82);
       cursor:pointer;
-      display:none;
-      align-items:center;
-      justify-content:center;
+      display:none; /* JS le montre seulement si overflow */
+      align-items:center; justify-content:center;
       transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
       flex:0 0 auto;
     }
     .navArrow:hover{ transform: translateY(-1px); filter:brightness(1.08); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
     .navArrow:active{ transform: translateY(0); }
-
     .links{
-      display:flex;
-      gap:6px;
-      align-items:center;
-      white-space:nowrap;
-      overflow-x:auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width:none;
-      padding: 6px 4px;
-      border-radius:999px;
-      min-width:0;
-
+      display:flex; gap:6px; align-items:center; white-space:nowrap;
+      overflow-x:auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width:none; padding: 6px 4px; border-radius:999px; min-width:0;
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
     .links::-webkit-scrollbar{display:none}
-
     .links a{
-      font-size:13px;
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid transparent;
-      flex:0 0 auto;
+      font-size:13px; color:var(--muted); padding:10px 12px; border-radius:999px;
+      border:1px solid transparent; flex:0 0 auto;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
     .links a:hover{
@@ -209,12 +169,9 @@
       background: rgba(255,255,255,.04);
       transform: translateY(-1px);
     }
-
     .nav-right{display:flex; align-items:center; gap:10px; flex:0 0 auto; white-space:nowrap;}
     .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:11px 14px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:10px; padding:11px 14px; border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
       color:var(--text);
@@ -226,11 +183,9 @@
     .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
     .pill.primary{
       background: linear-gradient(135deg, rgba(34,211,238,.88), rgba(139,92,246,.88));
-      color:#07070c;
-      border-color: rgba(255,255,255,.18);
+      color:#07070c; border-color: rgba(255,255,255,.18);
       box-shadow: 0 18px 55px rgba(34,211,238,.10);
     }
-
     @media(max-width:980px){
       .brand .sub{display:none}
       .nav .wrap{padding-top:12px; padding-bottom:12px;}
@@ -249,34 +204,25 @@
     header{padding:44px 0 8px}
     .hero{display:grid; grid-template-columns: 1.15fr .85fr; gap:14px;}
     @media(max-width:980px){ .hero{grid-template-columns:1fr} header{padding:26px 0 8px} }
-
     .hero-left{padding:26px; position:relative; overflow:hidden}
     .hero-left:after{
-      content:"";
-      position:absolute; inset:-1px;
-      border-radius: var(--r);
-      pointer-events:none;
-      background: radial-gradient(1200px 400px at 30% 0%, rgba(34,211,238,.12), transparent 55%),
-                  radial-gradient(1200px 420px at 100% 40%, rgba(139,92,246,.14), transparent 55%),
-                  radial-gradient(900px 420px at 70% 100%, rgba(244,114,182,.10), transparent 60%);
-      opacity:.85;
-      mask: linear-gradient(#000, transparent 120%);
+      content:""; position:absolute; inset:-1px; border-radius: var(--r); pointer-events:none;
+      background:
+        radial-gradient(1200px 400px at 30% 0%, rgba(34,211,238,.12), transparent 55%),
+        radial-gradient(1200px 420px at 100% 40%, rgba(139,92,246,.14), transparent 55%),
+        radial-gradient(900px 420px at 70% 100%, rgba(244,114,182,.10), transparent 60%);
+      opacity:.85; mask: linear-gradient(#000, transparent 120%);
     }
-
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; position:relative; z-index:1}
     .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
-      font-size:12px;
-      color:var(--muted);
+      font-size:12px; color:var(--muted);
       transition: transform .14s ease, filter .14s ease;
     }
     .chip:hover{ transform: translateY(-2px); filter:brightness(1.08); }
     .dot{width:8px; height:8px; border-radius:999px; background: linear-gradient(135deg, var(--a2), var(--a1)); display:inline-block;}
-
     h1{
       margin:0 0 12px;
       font-size: clamp(34px, 4.4vw, 58px);
@@ -289,19 +235,13 @@
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
     .lead{
-      margin:0 0 18px;
-      line-height:1.75;
-      color:var(--muted);
-      font-size:15px;
-      max-width:78ch;
-      position:relative; z-index:1;
+      margin:0 0 18px; line-height:1.75; color:var(--muted);
+      font-size:15px; max-width:78ch; position:relative; z-index:1;
     }
-
     .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; position:relative; z-index:1}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius:14px;
+      padding:12px 14px; border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
       color:var(--text);
@@ -311,43 +251,21 @@
       white-space:nowrap;
     }
     .btn:hover{transform: translateY(-2px) scale(1.01); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); filter:brightness(1.07)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(139,92,246,.92), rgba(244,114,182,.72));
-      color:#07070c;
-      border-color: rgba(255,255,255,.18);
-    }
-    .btn.linkedin{
-      background: linear-gradient(135deg, rgba(34,211,238,.84), rgba(139,92,246,.84));
-      color:#07070c;
-      border-color: rgba(255,255,255,.18);
-    }
-    .btn.ig{
-      background: linear-gradient(135deg, rgba(244,114,182,.85), rgba(139,92,246,.80));
-      color:#07070c;
-      border-color: rgba(255,255,255,.18);
-    }
+    .btn.primary{ background: linear-gradient(135deg, rgba(139,92,246,.92), rgba(244,114,182,.72)); color:#07070c; border-color: rgba(255,255,255,.18); }
+    .btn.linkedin{ background: linear-gradient(135deg, rgba(34,211,238,.84), rgba(139,92,246,.84)); color:#07070c; border-color: rgba(255,255,255,.18); }
     .btn.ghost{ background: rgba(255,255,255,.02); }
 
     .hero-right{padding:14px; display:flex; flex-direction:column; gap:10px}
-
     .profile{
-      padding:16px;
-      display:flex;
-      gap:12px;
-      align-items:center;
+      padding:16px; display:flex; gap:12px; align-items:center;
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden;
     }
-
     /* ✅ petit truc qui tourne (orb) */
     .orb{
-      position:absolute;
-      right:-24px; top:-24px;
-      width:90px; height:90px;
-      border-radius:999px;
+      position:absolute; right:-24px; top:-24px; width:90px; height:90px; border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
       background:
         radial-gradient(circle at 30% 30%, rgba(34,211,238,.22), transparent 55%),
@@ -357,19 +275,10 @@
       opacity:.8;
       animation: spin 8s linear infinite;
     }
-    .orb:after{
-      content:"";
-      position:absolute; inset:10px;
-      border-radius:999px;
-      border:1px dashed rgba(255,255,255,.18);
-      opacity:.7;
-    }
+    .orb:after{ content:""; position:absolute; inset:10px; border-radius:999px; border:1px dashed rgba(255,255,255,.18); opacity:.7; }
     @keyframes spin{to{transform: rotate(360deg)}}
-
     .avatar{
-      width:76px; height:76px;
-      border-radius:22px;
-      overflow:hidden;
+      width:76px; height:76px; border-radius:22px; overflow:hidden;
       border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.05);
       box-shadow: var(--shadow2);
@@ -380,7 +289,6 @@
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
     .profile b{display:block; font-size:14px}
     .profile span{display:block; margin-top:5px; color:var(--muted); font-size:12px; line-height:1.4}
-
     .stat{
       padding:14px;
       border-radius: var(--r);
@@ -396,21 +304,13 @@
       display:flex; align-items:flex-end; justify-content:space-between;
       gap:12px; margin:12px 0 12px;
     }
-
     /* ✅ titres “qui s’écrivent” */
     .type-title{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.2px;
-      min-height: 22px;
-      display:flex;
-      align-items:flex-end;
-      gap:8px;
+      margin:0; font-size:16px; letter-spacing:.2px;
+      min-height: 22px; display:flex; align-items:flex-end; gap:8px;
     }
     .caret{
-      width:10px;
-      height:18px;
-      border-right:2px solid rgba(255,255,255,.7);
+      width:10px; height:18px; border-right:2px solid rgba(255,255,255,.7);
       transform: translateY(2px);
       animation: blink 1s steps(1) infinite;
       opacity:.9;
@@ -424,26 +324,25 @@
     .about-left{ padding:18px; position:relative; overflow:hidden; }
     .about-left:before{
       content:""; position:absolute; inset:-1px; pointer-events:none; border-radius: var(--r);
-      background: radial-gradient(900px 400px at 0% 0%, rgba(139,92,246,.14), transparent 55%),
-                  radial-gradient(900px 420px at 100% 40%, rgba(34,211,238,.12), transparent 58%);
+      background:
+        radial-gradient(900px 400px at 0% 0%, rgba(139,92,246,.14), transparent 55%),
+        radial-gradient(900px 420px at 100% 40%, rgba(34,211,238,.12), transparent 58%);
       opacity:.75; mask: linear-gradient(#000, transparent 120%);
     }
     .about-right{ padding:18px; display:grid; gap:10px; }
     .about h3{ margin:0 0 8px; font-size:14px; letter-spacing:.2px; position:relative; z-index:1 }
     .about p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.75; position:relative; z-index:1 }
-
     .proofline{ margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; position:relative; z-index:1 }
     .tag{
-      font-size:12px; color:var(--muted);
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      padding:6px 9px; border-radius:999px;
-      font-weight:900;
-      transition: transform .14s ease, filter .14s ease;
+      font-size:12px; color:var(--muted); border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03); padding:6px 9px; border-radius:999px;
+      font-weight:900; transition: transform .14s ease, filter .14s ease;
     }
     .tag:hover{transform: translateY(-2px); filter:brightness(1.1)}
-
-    .points{ margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px; position:relative; z-index:1; }
+    .points{
+      margin:12px 0 0; padding:0; list-style:none;
+      display:grid; gap:8px; position:relative; z-index:1;
+    }
     .points li{
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 12px; border-radius:14px;
@@ -458,7 +357,6 @@
       background: linear-gradient(135deg, var(--a2), var(--a1));
       margin-top:4px; flex:0 0 auto; display:inline-block;
     }
-
     .mini-cards{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     @media(max-width:520px){ .mini-cards{grid-template-columns:1fr} }
     .mini-card{
@@ -479,7 +377,10 @@
     }
     .skill{ display:grid; gap:8px; margin-top:10px; }
     .skill:first-child{ margin-top:0; }
-    .skill .top{ display:flex; justify-content:space-between; gap:10px; font-size:12px; color:rgba(255,255,255,.78); font-weight:900; }
+    .skill .top{
+      display:flex; justify-content:space-between; gap:10px;
+      font-size:12px; color:rgba(255,255,255,.78); font-weight:900;
+    }
     .bar{
       height:10px; border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
@@ -487,12 +388,10 @@
       overflow:hidden;
     }
     .bar > span{
-      display:block; height:100%;
-      border-radius:999px;
+      display:block; height:100%; border-radius:999px;
       background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.90), rgba(244,114,182,.75));
       box-shadow: 0 10px 30px rgba(34,211,238,.10);
-      transform: scaleX(0);
-      transform-origin:left;
+      transform: scaleX(0); transform-origin:left;
       transition: transform .9s cubic-bezier(.2,.9,.2,1);
     }
     .skills.on .bar > span{transform: scaleX(1);}
@@ -510,8 +409,9 @@
     }
     .tile:before{
       content:""; position:absolute; inset:-1px; pointer-events:none;
-      background: radial-gradient(420px 220px at 10% 0%, rgba(34,211,238,.10), transparent 60%),
-                  radial-gradient(420px 220px at 100% 60%, rgba(139,92,246,.10), transparent 60%);
+      background:
+        radial-gradient(420px 220px at 10% 0%, rgba(34,211,238,.10), transparent 60%),
+        radial-gradient(420px 220px at 100% 60%, rgba(139,92,246,.10), transparent 60%);
       opacity:.9;
     }
     .tile > *{ position:relative; z-index:1; }
@@ -538,8 +438,7 @@
     .step > *{ position:relative; z-index:1; }
     .step:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
     .badgeN{
-      width:30px;height:30px;border-radius:12px;
-      display:inline-flex; align-items:center; justify-content:center;
+      width:30px;height:30px;border-radius:12px; display:inline-flex; align-items:center; justify-content:center;
       font-weight:950; color:#07070c;
       background: linear-gradient(135deg, rgba(34,211,238,.92), rgba(139,92,246,.92));
       border:1px solid rgba(255,255,255,.16);
@@ -548,15 +447,11 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    /* ✅ PACKS : même hauteur + drawer scrollable + fade + flèche */
+    /* ✅ PACKS : même hauteur même ouverts */
     .packs{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      align-items:stretch;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:stretch;
     }
     @media(max-width:980px){ .packs{grid-template-columns:1fr} }
-
     details.pack{
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
@@ -566,68 +461,39 @@
       transform: translateZ(0);
       background-clip: padding-box;
       position:relative;
-
-      display:flex;
-      flex-direction:column;
-
+      display:flex; flex-direction:column;
       padding-top: 44px;
       height: var(--packH);
     }
-    @media (max-width: 520px){
-      details.pack{ height: auto; }
-    }
-
+    @media (max-width: 520px){ details.pack{ height: auto; } }
     details.pack summary{
-      list-style:none;
-      cursor:pointer;
+      list-style:none; cursor:pointer;
       padding:16px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
       flex:0 0 auto;
     }
     details.pack summary::-webkit-details-marker{display:none}
-
     .pack-head{min-height: 90px;}
     .pack-title{font-weight:950; font-size:14px}
     .pack-desc{margin-top:6px; color:var(--muted); font-size:12.8px; line-height:1.55}
-
     .price{
       flex:0 0 auto;
-      padding:10px 12px;
-      border-radius:999px;
-      color:#07070c;
-      font-weight:950;
+      padding:10px 12px; border-radius:999px;
+      color:#07070c; font-weight:950;
       background: linear-gradient(135deg, rgba(34,211,238,.90), rgba(139,92,246,.92));
       border:1px solid rgba(255,255,255,.16);
-      white-space:nowrap;
-      text-align:right;
-      line-height:1.2;
+      white-space:nowrap; text-align:right; line-height:1.2;
       min-width: 160px;
     }
     .price small{display:block; opacity:.82; font-size:11px; margin-top:4px}
-
-    .open-hint{
-      padding:0 16px 12px;
-      color:rgba(255,255,255,.60);
-      font-size:12px;
-      flex:0 0 auto;
-    }
-
-    .peek{
-      padding:0 16px 12px;
-      display:grid; gap:8px;
-      flex:0 0 auto;
-    }
+    .open-hint{ padding:0 16px 12px; color:rgba(255,255,255,.60); font-size:12px; flex:0 0 auto; }
+    .peek{ padding:0 16px 12px; display:grid; gap:8px; flex:0 0 auto; }
     .peek .row{
       display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px;
-      border-radius:14px;
+      padding:10px 12px; border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:13px;
+      color:var(--muted); font-size:13px;
       transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
     .peek .row:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
@@ -636,101 +502,38 @@
       background: linear-gradient(135deg, var(--a3), var(--a2));
       margin-top:4px; flex:0 0 auto; display:inline-block;
     }
-
     .pack-body{
       padding:0 16px 16px;
       margin-top:auto;
-
       flex: 1 1 auto;
       overflow: hidden;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+      display:flex; flex-direction:column;
     }
-
     .pack-drawer{
-      border:1px solid rgba(255,255,255,.10);
+      border-top: 1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.02);
       border-radius:14px;
       padding:10px;
-
       overflow:auto;
       flex: 1 1 auto;
       display:none;
-      position:relative;
     }
-
-    /* ✅ scrollbar discrète */
-    .pack-drawer{
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,.18) rgba(255,255,255,.04);
-    }
-    .pack-drawer::-webkit-scrollbar{width:10px}
-    .pack-drawer::-webkit-scrollbar-track{background: rgba(255,255,255,.04); border-radius:999px}
-    .pack-drawer::-webkit-scrollbar-thumb{background: rgba(255,255,255,.18); border-radius:999px; border:2px solid rgba(255,255,255,.04)}
-    .pack-drawer::-webkit-scrollbar-thumb:hover{background: rgba(255,255,255,.25)}
-
-    /* ✅ fade bas pour indiquer "y'a du contenu" */
-    .pack-drawer:after{
-      content:"";
-      position:sticky;
-      display:block;
-      bottom:-10px;
-      height:34px;
-      margin-top:-24px;
-      background: linear-gradient(180deg, transparent, rgba(6,6,12,.85));
-      pointer-events:none;
-      border-radius: 0 0 14px 14px;
-    }
-
-    /* ✅ chevron discret */
-    .packScrollHint{
-      position:absolute;
-      right:10px;
-      bottom:12px;
-      width:34px;
-      height:34px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(6,6,12,.55);
-      backdrop-filter: blur(10px);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:2;
-      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .packScrollHint:hover{ transform: scale(1.06); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
-    .packScrollHint.pulse{ animation: pulse 1.6s ease-in-out infinite; }
-    @keyframes pulse{ 0%,100%{transform: scale(1)} 50%{transform: scale(1.07)} }
-
     details.pack[open] .pack-drawer{ display:block; }
-    details.pack[open] .packScrollHint{ display:inline-flex; }
-
     .list{margin:0; padding:0; list-style:none; display:grid; gap:8px}
     .list li{
       display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px;
-      border-radius:14px;
+      padding:10px 12px; border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:13px;
+      color:var(--muted); font-size:13px;
       transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
     .list li:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05);}
-
-    .pack-cta{ margin-top: 0; }
+    .pack-cta{margin-top:10px}
     .pack-cta .btn{width:100%}
-
     .recommended{
-      position:absolute;
-      top:12px; left:12px;
-      font-size:11px;
-      padding:7px 10px;
-      border-radius:999px;
+      position:absolute; top:12px; left:12px;
+      font-size:11px; padding:7px 10px; border-radius:999px;
       border:1px solid rgba(34,211,238,.35);
       background: rgba(34,211,238,.12);
       backdrop-filter: blur(10px);
@@ -739,19 +542,15 @@
     }
     details.pack.featured{ border-color: rgba(34,211,238,.32) }
     details.pack[open]{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18) }
-
     @media (max-width: 520px){
       details.pack summary{flex-direction:column; align-items:flex-start; gap:10px;}
       .price{ min-width:0; width:100%; text-align:left; }
-      .packScrollHint{ display:none !important; }
-      .pack-drawer:after{ display:none; }
     }
 
     /* Portfolio */
     .gallery-actions{display:flex; gap:10px; flex-wrap:wrap}
     .seg{
-      padding:10px 12px;
-      border-radius:999px;
+      padding:10px 12px; border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       color:var(--muted);
@@ -760,21 +559,10 @@
       transition: transform .12s ease, background .12s ease, border-color .12s ease, filter .12s ease;
     }
     .seg:hover{transform: translateY(-2px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); filter:brightness(1.07)}
-    .seg.active{
-      color:#07070c;
-      background: linear-gradient(135deg, rgba(139,92,246,.88), rgba(34,211,238,.72));
-      border-color: rgba(255,255,255,.16);
-    }
-
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-      margin-top:12px;
-    }
+    .seg.active{ color:#07070c; background: linear-gradient(135deg, rgba(139,92,246,.88), rgba(34,211,238,.72)); border-color: rgba(255,255,255,.16); }
+    .gallery{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px; }
     @media(max-width:980px){ .gallery{grid-template-columns:1fr 1fr} }
     @media(max-width:520px){ .gallery{grid-template-columns:1fr} }
-
     .shot{
       border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
@@ -786,7 +574,7 @@
       position:relative;
     }
     .shot:hover{transform: translateY(-3px) scale(1.01); border-color: rgba(255,255,255,.18); filter:brightness(1.06)}
-
+    /* ✅ Visuels : on voit TOUT + grand */
     .shot img{
       width:100%;
       height: 320px;
@@ -798,12 +586,9 @@
     }
     @media (max-width: 980px){ .shot img{ height: 300px; } }
     @media (max-width: 520px){ .shot img{ height: 320px; padding:14px; } }
-
     .cap{
-      position:absolute;
-      left:10px; right:10px; bottom:10px;
-      border-radius:14px;
-      padding:10px 12px;
+      position:absolute; left:10px; right:10px; bottom:10px;
+      border-radius:14px; padding:10px 12px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(6,6,12,.72);
       backdrop-filter: blur(12px);
@@ -812,10 +597,7 @@
     .cap b{font-size:12px}
     .cap span{font-size:11px; color:var(--muted)}
     .miniTag{
-      font-size:11px;
-      font-weight:950;
-      padding:6px 9px;
-      border-radius:999px;
+      font-size:11px; font-weight:950; padding:6px 9px; border-radius:999px;
       border:1px solid rgba(139,92,246,.35);
       background: rgba(139,92,246,.16);
       white-space:nowrap;
@@ -825,21 +607,18 @@
     .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     @media(max-width:980px){ .grid2{grid-template-columns:1fr} }
     .block{
-      padding:18px;
-      border-radius: var(--r);
+      padding:18px; border-radius: var(--r);
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden;
       transition: transform .18s ease, filter .18s ease, border-color .18s ease;
     }
     .block:before{
-      content:"";
-      position:absolute; inset:-1px;
-      pointer-events:none;
-      background: radial-gradient(520px 240px at 0% 0%, rgba(34,211,238,.10), transparent 60%),
-                  radial-gradient(520px 240px at 100% 70%, rgba(244,114,182,.09), transparent 60%);
+      content:""; position:absolute; inset:-1px; pointer-events:none;
+      background:
+        radial-gradient(520px 240px at 0% 0%, rgba(34,211,238,.10), transparent 60%),
+        radial-gradient(520px 240px at 100% 70%, rgba(244,114,182,.09), transparent 60%);
       opacity:.85;
     }
     .block > *{ position:relative; z-index:1; }
@@ -848,115 +627,9 @@
     .block p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     .block .actions{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 
-    /* ✅ Reviews carousel */
-    .reviews{
-      position:relative;
-      margin-top:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.02);
-      overflow:hidden;
-      padding:12px;
-      min-height: 210px;
-    }
-
-    .reviews-track{
-      display:flex;
-      gap:12px;
-      overflow:hidden;
-      scroll-snap-type:x mandatory;
-    }
-
-    .review{
-      flex: 0 0 100%;
-      scroll-snap-align:start;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding:14px;
-      box-shadow: var(--shadow2);
-      position:relative;
-    }
-    @media(min-width:980px){
-      .review{ flex-basis: calc(50% - 6px); }
-    }
-
-    .revTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .revName{
-      font-weight:950;
-      font-size:13px;
-    }
-
-    .revStars{
-      font-size:12px;
-      color: rgba(255,255,255,.85);
-      white-space:nowrap;
-    }
-
-    .revText{
-      margin:10px 0 0;
-      color: var(--muted);
-      font-size:13px;
-      line-height:1.65;
-    }
-
-    .revMeta{
-      margin-top:10px;
-      font-size:12px;
-      color: rgba(255,255,255,.55);
-    }
-
-    .revArrow{
-      position:absolute;
-      top:50%;
-      transform: translateY(-50%);
-      width:34px;
-      height:34px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(6,6,12,.55);
-      backdrop-filter: blur(10px);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
-      z-index:2;
-    }
-    .revArrow:hover{ transform: translateY(-50%) scale(1.05); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
-    .revArrow.left{ left:10px; }
-    .revArrow.right{ right:10px; }
-
-    .revDots{
-      display:flex;
-      justify-content:center;
-      gap:6px;
-      margin-top:10px;
-    }
-    .revDot{
-      width:7px; height:7px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
-      opacity:.7;
-    }
-    .revDot.on{
-      opacity:1;
-      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
-      border-color: rgba(255,255,255,.18);
-    }
-
     /* Contact */
     .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     @media(max-width:980px){ .contact-grid{grid-template-columns:1fr} }
-
     .field{display:grid; gap:8px; margin-top:12px}
     label{font-size:12px; color:var(--muted); font-weight:850}
     input, textarea{
@@ -976,7 +649,6 @@
       box-shadow: 0 0 0 4px rgba(34,211,238,.10);
       filter:brightness(1.03);
     }
-
     .success{
       display:none;
       margin-top:12px;
@@ -991,15 +663,17 @@
     .success.on{display:block}
 
     footer{padding:28px 0 60px; color:var(--muted2); font-size:13px;}
-    .foot{border-top: 1px solid rgba(255,255,255,.10); padding-top:18px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;}
+    .foot{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top:18px;
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    }
 
     /* ✅ Lightbox : image TOUJOURS entière (fit viewport) */
     .lightbox{
       position:fixed; inset:0;
       background: rgba(0,0,0,.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
+      display:none; align-items:center; justify-content:center;
       padding:18px;
       z-index:1000;
     }
@@ -1007,8 +681,7 @@
     .lb-card{
       width:min(1100px, 96vw);
       max-height: min(92vh, 920px);
-      display:flex;
-      flex-direction:column;
+      display:flex; flex-direction:column;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(6,6,12,.80);
@@ -1038,9 +711,7 @@
     .lb-top button:hover{transform: translateY(-1px); filter:brightness(1.08)}
     .lb-img{
       flex: 1 1 auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
       background: rgba(255,255,255,.03);
       padding: 10px;
       overflow:auto;
@@ -1048,8 +719,7 @@
     .lb-img img{
       max-width: 100%;
       max-height: 100%;
-      width:auto;
-      height:auto;
+      width:auto; height:auto;
       object-fit: contain;
       display:block;
       border-radius: 12px;
@@ -1058,12 +728,8 @@
 
     /* WhatsApp */
     .whatsapp-float{
-      position:fixed;
-      right:18px; bottom:18px;
-      z-index:1200;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      position:fixed; right:18px; bottom:18px; z-index:1200;
+      display:inline-flex; align-items:center; gap:10px;
       padding:12px 14px;
       border-radius:999px;
       background: rgba(255,255,255,.92);
@@ -1076,6 +742,7 @@
     }
     .whatsapp-float:hover{ transform: translateY(-2px); filter:brightness(1.02); }
     .wh-dot{width:12px;height:12px;border-radius:999px; background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(139,92,246,.95));}
+
     @media (max-width: 520px){
       .wrap{ padding:18px; }
       .hero-left{ padding:18px; }
@@ -1098,6 +765,70 @@
       .caret{ animation:none !important; opacity:1; }
       html{ scroll-behavior:auto; }
     }
+
+    /* ✅ Reviews carousel (AJOUT) */
+    .reviews{
+      position:relative;
+      margin-top:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+      padding:12px;
+      min-height: 210px; /* pas trop grand */
+    }
+    .reviews-track{
+      display:flex;
+      gap:12px;
+      overflow:hidden;
+      scroll-snap-type:x mandatory;
+    }
+    .review{
+      flex: 0 0 100%;
+      scroll-snap-align:start;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding:14px;
+      box-shadow: var(--shadow2);
+      position:relative;
+    }
+    @media(min-width:980px){
+      .review{ flex-basis: calc(50% - 6px); } /* 2 avis visibles sur desktop */
+    }
+    .revTop{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .revName{ font-weight:950; font-size:13px; }
+    .revStars{ font-size:12px; color: rgba(255,255,255,.85); white-space:nowrap; }
+    .revText{ margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.65; }
+    .revArrow{
+      position:absolute; top:50%; transform: translateY(-50%);
+      width:34px; height:34px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,12,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .revArrow:hover{ transform: translateY(-50%) scale(1.05); filter:brightness(1.08); border-color: rgba(255,255,255,.18); }
+    .revArrow.left{ left:10px; }
+    .revArrow.right{ right:10px; }
+    .revDots{ display:flex; justify-content:center; gap:6px; margin-top:10px; }
+    .revDot{
+      width:7px; height:7px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      opacity:.7;
+    }
+    .revDot.on{
+      opacity:1;
+      background: linear-gradient(135deg, rgba(34,211,238,.85), rgba(139,92,246,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* ✅ Instagram button disabled look */
+    a[aria-disabled="true"]{ pointer-events:none; opacity:.55; filter: grayscale(.25); }
   </style>
 </head>
 
@@ -1127,7 +858,7 @@
           <a href="#method">Méthode</a>
           <a href="#packs">Packs</a>
           <a href="#galerie">Portfolio</a>
-          <a href="#socialproof">Réseaux & Avis</a>
+          <a href="#socialproof">Avis</a>
           <a href="#contact">Contact</a>
         </nav>
         <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
@@ -1150,8 +881,8 @@
         </div>
 
         <h1>
-          Une communication <span class="grad">professionnelle</span> qui inspire confiance…
-          et génère des <span class="grad">demandes</span>.
+          Une communication <span class="grad">professionnelle</span> qui inspire confiance… et génère des
+          <span class="grad">demandes</span>.
         </h1>
 
         <p class="lead">
@@ -1165,7 +896,6 @@
           <a class="btn primary" href="#packs">Découvrir les packs</a>
           <a class="btn ghost" href="#galerie">Voir le portfolio</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ig" href="https://www.instagram.com/edbra_nd/" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
 
@@ -1198,7 +928,6 @@
   </header>
 
   <main class="wrap">
-
     <section id="about" class="reveal">
       <div class="section-head">
         <h2 class="type-title" data-text="À propos"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
@@ -1208,14 +937,12 @@
       <div class="about">
         <div class="card about-left glow-hover">
           <h3>Une communication claire, cohérente et rentable.</h3>
-
           <p>
-            Je suis <b>Eva De Abreu</b>, freelance en <b>communication & marketing</b>.
-            J’accompagne les TPE/PME, indépendants et commerces dans la construction d’une présence en ligne
-            <b>professionnelle</b>, <b>harmonisée</b> et <b>efficace</b>.
+            Je suis <b>Eva De Abreu</b>, freelance en <b>communication & marketing</b>. J’accompagne les TPE/PME, indépendants et commerces
+            dans la construction d’une présence en ligne <b>professionnelle</b>, <b>harmonisée</b> et <b>efficace</b>.
             <br><br>
-            Mon objectif : transformer votre image en <b>levier de confiance</b> et vos supports (réseaux, Google, site)
-            en <b>levier de demandes</b>.
+            Mon objectif : transformer votre image en <b>levier de confiance</b> et vos supports (réseaux, Google, site) en
+            <b>levier de demandes</b>.
           </p>
 
           <div class="proofline">
@@ -1254,4 +981,741 @@
 
             <div class="skill">
               <div class="top"><span>Identité visuelle & supports</span><span>Expertise</span></div>
-              <div class="bar"><span style="width
+              <div class="bar"><span style="width:88%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="top"><span>Réseaux sociaux & contenu</span><span>Stratégie</span></div>
+              <div class="bar"><span style="width:84%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="top"><span>Google Business & SEO local</span><span>Visibilité</span></div>
+              <div class="bar"><span style="width:78%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="top"><span>Web & optimisation</span><span>Performance</span></div>
+              <div class="bar"><span style="width:74%"></span></div>
+            </div>
+          </div>
+
+          <div class="soft glow-hover" style="padding:14px;">
+            <b>Analyse rapide offerte</b>
+            <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+              Partagez votre Instagram, votre fiche Google et votre site : je vous indique <b>3 actions prioritaires</b>
+              pour renforcer la crédibilité et améliorer la visibilité.
+            </div>
+            <div class="hero-actions" style="margin-top:10px;">
+              <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn primary" href="#contact">Demander l’analyse</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Expertises"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Une base solide + une exécution maîtrisée.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="tile glow-hover">
+          <h3>Identité & supports</h3>
+          <p>Menus, flyers, cartes, affiches, bannières, templates. Print & digital.</p>
+          <div class="proofline" style="margin-top:12px;">
+            <span class="tag">Branding</span><span class="tag">Print</span><span class="tag">Templates</span>
+          </div>
+        </div>
+
+        <div class="tile glow-hover">
+          <h3>Réseaux sociaux</h3>
+          <p>Contenus, cohérence graphique, calendrier éditorial, optimisation et conseils.</p>
+          <div class="proofline" style="margin-top:12px;">
+            <span class="tag">Posts</span><span class="tag">Stories</span><span class="tag">Stratégie</span>
+          </div>
+        </div>
+
+        <div class="tile glow-hover">
+          <h3>Web & SEO</h3>
+          <p>Page professionnelle, mise à jour site, SEO local, optimisation Google.</p>
+          <div class="proofline" style="margin-top:12px;">
+            <span class="tag">Web</span><span class="tag">SEO local</span><span class="tag">Conversion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="method" class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Méthode"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Un cadre clair, pour avancer efficacement.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step glow-hover">
+          <div class="badgeN">1</div>
+          <h3>Brief & objectifs</h3>
+          <p>Style, formats, cible, offre, priorités (image, visibilité, conversion).</p>
+        </div>
+        <div class="step glow-hover">
+          <div class="badgeN">2</div>
+          <h3>Plan & livrables</h3>
+          <p>Devis clair, calendrier, nombre d’allers-retours, validations.</p>
+        </div>
+        <div class="step glow-hover">
+          <div class="badgeN">3</div>
+          <h3>Production & livraison</h3>
+          <p>Création, déclinaisons et livraison des fichiers HD prêts à l’usage.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="packs" class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Packs mensuels"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Cliquez sur un pack : les détails s’affichent (pour tous) • taille identique ✅</p>
+      </div>
+
+      <div class="packs">
+        <details class="pack glow-hover">
+          <summary>
+            <div class="pack-head">
+              <div class="pack-title">🌿 Pack 1 — Visibilité Essentielle</div>
+              <div class="pack-desc">Base solide : visibilité locale + image cohérente.</div>
+            </div>
+            <div class="price">180€ / mois<small>au lieu de 350€</small></div>
+          </summary>
+
+          <div class="open-hint">Détails du pack</div>
+          <div class="peek">
+            <div class="row"><i></i><span>Optimisation Google Business + informations à jour</span></div>
+            <div class="row"><i></i><span>4 posts/mois + 4 visuels premium</span></div>
+            <div class="row"><i></i><span>1 story/semaine + conseils SEO de base</span></div>
+          </div>
+
+          <div class="pack-body">
+            <div class="pack-drawer" aria-label="Détails">
+              <ul class="list">
+                <li><i></i><span>Audit rapide de la présence en ligne</span></li>
+                <li><i></i><span>Optimisation Google Business Profile</span></li>
+                <li><i></i><span>4 posts / mois (Instagram ou Facebook)</span></li>
+                <li><i></i><span>4 visuels premium</span></li>
+                <li><i></i><span>1 story / semaine</span></li>
+                <li><i></i><span>Mise à jour infos (horaires, photos, coordonnées)</span></li>
+                <li><i></i><span>Conseils SEO de base</span></li>
+              </ul>
+            </div>
+
+            <div class="pack-cta">
+              <button class="btn primary choosePack" type="button" data-pack="Pack 1 — Visibilité Essentielle">Choisir ce pack</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="pack featured glow-hover">
+          <span class="recommended">RECOMMANDÉ</span>
+          <summary>
+            <div class="pack-head">
+              <div class="pack-title">🚀 Pack 2 — Croissance Digitale</div>
+              <div class="pack-desc">Accélérer : plus de contenu + suivi + visibilité.</div>
+            </div>
+            <div class="price">390€ / mois<small>au lieu de 750€</small></div>
+          </summary>
+
+          <div class="open-hint">Détails du pack</div>
+          <div class="peek">
+            <div class="row"><i></i><span>Tout le pack 1 inclus</span></div>
+            <div class="row"><i></i><span>8 posts/mois + visuels + stories</span></div>
+            <div class="row"><i></i><span>SEO local + analyse mensuelle</span></div>
+          </div>
+
+          <div class="pack-body">
+            <div class="pack-drawer" aria-label="Détails">
+              <ul class="list">
+                <li><i></i><span>Tout le pack 1 inclus</span></li>
+                <li><i></i><span>8 posts / mois</span></li>
+                <li><i></i><span>8 visuels premium + déclinaisons</span></li>
+                <li><i></i><span>Stories (rythme hebdomadaire)</span></li>
+                <li><i></i><span>Optimisation bio + stratégie de contenu</span></li>
+                <li><i></i><span>Réponse aux avis Google (si accès / droits)</span></li>
+                <li><i></i><span>Analyse mensuelle des statistiques</span></li>
+                <li><i></i><span>SEO local optimisé</span></li>
+              </ul>
+            </div>
+
+            <div class="pack-cta">
+              <button class="btn primary choosePack" type="button" data-pack="Pack 2 — Croissance Digitale">Choisir ce pack</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="pack glow-hover">
+          <summary>
+            <div class="pack-head">
+              <div class="pack-title">👑 Pack 3 — Stratégie & Image Premium</div>
+              <div class="pack-desc">Développer : stratégie, branding, contenus + web.</div>
+            </div>
+            <div class="price">790€ / mois<small>au lieu de 1500€</small></div>
+          </summary>
+
+          <div class="open-hint">Détails du pack</div>
+          <div class="peek">
+            <div class="row"><i></i><span>Tout le pack 2 inclus</span></div>
+            <div class="row"><i></i><span>Stratégie complète + identité visuelle</span></div>
+            <div class="row"><i></i><span>Accompagnement + reporting</span></div>
+          </div>
+
+          <div class="pack-body">
+            <div class="pack-drawer" aria-label="Détails">
+              <ul class="list">
+                <li><i></i><span>Tout le pack 2 inclus</span></li>
+                <li><i></i><span>Stratégie digitale complète</span></li>
+                <li><i></i><span>Charte graphique + identité visuelle</span></li>
+                <li><i></i><span>Production de contenus intensifiée</span></li>
+                <li><i></i><span>Accompagnement + reporting</span></li>
+                <li><i></i><span>Optimisation web / SEO (selon besoin)</span></li>
+              </ul>
+            </div>
+
+            <div class="pack-cta">
+              <button class="btn primary choosePack" type="button" data-pack="Pack 3 — Stratégie & Image Premium">Choisir ce pack</button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="galerie" class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Filtre par type + aperçu en grand (image entière ✅).</p>
+      </div>
+
+      <div class="gallery-actions">
+        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
+        <button type="button" class="seg" data-cat="sites">Sites internet</button>
+        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
+      </div>
+
+      <div class="gallery" id="galleryGrid">
+        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
+          <img src="produit-the.jpg" alt="Visuel produit / branding">
+          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
+        </div>
+
+        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
+          <img src="menu-resto.jpg" alt="Menu restauration">
+          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
+        </div>
+
+        <div class="shot" data-cat="visuels" data-title="Promotion" data-src="valentine.jpg">
+          <img src="valentine.jpg" alt="Promotion">
+          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="miniTag">Visuel</div></div>
+        </div>
+
+        <div class="shot" data-cat="visuels" data-title="Affiche / Flyer" data-src="maraude.jpg">
+          <img src="maraude.jpg" alt="Affiche / flyer">
+          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
+        </div>
+
+        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
+          <img src="matchday.jpg" alt="Story matchday">
+          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
+        </div>
+
+        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
+          <img src="classico.jpg" alt="Annonce événement">
+          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
+        </div>
+
+        <div class="shot" data-cat="sites" data-title="Sites internet — Projets à intégrer" data-src="brand-photo.jpg">
+          <img src="brand-photo.jpg" alt="Projets web à intégrer">
+          <div class="cap"><div><b>Sites internet</b><br><span>Projets à intégrer</span></div><div class="miniTag">Sites</div></div>
+        </div>
+      </div>
+
+      <div class="soft glow-hover" style="padding:14px; margin-top:12px;">
+        <b>Ajout de projets</b>
+        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+          Duplique une carte <span class="tiny">shot</span>, remplace <span class="tiny">data-src</span> / <span class="tiny">src</span>,
+          et choisis la catégorie <span class="tiny">data-cat</span>.
+        </div>
+      </div>
+    </section>
+
+    <!-- ✅ SOCIALPROOF (REMPLACÉ) -->
+    <section id="socialproof" class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Réseaux & avis"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Crédibilité & transparence.</p>
+      </div>
+
+      <div class="grid2">
+        <!-- ✅ Bloc Réseaux sociaux (LinkedIn + Instagram) -->
+        <div class="block glow-hover">
+          <b>Réseaux sociaux</b>
+          <p>Suivez mes actus, projets et avant/après : contenu, visuels, communication.</p>
+          <div class="actions">
+            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" id="igBtn" href="#" aria-disabled="true" title="Instagram bientôt disponible">Instagram (bientôt)</a>
+            <a class="btn primary" href="#contact">Demander un devis</a>
+          </div>
+          <div class="muted2 tiny" style="margin-top:10px;">
+            Astuce : dès que ton Instagram est prêt, remplace juste le lien dans le script (IG_URL).
+          </div>
+        </div>
+
+        <!-- ✅ Bloc Avis (carrousel) -->
+        <div class="block glow-hover">
+          <b>Avis clients</b>
+          <p>Quelques retours (le carrousel défile automatiquement).</p>
+          <div class="actions">
+            <a class="btn primary" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">⭐ Laisser un avis</a>
+            <a class="btn" href="https://share.google/7C5r2c80N5s6zFYwQ" target="_blank" rel="noopener">Voir sur Google</a>
+          </div>
+
+          <div class="reviews">
+            <div class="reviews-track" id="reviewsTrack" aria-label="Carrousel d'avis"></div>
+            <button class="revArrow left" type="button" id="revPrev" aria-label="Avis précédent">‹</button>
+            <button class="revArrow right" type="button" id="revNext" aria-label="Avis suivant">›</button>
+            <div class="revDots" id="revDots" aria-hidden="true"></div>
+          </div>
+
+          <div class="muted2 tiny" style="margin-top:10px;">
+            Tu pourras remplacer / ajouter des avis (nom/texte) dans le script en 2 minutes.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Contact"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Réponse rapide • demande envoyée en direct.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card glow-hover" style="padding:18px;">
+          <div class="muted" style="line-height:1.8; font-size:14px;">
+            <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
+            <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
+            <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
+            <b>Zone :</b> France entière (à distance)
+          </div>
+
+          <div class="hero-actions" style="margin-top:14px;">
+            <a class="btn primary" href="#contact">Demander un devis</a>
+            <a class="btn" href="tel:+33765232469">Appeler</a>
+            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="card glow-hover" style="padding:18px;">
+          <div style="font-weight:950;">Demande de devis</div>
+          <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+            Remplissez puis cliquez sur <b>Envoyer</b> : la demande part directement par email.
+          </div>
+
+          <form id="quoteForm" action="https://formsubmit.co/deabreue9@gmail.com" method="POST" accept-charset="UTF-8">
+            <input type="hidden" name="_subject" value="Demande de devis — Site portfolio" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://evadbr91.github.io/#contact" />
+
+            <div class="field">
+              <label for="fName">Nom / Entreprise</label>
+              <input id="fName" name="Nom / Entreprise" type="text" placeholder="Ex : Restaurant Le Sud" required />
+            </div>
+            <div class="field">
+              <label for="fEmail">Votre email</label>
+              <input id="fEmail" name="Email" type="email" placeholder="Ex : contact@..." required />
+            </div>
+            <div class="field">
+              <label for="fPack">Pack souhaité</label>
+              <input id="fPack" name="Pack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
+            </div>
+            <div class="field">
+              <label for="fMsg">Message</label>
+              <textarea id="fMsg" name="Message" placeholder="Secteur, objectif, délai, contenus, web..." required></textarea>
+            </div>
+
+            <div class="hero-actions" style="margin-top:12px;">
+              <button class="btn primary" id="sendBtn" type="submit">Envoyer la demande</button>
+              <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
+            </div>
+
+            <div class="success" id="successBox">
+              Votre demande est en cours d’envoi ✅<br>
+              (Si c’est la première fois, FormSubmit peut demander une confirmation côté Eva.)
+            </div>
+
+            <div class="muted2 tiny" style="margin-top:10px;">
+              Astuce : cliquez sur “Choisir ce pack” → le champ “Pack souhaité” se remplit automatiquement.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-card" role="dialog" aria-modal="true">
+      <div class="lb-top">
+        <b id="lbTitle">Aperçu</b>
+        <button id="lbClose" type="button">Fermer ✕</button>
+      </div>
+      <div class="lb-img">
+        <img id="lbImg" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Business -->
+  <a class="whatsapp-float"
+     href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
+     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
+    <span class="wh-dot"></span> WhatsApp
+  </a>
+
+  <script>
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add("on");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // ✅ Animate skill bars when visible
+    const skillsBox = document.getElementById("skillsBox");
+    if(skillsBox){
+      const obs2 = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            skillsBox.classList.add("on");
+            obs2.disconnect();
+          }
+        });
+      }, {threshold: 0.3});
+      obs2.observe(skillsBox);
+    }
+
+    // ✅ Typewriter titles (once when section becomes visible)
+    function typeOnce(el){
+      const target = el.getAttribute("data-text") || "";
+      const out = el.querySelector(".typeOut");
+      const caret = el.querySelector(".caret");
+      if(!out || el.dataset.typed === "1") return;
+
+      el.dataset.typed = "1";
+      out.textContent = "";
+      let i = 0;
+      const speed = 18;
+      let last = performance.now();
+
+      function step(now){
+        if(now - last < speed){ requestAnimationFrame(step); return; }
+        last = now;
+        out.textContent = target.slice(0, i++);
+        if(i <= target.length){
+          requestAnimationFrame(step);
+        }else{
+          if(caret) caret.style.opacity = "0.0";
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    const titleObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          typeOnce(e.target);
+          titleObserver.unobserve(e.target);
+        }
+      });
+    }, {threshold: 0.3});
+    document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
+
+    // ✅ Nav arrows (show only if overflow)
+    (function(){
+      const el = document.getElementById("topLinks");
+      const left = document.getElementById("navLeft");
+      const right = document.getElementById("navRight");
+      if(!el || !left || !right) return;
+
+      function refresh(){
+        const overflow = el.scrollWidth > el.clientWidth + 2;
+        left.style.display = overflow ? "inline-flex" : "none";
+        right.style.display = overflow ? "inline-flex" : "none";
+      }
+      function scrollByX(dx){
+        el.scrollBy({ left: dx, behavior: "smooth" });
+      }
+      left.addEventListener("click", () => scrollByX(-220));
+      right.addEventListener("click", () => scrollByX(220));
+      window.addEventListener("resize", refresh);
+      setTimeout(refresh, 60);
+      refresh();
+    })();
+
+    // Gallery filter
+    const segs = Array.from(document.querySelectorAll(".seg"));
+    const shots = Array.from(document.querySelectorAll(".shot"));
+    function setCat(cat){
+      segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
+      shots.forEach(it => it.style.display = (it.dataset.cat === cat) ? "" : "none");
+    }
+    segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
+    setCat("visuels");
+
+    // ✅ Lightbox
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbTitle = document.getElementById("lbTitle");
+    const lbClose = document.getElementById("lbClose");
+
+    function openLB(src, title){
+      lbTitle.textContent = title || "Aperçu";
+      lbImg.src = src;
+      lbImg.alt = title || "Aperçu";
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLB(){
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden","true");
+      lbImg.src = "";
+      document.body.style.overflow = "";
+    }
+    lbClose.addEventListener("click", closeLB);
+    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
+    window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
+
+    shots.forEach(s => {
+      s.addEventListener("click", () => {
+        const src = s.getAttribute("data-src");
+        const title = s.getAttribute("data-title");
+        if(src) openLB(src, title);
+      });
+    });
+
+    // ✅ Packs -> choisir ce pack + scroll contact + remplissage
+    const packInput = document.getElementById("fPack");
+    function goContactWithPack(packName){
+      if(packInput && packName) packInput.value = packName;
+      document.getElementById("contact")?.scrollIntoView({behavior:"smooth", block:"start"});
+      setTimeout(()=> document.getElementById("fEmail")?.focus(), 450);
+    }
+    document.querySelectorAll(".choosePack").forEach(btn => {
+      btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
+    });
+
+    // ✅ Packs: si on ouvre 1 pack, on ouvre/ferme tous (comme tu veux garder)
+    const packDetails = Array.from(document.querySelectorAll("details.pack"));
+    let syncing = false;
+    packDetails.forEach(d => {
+      d.addEventListener("toggle", () => {
+        if(syncing) return;
+        syncing = true;
+        const state = d.open;
+        packDetails.forEach(other => { other.open = state; });
+        syncing = false;
+      });
+    });
+
+    // Copy email
+    const EMAIL = "deabreue9@gmail.com";
+    function copyToClipboard(text){
+      if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      return Promise.resolve();
+    }
+    const copyMailBtn = document.getElementById("copyMailBtn");
+    copyMailBtn.addEventListener("click", async () => {
+      await copyToClipboard(EMAIL);
+      copyMailBtn.textContent = "Copié ✅";
+      setTimeout(() => copyMailBtn.textContent = "Copier mon email", 1200);
+    });
+
+    // Form UX (message)
+    const quoteForm = document.getElementById("quoteForm");
+    const successBox = document.getElementById("successBox");
+    const sendBtn = document.getElementById("sendBtn");
+    if(quoteForm){
+      quoteForm.addEventListener("submit", () => {
+        sendBtn.textContent = "Envoi...";
+        successBox.classList.add("on");
+      });
+    }
+
+    /* ===========================
+       ✅ AJOUTS : Instagram + Avis
+       =========================== */
+
+    // ✅ Instagram: active le bouton dès que tu as ton lien
+    const IG_URL = "https://www.instagram.com/edbra_nd/";
+    const igBtn = document.getElementById("igBtn");
+    if(igBtn){
+      if(IG_URL && IG_URL.startsWith("http")){
+        igBtn.href = IG_URL;
+        igBtn.target = "_blank";
+        igBtn.rel = "noopener";
+        igBtn.textContent = "Instagram";
+        igBtn.removeAttribute("aria-disabled");
+        igBtn.removeAttribute("title");
+      }
+    }
+
+    // ✅ Avis carousel (auto + manuel) — tes 2 avis actuels
+    const reviews = [
+      {
+        name: "Sheylie Berkane",
+        stars: 5,
+        text: "Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février."
+      },
+      {
+        name: "Sandiyya",
+        stars: 5,
+        text: "Je recommande sans hésiter ses services ! Visité en janvier."
+      }
+    ];
+
+    function starsStr(n){
+      const x = Math.max(0, Math.min(5, n));
+      return "★".repeat(x) + "☆".repeat(5 - x);
+    }
+
+    (function initReviews(){
+      const track = document.getElementById("reviewsTrack");
+      const dots = document.getElementById("revDots");
+      const prev = document.getElementById("revPrev");
+      const next = document.getElementById("revNext");
+      const wrap = track?.closest(".reviews");
+
+      if(!track || !dots || !prev || !next) return;
+
+      // Render cards
+      track.innerHTML = reviews.map(r => `
+        <div class="review" role="group" aria-label="Avis client">
+          <div class="revTop">
+            <div class="revName">${r.name}</div>
+            <div class="revStars" aria-label="${r.stars} sur 5">${starsStr(r.stars)}</div>
+          </div>
+          <div class="revText">${r.text}</div>
+        </div>
+      `).join("");
+
+      const mq = window.matchMedia("(min-width: 980px)");
+      let idx = 0;
+      let timer = null;
+
+      function perView(){ return mq.matches ? 2 : 1; }
+      function pages(){
+        const pv = perView();
+        return Math.max(1, Math.ceil(reviews.length / pv));
+      }
+
+      function buildDots(){
+        const p = pages();
+        dots.innerHTML = "";
+        for(let i=0;i<p;i++){
+          const d = document.createElement("div");
+          d.className = "revDot" + (i===idx ? " on" : "");
+          d.addEventListener("click", () => go(i, true));
+          dots.appendChild(d);
+        }
+
+        // Si 1 page, on peut masquer flèches/dots (optionnel)
+        const showNav = p > 1;
+        prev.style.display = showNav ? "inline-flex" : "none";
+        next.style.display = showNav ? "inline-flex" : "none";
+        dots.style.display = showNav ? "flex" : "none";
+      }
+
+      function updateDots(){
+        const ds = Array.from(dots.children);
+        ds.forEach((d,i)=> d.classList.toggle("on", i===idx));
+      }
+
+      function clampIdx(){
+        const p = pages();
+        if(idx < 0) idx = p - 1;
+        if(idx > p - 1) idx = 0;
+      }
+
+      function scrollToIdx(smooth){
+        const left = track.clientWidth * idx;
+        track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+      }
+
+      function go(n, smooth){
+        idx = n;
+        clampIdx();
+        scrollToIdx(smooth);
+        updateDots();
+      }
+
+      function nextOne(){ go(idx + 1, true); }
+      function prevOne(){ go(idx - 1, true); }
+
+      prev.addEventListener("click", prevOne);
+      next.addEventListener("click", nextOne);
+
+      // Autoplay (pause on hover/focus)
+      function start(){
+        stop();
+        if(pages() <= 1) return;
+        timer = setInterval(nextOne, 4200);
+      }
+      function stop(){
+        if(timer){ clearInterval(timer); timer = null; }
+      }
+
+      wrap?.addEventListener("mouseenter", stop);
+      wrap?.addEventListener("mouseleave", start);
+      wrap?.addEventListener("focusin", stop);
+      wrap?.addEventListener("focusout", start);
+
+      // Rebuild on resize (perView changes)
+      function onResize(){
+        const p = pages();
+        if(idx > p - 1) idx = p - 1;
+        buildDots();
+        scrollToIdx(false);
+        updateDots();
+        start();
+      }
+
+      mq.addEventListener?.("change", onResize);
+      window.addEventListener("resize", () => {
+        // léger debounce
+        clearTimeout(window.__revResize);
+        window.__revResize = setTimeout(onResize, 120);
+      });
+
+      buildDots();
+      scrollToIdx(false);
+      start();
+    })();
+  </script>
+</body>
+</html>
