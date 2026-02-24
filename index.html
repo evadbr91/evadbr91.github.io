@@ -29,18 +29,39 @@
 
       <div class="linksWrap" aria-label="Menu">
         <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
           <a href="portfolio.html">Portfolio</a>
           <a href="contact.html">Contact</a>
         </nav>
+
         <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
+
+        <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu">☰</button>
       </div>
 
       <div class="nav-right">
         <a class="pill" href="tel:+33765232469">📞 Appeler</a>
         <a class="pill primary" href="contact.html">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobileNav" id="mobileNav" aria-hidden="true">
+    <div class="mobileCard card">
+      <div class="mobileHead">
+        <b>Menu</b>
+        <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
+      </div>
+      <div class="mobileLinks">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="width:100%; justify-content:center;">Demander un devis</a>
+        <a class="btn" href="tel:+33765232469" style="width:100%; justify-content:center;">📞 Appeler</a>
       </div>
     </div>
   </div>
@@ -115,7 +136,7 @@
         </div>
         <div class="tile glow-hover">
           <h3>De la visibilité</h3>
-          <p>Réseaux + optimisation + conseils pour être vu.</p>
+          <p>Réseaux + optimisation + conseils pour être vue.</p>
         </div>
         <div class="tile glow-hover">
           <h3>Plus de demandes</h3>
@@ -127,6 +148,20 @@
         <a class="btn primary" href="contact.html">Demander un devis</a>
         <a class="btn" href="portfolio.html">Voir les réalisations</a>
         <a class="btn ghost" href="services.html">Voir les packs</a>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Avis clients"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Des retours récents (défile automatiquement).</p>
+      </div>
+
+      <div class="reviews">
+        <div class="reviews-track" id="reviewsTrack" aria-label="Carrousel d'avis"></div>
+        <button class="revArrow left" type="button" id="revPrev" aria-label="Avis précédent">‹</button>
+        <button class="revArrow right" type="button" id="revNext" aria-label="Avis suivant">›</button>
+        <div class="revDots" id="revDots" aria-hidden="true"></div>
       </div>
     </section>
 
