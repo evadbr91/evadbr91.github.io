@@ -1021,3 +1021,94 @@ html{scroll-behavior:smooth}
   background: linear-gradient(135deg, rgba(34,211,238,.92), rgba(139,92,246,.92), rgba(244,114,182,.70));
   filter: drop-shadow(0 10px 20px rgba(34,211,238,.08));
 }
+/* ===== NAV MOBILE (burger + drawer) ===== */
+.brand{ text-decoration:none; }
+.burger{
+  display:none;
+  width:44px; height:44px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:10px;
+  transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+}
+.burger:hover{ transform: translateY(-1px); filter:brightness(1.08); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+.burger span{
+  display:block;
+  width:18px;
+  height:2px;
+  border-radius:999px;
+  background: rgba(255,255,255,.86);
+}
+@media(max-width: 760px){
+  .nav-right{ display:none !important; }  /* on cache les 2 boutons desktop */
+  .burger{ display:inline-flex; }
+}
+
+/* Drawer */
+.mobileMenu{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  display:none;
+  z-index:1200;
+  padding:16px;
+}
+.mobileMenu.open{ display:flex; align-items:flex-start; justify-content:flex-end; }
+
+.mobileCard{
+  width:min(420px, 92vw);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(6,6,12,.86);
+  box-shadow: 0 30px 120px rgba(0,0,0,.55);
+  overflow:hidden;
+  animation: pop .16s ease-out;
+}
+.mobileTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 14px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.mobileClose{
+  width:38px;height:38px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.90);
+  cursor:pointer;
+  font-weight:950;
+  transition: transform .12s ease, filter .12s ease;
+}
+.mobileClose:hover{ transform: translateY(-1px); filter:brightness(1.08); }
+
+.mobileLinks{
+  display:grid;
+  padding:12px 14px;
+  gap:8px;
+}
+.mLink{
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.88);
+  font-weight:900;
+  transition: transform .12s ease, filter .12s ease, background .12s ease, border-color .12s ease;
+}
+.mLink:hover{ transform: translateY(-1px); filter:brightness(1.06); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); }
+
+.mobileCtas{
+  padding: 0 14px 14px;
+  display:grid;
+  gap:10px;
+}
+.mobileCtas .btn{ width:100%; justify-content:center; }
