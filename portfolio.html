@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio — Eva De Abreu</title>
-  <meta name="description" content="Portfolio : visuels, réseaux sociaux, sites internet." />
+  <meta name="description" content="Portfolio : visuels, réseaux sociaux, sites web." />
   <meta name="theme-color" content="#07070c" />
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
-          <a href="portfolio.html" class="active">Portfolio</a>
+          <a href="portfolio.html">Portfolio</a>
           <a href="contact.html">Contact</a>
         </nav>
         <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
@@ -46,114 +46,95 @@
   </div>
 
   <main class="wrap">
-    <section class="reveal" style="padding-top:26px;">
+    <div class="card pageHead glow-hover reveal">
+      <h1>Portfolio</h1>
+      <p>Filtre par type + aperçu en grand (image entière + zoom). Ajoute/remplace tes images quand tu veux.</p>
+    </div>
+
+    <section class="reveal">
       <div class="section-head">
-        <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Visuels • Réseaux sociaux • Sites internet</p>
+        <h2 class="type-title" data-text="Réalisations"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Visuels • Réseaux sociaux • Sites</p>
       </div>
 
-      <div class="card glow-hover" style="padding:18px;">
-        <b>Sites internet</b>
-        <div class="muted" style="margin-top:6px; font-size:13.5px; line-height:1.7;">
-          Voici 2 projets web : tu peux ouvrir le site ou lancer un aperçu.
-          <br>
-          (Si un jour l’aperçu iframe est bloqué, le bouton “Ouvrir le site” marche toujours.)
+      <div class="gallery-actions">
+        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
+        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
+        <button type="button" class="seg" data-cat="sites">Sites internet</button>
+      </div>
+
+      <div class="gallery" id="galleryGrid">
+        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
+          <img src="produit-the.jpg" alt="Visuel produit / branding" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
-        <div class="site-carousel">
-          <button class="siteArrow left" id="sitePrev" type="button" aria-label="Site précédent">‹</button>
-          <button class="siteArrow right" id="siteNext" type="button" aria-label="Site suivant">›</button>
-
-          <div class="site-track" id="siteTrack">
-            <div class="site-card glow-hover">
-              <div class="site-top">
-                <div class="site-title">Monelec — Site artisan (bâtiment)</div>
-                <div class="site-desc">Présentation, services, contact — base solide “pro” pour un artisan.</div>
-              </div>
-              <div class="site-inner">
-                <div class="site-preview">
-                  Aperçu interactif disponible via le bouton ci-dessous
-                </div>
-                <div class="site-actions">
-                  <a class="btn primary" href="https://evadbr91.github.io/Monelec/" target="_blank" rel="noopener">Ouvrir le site</a>
-                  <button class="btn" type="button"
-                    data-site-preview="https://evadbr91.github.io/Monelec/"
-                    data-site-title="Monelec — Aperçu">
-                    Aperçu
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="site-card glow-hover">
-              <div class="site-top">
-                <div class="site-title">Asth-ya — Projet web</div>
-                <div class="site-desc">Site vitrine moderne — structure claire et design premium.</div>
-              </div>
-              <div class="site-inner">
-                <div class="site-preview">
-                  Aperçu interactif disponible via le bouton ci-dessous
-                </div>
-                <div class="site-actions">
-                  <a class="btn primary" href="https://evadbr91.github.io/asth-ya/" target="_blank" rel="noopener">Ouvrir le site</a>
-                  <button class="btn" type="button"
-                    data-site-preview="https://evadbr91.github.io/asth-ya/"
-                    data-site-title="Asth-ya — Aperçu">
-                    Aperçu
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          </div>
+        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
+          <img src="menu-resto.jpg" alt="Menu" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
         </div>
 
-        <div class="muted2 tiny" style="margin-top:10px;">
-          Pro tip : quand tu auras des captures (images) de tes sites, on remplacera le bloc “Aperçu” par des mini screenshots 🔥
+        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
+          <img src="matchday.jpg" alt="Story" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
+        </div>
+
+        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
+          <img src="classico.jpg" alt="Annonce" onerror="this.src='brand-photo.jpg'">
+          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
+        </div>
+
+        <div class="shot" data-cat="sites" data-title="MONELEC" data-src="brand-photo.jpg">
+          <img src="brand-photo.jpg" alt="Site Monelec" onerror="this.style.display='none'">
+          <div class="cap"><div><b>MONELEC</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
+        </div>
+
+        <div class="shot" data-cat="sites" data-title="ASTH-YA" data-src="brand-photo.jpg">
+          <img src="brand-photo.jpg" alt="Site ASTH-YA" onerror="this.style.display='none'">
+          <div class="cap"><div><b>ASTH-YA</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
         </div>
       </div>
     </section>
 
     <section class="reveal">
       <div class="section-head">
-        <h2 class="type-title" data-text="Galerie"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
-        <p>Filtre + zoom sur image</p>
+        <h2 class="type-title" data-text="Sites web"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Projets live — aperçu + lien direct.</p>
       </div>
 
-      <div class="gallery-actions">
-        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
-        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
-      </div>
+      <div class="sitesWrap">
+        <div class="sitesTrack" id="sitesTrack" aria-label="Carrousel sites web">
+          <article class="siteCard glow-hover">
+            <div class="siteTop">
+              <div class="siteTitle">MONELEC — Site artisan</div>
+              <div class="siteDesc">Site vitrine : sections claires, services, confiance + contact.</div>
+            </div>
 
-      <div class="gallery" id="galleryGrid">
-        <div class="shot" data-cat="visuels" data-title="Produit / Branding" data-src="produit-the.jpg">
-          <img src="produit-the.jpg" alt="Visuel produit / branding">
-          <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
-        </div>
+            <div class="sitePreview">
+              <iframe class="siteFrame" src="https://evadbr91.github.io/Monelec/" loading="lazy" title="Aperçu site Monelec"></iframe>
+            </div>
 
-        <div class="shot" data-cat="visuels" data-title="Menu — Restauration" data-src="menu-resto.jpg">
-          <img src="menu-resto.jpg" alt="Menu restauration">
-          <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
-        </div>
+            <div class="siteBottom">
+              <a class="btn primary" href="https://evadbr91.github.io/Monelec/" target="_blank" rel="noopener">Voir le site</a>
+              <a class="btn ghost" href="contact.html">Demander un site</a>
+            </div>
+          </article>
 
-        <div class="shot" data-cat="visuels" data-title="Promotion" data-src="valentine.jpg">
-          <img src="valentine.jpg" alt="Promotion">
-          <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="miniTag">Visuel</div></div>
-        </div>
+          <article class="siteCard glow-hover">
+            <div class="siteTop">
+              <div class="siteTitle">ASTH-YA — Site vitrine</div>
+              <div class="siteDesc">Présentation pro : identité, sections propres et responsive.</div>
+            </div>
 
-        <div class="shot" data-cat="visuels" data-title="Affiche / Flyer" data-src="maraude.jpg">
-          <img src="maraude.jpg" alt="Affiche / flyer">
-          <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
-        </div>
+            <div class="sitePreview">
+              <iframe class="siteFrame" src="https://evadbr91.github.io/asth-ya/" loading="lazy" title="Aperçu site ASTH-YA"></iframe>
+            </div>
 
-        <div class="shot" data-cat="reseaux" data-title="Story — Matchday" data-src="matchday.jpg">
-          <img src="matchday.jpg" alt="Story matchday">
-          <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
-        </div>
-
-        <div class="shot" data-cat="reseaux" data-title="Annonce — Événement" data-src="classico.jpg">
-          <img src="classico.jpg" alt="Annonce événement">
-          <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
+            <div class="siteBottom">
+              <a class="btn primary" href="https://evadbr91.github.io/asth-ya/" target="_blank" rel="noopener">Voir le site</a>
+              <a class="btn ghost" href="contact.html">Demander un site</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -166,7 +147,6 @@
     </footer>
   </main>
 
-  <!-- Lightbox images -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lb-card" role="dialog" aria-modal="true">
       <div class="lb-top">
@@ -181,28 +161,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Modal preview site -->
-  <div class="lightbox" id="siteModal" aria-hidden="true">
-    <div class="lb-card" role="dialog" aria-modal="true">
-      <div class="lb-top">
-        <b id="siteModalTitle">Aperçu du site</b>
-        <div class="lb-actions">
-          <a class="btn" id="siteModalOpen" href="#" target="_blank" rel="noopener" style="padding:8px 10px; border-radius:12px;">Ouvrir</a>
-          <button id="siteModalClose" type="button">Fermer ✕</button>
-        </div>
-      </div>
-      <div class="siteFrameWrap">
-        <iframe class="siteFrame" id="siteFrame" src="" title="Aperçu du site"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <a class="whatsapp-float"
-     href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
-     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
-    <span class="wh-dot"></span> WhatsApp
-  </a>
 
   <script src="assets/js/main.js" defer></script>
 </body>
