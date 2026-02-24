@@ -1,41 +1,145 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact — Eva</title>
-<link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Eva De Abreu</title>
+  <meta name="description" content="Contact et demande de devis." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
 
-<div class="nav">
-  <div class="wrap">
-    <div><strong>Eva De Abreu</strong></div>
-    <div>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="contact.html">Contact</a>
+  <div class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
+        <div>
+          <div class="name">Eva De Abreu</div>
+          <div class="sub">Communication & Marketing — Freelance</div>
+        </div>
+      </div>
+
+      <div class="linksWrap" aria-label="Menu">
+        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+        <nav class="links" id="topLinks">
+          <a href="index.html">Accueil</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
+      </div>
+
+      <div class="nav-right">
+        <a class="pill" href="tel:+33765232469">📞 Appeler</a>
+        <a class="pill primary" href="#form">Demander un devis</a>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="wrap">
+  <main class="wrap">
+    <section class="reveal" style="padding-top:26px;">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Contact"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Réponse rapide • demande envoyée en direct.</p>
+      </div>
 
-<h1>Contact</h1>
+      <div class="contact-grid">
+        <div class="card glow-hover" style="padding:18px;">
+          <div class="muted" style="line-height:1.8; font-size:14px;">
+            <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
+            <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
+            <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Profil</a><br>
+            <b>Instagram :</b> <a id="igBtn" href="#" aria-disabled="true" title="Instagram bientôt disponible">Instagram (bientôt)</a><br>
+            <b>Zone :</b> France entière (à distance)
+          </div>
 
-<div class="card">
-<p>Email : deabreue9@gmail.com</p>
-<p>Téléphone : 07 65 23 24 69</p>
-</div>
+          <div class="hero-actions" style="margin-top:14px;">
+            <a class="btn primary" href="#form">Demander un devis</a>
+            <a class="btn" href="tel:+33765232469">Appeler</a>
+            <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
 
-<footer>
-© 2026 Eva De Abreu
-</footer>
+        <div class="card glow-hover" style="padding:18px;" id="form">
+          <div style="font-weight:950;">Demande de devis</div>
+          <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+            Remplissez puis cliquez sur <b>Envoyer</b> : la demande part directement par email.
+          </div>
 
-</div>
+          <form id="quoteForm" action="https://formsubmit.co/deabreue9@gmail.com" method="POST" accept-charset="UTF-8">
+            <input type="hidden" name="_subject" value="Demande de devis — Site portfolio" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://evadbr91.github.io/contact.html" />
 
-<script src="assets/js/main.js"></script>
+            <div class="field">
+              <label for="fName">Nom / Entreprise</label>
+              <input id="fName" name="Nom / Entreprise" type="text" placeholder="Ex : Restaurant Le Sud" required />
+            </div>
+            <div class="field">
+              <label for="fEmail">Votre email</label>
+              <input id="fEmail" name="Email" type="email" placeholder="Ex : contact@..." required />
+            </div>
+            <div class="field">
+              <label for="fPack">Pack souhaité</label>
+              <input id="fPack" name="Pack" type="text" placeholder="Ex : Pack 2 — Croissance Digitale" />
+            </div>
+            <div class="field">
+              <label for="fMsg">Message</label>
+              <textarea id="fMsg" name="Message" placeholder="Secteur, objectif, délai, contenus, web..." required></textarea>
+            </div>
+
+            <div class="hero-actions" style="margin-top:12px;">
+              <button class="btn primary" id="sendBtn" type="submit">Envoyer la demande</button>
+              <button class="btn" id="copyMailBtn" type="button">Copier mon email</button>
+            </div>
+
+            <div class="success" id="successBox">
+              Votre demande est en cours d’envoi ✅<br>
+              (Si c’est la première fois, FormSubmit peut demander une confirmation côté Eva.)
+            </div>
+          </form>
+
+          <div class="muted2 tiny" style="margin-top:10px;">
+            Astuce : si tu arrives depuis “Services”, le pack peut être pré-rempli automatiquement.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+      </div>
+    </footer>
+  </main>
+
+  <a class="whatsapp-float"
+     href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
+     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
+    <span class="wh-dot"></span> WhatsApp
+  </a>
+
+  <script>
+    // Prefill pack from URL: contact.html?pack=...
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const pack = params.get("pack");
+      const input = document.getElementById("fPack");
+      if(pack && input) input.value = pack;
+    })();
+  </script>
+
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
