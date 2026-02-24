@@ -639,3 +639,8 @@ footer{padding:28px 0 60px; color:var(--muted2); font-size:13px;}
   .caret{ animation:none !important; opacity:1; }
   html{ scroll-behavior:auto; }
 }
+/* Fallback si JS ne charge pas */
+.no-js .reveal{
+  opacity:1 !important;
+  transform:none !important;
+}
