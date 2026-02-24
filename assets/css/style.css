@@ -781,6 +781,7 @@ footer{padding:28px 0 60px; color:var(--muted2); font-size:13px;}
 @media(max-width: 760px){
   .navArrow{ display:none !important; }
   .links{ display:none; }
+  .nav-right{ display:none !important; } 
   .burger{ display:inline-flex; align-items:center; justify-content:center; }
 }
 
