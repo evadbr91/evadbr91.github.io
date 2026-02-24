@@ -18,14 +18,70 @@
   </div>
 
   <div class="nav">
-    <div class="wrap">
-      <div class="brand">
-        <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
-        <div>
-          <div class="name">Eva De Abreu</div>
-          <div class="sub">Communication & Marketing — Freelance</div>
-        </div>
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Retour à l’accueil">
+      <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
+      <div>
+        <div class="name">Eva De Abreu</div>
+        <div class="sub">Communication & Marketing — Freelance</div>
       </div>
+    </a>
+
+    <div class="linksWrap" aria-label="Menu desktop">
+      <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+
+      <nav class="links" id="topLinks">
+        <a href="#about">À propos</a>
+        <a href="#services">Expertises</a>
+        <a href="#method">Méthode</a>
+        <a href="#packs">Packs</a>
+        <a href="#galerie">Portfolio</a>
+        <a href="#socialproof">Avis</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
+    </div>
+
+    <!-- Desktop buttons -->
+    <div class="nav-right">
+      <a class="pill" href="tel:+33765232469">📞 Appeler</a>
+      <a class="pill primary" href="#contact">Demander un devis</a>
+    </div>
+
+    <!-- Mobile burger -->
+    <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
+    <div class="mobileCard">
+      <div class="mobileTop">
+        <b>Menu</b>
+        <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
+      </div>
+
+      <nav class="mobileLinks" aria-label="Navigation mobile">
+        <a href="#about" class="mLink">À propos</a>
+        <a href="#services" class="mLink">Expertises</a>
+        <a href="#method" class="mLink">Méthode</a>
+        <a href="#packs" class="mLink">Packs</a>
+        <a href="#galerie" class="mLink">Portfolio</a>
+        <a href="#socialproof" class="mLink">Avis</a>
+        <a href="#contact" class="mLink">Contact</a>
+      </nav>
+
+      <div class="mobileCtas">
+        <a class="btn primary" href="#contact">Demander un devis</a>
+        <a class="btn" href="tel:+33765232469">📞 Appeler</a>
+        <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.instagram.com/edbra_nd/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+</div>
 
       <div class="linksWrap" aria-label="Menu">
         <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
