@@ -1,1 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Eva De Abreu</title>
+  <meta name="description" content="Portfolio : visuels, réseaux sociaux, sites internet (projets développés)." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
 
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <div class="nav">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="Accueil">
+        <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
+        <div>
+          <div class="name">Eva De Abreu</div>
+          <div class="sub">Communication & Marketing — Freelance</div>
+        </div>
+      </a>
+
+      <div class="linksWrap" aria-label="Menu">
+        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+        <nav class="links" id="topLinks">
+          <a href="index.html">Accueil</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
+      </div>
+
+      <div class="nav-right">
+        <a class="pill" href="tel:+33765232469">📞 Appeler</a>
+        <a class="pill primary" href="contact.html">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="reveal">
+      <div class="section-head">
+        <h2 class="type-title" data-text="Portfolio"><span class="typeOut"></span><span class="caret" aria-hidden="true"></span></h2>
+        <p>Filtre + aperçu (visuels en grand) + sites web en carrousel.</p>
+      </div>
+
+      <div class="gallery-actions">
+        <button type="button" class="seg active" data-cat="visuels">Visuels</button>
+        <button type="button" class="seg" data-cat="sites">Sites internet</button>
+        <button type="button" class="seg" data-cat="reseaux">Réseaux sociaux</button>
+      </div>
+
+      <!-- BLOCK: VISUELS -->
+      <div data-block="visuels" style="margin-top:12px;">
+        <div class="gallery" id="galleryGrid">
+          <div class="shot" data-title="Produit / Branding" data-src="produit-the.jpg">
+            <img src="produit-the.jpg" alt="Visuel produit / branding">
+            <div class="cap"><div><b>Produit / Branding</b><br><span>Création premium</span></div><div class="miniTag">Visuel</div></div>
+          </div>
+
+          <div class="shot" data-title="Menu — Restauration" data-src="menu-resto.jpg">
+            <img src="menu-resto.jpg" alt="Menu restauration">
+            <div class="cap"><div><b>Menu</b><br><span>Restauration</span></div><div class="miniTag">Visuel</div></div>
+          </div>
+
+          <div class="shot" data-title="Promotion" data-src="valentine.jpg">
+            <img src="valentine.jpg" alt="Promotion">
+            <div class="cap"><div><b>Promotion</b><br><span>Opération spéciale</span></div><div class="miniTag">Visuel</div></div>
+          </div>
+
+          <div class="shot" data-title="Affiche / Flyer" data-src="maraude.jpg">
+            <img src="maraude.jpg" alt="Affiche / flyer">
+            <div class="cap"><div><b>Affiche</b><br><span>Support print</span></div><div class="miniTag">Visuel</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK: SITES -->
+      <div data-block="sites" style="display:none; margin-top:12px;">
+        <div class="webWrap">
+          <button class="webArrow left" id="webPrev" type="button" aria-label="Projet précédent">‹</button>
+          <button class="webArrow right" id="webNext" type="button" aria-label="Projet suivant">›</button>
+
+          <div class="webTrack" id="webTrack" aria-label="Carrousel sites web">
+            <!-- MONELEC -->
+            <article class="webCard glow-hover">
+              <div class="webTop">
+                <div class="webTitle">Site vitrine — Monelec</div>
+                <div class="webDesc">
+                  Site professionnel pour artisan (électricité / rénovation). Design moderne, sections claires, contact.
+                </div>
+                <div class="webBadges">
+                  <span class="webBadge">Responsive</span>
+                  <span class="webBadge">Site vitrine</span>
+                  <span class="webBadge">Design premium</span>
+                </div>
+              </div>
+
+              <div class="webInner">
+                <div class="mockup">
+                  <div class="mockupTop">
+                    <div class="dots"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span></div>
+                    <div class="addr">evadbr91.github.io/Monelec</div>
+                  </div>
+                  <iframe class="mockupFrame" src="https://evadbr91.github.io/Monelec/" title="Aperçu Monelec" loading="lazy"></iframe>
+                </div>
+
+                <div class="webCtaRow">
+                  <a class="btn primary" href="https://evadbr91.github.io/Monelec/" target="_blank" rel="noopener">Visiter le site</a>
+                  <a class="btn" href="https://evadbr91.github.io/Monelec/" target="_blank" rel="noopener">Ouvrir en grand</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- ASTH-YA -->
+            <article class="webCard glow-hover">
+              <div class="webTop">
+                <div class="webTitle">Site vitrine — Asth-ya</div>
+                <div class="webDesc">
+                  Site vitrine moderne : mise en valeur, structure clean, navigation claire, CTA visibles.
+                </div>
+                <div class="webBadges">
+                  <span class="webBadge">Responsive</span>
+                  <span class="webBadge">One-page</span>
+                  <span class="webBadge">UX</span>
+                </div>
+              </div>
+
+              <div class="webInner">
+                <div class="mockup">
+                  <div class="mockupTop">
+                    <div class="dots"><span class="dot3"></span><span class="dot3"></span><span class="dot3"></span></div>
+                    <div class="addr">evadbr91.github.io/asth-ya</div>
+                  </div>
+                  <iframe class="mockupFrame" src="https://evadbr91.github.io/asth-ya/" title="Aperçu Asth-ya" loading="lazy"></iframe>
+                </div>
+
+                <div class="webCtaRow">
+                  <a class="btn primary" href="https://evadbr91.github.io/asth-ya/" target="_blank" rel="noopener">Visiter le site</a>
+                  <a class="btn" href="https://evadbr91.github.io/asth-ya/" target="_blank" rel="noopener">Ouvrir en grand</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="soft glow-hover" style="padding:14px; margin-top:12px;">
+          <b>Tu veux que j’ajoute d’autres sites ?</b>
+          <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+            Tu me donnes le lien + une mini description → je te crée une nouvelle carte.
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK: RESEAUX -->
+      <div data-block="reseaux" style="display:none; margin-top:12px;">
+        <div class="gallery">
+          <div class="shot" data-title="Story — Matchday" data-src="matchday.jpg">
+            <img src="matchday.jpg" alt="Story matchday">
+            <div class="cap"><div><b>Story</b><br><span>Matchday</span></div><div class="miniTag">Réseaux</div></div>
+          </div>
+
+          <div class="shot" data-title="Annonce — Événement" data-src="classico.jpg">
+            <img src="classico.jpg" alt="Annonce événement">
+            <div class="cap"><div><b>Annonce</b><br><span>Événement</span></div><div class="miniTag">Réseaux</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="soft glow-hover" style="padding:14px;">
+        <b>Tu veux un rendu “ultra agence” ?</b>
+        <div class="muted" style="margin-top:6px; font-size:13px; line-height:1.6;">
+          Je peux ajouter : études de cas, objectifs → actions → résultats, et des badges “avant/après”.
+        </div>
+        <div class="hero-actions" style="margin-top:10px;">
+          <a class="btn primary" href="contact.html">Demander un devis</a>
+          <a class="btn" href="services.html">Voir les services</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-card" role="dialog" aria-modal="true">
+      <div class="lb-top">
+        <b id="lbTitle">Aperçu</b>
+        <div class="lb-actions">
+          <button id="lbZoom" type="button" title="Zoom">Zoom</button>
+          <button id="lbClose" type="button">Fermer ✕</button>
+        </div>
+      </div>
+      <div class="lb-img" id="lbArea" title="Clique pour zoomer">
+        <img id="lbImg" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <a class="whatsapp-float"
+     href="https://wa.me/33765232469?text=Bonjour%20Eva%2C%20j%E2%80%99aimerais%20un%20devis%20pour%20la%20communication%20%2F%20r%C3%A9seaux%20sociaux."
+     target="_blank" rel="noopener" aria-label="Contacter Eva sur WhatsApp">
+    <span class="wh-dot"></span> WhatsApp
+  </a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
