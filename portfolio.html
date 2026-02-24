@@ -29,13 +29,17 @@
 
       <div class="linksWrap" aria-label="Menu">
         <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
           <a href="portfolio.html">Portfolio</a>
           <a href="contact.html">Contact</a>
         </nav>
+
         <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
+
+        <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu">☰</button>
       </div>
 
       <div class="nav-right">
@@ -45,10 +49,27 @@
     </div>
   </div>
 
+  <div class="mobileNav" id="mobileNav" aria-hidden="true">
+    <div class="mobileCard card">
+      <div class="mobileHead">
+        <b>Menu</b>
+        <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
+      </div>
+      <div class="mobileLinks">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="width:100%; justify-content:center;">Demander un devis</a>
+        <a class="btn" href="tel:+33765232469" style="width:100%; justify-content:center;">📞 Appeler</a>
+      </div>
+    </div>
+  </div>
+
   <main class="wrap">
     <div class="card pageHead glow-hover reveal">
       <h1>Portfolio</h1>
-      <p>Filtre par type + aperçu en grand (image entière + zoom). Ajoute/remplace tes images quand tu veux.</p>
+      <p>Filtre par type + aperçu en grand (image entière + zoom). Et tes projets web en direct.</p>
     </div>
 
     <section class="reveal">
@@ -85,12 +106,12 @@
         </div>
 
         <div class="shot" data-cat="sites" data-title="MONELEC" data-src="brand-photo.jpg">
-          <img src="brand-photo.jpg" alt="Site Monelec" onerror="this.style.display='none'">
+          <img src="brand-photo.jpg" alt="Site Monelec">
           <div class="cap"><div><b>MONELEC</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
         </div>
 
         <div class="shot" data-cat="sites" data-title="ASTH-YA" data-src="brand-photo.jpg">
-          <img src="brand-photo.jpg" alt="Site ASTH-YA" onerror="this.style.display='none'">
+          <img src="brand-photo.jpg" alt="Site ASTH-YA">
           <div class="cap"><div><b>ASTH-YA</b><br><span>Site web</span></div><div class="miniTag">Sites</div></div>
         </div>
       </div>
@@ -103,11 +124,11 @@
       </div>
 
       <div class="sitesWrap">
-        <div class="sitesTrack" id="sitesTrack" aria-label="Carrousel sites web">
+        <div class="sitesTrack" aria-label="Carrousel sites web">
           <article class="siteCard glow-hover">
             <div class="siteTop">
               <div class="siteTitle">MONELEC — Site artisan</div>
-              <div class="siteDesc">Site vitrine : sections claires, services, confiance + contact.</div>
+              <div class="siteDesc">Site vitrine : services, confiance + contact.</div>
             </div>
 
             <div class="sitePreview">
@@ -123,7 +144,7 @@
           <article class="siteCard glow-hover">
             <div class="siteTop">
               <div class="siteTitle">ASTH-YA — Site vitrine</div>
-              <div class="siteDesc">Présentation pro : identité, sections propres et responsive.</div>
+              <div class="siteDesc">Présentation pro : identité, sections clean et responsive.</div>
             </div>
 
             <div class="sitePreview">
