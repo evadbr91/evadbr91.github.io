@@ -442,3 +442,41 @@ document.querySelectorAll("#y, #year").forEach(el => {
   scrollToIdx(false);
   start();
 })();
+/* ===== MENU MOBILE (burger) ===== */
+(() => {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("mobileClose");
+  if(!burger || !menu || !closeBtn) return;
+
+  function openMenu(){
+    menu.classList.add("open");
+    menu.setAttribute("aria-hidden","false");
+    burger.setAttribute("aria-expanded","true");
+    document.body.style.overflow = "hidden";
+  }
+  function closeMenu(){
+    menu.classList.remove("open");
+    menu.setAttribute("aria-hidden","true");
+    burger.setAttribute("aria-expanded","false");
+    document.body.style.overflow = "";
+  }
+
+  burger.addEventListener("click", () => {
+    menu.classList.contains("open") ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener("click", closeMenu);
+
+  // clique sur le fond = fermer
+  menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
+
+  // lien du menu = fermer après clic
+  menu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => closeMenu());
+  });
+
+  // ESC = fermer
+  window.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeMenu();
+  });
+})();
