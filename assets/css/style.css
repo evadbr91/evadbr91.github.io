@@ -1119,3 +1119,25 @@ html{scroll-behavior:smooth}
   gap:10px;
 }
 .mobileCtas .btn{ width:100%; justify-content:center; }
+/* FIX MOBILE — Carrousel avis (safe override) */
+.reviews { position: relative; }
+
+.reviews-track{
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type:x mandatory;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+  scrollbar-width:none;
+}
+.reviews-track::-webkit-scrollbar{ display:none; }
+
+.review{
+  scroll-snap-align: start;
+}
+
+/* Flèches : on évite qu’elles bloquent le swipe */
+@media (max-width: 720px){
+  .revArrow{ display:none !important; }
+}
