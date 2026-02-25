@@ -298,7 +298,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
     { name:"Dorian", stars:5, meta:"Avis Google • il y a 18 heures", text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février." },
     { name:"Sheylie Berkane", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février." },
     { name:"Sandiyya", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande sans hésiter ses services ! Visité en janvier." }
-    { name:"Sylvie", stars:5, meta:"Avis Google • il y a 15 heures", text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie, merci beaucoup Visité en janvier." }
   ];
 
   function starsStr(n){
