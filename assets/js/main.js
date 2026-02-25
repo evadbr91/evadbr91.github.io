@@ -1,11 +1,7 @@
-/* ========= EVA — MAIN.JS (COMPLET) ========= */
-
-/* Year */
 document.querySelectorAll("#y, #year").forEach(el => {
   el.textContent = new Date().getFullYear();
 });
 
-/* Reveal on scroll */
 (() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -19,7 +15,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 })();
 
-/* Skills bars on view */
 (() => {
   const skillsBox = document.getElementById("skillsBox");
   if (!skillsBox) return;
@@ -36,7 +31,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   obs2.observe(skillsBox);
 })();
 
-/* Typewriter titles */
 (() => {
   function typeOnce(el) {
     const target = el.getAttribute("data-text") || "";
@@ -75,7 +69,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".type-title").forEach(t => titleObserver.observe(t));
 })();
 
-/* Top nav horizontal scroll arrows (if present) */
 (() => {
   const el = document.getElementById("topLinks");
   const left = document.getElementById("navLeft");
@@ -98,7 +91,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   refresh();
 })();
 
-/* Portfolio filter */
 (() => {
   const segs = Array.from(document.querySelectorAll(".seg"));
   const shots = Array.from(document.querySelectorAll(".shot"));
@@ -115,7 +107,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   setCat("visuels");
 })();
 
-/* Lightbox (portfolio) */
 (() => {
   const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lbImg");
@@ -181,7 +172,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Choose pack -> fill contact input */
 (() => {
   const packInput = document.getElementById("fPack");
   function goContactWithPack(packName) {
@@ -194,7 +184,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Pack carousel arrows (mobile only) */
 (() => {
   const track = document.getElementById("packsTrack");
   const prev = document.getElementById("packPrev");
@@ -229,7 +218,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   refresh();
 })();
 
-/* Copy email button */
 (() => {
   const EMAIL = "deabreue9@gmail.com";
   const copyMailBtn = document.getElementById("copyMailBtn");
@@ -254,7 +242,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Formsubmit UX */
 (() => {
   const quoteForm = document.getElementById("quoteForm");
   const successBox = document.getElementById("successBox");
@@ -267,7 +254,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
 })();
 
-/* Instagram link */
 (() => {
   const IG_URL = "https://www.instagram.com/edbra_nd/";
   const igBtn = document.getElementById("igBtn");
@@ -283,7 +269,6 @@ document.querySelectorAll("#y, #year").forEach(el => {
   }
 })();
 
-/* ========= AVIS (INDEX) — CARROUSEL STYLÉ (FIX MOBILE) ========= */
 (function initReviews(){
   const track = document.getElementById("reviewsTrack");
   const dots = document.getElementById("revDots");
@@ -326,12 +311,21 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   const mq = window.matchMedia("(min-width: 980px)");
   let idx = 0;
-  let timer = null;
+  let raf = null;
   let startAt = 0;
   const DURATION = 5200;
 
   function perView(){ return mq.matches ? 2 : 1; }
   function pages(){ return Math.max(1, Math.ceil(reviews.length / perView())); }
+
+  function pageWidth(){
+    return track.clientWidth || 1;
+  }
+
+  function scrollToIdx(smooth){
+    const left = pageWidth() * idx;
+    track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+  }
 
   function buildDots(){
     const p = pages();
@@ -359,13 +353,33 @@ document.querySelectorAll("#y, #year").forEach(el => {
     if(idx > p - 1) idx = 0;
   }
 
-  function pageWidth(){
-    return track.clientWidth || 1;
+  function stop(){
+    if(raf) cancelAnimationFrame(raf);
+    raf = null;
+    if(prog) prog.style.width = "0%";
   }
 
-  function scrollToIdx(smooth){
-    const left = pageWidth() * idx;
-    track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+  function tick(now){
+    if(!raf) return;
+    const elapsed = now - startAt;
+    const t = Math.min(1, elapsed / DURATION);
+    if(prog) prog.style.width = `${Math.round(t*100)}%`;
+    if(t >= 1){
+      nextOne();
+      return;
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function start(){
+    stop();
+    if(pages() <= 1) return;
+    startAt = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+
+  function restart(){
+    start();
   }
 
   function go(n, smooth){
@@ -382,86 +396,14 @@ document.querySelectorAll("#y, #year").forEach(el => {
   prev.addEventListener("click", prevOne);
   next.addEventListener("click", nextOne);
 
-  function tick(now){
-    if(!timer) return;
-    const elapsed = now - startAt;
-    const t = Math.min(1, elapsed / DURATION);
-    if(prog) prog.style.width = `${Math.round(t*100)}%`;
-    if(t >= 1){
-      nextOne();
-      return;
-    }
-    requestAnimationFrame(tick);
-  }
-
-  function start(){
-    stop();
-    if(pages() <= 1) return;
-    timer = { on:true };
-    startAt = performance.now();
-    requestAnimationFrame(tick);
-  }
-
-  function stop(){
-    timer = null;
-    if(prog) prog.style.width = "0%";
-  }
-
-  function restart(){
-    start();
-  }
-
   wrap?.addEventListener("mouseenter", stop);
   wrap?.addEventListener("mouseleave", start);
   wrap?.addEventListener("focusin", stop);
   wrap?.addEventListener("focusout", start);
 
-  /* ✅ FIX MOBILE : drag/swipe qui scrolle réellement la track */
-  let isDown = false;
-  let startX = 0;
-  let startScrollLeft = 0;
-  let moved = false;
+  track.addEventListener("touchstart", stop, { passive: true });
+  track.addEventListener("touchend", start, { passive: true });
 
-  track.style.userSelect = "none";
-
-  const down = (clientX) => {
-    isDown = true;
-    moved = false;
-    startX = clientX;
-    startScrollLeft = track.scrollLeft;
-    stop();
-  };
-  const move = (clientX) => {
-    if(!isDown) return;
-    const dx = clientX - startX;
-    if (Math.abs(dx) > 3) moved = true;
-    track.scrollLeft = startScrollLeft - dx;
-  };
-  const up = () => {
-    if(!isDown) return;
-    isDown = false;
-
-    // snap vers la page la plus proche
-    const w = pageWidth();
-    const target = Math.round(track.scrollLeft / w);
-    idx = Math.max(0, Math.min(pages() - 1, target));
-    scrollToIdx(true);
-    updateDots();
-    start();
-  };
-
-  // Pointer events (modern)
-  track.addEventListener("pointerdown", (e) => {
-    down(e.clientX);
-    if (track.setPointerCapture) track.setPointerCapture(e.pointerId);
-  });
-  track.addEventListener("pointermove", (e) => move(e.clientX));
-  ["pointerup","pointercancel","pointerleave"].forEach(evt => track.addEventListener(evt, up));
-
-  // Empêche les clics involontaires si tu as glissé
-  track.addEventListener("click", (e) => { if (moved) e.preventDefault(); }, true);
-
-  // Sync dots si scroll (ex: inertie iOS)
   let scrollT = null;
   track.addEventListener("scroll", () => {
     clearTimeout(scrollT);
@@ -472,8 +414,9 @@ document.querySelectorAll("#y, #year").forEach(el => {
       if (newIdx !== idx) {
         idx = newIdx;
         updateDots();
+        restart();
       }
-    }, 60);
+    }, 80);
   }, { passive: true });
 
   function onResize(){
@@ -491,12 +434,16 @@ document.querySelectorAll("#y, #year").forEach(el => {
     window.__revResize = setTimeout(onResize, 120);
   });
 
+  document.addEventListener("visibilitychange", () => {
+    if(document.hidden) stop();
+    else start();
+  });
+
   buildDots();
   scrollToIdx(false);
   start();
 })();
 
-/* ===== MENU MOBILE (burger) ===== */
 (() => {
   const burger = document.getElementById("burger");
   const menu = document.getElementById("mobileMenu");
@@ -521,15 +468,12 @@ document.querySelectorAll("#y, #year").forEach(el => {
   });
   closeBtn.addEventListener("click", closeMenu);
 
-  // clique sur le fond = fermer
   menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
 
-  // lien du menu = fermer après clic
   menu.querySelectorAll("a").forEach(a => {
     a.addEventListener("click", () => closeMenu());
   });
 
-  // ESC = fermer
   window.addEventListener("keydown", (e) => {
     if(e.key === "Escape") closeMenu();
   });
