@@ -139,31 +139,26 @@ document.addEventListener("DOMContentLoaded", () => {
     stars:5,
     meta:"Avis Google • il y a 18 heures",
     text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février."
-  },
-  {
+
     name:"Sheylie Berkane",
     stars:5,
     meta:"Avis Google • il y a 23 heures",
     text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février."
-  },
-  {
+      
     name:"Sandiyya",
     stars:5,
     meta:"Avis Google • il y a un jour • Nouveau",
     text:"Je recommande sans hésiter ses services ! Visité en janvier."
-  },
-  {
+      
     name:"Patrick Mat",
     stars:5,
     meta:"Avis Google • il y a 14 heures • Nouveau",
     text:"Personne agréable, très professionnelle, toujours a l'écoute. Un travail au top je recommande a 1000% ! Visité en février."
-  },
-  {
+
     name:"Sylvie Materne",
     stars:5,
     meta:"Avis Google • il y a 15 heures • Nouveau",
     text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie. Merci beaucoup."
-  }
 ];
 
   function starsStr(n){
