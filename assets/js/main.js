@@ -19,6 +19,23 @@ document.querySelectorAll("#y, #year").forEach(el => {
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 })();
 
+/* Skills bars on view */
+(() => {
+  const skillsBox = document.getElementById("skillsBox");
+  if (!skillsBox) return;
+
+  const obs2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        skillsBox.classList.add("on");
+        obs2.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  obs2.observe(skillsBox);
+})();
+
 /* Typewriter titles */
 (() => {
   function typeOnce(el) {
@@ -81,49 +98,192 @@ document.querySelectorAll("#y, #year").forEach(el => {
   refresh();
 })();
 
-/* ===== MENU MOBILE (burger) ===== */
-document.addEventListener("DOMContentLoaded", () => {
-  const burger = document.getElementById("burger");
-  const menu = document.getElementById("mobileMenu");
-  const closeBtn = document.getElementById("mobileClose");
-  if(!burger || !menu || !closeBtn) return;
+/* Portfolio filter */
+(() => {
+  const segs = Array.from(document.querySelectorAll(".seg"));
+  const shots = Array.from(document.querySelectorAll(".shot"));
+  if (!segs.length || !shots.length) return;
 
-  function openMenu(){
-    menu.classList.add("open");
-    menu.setAttribute("aria-hidden","false");
-    burger.setAttribute("aria-expanded","true");
+  function setCat(cat) {
+    segs.forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
+    shots.forEach(it => {
+      it.style.display = (it.dataset.cat === cat) ? "" : "none";
+    });
+  }
+
+  segs.forEach(btn => btn.addEventListener("click", () => setCat(btn.dataset.cat)));
+  setCat("visuels");
+})();
+
+/* Lightbox (portfolio) */
+(() => {
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbTitle = document.getElementById("lbTitle");
+  const lbClose = document.getElementById("lbClose");
+  const lbZoom = document.getElementById("lbZoom");
+  const lbArea = document.getElementById("lbArea");
+  const shots = Array.from(document.querySelectorAll(".shot"));
+
+  if (!lb || !lbImg || !lbTitle || !lbClose || !lbZoom || !lbArea || !shots.length) return;
+
+  function openLB(src, title) {
+    lbTitle.textContent = title || "Aperçu";
+    lbImg.src = src;
+    lbImg.alt = title || "Aperçu";
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    lbArea.classList.remove("zoom");
+    lbImg.style.transform = "scale(1)";
+    lbZoom.textContent = "Zoom";
   }
-  function closeMenu(){
-    menu.classList.remove("open");
-    menu.setAttribute("aria-hidden","true");
-    burger.setAttribute("aria-expanded","false");
+  function closeLB() {
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
+    lbImg.src = "";
     document.body.style.overflow = "";
+    lbArea.classList.remove("zoom");
+    lbImg.style.transform = "scale(1)";
+    lbZoom.textContent = "Zoom";
+  }
+  function toggleZoom() {
+    const on = lbArea.classList.toggle("zoom");
+    lbZoom.textContent = on ? "Adapter" : "Zoom";
+    lbImg.style.transform = "scale(1)";
+    z = 1;
   }
 
-  burger.addEventListener("click", (e) => {
+  lbClose.addEventListener("click", closeLB);
+  lb.addEventListener("click", (e) => { if (e.target === lb) closeLB(); });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLB(); });
+
+  lbZoom.addEventListener("click", toggleZoom);
+  lbArea.addEventListener("click", (e) => {
+    if (e.target === lbImg || e.target === lbArea) toggleZoom();
+  });
+
+  let z = 1;
+  lbArea.addEventListener("wheel", (e) => {
+    if (!lbArea.classList.contains("zoom")) return;
     e.preventDefault();
-    e.stopPropagation();
-    menu.classList.contains("open") ? closeMenu() : openMenu();
+    const delta = Math.sign(e.deltaY);
+    z = Math.max(1, Math.min(3, z + (delta > 0 ? -0.12 : 0.12)));
+    lbImg.style.transform = `scale(${z.toFixed(2)})`;
+  }, { passive: false });
+
+  shots.forEach(s => {
+    s.addEventListener("click", () => {
+      const src = s.getAttribute("data-src");
+      const title = s.getAttribute("data-title");
+      if (src) openLB(src, title);
+    });
   });
+})();
 
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    closeMenu();
+/* Choose pack -> fill contact input */
+(() => {
+  const packInput = document.getElementById("fPack");
+  function goContactWithPack(packName) {
+    if (packInput && packName) packInput.value = packName;
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => document.getElementById("fEmail")?.focus(), 450);
+  }
+  document.querySelectorAll(".choosePack").forEach(btn => {
+    btn.addEventListener("click", () => goContactWithPack(btn.getAttribute("data-pack") || ""));
   });
+})();
 
-  menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
+/* Pack carousel arrows (mobile only) */
+(() => {
+  const track = document.getElementById("packsTrack");
+  const prev = document.getElementById("packPrev");
+  const next = document.getElementById("packNext");
+  if (!track || !prev || !next) return;
 
-  menu.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => closeMenu());
+  function isDesktop() {
+    return window.matchMedia("(min-width: 980px)").matches;
+  }
+
+  function refresh() {
+    if (isDesktop()) {
+      prev.style.display = "none";
+      next.style.display = "none";
+      return;
+    }
+    const overflow = track.scrollWidth > track.clientWidth + 4;
+    prev.style.display = overflow ? "inline-flex" : "none";
+    next.style.display = overflow ? "inline-flex" : "none";
+  }
+
+  function scrollByCard(dir) {
+    const card = track.querySelector(".packCard");
+    const dx = (card ? card.getBoundingClientRect().width : 320) + 12;
+    track.scrollBy({ left: dir * dx, behavior: "smooth" });
+  }
+
+  prev.addEventListener("click", () => scrollByCard(-1));
+  next.addEventListener("click", () => scrollByCard(1));
+  window.addEventListener("resize", () => setTimeout(refresh, 60));
+  setTimeout(refresh, 80);
+  refresh();
+})();
+
+/* Copy email button */
+(() => {
+  const EMAIL = "deabreue9@gmail.com";
+  const copyMailBtn = document.getElementById("copyMailBtn");
+  if (!copyMailBtn) return;
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+    return Promise.resolve();
+  }
+
+  copyMailBtn.addEventListener("click", async () => {
+    await copyToClipboard(EMAIL);
+    const old = copyMailBtn.textContent;
+    copyMailBtn.textContent = "Copié ✅";
+    setTimeout(() => copyMailBtn.textContent = old || "Copier mon email", 1200);
   });
+})();
 
-  window.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") closeMenu();
+/* Formsubmit UX */
+(() => {
+  const quoteForm = document.getElementById("quoteForm");
+  const successBox = document.getElementById("successBox");
+  const sendBtn = document.getElementById("sendBtn");
+  if (!quoteForm || !successBox || !sendBtn) return;
+
+  quoteForm.addEventListener("submit", () => {
+    sendBtn.textContent = "Envoi...";
+    successBox.classList.add("on");
   });
-});
+})();
 
-/* ========= AVIS (CARROUSEL MOBILE SAFE: TRANSFORM) ========= */
+/* Instagram link */
+(() => {
+  const IG_URL = "https://www.instagram.com/edbra_nd/";
+  const igBtn = document.getElementById("igBtn");
+  if (!igBtn) return;
+
+  if (IG_URL && IG_URL.startsWith("http")) {
+    igBtn.href = IG_URL;
+    igBtn.target = "_blank";
+    igBtn.rel = "noopener";
+    igBtn.textContent = "Instagram";
+    igBtn.removeAttribute("aria-disabled");
+    igBtn.removeAttribute("title");
+  }
+})();
+
+/* ========= AVIS (INDEX) — CARROUSEL STYLÉ (FIX MOBILE) ========= */
 (function initReviews(){
   const track = document.getElementById("reviewsTrack");
   const dots = document.getElementById("revDots");
@@ -131,35 +291,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const next = document.getElementById("revNext");
   const wrap = track?.closest(".reviews");
   const prog = document.getElementById("revProg");
+
   if(!track || !dots || !prev || !next) return;
 
   const reviews = [
-  {
-    name:"Dorian",
-    stars:5,
-    meta:"Avis Google • il y a 18 heures",
-    text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février."
-
-    name:"Sheylie Berkane",
-    stars:5,
-    meta:"Avis Google • il y a 23 heures",
-    text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février."
-      
-    name:"Sandiyya",
-    stars:5,
-    meta:"Avis Google • il y a un jour • Nouveau",
-    text:"Je recommande sans hésiter ses services ! Visité en janvier."
-      
-    name:"Patrick Mat",
-    stars:5,
-    meta:"Avis Google • il y a 14 heures • Nouveau",
-    text:"Personne agréable, très professionnelle, toujours a l'écoute. Un travail au top je recommande a 1000% ! Visité en février."
-
-    name:"Sylvie Materne",
-    stars:5,
-    meta:"Avis Google • il y a 15 heures • Nouveau",
-    text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie. Merci beaucoup."
-];
+    { name:"Dorian", stars:5, meta:"Avis Google • il y a 18 heures", text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février." },
+    { name:"Sheylie Berkane", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février." },
+    { name:"Sandiyya", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande sans hésiter ses services ! Visité en janvier." },
+    { name:"Patrick Mat", stars:5, meta:"Avis Google • il y a 14 heures • Nouveau", text:"Personne agréable, très professionnelle, toujours a l'écoute. Un travail au top je recommande a 1000% ! Visité en février." },
+    { name:"Sylvie Materne", stars:5, meta:"Avis Google • il y a 15 heures • Nouveau", text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie. Merci beaucoup. Visité en février." }
+  ];
 
   function starsStr(n){
     const x = Math.max(0, Math.min(5, n));
@@ -185,26 +326,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mq = window.matchMedia("(min-width: 980px)");
   let idx = 0;
-  let raf = null;
+  let timer = null;
   let startAt = 0;
   const DURATION = 5200;
 
   function perView(){ return mq.matches ? 2 : 1; }
   function pages(){ return Math.max(1, Math.ceil(reviews.length / perView())); }
-
-  function slideWidth(){
-    const first = track.querySelector(".review");
-    if(!first) return 0;
-    return first.getBoundingClientRect().width;
-  }
-  function gap(){ return 12; } // must match CSS gap
-
-  function applyTransform(smooth){
-    track.style.transition = smooth ? "transform .55s cubic-bezier(.2,.9,.2,1)" : "none";
-    const x = idx * (slideWidth() + gap());
-    track.style.transform = `translate3d(${-x}px,0,0)`;
-    if(!smooth) requestAnimationFrame(()=> track.style.transition = "transform .55s cubic-bezier(.2,.9,.2,1)");
-  }
 
   function buildDots(){
     const p = pages();
@@ -221,22 +348,34 @@ document.addEventListener("DOMContentLoaded", () => {
     dots.style.display = showNav ? "flex" : "none";
     if(prog) prog.style.width = "0%";
   }
+
   function updateDots(){
     Array.from(dots.children).forEach((d,i)=> d.classList.toggle("on", i===idx));
   }
+
   function clampIdx(){
     const p = pages();
     if(idx < 0) idx = p - 1;
     if(idx > p - 1) idx = 0;
   }
 
+  function pageWidth(){
+    return track.clientWidth || 1;
+  }
+
+  function scrollToIdx(smooth){
+    const left = pageWidth() * idx;
+    track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+  }
+
   function go(n, smooth){
     idx = n;
     clampIdx();
-    applyTransform(smooth);
+    scrollToIdx(smooth);
     updateDots();
     restart();
   }
+
   function nextOne(){ go(idx + 1, true); }
   function prevOne(){ go(idx - 1, true); }
 
@@ -244,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
   next.addEventListener("click", nextOne);
 
   function tick(now){
-    if(!raf) return;
+    if(!timer) return;
     const elapsed = now - startAt;
     const t = Math.min(1, elapsed / DURATION);
     if(prog) prog.style.width = `${Math.round(t*100)}%`;
@@ -252,43 +391,96 @@ document.addEventListener("DOMContentLoaded", () => {
       nextOne();
       return;
     }
-    raf = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
+
   function start(){
     stop();
     if(pages() <= 1) return;
+    timer = { on:true };
     startAt = performance.now();
-    raf = requestAnimationFrame(tick);
+    requestAnimationFrame(tick);
   }
+
   function stop(){
-    if(raf){ cancelAnimationFrame(raf); raf = null; }
+    timer = null;
     if(prog) prog.style.width = "0%";
   }
-  function restart(){ start(); }
+
+  function restart(){
+    start();
+  }
 
   wrap?.addEventListener("mouseenter", stop);
   wrap?.addEventListener("mouseleave", start);
   wrap?.addEventListener("focusin", stop);
   wrap?.addEventListener("focusout", start);
 
-  // Swipe (mobile)
-  let touchX = null;
-  wrap?.addEventListener("touchstart", (e)=>{ touchX = e.touches?.[0]?.clientX ?? null; }, {passive:true});
-  wrap?.addEventListener("touchend", (e)=>{
-    if(touchX == null) return;
-    const endX = e.changedTouches?.[0]?.clientX ?? touchX;
-    const dx = endX - touchX;
-    touchX = null;
-    if(Math.abs(dx) > 40){
-      dx < 0 ? nextOne() : prevOne();
-    }
-  }, {passive:true});
+  /* ✅ FIX MOBILE : drag/swipe qui scrolle réellement la track */
+  let isDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let moved = false;
+
+  track.style.userSelect = "none";
+
+  const down = (clientX) => {
+    isDown = true;
+    moved = false;
+    startX = clientX;
+    startScrollLeft = track.scrollLeft;
+    stop();
+  };
+  const move = (clientX) => {
+    if(!isDown) return;
+    const dx = clientX - startX;
+    if (Math.abs(dx) > 3) moved = true;
+    track.scrollLeft = startScrollLeft - dx;
+  };
+  const up = () => {
+    if(!isDown) return;
+    isDown = false;
+
+    // snap vers la page la plus proche
+    const w = pageWidth();
+    const target = Math.round(track.scrollLeft / w);
+    idx = Math.max(0, Math.min(pages() - 1, target));
+    scrollToIdx(true);
+    updateDots();
+    start();
+  };
+
+  // Pointer events (modern)
+  track.addEventListener("pointerdown", (e) => {
+    down(e.clientX);
+    if (track.setPointerCapture) track.setPointerCapture(e.pointerId);
+  });
+  track.addEventListener("pointermove", (e) => move(e.clientX));
+  ["pointerup","pointercancel","pointerleave"].forEach(evt => track.addEventListener(evt, up));
+
+  // Empêche les clics involontaires si tu as glissé
+  track.addEventListener("click", (e) => { if (moved) e.preventDefault(); }, true);
+
+  // Sync dots si scroll (ex: inertie iOS)
+  let scrollT = null;
+  track.addEventListener("scroll", () => {
+    clearTimeout(scrollT);
+    scrollT = setTimeout(() => {
+      const w = pageWidth();
+      const target = Math.round(track.scrollLeft / w);
+      const newIdx = Math.max(0, Math.min(pages() - 1, target));
+      if (newIdx !== idx) {
+        idx = newIdx;
+        updateDots();
+      }
+    }, 60);
+  }, { passive: true });
 
   function onResize(){
     const p = pages();
     if(idx > p - 1) idx = p - 1;
     buildDots();
-    applyTransform(false);
+    scrollToIdx(false);
     updateDots();
     start();
   }
@@ -300,6 +492,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   buildDots();
-  applyTransform(false);
+  scrollToIdx(false);
   start();
+})();
+
+/* ===== MENU MOBILE (burger) ===== */
+(() => {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("mobileClose");
+  if(!burger || !menu || !closeBtn) return;
+
+  function openMenu(){
+    menu.classList.add("open");
+    menu.setAttribute("aria-hidden","false");
+    burger.setAttribute("aria-expanded","true");
+    document.body.style.overflow = "hidden";
+  }
+  function closeMenu(){
+    menu.classList.remove("open");
+    menu.setAttribute("aria-hidden","true");
+    burger.setAttribute("aria-expanded","false");
+    document.body.style.overflow = "";
+  }
+
+  burger.addEventListener("click", () => {
+    menu.classList.contains("open") ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener("click", closeMenu);
+
+  // clique sur le fond = fermer
+  menu.addEventListener("click", (e) => { if(e.target === menu) closeMenu(); });
+
+  // lien du menu = fermer après clic
+  menu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => closeMenu());
+  });
+
+  // ESC = fermer
+  window.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeMenu();
+  });
 })();
