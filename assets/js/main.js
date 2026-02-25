@@ -283,7 +283,7 @@ document.querySelectorAll("#y, #year").forEach(el => {
   }
 })();
 
-/* ========= AVIS (INDEX) — CARROUSEL STYLÉ ========= */
+/* ========= AVIS (INDEX) — CARROUSEL STYLÉ (FIX MOBILE) ========= */
 (function initReviews(){
   const track = document.getElementById("reviewsTrack");
   const dots = document.getElementById("revDots");
@@ -294,14 +294,13 @@ document.querySelectorAll("#y, #year").forEach(el => {
 
   if(!track || !dots || !prev || !next) return;
 
-const reviews = [
-  { name:"Dorian", stars:5, meta:"Avis Google • il y a 18 heures", text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février." },
-  { name:"Sheylie Berkane", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février." },
-  { name:"Sandiyya", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande sans hésiter ses services ! Visité en janvier." },
-
-  { name:"Patrick Mat", stars:5, meta:"Avis Google • il y a 14 heures • Nouveau", text:"Personne agréable, très professionnelle, toujours a l'écoute. Un travail au top je recommande a 1000% ! Visité en février." },
-  { name:"Sylvie Materne", stars:5, meta:"Avis Google • il y a 15 heures • Nouveau", text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie. Merci beaucoup. Visité en février." }
-];
+  const reviews = [
+    { name:"Dorian", stars:5, meta:"Avis Google • il y a 18 heures", text:"Je recommande grandement ses services ! Très professionnel et réactive. Visité en février." },
+    { name:"Sheylie Berkane", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande vivement pour ses services et sa réactivité c’était un grand plaisir d’obtenir son aide ! Visité en février." },
+    { name:"Sandiyya", stars:5, meta:"Avis Google • il y a 23 heures", text:"Je recommande sans hésiter ses services ! Visité en janvier." },
+    { name:"Patrick Mat", stars:5, meta:"Avis Google • il y a 14 heures • Nouveau", text:"Personne agréable, très professionnelle, toujours a l'écoute. Un travail au top je recommande a 1000% ! Visité en février." },
+    { name:"Sylvie Materne", stars:5, meta:"Avis Google • il y a 15 heures • Nouveau", text:"Travail impeccable, personne agréable et sérieuse. Je recommande son professionnalisme ! Je suis ravie. Merci beaucoup. Visité en février." }
+  ];
 
   function starsStr(n){
     const x = Math.max(0, Math.min(5, n));
@@ -360,8 +359,12 @@ const reviews = [
     if(idx > p - 1) idx = 0;
   }
 
+  function pageWidth(){
+    return track.clientWidth || 1;
+  }
+
   function scrollToIdx(smooth){
-    const left = track.clientWidth * idx;
+    const left = pageWidth() * idx;
     track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
   }
 
@@ -413,18 +416,65 @@ const reviews = [
   wrap?.addEventListener("focusin", stop);
   wrap?.addEventListener("focusout", start);
 
-  // Swipe
-  let touchX = null;
-  track.addEventListener("touchstart", (e)=>{ touchX = e.touches?.[0]?.clientX ?? null; }, {passive:true});
-  track.addEventListener("touchend", (e)=>{
-    if(touchX == null) return;
-    const endX = e.changedTouches?.[0]?.clientX ?? touchX;
-    const dx = endX - touchX;
-    touchX = null;
-    if(Math.abs(dx) > 40){
-      dx < 0 ? nextOne() : prevOne();
-    }
-  }, {passive:true});
+  /* ✅ FIX MOBILE : drag/swipe qui scrolle réellement la track */
+  let isDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let moved = false;
+
+  track.style.userSelect = "none";
+
+  const down = (clientX) => {
+    isDown = true;
+    moved = false;
+    startX = clientX;
+    startScrollLeft = track.scrollLeft;
+    stop();
+  };
+  const move = (clientX) => {
+    if(!isDown) return;
+    const dx = clientX - startX;
+    if (Math.abs(dx) > 3) moved = true;
+    track.scrollLeft = startScrollLeft - dx;
+  };
+  const up = () => {
+    if(!isDown) return;
+    isDown = false;
+
+    // snap vers la page la plus proche
+    const w = pageWidth();
+    const target = Math.round(track.scrollLeft / w);
+    idx = Math.max(0, Math.min(pages() - 1, target));
+    scrollToIdx(true);
+    updateDots();
+    start();
+  };
+
+  // Pointer events (modern)
+  track.addEventListener("pointerdown", (e) => {
+    down(e.clientX);
+    if (track.setPointerCapture) track.setPointerCapture(e.pointerId);
+  });
+  track.addEventListener("pointermove", (e) => move(e.clientX));
+  ["pointerup","pointercancel","pointerleave"].forEach(evt => track.addEventListener(evt, up));
+
+  // Empêche les clics involontaires si tu as glissé
+  track.addEventListener("click", (e) => { if (moved) e.preventDefault(); }, true);
+
+  // Sync dots si scroll (ex: inertie iOS)
+  let scrollT = null;
+  track.addEventListener("scroll", () => {
+    clearTimeout(scrollT);
+    scrollT = setTimeout(() => {
+      const w = pageWidth();
+      const target = Math.round(track.scrollLeft / w);
+      const newIdx = Math.max(0, Math.min(pages() - 1, target));
+      if (newIdx !== idx) {
+        idx = newIdx;
+        updateDots();
+      }
+    }, 60);
+  }, { passive: true });
 
   function onResize(){
     const p = pages();
@@ -445,6 +495,7 @@ const reviews = [
   scrollToIdx(false);
   start();
 })();
+
 /* ===== MENU MOBILE (burger) ===== */
 (() => {
   const burger = document.getElementById("burger");
