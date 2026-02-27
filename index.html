@@ -6,7 +6,7 @@
   <title>Eva De Abreu — Communication & Marketing</title>
   <meta name="description" content="Freelance en communication & marketing : identité visuelle, réseaux sociaux, web & SEO." />
   <meta name="theme-color" content="#07070c" />
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260226">
 </head>
 
 <body>
@@ -17,6 +17,7 @@
     <div class="blob b3"></div>
   </div>
 
+  <!-- NAV (identique partout) -->
   <div class="nav">
     <div class="wrap">
       <a class="brand" href="index.html" aria-label="Retour à l’accueil">
@@ -27,13 +28,20 @@
         </div>
       </a>
 
-      <div class="linksWrap" aria-label="Menu desktop">
+      <div class="linksWrap" aria-label="Menu">
+        <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
+
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
           <a href="portfolio.html">Portfolio</a>
           <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions</a>
+          <a href="politique-confidentialite.html">Confidentialité</a>
+          <a href="conditions-prestations.html">Conditions</a>
         </nav>
+
+        <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
       </div>
 
       <div class="nav-right">
@@ -58,6 +66,9 @@
           <a href="services.html" class="mLink">Services</a>
           <a href="portfolio.html" class="mLink">Portfolio</a>
           <a href="contact.html" class="mLink">Contact</a>
+          <a href="mentions-legales.html" class="mLink">Mentions légales</a>
+          <a href="politique-confidentialite.html" class="mLink">Confidentialité</a>
+          <a href="conditions-prestations.html" class="mLink">Conditions</a>
         </nav>
 
         <div class="mobileCtas">
@@ -69,6 +80,7 @@
       </div>
     </div>
   </div>
+  <!-- /NAV -->
 
   <header class="wrap">
     <div class="hero">
@@ -176,12 +188,22 @@
 
     <footer>
       <div class="foot">
-        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
-        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+        <div>
+          <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+          <div class="muted2">
+            SIRET : 10168913100015 • TVA non applicable, art. 293 B du CGI • Hébergement : OVH •
+            <a href="mailto:contact@evadeabreu.fr">contact@evadeabreu.fr</a>
+          </div>
+          <div class="muted2" style="margin-top:6px;">
+            <a href="mentions-legales.html">Mentions légales</a> •
+            <a href="politique-confidentialite.html">Politique de confidentialité</a> •
+            <a href="conditions-prestations.html">Conditions de prestations</a>
+          </div>
+        </div>
       </div>
     </footer>
   </main>
 
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js?v=20260226" defer></script>
 </body>
 </html>
