@@ -6,7 +6,7 @@
   <title>Contact — Eva De Abreu</title>
   <meta name="description" content="Contact et demande de devis." />
   <meta name="theme-color" content="#07070c" />
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260226">
 </head>
 
 <body>
@@ -17,54 +17,68 @@
     <div class="blob b3"></div>
   </div>
 
+  <!-- NAV -->
   <div class="nav">
     <div class="wrap">
-      <div class="brand">
+      <a class="brand" href="index.html" aria-label="Retour à l’accueil">
         <img src="brand-photo.jpg" alt="Photo — Eva De Abreu" onerror="this.style.display='none'">
         <div>
           <div class="name">Eva De Abreu</div>
           <div class="sub">Communication & Marketing — Freelance</div>
         </div>
-      </div>
+      </a>
 
       <div class="linksWrap" aria-label="Menu">
         <button class="navArrow" id="navLeft" type="button" aria-label="Défiler à gauche">‹</button>
-
         <nav class="links" id="topLinks">
           <a href="index.html">Accueil</a>
           <a href="services.html">Services</a>
           <a href="portfolio.html">Portfolio</a>
           <a href="contact.html">Contact</a>
+          <a href="mentions-legales.html">Mentions</a>
+          <a href="politique-confidentialite.html">Confidentialité</a>
+          <a href="conditions-prestations.html">Conditions</a>
         </nav>
-
         <button class="navArrow" id="navRight" type="button" aria-label="Défiler à droite">›</button>
-
-        <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu">☰</button>
       </div>
 
       <div class="nav-right">
         <a class="pill" href="tel:+33765232469">📞 Appeler</a>
         <a class="pill primary" href="contact.html">Demander un devis</a>
       </div>
-    </div>
-  </div>
 
-  <div class="mobileNav" id="mobileNav" aria-hidden="true">
-    <div class="mobileCard card">
-      <div class="mobileHead">
-        <b>Menu</b>
-        <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
-      </div>
-      <div class="mobileLinks">
-        <a href="index.html">Accueil</a>
-        <a href="services.html">Services</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
-        <a class="btn primary" href="contact.html" style="width:100%; justify-content:center;">Demander un devis</a>
-        <a class="btn" href="tel:+33765232469" style="width:100%; justify-content:center;">📞 Appeler</a>
+      <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
+      <div class="mobileCard">
+        <div class="mobileTop">
+          <b>Menu</b>
+          <button class="mobileClose" id="mobileClose" type="button" aria-label="Fermer">✕</button>
+        </div>
+
+        <nav class="mobileLinks" aria-label="Navigation mobile">
+          <a href="index.html" class="mLink">Accueil</a>
+          <a href="services.html" class="mLink">Services</a>
+          <a href="portfolio.html" class="mLink">Portfolio</a>
+          <a href="contact.html" class="mLink">Contact</a>
+          <a href="mentions-legales.html" class="mLink">Mentions légales</a>
+          <a href="politique-confidentialite.html" class="mLink">Confidentialité</a>
+          <a href="conditions-prestations.html" class="mLink">Conditions</a>
+        </nav>
+
+        <div class="mobileCtas">
+          <a class="btn primary" href="contact.html">Demander un devis</a>
+          <a class="btn" href="tel:+33765232469">📞 Appeler</a>
+          <a class="btn linkedin" href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://www.instagram.com/edbra_nd/" target="_blank" rel="noopener">Instagram</a>
+        </div>
       </div>
     </div>
   </div>
+  <!-- /NAV -->
 
   <main class="wrap">
     <div class="card pageHead glow-hover reveal">
@@ -81,7 +95,7 @@
       <div class="contact-grid">
         <div class="card glow-hover" style="padding:18px;">
           <div class="muted" style="line-height:1.8; font-size:14px;">
-            <b>Email :</b> <a href="mailto:deabreue9@gmail.com">deabreue9@gmail.com</a><br>
+            <b>Email :</b> <a href="mailto:contact@evadeabreu.fr">contact@evadeabreu.fr</a><br>
             <b>Téléphone :</b> <a href="tel:+33765232469">07 65 23 24 69</a><br>
             <b>LinkedIn :</b> <a href="https://www.linkedin.com/in/eva-de-abreu-46a273197/" target="_blank" rel="noopener">Voir mon profil</a><br>
             <b>Zone :</b> France entière (à distance)
@@ -95,11 +109,12 @@
         </div>
 
         <div class="card glow-hover" style="padding:18px;">
-          <form action="https://formsubmit.co/deabreue9@gmail.com" method="POST" accept-charset="UTF-8">
-            <input type="hidden" name="_subject" value="Demande de devis — Site Eva De Abreu" />
+          <!-- FormSubmit : pense à valider l’email une fois côté FormSubmit -->
+          <form action="https://formsubmit.co/contact@evadeabreu.fr" method="POST" accept-charset="UTF-8">
+            <input type="hidden" name="_subject" value="Demande de devis — evadeabreu.fr" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://evadbr91.github.io/contact.html" />
+            <input type="hidden" name="_next" value="contact.html" />
 
             <div class="field">
               <label for="name">Nom / Entreprise</label>
@@ -132,12 +147,22 @@
 
     <footer>
       <div class="foot">
-        <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
-        <div class="muted2">Visuels • Réseaux sociaux • Web • SEO — France entière</div>
+        <div>
+          <div>© <span id="y"></span> Eva De Abreu — Communication & Marketing</div>
+          <div class="muted2">
+            SIRET : 10168913100015 • TVA non applicable, art. 293 B du CGI • Hébergement : OVH •
+            <a href="mailto:contact@evadeabreu.fr">contact@evadeabreu.fr</a>
+          </div>
+          <div class="muted2" style="margin-top:6px;">
+            <a href="mentions-legales.html">Mentions légales</a> •
+            <a href="politique-confidentialite.html">Politique de confidentialité</a> •
+            <a href="conditions-prestations.html">Conditions de prestations</a>
+          </div>
+        </div>
       </div>
     </footer>
   </main>
 
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js?v=20260226" defer></script>
 </body>
 </html>
